@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yonyou.bpm.engine.mapper.UserMapper">
+	<!-- id全局唯一 -->
+	<select id="extSelectUserById" parameterType="string" resultMap="extUserResultMap">
+		SELECT * FROM USER WHERE ID_ = #{id} 
+	</select>
+	
+	<select id="extSelectUserByCode" parameterType="string" resultMap="extUserResultMap">
+        SELECT * FROM USER WHERE CODE_ = #{userCode}
+    </select>
+
+	<resultMap id="extUserResultMap" type="com.yonyou.bpm.core.entity.UserEntity">
+		<id property="id" column="ID_" jdbcType="VARCHAR" />
+		<result property="code" column="CODE_" jdbcType="VARCHAR" />
+		<result property="name" column="NAME_" jdbcType="VARCHAR" />
+		<result property="nickName" column="NICKNAME_" jdbcType="VARCHAR" />
+		<result property="password" column="PASSWORD_" jdbcType="VARCHAR" />
+		<result property="salt" column="SALT_" jdbcType="VARCHAR" />
+		<result property="email" column="EMAIL_" jdbcType="VARCHAR" />
+		<result property="phone" column="PHONE_" jdbcType="VARCHAR" />
+		<result property="pic" column="PIC_" jdbcType="VARCHAR" />
+		<result property="createTime" column="CREATE_TIME_" jdbcType="TIMESTAMP" />
+		<result property="modifyTime" column="MODIFY_TIME_" jdbcType="TIMESTAMP" />
+		<result property="enable" column="ENABLE_" jdbcType="CHAR" />
+		<result property="idNumber" column="ID_NUMBER_" jdbcType="VARCHAR" />
+		<result property="nice" column="NICE_" jdbcType="INTEGER" />	
+		<result property="where" column="WHERE_" jdbcType="VARCHAR" />
+		<result property="school" column="SCHOOL_" jdbcType="VARCHAR" />
+		<result property="hobby" column="HOBBY_" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+	<insert id="extInsertUser" parameterType="com.yonyou.bpm.core.entity.UserEntity">
+		insert into USER(ID_, CODE_,NAME_,NICKNAME_
+		PASSWORD_,SALT_,EMAIL_,PHONE_,PIC_,CREATE_TIME_,ENABLE_,ID_NUMBER_,NICE_,WHERE_,
+		SCHOOL_, HOBBY_)
+		values (
+		#{id ,jdbcType=VARCHAR},
+		#{code ,jdbcType=VARCHAR},
+		#{name ,jdbcType=VARCHAR},
+		#{nickName ,jdbcType=VARCHAR},
+		#{password ,jdbcType=VARCHAR},
+		#{salt ,jdbcType=VARCHAR},
+		#{email ,jdbcType=VARCHAR},
+		#{phone ,jdbcType=VARCHAR},
+		#{pic ,jdbcType=VARCHAR},
+		#{createTime ,jdbcType=TIMESTAMP},
+		#{enable ,jdbcType=VARCHAR},
+		#{idNumber ,jdbcType=VARCHAR},
+		#{nice ,jdbcType=INTEGER},
+		#{where ,jdbcType=VARCHAR},
+		#{school ,jdbcType=VARCHAR},
+		#{hobby, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="extUpdateUser" parameterType="com.yonyou.bpm.core.entity.UserEntity">
+		update USER
+		set
+		CODE_ = #{code, jdbcType=VARCHAR},
+		NAME_ = #{name, jdbcType=VARCHAR},
+		NICKNAME_ = #{nickName, jdbcType=VARCHAR},
+		PASSWORD_ = #{password, jdbcType=VARCHAR},
+        <if test="email!=null">EMAIL_ = #{email, jdbcType=VARCHAR},</if>
+        <if test="phone!=null">PHONE_ = #{phone, jdbcType=VARCHAR},</if>
+		ENABLE_ = #{enable, jdbcType=VARCHAR},
+		SALT_= #{salt, jdbcType=VARCHAR},
+		PIC_=#{pic, jdbcType=VARCHAR},
+		ID_NUMBER_=#{idNumber, jdbcType=VARCHAR},
+		NICE_=#{nice, jdbcType=INTEGER},
+		WHERE_=#{where, jdbcType=VARCHAR},
+		SCHOOL_=#{school, jdbcType=VARCHAR},
+		HOBBY_=#{hobby, jdbcType=VARCHAR}
+		where ID_ = #{id}
+	</update>
+	
+	<delete id="extDeleteUser" parameterType="com.yonyou.bpm.core.entity.UserEntity">
+		delete from SER
+		where ID_ = #{id} 
+	</delete>
+	
+</mapper>
