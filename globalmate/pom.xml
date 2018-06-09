@@ -34,9 +34,9 @@
             </activation>
             <properties>
                 <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
-                <pom.jdbc.url>jdbc:mysql://172.20.12.79:3306/iform_20160728?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
-                <pom.jdbc.username>iform</pom.jdbc.username>
-                <pom.jdbc.password>1</pom.jdbc.password>
+                <pom.jdbc.url>jdbc:mysql://172.20.8.236:3306/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.username>root</pom.jdbc.username>
+                <pom.jdbc.password></pom.jdbc.password>
             </properties>
         </profile>
 
