@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UserlinkMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Userlink">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="type_" jdbcType="VARCHAR" property="type" />
+    <result column="enable_" jdbcType="CHAR" property="enable" />
+    <result column="user_id_" jdbcType="VARCHAR" property="userId" />
+    <result column="target_id_" jdbcType="VARCHAR" property="targetId" />
+    <result column="MAIN_TARGET_" jdbcType="CHAR" property="mainTarget" />
+    <result column="create_time_" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="authentication_" jdbcType="DOUBLE" property="authentication" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, type_, enable_, user_id_, target_id_, MAIN_TARGET_, create_time_, authentication_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userlink
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userlink
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.Userlink">
+    insert into userlink (id_, type_, enable_, 
+      user_id_, target_id_, MAIN_TARGET_, 
+      create_time_, authentication_)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{enable,jdbcType=CHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{targetId,jdbcType=VARCHAR}, #{mainTarget,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{authentication,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Userlink">
+    insert into userlink
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="type != null">
+        type_,
+      </if>
+      <if test="enable != null">
+        enable_,
+      </if>
+      <if test="userId != null">
+        user_id_,
+      </if>
+      <if test="targetId != null">
+        target_id_,
+      </if>
+      <if test="mainTarget != null">
+        MAIN_TARGET_,
+      </if>
+      <if test="createTime != null">
+        create_time_,
+      </if>
+      <if test="authentication != null">
+        authentication_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetId != null">
+        #{targetId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainTarget != null">
+        #{mainTarget,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authentication != null">
+        #{authentication,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Userlink">
+    update userlink
+    <set>
+      <if test="type != null">
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        enable_ = #{enable,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        user_id_ = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetId != null">
+        target_id_ = #{targetId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainTarget != null">
+        MAIN_TARGET_ = #{mainTarget,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time_ = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authentication != null">
+        authentication_ = #{authentication,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Userlink">
+    update userlink
+    set type_ = #{type,jdbcType=VARCHAR},
+      enable_ = #{enable,jdbcType=CHAR},
+      user_id_ = #{userId,jdbcType=VARCHAR},
+      target_id_ = #{targetId,jdbcType=VARCHAR},
+      MAIN_TARGET_ = #{mainTarget,jdbcType=CHAR},
+      create_time_ = #{createTime,jdbcType=TIMESTAMP},
+      authentication_ = #{authentication,jdbcType=DOUBLE}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

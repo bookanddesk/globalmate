@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UTagMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.UTag">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="name_" jdbcType="VARCHAR" property="name" />
+    <result column="type_" jdbcType="VARCHAR" property="type" />
+    <result column="busiext1_" jdbcType="VARCHAR" property="busiext1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, name_, type_, busiext1_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_tag
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_tag
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.UTag">
+    insert into u_tag (id_, name_, type_, 
+      busiext1_)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{busiext1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.UTag">
+    insert into u_tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="name != null">
+        name_,
+      </if>
+      <if test="type != null">
+        type_,
+      </if>
+      <if test="busiext1 != null">
+        busiext1_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="busiext1 != null">
+        #{busiext1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.UTag">
+    update u_tag
+    <set>
+      <if test="name != null">
+        name_ = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="busiext1 != null">
+        busiext1_ = #{busiext1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.UTag">
+    update u_tag
+    set name_ = #{name,jdbcType=VARCHAR},
+      type_ = #{type,jdbcType=VARCHAR},
+      busiext1_ = #{busiext1,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

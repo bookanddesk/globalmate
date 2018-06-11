@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UsergroupMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Usergroup">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="enable_" jdbcType="CHAR" property="enable" />
+    <result column="code_" jdbcType="VARCHAR" property="code" />
+    <result column="name_" jdbcType="VARCHAR" property="name" />
+    <result column="descrition_" jdbcType="VARCHAR" property="descrition" />
+    <result column="create_time_" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, enable_, code_, name_, descrition_, create_time_, creator_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usergroup
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from usergroup
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.Usergroup">
+    insert into usergroup (id_, enable_, code_, 
+      name_, descrition_, create_time_, 
+      creator_)
+    values (#{id,jdbcType=VARCHAR}, #{enable,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Usergroup">
+    insert into usergroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="enable != null">
+        enable_,
+      </if>
+      <if test="code != null">
+        code_,
+      </if>
+      <if test="name != null">
+        name_,
+      </if>
+      <if test="descrition != null">
+        descrition_,
+      </if>
+      <if test="createTime != null">
+        create_time_,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Usergroup">
+    update usergroup
+    <set>
+      <if test="enable != null">
+        enable_ = #{enable,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        code_ = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name_ = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        descrition_ = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time_ = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Usergroup">
+    update usergroup
+    set enable_ = #{enable,jdbcType=CHAR},
+      code_ = #{code,jdbcType=VARCHAR},
+      name_ = #{name,jdbcType=VARCHAR},
+      descrition_ = #{descrition,jdbcType=VARCHAR},
+      create_time_ = #{createTime,jdbcType=TIMESTAMP},
+      creator_ = #{creator,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

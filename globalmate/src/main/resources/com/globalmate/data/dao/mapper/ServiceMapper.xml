@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.ServiceMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Service">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="user_id_" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name_" jdbcType="VARCHAR" property="userName" />
+    <result column="name_" jdbcType="VARCHAR" property="name" />
+    <result column="type_" jdbcType="VARCHAR" property="type" />
+    <result column="descrition_" jdbcType="VARCHAR" property="descrition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, user_id_, user_name_, name_, type_, descrition_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from service
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from service
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.Service">
+    insert into service (ID_, user_id_, user_name_, 
+      name_, type_, descrition_
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Service">
+    insert into service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="userId != null">
+        user_id_,
+      </if>
+      <if test="userName != null">
+        user_name_,
+      </if>
+      <if test="name != null">
+        name_,
+      </if>
+      <if test="type != null">
+        type_,
+      </if>
+      <if test="descrition != null">
+        descrition_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Service">
+    update service
+    <set>
+      <if test="userId != null">
+        user_id_ = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name_ = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name_ = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        descrition_ = #{descrition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Service">
+    update service
+    set user_id_ = #{userId,jdbcType=VARCHAR},
+      user_name_ = #{userName,jdbcType=VARCHAR},
+      name_ = #{name,jdbcType=VARCHAR},
+      type_ = #{type,jdbcType=VARCHAR},
+      descrition_ = #{descrition,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

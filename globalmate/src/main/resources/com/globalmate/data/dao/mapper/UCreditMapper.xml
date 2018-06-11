@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UCreditMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.UCredit">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="grade_" jdbcType="VARCHAR" property="grade" />
+    <result column="name_" jdbcType="VARCHAR" property="name" />
+    <result column="privilege_" jdbcType="VARCHAR" property="privilege" />
+    <result column="busiext1_" jdbcType="VARCHAR" property="busiext1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, grade_, name_, privilege_, busiext1_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_credit
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_credit
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.UCredit">
+    insert into u_credit (id_, grade_, name_, 
+      privilege_, busiext1_)
+    values (#{id,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{privilege,jdbcType=VARCHAR}, #{busiext1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.UCredit">
+    insert into u_credit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="grade != null">
+        grade_,
+      </if>
+      <if test="name != null">
+        name_,
+      </if>
+      <if test="privilege != null">
+        privilege_,
+      </if>
+      <if test="busiext1 != null">
+        busiext1_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="busiext1 != null">
+        #{busiext1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.UCredit">
+    update u_credit
+    <set>
+      <if test="grade != null">
+        grade_ = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name_ = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        privilege_ = #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="busiext1 != null">
+        busiext1_ = #{busiext1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.UCredit">
+    update u_credit
+    set grade_ = #{grade,jdbcType=VARCHAR},
+      name_ = #{name,jdbcType=VARCHAR},
+      privilege_ = #{privilege,jdbcType=VARCHAR},
+      busiext1_ = #{busiext1,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

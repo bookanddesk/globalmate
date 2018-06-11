@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.LearnCooperationMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.LearnCooperation">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="language_" jdbcType="VARCHAR" property="language" />
+    <result column="subject_" jdbcType="VARCHAR" property="subject" />
+    <result column="descrition_" jdbcType="VARCHAR" property="descrition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, language_, subject_, descrition_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from learn_cooperation
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from learn_cooperation
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.LearnCooperation">
+    insert into learn_cooperation (ID_, language_, subject_, 
+      descrition_)
+    values (#{id,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{descrition,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.LearnCooperation">
+    insert into learn_cooperation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="language != null">
+        language_,
+      </if>
+      <if test="subject != null">
+        subject_,
+      </if>
+      <if test="descrition != null">
+        descrition_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.LearnCooperation">
+    update learn_cooperation
+    <set>
+      <if test="language != null">
+        language_ = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject_ = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null">
+        descrition_ = #{descrition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.LearnCooperation">
+    update learn_cooperation
+    set language_ = #{language,jdbcType=VARCHAR},
+      subject_ = #{subject,jdbcType=VARCHAR},
+      descrition_ = #{descrition,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
