@@ -130,18 +130,6 @@ CREATE TABLE userlink  (
 	PRIMARY KEY(id_)
 );
 
-CREATE TABLE   u_Tag(
-	id_         	varchar(64) NOT NULL,
-	type_       	varchar(32) NOT NULL,
-	enable_     	char(1) NOT NULL,
-	user_id_    	varchar(64) NOT NULL,
-	target_id_  	varchar(64) NOT NULL,
-	MAIN_TARGET_	char(1) NULL,
-	create_time_	TIMESTAMPNOT NULL,
-	authentication_ double , -- //认证数目
-	PRIMARY KEY(id_)
-);
-
 drop table if exists u_Tag;
 CREATE TABLE   u_Tag(
 	id_         	varchar(64) NOT NULL,
