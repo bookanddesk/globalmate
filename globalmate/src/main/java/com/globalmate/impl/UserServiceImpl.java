@@ -3,7 +3,13 @@
  */
 package com.globalmate.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 
 import com.globalmate.user.User;
@@ -16,8 +22,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(String id) {
-		DefaultSqlSessionFactory sqlSessionFactory = new DefaultSqlSessionFactory(null);
+		String resource = "mybatis-config.xml";
+		InputStream inputStream=null;
+		try {
+			inputStream = Resources.getResourceAsStream(resource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
 		User user=null;
 		try {
 			UserService userService = sqlSession.getMapper(UserService.class);

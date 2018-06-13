@@ -4,7 +4,7 @@ package com.globalmate.user;
  * User 
  */
 public interface UserService {
-	public static final String NAMESPACE = "com.globalmate.mapper.UserMapper";
+	public static final String NAMESPACE = "com.globalmate.data.dao.mapper.UserMapper";
 	
 	User getUserById(String id);
 	
