@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/tx
-                           http://www.springframework.org/schema/tx/spring-tx.xsd
-                           http://www.springframework.org/schema/aop
-                           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
           destroy-method="close">
@@ -49,8 +43,8 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 加载所有Mapper.xml文件 -->
-        <!--<property name="mapperLocations"
-                  value="classpath:com/globalmate/data/dao/mapper/*Mapper.xml"/>-->
+        <property name="mapperLocations"
+                  value="classpath:com/globalmate/data/dao/mapper/*Mapper.xml"/>
         <property name="transactionFactory">
             <bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory"/>
         </property>
@@ -66,7 +60,7 @@
 
     <!-- 采用自动扫描方式创建mapper bean(单个更新模式) -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.yonyou.esn.data.dao.mapper"/>
+        <property name="basePackage" value="com.globalmate.data.dao.mapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 

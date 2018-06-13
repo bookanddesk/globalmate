@@ -58,7 +58,7 @@
 <!--<table tableName="u_credit"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-<table tableName="service" schema="" enableCountByExample="false"
+<!--<table tableName="service" schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 <table tableName="need"  schema="" enableCountByExample="false"
@@ -84,7 +84,7 @@
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 <table tableName="userlink" schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
 
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

@@ -1,8 +1,9 @@
-package com.globalmate.uitl;
+package com.globalmate.data.entity.po;
 
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
+
 public class JsonResult {
 	private boolean success=true;//是否成功
 	private String msg;//消息文本。如果失败则必需有值记录失败描述文字
@@ -29,7 +30,7 @@ public class JsonResult {
 		return jr;
 	}
 	
-	public static JsonResult fail(String msg,Object data){
+	public static JsonResult fail(String msg, Object data){
 		JsonResult jr = new JsonResult();
 		jr.setSuccess(false);
 		jr.setMsg(msg);
