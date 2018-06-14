@@ -2,9 +2,8 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 
-public class Clearance {
-    private String id;
-
+public class Clearance extends BaseTypeEntity{
+	
     private String where;
 
     private Date time;
@@ -15,13 +14,6 @@ public class Clearance {
 
     private String descrition;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getWhere() {
         return where;
@@ -61,5 +53,13 @@ public class Clearance {
 
     public void setDescrition(String descrition) {
         this.descrition = descrition == null ? null : descrition.trim();
+    }
+
+    public String getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(String needId) {
+        this.needId = needId == null ? null : needId.trim();
     }
 }

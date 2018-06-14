@@ -1,7 +1,6 @@
 package com.globalmate.data.entity;
 
-public class LearnCooperation {
-    private String id;
+public class LearnCooperation extends BaseTypeEntity{
 
     private String language;
 
@@ -9,13 +8,7 @@ public class LearnCooperation {
 
     private String descrition;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getLanguage() {
         return language;
@@ -40,4 +33,5 @@ public class LearnCooperation {
     public void setDescrition(String descrition) {
         this.descrition = descrition == null ? null : descrition.trim();
     }
+
 }

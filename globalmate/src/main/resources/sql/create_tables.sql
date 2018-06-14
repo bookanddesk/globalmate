@@ -49,6 +49,7 @@ CREATE TABLE need(
 
 CREATE TABLE buy( 
 	ID_        	varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	country_	varchar(64) NULL,  -- //国家
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
@@ -57,10 +58,12 @@ CREATE TABLE buy(
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     char(6) NULL,  -- //交货方式
 	PRIMARY KEY(ID_)
+	foreign key(need_id_)　references need(ID_)
 );
 
 CREATE TABLE carry( 
 	ID_     varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	from_	varchar(255) NULL,  
 	to_	varchar(255) NULL,  
 	arrive_	TIMESTAMP  NULL,  
@@ -73,10 +76,12 @@ CREATE TABLE carry(
 	volume_         varchar(255) NULL,  -- //体积
 	weight_         varchar(255) NULL,  -- //重量
 	PRIMARY KEY(ID_)
+	foreign key(need_id_)　references need(ID_)
 );
 
 CREATE TABLE accompany( 
 	ID_     varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	where_	varchar(255) NULL,  
 	start_time_	TIMESTAMP   NULL,  
 	end_time_ TIMESTAMP  NULL,  
@@ -84,26 +89,31 @@ CREATE TABLE accompany(
 	type_  varchar(255) NULL, -- //想玩儿什么，下拉选一种？？
 	doctor_     char(1) NULL,  -- //是否为看病
 	PRIMARY KEY(ID_)
+	foreign key(need_id_)　references need(ID_)
 );
 
 
 CREATE TABLE clearance( 
 	ID_     varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	where_	varchar(255) NULL,  -- //目的地国家
 	time_	TIMESTAMP   NULL,  -- //时间
 	flight_information_  varchar(255)  NULL, -- //航班信息
 	airport varchar(255) NULL,  -- //通关机场
 	descrition_  varchar(2000) NULL, -- //描述
 	PRIMARY KEY(ID_)
+	foreign key(need_id_)　references need(ID_)
 )
 
 
 CREATE TABLE learn_cooperation( 
 	ID_     varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	language_ varchar(255) NULL,  -- //语言
 	subject_  varchar(255) NULL,  -- //科目
 	descrition_  varchar(2000) NULL, -- //描述
 	PRIMARY KEY(ID_)
+	foreign key(need_id_)　references need(ID_)
 );
 
 

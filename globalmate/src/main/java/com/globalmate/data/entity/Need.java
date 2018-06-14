@@ -5,7 +5,7 @@ import java.util.Date;
 public class Need {
     private String id;
 
-    private String startType;
+    private String startType;  //冗余了
 
     private String type;
 

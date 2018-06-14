@@ -1,8 +1,6 @@
 package com.globalmate.data.entity;
 
-public class Buy {
-    private String id;
-
+public class Buy extends BaseTypeEntity{
     private String country;
 
     private String goodsName;
@@ -17,13 +15,6 @@ public class Buy {
 
     private String deliveryWay;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getCountry() {
         return country;
@@ -80,4 +71,5 @@ public class Buy {
     public void setDeliveryWay(String deliveryWay) {
         this.deliveryWay = deliveryWay == null ? null : deliveryWay.trim();
     }
+
 }

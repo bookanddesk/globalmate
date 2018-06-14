@@ -2,8 +2,7 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 
-public class Carry {
-    private String id;
+public class Carry extends BaseTypeEntity{
 
     private String from;
 
@@ -26,14 +25,6 @@ public class Carry {
     private String volume;
 
     private String weight;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getFrom() {
         return from;
@@ -121,5 +112,13 @@ public class Carry {
 
     public void setWeight(String weight) {
         this.weight = weight == null ? null : weight.trim();
+    }
+
+    public String getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(String needId) {
+        this.needId = needId == null ? null : needId.trim();
     }
 }
