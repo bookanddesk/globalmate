@@ -1,7 +1,8 @@
 package com.globalmate.service.assistance;
 
-import com.globalmate.data.entity.Need;
-import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.*;
+
+import java.util.List;
 
 /**
  * 平台帮助
@@ -13,8 +14,21 @@ public interface AssistService {
      * @param need
      * @return 匹配到的可以提供帮助的用户
      */
-    User matchDemands(Need need);
+    List<User> matchDemands(Need need);
 
+    /**
+     * 生成一个帮助交易
+     * @param matchNeed
+     * @return
+     */
+    SysAssistanceDeal addAssistanceDeal(SysMatchNeed matchNeed);
+
+    /**
+     * 获取用户全部有效帮助
+     * @param user
+     * @return
+     */
+    List<SysAssistanceDeal> getAssistanceDeal(User user);
 
 
 }

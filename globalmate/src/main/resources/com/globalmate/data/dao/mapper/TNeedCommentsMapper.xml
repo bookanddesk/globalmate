@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.TNeedCommentsMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.TNeedComments">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id" jdbcType="VARCHAR" property="needId" />
+    <result column="u_needer_id" jdbcType="VARCHAR" property="uNeederId" />
+    <result column="u_nedder_name" jdbcType="VARCHAR" property="uNedderName" />
+    <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime" />
+    <result column="comment_modify_time" jdbcType="TIMESTAMP" property="commentModifyTime" />
+    <result column="topped_times" jdbcType="SMALLINT" property="toppedTimes" />
+    <result column="stepped_times" jdbcType="SMALLINT" property="steppedTimes" />
+    <result column="is_replied" jdbcType="BIT" property="isReplied" />
+    <result column="replied_comment_id" jdbcType="VARCHAR" property="repliedCommentId" />
+    <result column="is_reply_comment" jdbcType="BIT" property="isReplyComment" />
+    <result column="comment_ext1" jdbcType="VARCHAR" property="commentExt1" />
+    <result column="comment_ext2" jdbcType="VARCHAR" property="commentExt2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, need_id, u_needer_id, u_nedder_name, comment_create_time, comment_modify_time, 
+    topped_times, stepped_times, is_replied, replied_comment_id, is_reply_comment, comment_ext1, 
+    comment_ext2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_need_comments
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_need_comments
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.TNeedComments">
+    insert into t_need_comments (id_, need_id, u_needer_id, 
+      u_nedder_name, comment_create_time, comment_modify_time, 
+      topped_times, stepped_times, is_replied, 
+      replied_comment_id, is_reply_comment, comment_ext1, 
+      comment_ext2)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{uNeederId,jdbcType=VARCHAR}, 
+      #{uNedderName,jdbcType=VARCHAR}, #{commentCreateTime,jdbcType=TIMESTAMP}, #{commentModifyTime,jdbcType=TIMESTAMP}, 
+      #{toppedTimes,jdbcType=SMALLINT}, #{steppedTimes,jdbcType=SMALLINT}, #{isReplied,jdbcType=BIT}, 
+      #{repliedCommentId,jdbcType=VARCHAR}, #{isReplyComment,jdbcType=BIT}, #{commentExt1,jdbcType=VARCHAR}, 
+      #{commentExt2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.TNeedComments">
+    insert into t_need_comments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="needId != null">
+        need_id,
+      </if>
+      <if test="uNeederId != null">
+        u_needer_id,
+      </if>
+      <if test="uNedderName != null">
+        u_nedder_name,
+      </if>
+      <if test="commentCreateTime != null">
+        comment_create_time,
+      </if>
+      <if test="commentModifyTime != null">
+        comment_modify_time,
+      </if>
+      <if test="toppedTimes != null">
+        topped_times,
+      </if>
+      <if test="steppedTimes != null">
+        stepped_times,
+      </if>
+      <if test="isReplied != null">
+        is_replied,
+      </if>
+      <if test="repliedCommentId != null">
+        replied_comment_id,
+      </if>
+      <if test="isReplyComment != null">
+        is_reply_comment,
+      </if>
+      <if test="commentExt1 != null">
+        comment_ext1,
+      </if>
+      <if test="commentExt2 != null">
+        comment_ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederId != null">
+        #{uNeederId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNedderName != null">
+        #{uNedderName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCreateTime != null">
+        #{commentCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentModifyTime != null">
+        #{commentModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toppedTimes != null">
+        #{toppedTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="steppedTimes != null">
+        #{steppedTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="isReplied != null">
+        #{isReplied,jdbcType=BIT},
+      </if>
+      <if test="repliedCommentId != null">
+        #{repliedCommentId,jdbcType=VARCHAR},
+      </if>
+      <if test="isReplyComment != null">
+        #{isReplyComment,jdbcType=BIT},
+      </if>
+      <if test="commentExt1 != null">
+        #{commentExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="commentExt2 != null">
+        #{commentExt2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.TNeedComments">
+    update t_need_comments
+    <set>
+      <if test="needId != null">
+        need_id = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederId != null">
+        u_needer_id = #{uNeederId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNedderName != null">
+        u_nedder_name = #{uNedderName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCreateTime != null">
+        comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentModifyTime != null">
+        comment_modify_time = #{commentModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toppedTimes != null">
+        topped_times = #{toppedTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="steppedTimes != null">
+        stepped_times = #{steppedTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="isReplied != null">
+        is_replied = #{isReplied,jdbcType=BIT},
+      </if>
+      <if test="repliedCommentId != null">
+        replied_comment_id = #{repliedCommentId,jdbcType=VARCHAR},
+      </if>
+      <if test="isReplyComment != null">
+        is_reply_comment = #{isReplyComment,jdbcType=BIT},
+      </if>
+      <if test="commentExt1 != null">
+        comment_ext1 = #{commentExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="commentExt2 != null">
+        comment_ext2 = #{commentExt2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.TNeedComments">
+    update t_need_comments
+    set need_id = #{needId,jdbcType=VARCHAR},
+      u_needer_id = #{uNeederId,jdbcType=VARCHAR},
+      u_nedder_name = #{uNedderName,jdbcType=VARCHAR},
+      comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      comment_modify_time = #{commentModifyTime,jdbcType=TIMESTAMP},
+      topped_times = #{toppedTimes,jdbcType=SMALLINT},
+      stepped_times = #{steppedTimes,jdbcType=SMALLINT},
+      is_replied = #{isReplied,jdbcType=BIT},
+      replied_comment_id = #{repliedCommentId,jdbcType=VARCHAR},
+      is_reply_comment = #{isReplyComment,jdbcType=BIT},
+      comment_ext1 = #{commentExt1,jdbcType=VARCHAR},
+      comment_ext2 = #{commentExt2,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

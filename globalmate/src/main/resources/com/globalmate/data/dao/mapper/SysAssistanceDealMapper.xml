@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.SysAssistanceDealMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.SysAssistanceDeal">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id_" jdbcType="VARCHAR" property="needId" />
+    <result column="u_needer_id_" jdbcType="VARCHAR" property="uNeederId" />
+    <result column="u_needer_name" jdbcType="VARCHAR" property="uNeederName" />
+    <result column="provide_id_" jdbcType="VARCHAR" property="provideId" />
+    <result column="u_provider_id_" jdbcType="VARCHAR" property="uProviderId" />
+    <result column="u_provider_name" jdbcType="VARCHAR" property="uProviderName" />
+    <result column="assist_create_time" jdbcType="TIMESTAMP" property="assistCreateTime" />
+    <result column="assist_modify_time" jdbcType="CHAR" property="assistModifyTime" />
+    <result column="assist_end_time" jdbcType="TIMESTAMP" property="assistEndTime" />
+    <result column="assist_status" jdbcType="VARCHAR" property="assistStatus" />
+    <result column="assist_evaluation" jdbcType="VARCHAR" property="assistEvaluation" />
+    <result column="assist_price" jdbcType="VARCHAR" property="assistPrice" />
+    <result column="assist_ext1" jdbcType="VARCHAR" property="assistExt1" />
+    <result column="assist_ext2" jdbcType="VARCHAR" property="assistExt2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, need_id_, u_needer_id_, u_needer_name, provide_id_, u_provider_id_, u_provider_name, 
+    assist_create_time, assist_modify_time, assist_end_time, assist_status, assist_evaluation, 
+    assist_price, assist_ext1, assist_ext2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_assistance_deal
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_assistance_deal
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.SysAssistanceDeal">
+    insert into sys_assistance_deal (id_, need_id_, u_needer_id_, 
+      u_needer_name, provide_id_, u_provider_id_, 
+      u_provider_name, assist_create_time, assist_modify_time, 
+      assist_end_time, assist_status, assist_evaluation, 
+      assist_price, assist_ext1, assist_ext2
+      )
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{uNeederId,jdbcType=VARCHAR}, 
+      #{uNeederName,jdbcType=VARCHAR}, #{provideId,jdbcType=VARCHAR}, #{uProviderId,jdbcType=VARCHAR}, 
+      #{uProviderName,jdbcType=VARCHAR}, #{assistCreateTime,jdbcType=TIMESTAMP}, #{assistModifyTime,jdbcType=CHAR}, 
+      #{assistEndTime,jdbcType=TIMESTAMP}, #{assistStatus,jdbcType=VARCHAR}, #{assistEvaluation,jdbcType=VARCHAR}, 
+      #{assistPrice,jdbcType=VARCHAR}, #{assistExt1,jdbcType=VARCHAR}, #{assistExt2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.SysAssistanceDeal">
+    insert into sys_assistance_deal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="needId != null">
+        need_id_,
+      </if>
+      <if test="uNeederId != null">
+        u_needer_id_,
+      </if>
+      <if test="uNeederName != null">
+        u_needer_name,
+      </if>
+      <if test="provideId != null">
+        provide_id_,
+      </if>
+      <if test="uProviderId != null">
+        u_provider_id_,
+      </if>
+      <if test="uProviderName != null">
+        u_provider_name,
+      </if>
+      <if test="assistCreateTime != null">
+        assist_create_time,
+      </if>
+      <if test="assistModifyTime != null">
+        assist_modify_time,
+      </if>
+      <if test="assistEndTime != null">
+        assist_end_time,
+      </if>
+      <if test="assistStatus != null">
+        assist_status,
+      </if>
+      <if test="assistEvaluation != null">
+        assist_evaluation,
+      </if>
+      <if test="assistPrice != null">
+        assist_price,
+      </if>
+      <if test="assistExt1 != null">
+        assist_ext1,
+      </if>
+      <if test="assistExt2 != null">
+        assist_ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederId != null">
+        #{uNeederId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederName != null">
+        #{uNeederName,jdbcType=VARCHAR},
+      </if>
+      <if test="provideId != null">
+        #{provideId,jdbcType=VARCHAR},
+      </if>
+      <if test="uProviderId != null">
+        #{uProviderId,jdbcType=VARCHAR},
+      </if>
+      <if test="uProviderName != null">
+        #{uProviderName,jdbcType=VARCHAR},
+      </if>
+      <if test="assistCreateTime != null">
+        #{assistCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistModifyTime != null">
+        #{assistModifyTime,jdbcType=CHAR},
+      </if>
+      <if test="assistEndTime != null">
+        #{assistEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistStatus != null">
+        #{assistStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="assistEvaluation != null">
+        #{assistEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="assistPrice != null">
+        #{assistPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="assistExt1 != null">
+        #{assistExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="assistExt2 != null">
+        #{assistExt2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.SysAssistanceDeal">
+    update sys_assistance_deal
+    <set>
+      <if test="needId != null">
+        need_id_ = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederId != null">
+        u_needer_id_ = #{uNeederId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeederName != null">
+        u_needer_name = #{uNeederName,jdbcType=VARCHAR},
+      </if>
+      <if test="provideId != null">
+        provide_id_ = #{provideId,jdbcType=VARCHAR},
+      </if>
+      <if test="uProviderId != null">
+        u_provider_id_ = #{uProviderId,jdbcType=VARCHAR},
+      </if>
+      <if test="uProviderName != null">
+        u_provider_name = #{uProviderName,jdbcType=VARCHAR},
+      </if>
+      <if test="assistCreateTime != null">
+        assist_create_time = #{assistCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistModifyTime != null">
+        assist_modify_time = #{assistModifyTime,jdbcType=CHAR},
+      </if>
+      <if test="assistEndTime != null">
+        assist_end_time = #{assistEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistStatus != null">
+        assist_status = #{assistStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="assistEvaluation != null">
+        assist_evaluation = #{assistEvaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="assistPrice != null">
+        assist_price = #{assistPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="assistExt1 != null">
+        assist_ext1 = #{assistExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="assistExt2 != null">
+        assist_ext2 = #{assistExt2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.SysAssistanceDeal">
+    update sys_assistance_deal
+    set need_id_ = #{needId,jdbcType=VARCHAR},
+      u_needer_id_ = #{uNeederId,jdbcType=VARCHAR},
+      u_needer_name = #{uNeederName,jdbcType=VARCHAR},
+      provide_id_ = #{provideId,jdbcType=VARCHAR},
+      u_provider_id_ = #{uProviderId,jdbcType=VARCHAR},
+      u_provider_name = #{uProviderName,jdbcType=VARCHAR},
+      assist_create_time = #{assistCreateTime,jdbcType=TIMESTAMP},
+      assist_modify_time = #{assistModifyTime,jdbcType=CHAR},
+      assist_end_time = #{assistEndTime,jdbcType=TIMESTAMP},
+      assist_status = #{assistStatus,jdbcType=VARCHAR},
+      assist_evaluation = #{assistEvaluation,jdbcType=VARCHAR},
+      assist_price = #{assistPrice,jdbcType=VARCHAR},
+      assist_ext1 = #{assistExt1,jdbcType=VARCHAR},
+      assist_ext2 = #{assistExt2,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.TProvideMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.TProvide">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="p_type" jdbcType="VARCHAR" property="pType" />
+    <result column="u_id" jdbcType="VARCHAR" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="p_location" jdbcType="VARCHAR" property="pLocation" />
+    <result column="p_resident1" jdbcType="VARCHAR" property="pResident1" />
+    <result column="p_resident2" jdbcType="VARCHAR" property="pResident2" />
+    <result column="p_feature" jdbcType="VARCHAR" property="pFeature" />
+    <result column="p_effective_modulus" jdbcType="VARCHAR" property="pEffectiveModulus" />
+    <result column="p_create_time" jdbcType="TIMESTAMP" property="pCreateTime" />
+    <result column="p_modify_time" jdbcType="TIMESTAMP" property="pModifyTime" />
+    <result column="p_ext1" jdbcType="VARCHAR" property="pExt1" />
+    <result column="p_ext2" jdbcType="VARCHAR" property="pExt2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, p_type, u_id, u_name, p_location, p_resident1, p_resident2, p_feature, p_effective_modulus, 
+    p_create_time, p_modify_time, p_ext1, p_ext2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_provide
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_provide
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.TProvide">
+    insert into t_provide (id_, p_type, u_id, 
+      u_name, p_location, p_resident1, 
+      p_resident2, p_feature, p_effective_modulus, 
+      p_create_time, p_modify_time, p_ext1, 
+      p_ext2)
+    values (#{id,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, 
+      #{uName,jdbcType=VARCHAR}, #{pLocation,jdbcType=VARCHAR}, #{pResident1,jdbcType=VARCHAR}, 
+      #{pResident2,jdbcType=VARCHAR}, #{pFeature,jdbcType=VARCHAR}, #{pEffectiveModulus,jdbcType=VARCHAR}, 
+      #{pCreateTime,jdbcType=TIMESTAMP}, #{pModifyTime,jdbcType=TIMESTAMP}, #{pExt1,jdbcType=VARCHAR}, 
+      #{pExt2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.TProvide">
+    insert into t_provide
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="pType != null">
+        p_type,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="pLocation != null">
+        p_location,
+      </if>
+      <if test="pResident1 != null">
+        p_resident1,
+      </if>
+      <if test="pResident2 != null">
+        p_resident2,
+      </if>
+      <if test="pFeature != null">
+        p_feature,
+      </if>
+      <if test="pEffectiveModulus != null">
+        p_effective_modulus,
+      </if>
+      <if test="pCreateTime != null">
+        p_create_time,
+      </if>
+      <if test="pModifyTime != null">
+        p_modify_time,
+      </if>
+      <if test="pExt1 != null">
+        p_ext1,
+      </if>
+      <if test="pExt2 != null">
+        p_ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null">
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="pLocation != null">
+        #{pLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="pResident1 != null">
+        #{pResident1,jdbcType=VARCHAR},
+      </if>
+      <if test="pResident2 != null">
+        #{pResident2,jdbcType=VARCHAR},
+      </if>
+      <if test="pFeature != null">
+        #{pFeature,jdbcType=VARCHAR},
+      </if>
+      <if test="pEffectiveModulus != null">
+        #{pEffectiveModulus,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreateTime != null">
+        #{pCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pModifyTime != null">
+        #{pModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pExt1 != null">
+        #{pExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="pExt2 != null">
+        #{pExt2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.TProvide">
+    update t_provide
+    <set>
+      <if test="pType != null">
+        p_type = #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="pLocation != null">
+        p_location = #{pLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="pResident1 != null">
+        p_resident1 = #{pResident1,jdbcType=VARCHAR},
+      </if>
+      <if test="pResident2 != null">
+        p_resident2 = #{pResident2,jdbcType=VARCHAR},
+      </if>
+      <if test="pFeature != null">
+        p_feature = #{pFeature,jdbcType=VARCHAR},
+      </if>
+      <if test="pEffectiveModulus != null">
+        p_effective_modulus = #{pEffectiveModulus,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreateTime != null">
+        p_create_time = #{pCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pModifyTime != null">
+        p_modify_time = #{pModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pExt1 != null">
+        p_ext1 = #{pExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="pExt2 != null">
+        p_ext2 = #{pExt2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.TProvide">
+    update t_provide
+    set p_type = #{pType,jdbcType=VARCHAR},
+      u_id = #{uId,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      p_location = #{pLocation,jdbcType=VARCHAR},
+      p_resident1 = #{pResident1,jdbcType=VARCHAR},
+      p_resident2 = #{pResident2,jdbcType=VARCHAR},
+      p_feature = #{pFeature,jdbcType=VARCHAR},
+      p_effective_modulus = #{pEffectiveModulus,jdbcType=VARCHAR},
+      p_create_time = #{pCreateTime,jdbcType=TIMESTAMP},
+      p_modify_time = #{pModifyTime,jdbcType=TIMESTAMP},
+      p_ext1 = #{pExt1,jdbcType=VARCHAR},
+      p_ext2 = #{pExt2,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

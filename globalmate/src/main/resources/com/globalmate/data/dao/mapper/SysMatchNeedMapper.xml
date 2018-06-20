@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.SysMatchNeedMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.SysMatchNeed">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id" jdbcType="VARCHAR" property="needId" />
+    <result column="u_need_id" jdbcType="VARCHAR" property="uNeedId" />
+    <result column="u_need_name" jdbcType="VARCHAR" property="uNeedName" />
+    <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="match_info" jdbcType="VARCHAR" property="matchInfo" />
+    <result column="match_msg_count" jdbcType="INTEGER" property="matchMsgCount" />
+    <result column="match_accept" jdbcType="BIT" property="matchAccept" />
+    <result column="match_create_time" jdbcType="TIMESTAMP" property="matchCreateTime" />
+    <result column="match_modify_time" jdbcType="TIMESTAMP" property="matchModifyTime" />
+    <result column="last_push_time" jdbcType="TIMESTAMP" property="lastPushTime" />
+    <result column="match_ext1" jdbcType="VARCHAR" property="matchExt1" />
+    <result column="match_ext2" jdbcType="VARCHAR" property="matchExt2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, need_id, u_need_id, u_need_name, provider_id, provider_name, match_info, match_msg_count, 
+    match_accept, match_create_time, match_modify_time, last_push_time, match_ext1, match_ext2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_match_need
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_match_need
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.SysMatchNeed">
+    insert into sys_match_need (id_, need_id, u_need_id, 
+      u_need_name, provider_id, provider_name, 
+      match_info, match_msg_count, match_accept, 
+      match_create_time, match_modify_time, last_push_time, 
+      match_ext1, match_ext2)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{uNeedId,jdbcType=VARCHAR}, 
+      #{uNeedName,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, 
+      #{matchInfo,jdbcType=VARCHAR}, #{matchMsgCount,jdbcType=INTEGER}, #{matchAccept,jdbcType=BIT}, 
+      #{matchCreateTime,jdbcType=TIMESTAMP}, #{matchModifyTime,jdbcType=TIMESTAMP}, #{lastPushTime,jdbcType=TIMESTAMP}, 
+      #{matchExt1,jdbcType=VARCHAR}, #{matchExt2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.SysMatchNeed">
+    insert into sys_match_need
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="needId != null">
+        need_id,
+      </if>
+      <if test="uNeedId != null">
+        u_need_id,
+      </if>
+      <if test="uNeedName != null">
+        u_need_name,
+      </if>
+      <if test="providerId != null">
+        provider_id,
+      </if>
+      <if test="providerName != null">
+        provider_name,
+      </if>
+      <if test="matchInfo != null">
+        match_info,
+      </if>
+      <if test="matchMsgCount != null">
+        match_msg_count,
+      </if>
+      <if test="matchAccept != null">
+        match_accept,
+      </if>
+      <if test="matchCreateTime != null">
+        match_create_time,
+      </if>
+      <if test="matchModifyTime != null">
+        match_modify_time,
+      </if>
+      <if test="lastPushTime != null">
+        last_push_time,
+      </if>
+      <if test="matchExt1 != null">
+        match_ext1,
+      </if>
+      <if test="matchExt2 != null">
+        match_ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedId != null">
+        #{uNeedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedName != null">
+        #{uNeedName,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchInfo != null">
+        #{matchInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="matchMsgCount != null">
+        #{matchMsgCount,jdbcType=INTEGER},
+      </if>
+      <if test="matchAccept != null">
+        #{matchAccept,jdbcType=BIT},
+      </if>
+      <if test="matchCreateTime != null">
+        #{matchCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchModifyTime != null">
+        #{matchModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPushTime != null">
+        #{lastPushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchExt1 != null">
+        #{matchExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="matchExt2 != null">
+        #{matchExt2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.SysMatchNeed">
+    update sys_match_need
+    <set>
+      <if test="needId != null">
+        need_id = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedId != null">
+        u_need_id = #{uNeedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedName != null">
+        u_need_name = #{uNeedName,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        provider_id = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        provider_name = #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchInfo != null">
+        match_info = #{matchInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="matchMsgCount != null">
+        match_msg_count = #{matchMsgCount,jdbcType=INTEGER},
+      </if>
+      <if test="matchAccept != null">
+        match_accept = #{matchAccept,jdbcType=BIT},
+      </if>
+      <if test="matchCreateTime != null">
+        match_create_time = #{matchCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchModifyTime != null">
+        match_modify_time = #{matchModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPushTime != null">
+        last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="matchExt1 != null">
+        match_ext1 = #{matchExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="matchExt2 != null">
+        match_ext2 = #{matchExt2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.SysMatchNeed">
+    update sys_match_need
+    set need_id = #{needId,jdbcType=VARCHAR},
+      u_need_id = #{uNeedId,jdbcType=VARCHAR},
+      u_need_name = #{uNeedName,jdbcType=VARCHAR},
+      provider_id = #{providerId,jdbcType=VARCHAR},
+      provider_name = #{providerName,jdbcType=VARCHAR},
+      match_info = #{matchInfo,jdbcType=VARCHAR},
+      match_msg_count = #{matchMsgCount,jdbcType=INTEGER},
+      match_accept = #{matchAccept,jdbcType=BIT},
+      match_create_time = #{matchCreateTime,jdbcType=TIMESTAMP},
+      match_modify_time = #{matchModifyTime,jdbcType=TIMESTAMP},
+      last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      match_ext1 = #{matchExt1,jdbcType=VARCHAR},
+      match_ext2 = #{matchExt2,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

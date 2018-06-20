@@ -160,3 +160,106 @@ CREATE TABLE   u_credit(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment'用户信用';
 
 -- until 2018-6-11
+
+drop table if exists T_provide;
+
+/*==============================================================*/
+/* Table: T_provide                                             */
+/*==============================================================*/
+create table T_provide
+(
+   id_                  varchar(64) not null,
+   p_type               varchar(64) comment '服务类型',
+   u_id                 varchar(64) comment '服务提供者id',
+   u_name               varchar(32) comment '服务提供者name',
+   p_location           varchar(32) comment '服务提供者者位置',
+   p_resident1          varchar(32) comment '服务提供者者常驻地1',
+   p_resident2          varchar(32) comment '服务提供者者常驻地2',
+   p_feature            varchar(64) comment '服务特性',
+   p_effective_modulus  varchar(10) comment '服务有效系数',
+   p_create_time        timestamp comment '服务添加时间',
+   p_modify_time        timestamp comment '服务更新时间',
+   p_ext1               varchar(64) comment '扩展字段1',
+   p_ext2               varchar(64) comment '扩展字段2',
+   primary key (id_)
+);
+
+
+drop table if exists sys_match_need;
+
+/*==============================================================*/
+/* Table: sys_match_need                                        */
+/*==============================================================*/
+create table sys_match_need
+(
+   id_                  varchar(64) not null,
+   need_id              varchar(64) comment '需求id',
+   u_need_id            varchar(64) comment '需求人id',
+   u_need_name          varchar(64) comment '需求人name',
+   provider_id          varchar(64) comment '可帮助人id',
+   provider_name        varchar(64) comment '可帮助人name',
+   match_info           varchar(64) comment '匹配信息',
+   match_msg_count      int(10) comment '推送信息次数',
+   match_accept         tinyint(1) comment '被采纳状态',
+   match_create_time    timestamp comment '匹配创建时间',
+   match_modify_time    timestamp comment '匹配修改时间',
+   last_push_time       timestamp comment '最后推送时间',
+   match_ext1           varchar(64) comment '扩展字段1',
+   match_ext2           varchar(64) comment '扩展字段2',
+   primary key (id_)
+);
+
+
+drop table if exists sys_assistance_deal;
+
+/*==============================================================*/
+/* Table: sys_assistance_deal                                   */
+/*==============================================================*/
+create table sys_assistance_deal
+(
+   id_                  varchar(64) not null,
+   need_id_             varchar(64) comment '需求id_',
+   u_needer_id_         varchar(64) comment '需求人id_',
+   u_needer_name        varchar(32) comment '需求人name',
+   provide_id_          varchar(64) comment '服务id_',
+   u_provider_id_       varchar(64) comment '服务提供者人id',
+   u_provider_name      varchar(32) comment '服务提供者name',
+   assist_create_time   timestamp comment '帮助创建时间',
+   assist_modify_time   char(10) comment '帮助更新时间',
+   assist_end_time      timestamp comment '帮助结束时间',
+   assist_status        varchar(64) comment '帮助状态',
+   assist_evaluation    varchar(64) comment '帮助评价',
+   assist_price         varchar(64) comment '交易代价',
+   assist_ext1          varchar(64) comment '扩展字段1',
+   assist_ext2          varchar(64) comment '扩展字段2',
+   primary key (id_)
+);
+
+
+-- until 2018-6-14
+
+drop table if exists T_need_comments;
+
+/*==============================================================*/
+/* Table: T_need_comments                                       */
+/*==============================================================*/
+create table T_need_comments
+(
+   id_                  varchar(64) not null,
+   need_id              varchar(64) comment '需求id',
+   u_needer_id          varchar(64) comment '留言者id',
+   u_nedder_name        varchar(32) comment '留言者姓名',
+   comment_create_time  timestamp comment '留言提交时间',
+   comment_modify_time  timestamp comment '留言更新时间',
+   topped_times         smallint(5) comment '留言被顶次数',
+   stepped_times        smallint(5) comment '留言被踩次数',
+   is_replied           tinyint(1) comment '留言是否有被回复',
+   replied_comment_id   varchar(64) comment '被回复的留言id',
+   is_reply_comment     tinyint(1) comment '是否是回复留言',
+   comment_ext1         varchar(64) comment '扩展字段1',
+   comment_ext2         varchar(64) comment '扩展字段2',
+   primary key (id_)
+);
+
+
+-- until 2018-6-20
