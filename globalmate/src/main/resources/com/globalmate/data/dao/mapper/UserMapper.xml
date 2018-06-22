@@ -1,85 +1,258 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
-
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.globalmate.data.dao.mapper.UserMapper">
-	<!-- id全局唯一 -->
-	<select id="extSelectUserById" parameterType="string" resultMap="extUserResultMap">
-		SELECT * FROM USER WHERE ID_ = #{id} 
-	</select>
-	
-	<select id="extSelectUserByCode" parameterType="string" resultMap="extUserResultMap">
-        SELECT * FROM USER WHERE CODE_ = #{userCode}
-    </select>
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.User">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="CODE_" jdbcType="VARCHAR" property="code" />
+    <result column="NAME_" jdbcType="VARCHAR" property="name" />
+    <result column="NIKENAME_" jdbcType="VARCHAR" property="nikename" />
+    <result column="PASSWORD_" jdbcType="VARCHAR" property="password" />
+    <result column="SALT_" jdbcType="VARCHAR" property="salt" />
+    <result column="EMAIL_" jdbcType="VARCHAR" property="email" />
+    <result column="PHONE_" jdbcType="VARCHAR" property="phone" />
+    <result column="PIC_" jdbcType="VARCHAR" property="pic" />
+    <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ENABLE_" jdbcType="VARCHAR" property="enable" />
+    <result column="ID_NUMBER_" jdbcType="VARCHAR" property="idNumber" />
+    <result column="NICE_" jdbcType="INTEGER" property="nice" />
+    <result column="WHERE_" jdbcType="VARCHAR" property="where" />
+    <result column="SCHOOL_" jdbcType="VARCHAR" property="school" />
+    <result column="HOBBY_" jdbcType="VARCHAR" property="hobby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, CODE_, NAME_, NIKENAME_, PASSWORD_, SALT_, EMAIL_, PHONE_, PIC_, CREATE_TIME_, 
+    MODIFY_TIME_, ENABLE_, ID_NUMBER_, NICE_, WHERE_, SCHOOL_, HOBBY_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.User">
+    insert into user (ID_, CODE_, NAME_, 
+      NIKENAME_, PASSWORD_, SALT_, 
+      EMAIL_, PHONE_, PIC_, 
+      CREATE_TIME_, MODIFY_TIME_, ENABLE_, 
+      ID_NUMBER_, NICE_, WHERE_, 
+      SCHOOL_, HOBBY_)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{nikename,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=VARCHAR}, 
+      #{idNumber,jdbcType=VARCHAR}, #{nice,jdbcType=INTEGER}, #{where,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="code != null">
+        CODE_,
+      </if>
+      <if test="name != null">
+        NAME_,
+      </if>
+      <if test="nikename != null">
+        NIKENAME_,
+      </if>
+      <if test="password != null">
+        PASSWORD_,
+      </if>
+      <if test="salt != null">
+        SALT_,
+      </if>
+      <if test="email != null">
+        EMAIL_,
+      </if>
+      <if test="phone != null">
+        PHONE_,
+      </if>
+      <if test="pic != null">
+        PIC_,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME_,
+      </if>
+      <if test="modifyTime != null">
+        MODIFY_TIME_,
+      </if>
+      <if test="enable != null">
+        ENABLE_,
+      </if>
+      <if test="idNumber != null">
+        ID_NUMBER_,
+      </if>
+      <if test="nice != null">
+        NICE_,
+      </if>
+      <if test="where != null">
+        WHERE_,
+      </if>
+      <if test="school != null">
+        SCHOOL_,
+      </if>
+      <if test="hobby != null">
+        HOBBY_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nikename != null">
+        #{nikename,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null">
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nice != null">
+        #{nice,jdbcType=INTEGER},
+      </if>
+      <if test="where != null">
+        #{where,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.User">
+    update user
+    <set>
+      <if test="code != null">
+        CODE_ = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME_ = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nikename != null">
+        NIKENAME_ = #{nikename,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD_ = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        SALT_ = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL_ = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE_ = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        PIC_ = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        MODIFY_TIME_ = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        ENABLE_ = #{enable,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null">
+        ID_NUMBER_ = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nice != null">
+        NICE_ = #{nice,jdbcType=INTEGER},
+      </if>
+      <if test="where != null">
+        WHERE_ = #{where,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        SCHOOL_ = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        HOBBY_ = #{hobby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.User">
+    update user
+    set CODE_ = #{code,jdbcType=VARCHAR},
+      NAME_ = #{name,jdbcType=VARCHAR},
+      NIKENAME_ = #{nikename,jdbcType=VARCHAR},
+      PASSWORD_ = #{password,jdbcType=VARCHAR},
+      SALT_ = #{salt,jdbcType=VARCHAR},
+      EMAIL_ = #{email,jdbcType=VARCHAR},
+      PHONE_ = #{phone,jdbcType=VARCHAR},
+      PIC_ = #{pic,jdbcType=VARCHAR},
+      CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME_ = #{modifyTime,jdbcType=TIMESTAMP},
+      ENABLE_ = #{enable,jdbcType=VARCHAR},
+      ID_NUMBER_ = #{idNumber,jdbcType=VARCHAR},
+      NICE_ = #{nice,jdbcType=INTEGER},
+      WHERE_ = #{where,jdbcType=VARCHAR},
+      SCHOOL_ = #{school,jdbcType=VARCHAR},
+      HOBBY_ = #{hobby,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
 
-	<resultMap id="extUserResultMap" type="com.globalmate.data.entity.UserEntity">
-		<id property="id" column="ID_" jdbcType="VARCHAR" />
-		<result property="code" column="CODE_" jdbcType="VARCHAR" />
-		<result property="name" column="NAME_" jdbcType="VARCHAR" />
-		<result property="nickName" column="NICKNAME_" jdbcType="VARCHAR" />
-		<result property="password" column="PASSWORD_" jdbcType="VARCHAR" />
-		<result property="salt" column="SALT_" jdbcType="VARCHAR" />
-		<result property="email" column="EMAIL_" jdbcType="VARCHAR" />
-		<result property="phone" column="PHONE_" jdbcType="VARCHAR" />
-		<result property="pic" column="PIC_" jdbcType="VARCHAR" />
-		<result property="createTime" column="CREATE_TIME_" jdbcType="TIMESTAMP" />
-		<result property="modifyTime" column="MODIFY_TIME_" jdbcType="TIMESTAMP" />
-		<result property="enable" column="ENABLE_" jdbcType="CHAR" />
-		<result property="idNumber" column="ID_NUMBER_" jdbcType="VARCHAR" />
-		<result property="nice" column="NICE_" jdbcType="INTEGER" />	
-		<result property="where" column="WHERE_" jdbcType="VARCHAR" />
-		<result property="school" column="SCHOOL_" jdbcType="VARCHAR" />
-		<result property="hobby" column="HOBBY_" jdbcType="VARCHAR" />
-	</resultMap>
-	
+  <select id="selectUserCount" parameterType="com.globalmate.data.entity.User" resultType="java.lang.Integer">
+    select count(1) from user
+    <where>
+      ENABLE_ = '1'
+      <if test="nikename != null">
+        and NIKENAME_ = #{nikename}
+      </if>
+      <if test="phone != null">
+        and PHONE_ = #{phone}
+      </if>
+    </where>
+  </select>
 
-	<insert id="extInsertUser" parameterType="com.globalmate.data.entity.UserEntity">
-		insert into USER(ID_, CODE_,NAME_,NICKNAME_
-		PASSWORD_,SALT_,EMAIL_,PHONE_,PIC_,CREATE_TIME_,ENABLE_,ID_NUMBER_,NICE_,WHERE_,
-		SCHOOL_, HOBBY_)
-		values (
-		#{id ,jdbcType=VARCHAR},
-		#{code ,jdbcType=VARCHAR},
-		#{name ,jdbcType=VARCHAR},
-		#{nickName ,jdbcType=VARCHAR},
-		#{password ,jdbcType=VARCHAR},
-		#{salt ,jdbcType=VARCHAR},
-		#{email ,jdbcType=VARCHAR},
-		#{phone ,jdbcType=VARCHAR},
-		#{pic ,jdbcType=VARCHAR},
-		#{createTime ,jdbcType=TIMESTAMP},
-		#{enable ,jdbcType=VARCHAR},
-		#{idNumber ,jdbcType=VARCHAR},
-		#{nice ,jdbcType=INTEGER},
-		#{where ,jdbcType=VARCHAR},
-		#{school ,jdbcType=VARCHAR},
-		#{hobby, jdbcType=VARCHAR}
-		)
-	</insert>
-	
-	<update id="extUpdateUser" parameterType="com.globalmate.data.entity.UserEntity">
-		update USER
-		set
-		CODE_ = #{code, jdbcType=VARCHAR},
-		NAME_ = #{name, jdbcType=VARCHAR},
-		NICKNAME_ = #{nickName, jdbcType=VARCHAR},
-		PASSWORD_ = #{password, jdbcType=VARCHAR},
-        <if test="email!=null">EMAIL_ = #{email, jdbcType=VARCHAR},</if>
-        <if test="phone!=null">PHONE_ = #{phone, jdbcType=VARCHAR},</if>
-		ENABLE_ = #{enable, jdbcType=VARCHAR},
-		SALT_= #{salt, jdbcType=VARCHAR},
-		PIC_=#{pic, jdbcType=VARCHAR},
-		ID_NUMBER_=#{idNumber, jdbcType=VARCHAR},
-		NICE_=#{nice, jdbcType=INTEGER},
-		WHERE_=#{where, jdbcType=VARCHAR},
-		SCHOOL_=#{school, jdbcType=VARCHAR},
-		HOBBY_=#{hobby, jdbcType=VARCHAR}
-		where ID_ = #{id}
-	</update>
-	
-	<delete id="extDeleteUser" parameterType="com.globalmate.data.entity.UserEntity">
-		delete from SER
-		where ID_ = #{id} 
-	</delete>
-	
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user where phone_=#{phone}
+  </select>
+
+  <update id="falseDelete" parameterType="java.lang.String">
+    update user set ENABLE_ = '0' where ID_ = #{userId}
+  </update>
+
 </mapper>

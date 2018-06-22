@@ -55,11 +55,11 @@ public class Clearance extends BaseTypeEntity{
         this.descrition = descrition == null ? null : descrition.trim();
     }
 
-    public String getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(String needId) {
-        this.needId = needId == null ? null : needId.trim();
-    }
+//    public String getNeedId() {
+//        return needId;
+//    }
+//
+//    public void setNeedId(String needId) {
+//        this.needId = needId == null ? null : needId.trim();
+//    }
 }

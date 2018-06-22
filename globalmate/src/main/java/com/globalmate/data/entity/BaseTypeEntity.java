@@ -12,4 +12,11 @@ public class BaseTypeEntity {
         this.id = id == null ? null : id.trim();
     }
 
+    public String getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(String needId) {
+        this.needId = needId;
+    }
 }

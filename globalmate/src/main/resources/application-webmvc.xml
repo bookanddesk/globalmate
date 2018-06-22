@@ -21,6 +21,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/**/user/add" />
+            <mvc:exclude-mapping path="/**/user/login/**" />
             <bean class="com.globalmate.common.TokenInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

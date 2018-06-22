@@ -114,11 +114,11 @@ public class Carry extends BaseTypeEntity{
         this.weight = weight == null ? null : weight.trim();
     }
 
-    public String getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(String needId) {
-        this.needId = needId == null ? null : needId.trim();
-    }
+//    public String getNeedId() {
+//        return needId;
+//    }
+//
+//    public void setNeedId(String needId) {
+//        this.needId = needId == null ? null : needId.trim();
+//    }
 }

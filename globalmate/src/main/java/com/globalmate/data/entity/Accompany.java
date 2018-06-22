@@ -65,11 +65,11 @@ public class Accompany extends BaseTypeEntity{
         this.doctor = doctor == null ? null : doctor.trim();
     }
 
-    public String getNeedId() {
-        return needId;
-    }
-
-    public void setNeedId(String needId) {
-        this.needId = needId == null ? null : needId.trim();
-    }
+//    public String getNeedId() {
+//        return needId;
+//    }
+//
+//    public void setNeedId(String needId) {
+//        this.needId = needId == null ? null : needId.trim();
+//    }
 }

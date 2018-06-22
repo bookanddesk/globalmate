@@ -2,6 +2,7 @@ package com.globalmate.exception;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.spring.MyBatisSystemException;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
 public class ExceptionParser {
@@ -21,6 +22,8 @@ public class ExceptionParser {
             message = "数据库错误：" + message;
         }else if(throwable instanceof JedisConnectionException){
             message = "redis缓存错误：" + message;
+        }else if(throwable instanceof RedisConnectionFailureException){
+            message = "redis链接错误：" + message;
         }else if(throwable instanceof RuntimeException) {
             if(StringUtils.isBlank(message)){
                 message = "运行时错误！";

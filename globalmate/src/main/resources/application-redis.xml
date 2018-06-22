@@ -20,7 +20,7 @@
         <property name="hostName" value="${redis.host}"/>
         <property name="port" value="${redis.port}"/>
         <property name="database" value="${redis.dbindex}"/>
-        <property name="password" value="${redis.password}"/>
+        <property name="password" value=""/>
         <property name="timeout" value="${redis.timeout}"/>
         <property name="poolConfig" ref="poolConfig"/>
         <property name="usePool" value="true"/>
