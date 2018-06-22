@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UFansRelationsMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.UFansRelations">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="u_id" jdbcType="VARCHAR" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="relation_type" jdbcType="SMALLINT" property="relationType" />
+    <result column="u_related_id" jdbcType="VARCHAR" property="uRelatedId" />
+    <result column="u_related_name" jdbcType="VARCHAR" property="uRelatedName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modity_time" jdbcType="TIMESTAMP" property="modityTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="rela_ext1" jdbcType="VARCHAR" property="relaExt1" />
+    <result column="rela_ext2" jdbcType="VARCHAR" property="relaExt2" />
+    <result column="rela_ext3" jdbcType="VARCHAR" property="relaExt3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, u_id, u_name, relation_type, u_related_id, u_related_name, create_time, modity_time, 
+    is_deleted, rela_ext1, rela_ext2, rela_ext3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_fans_relations
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_fans_relations
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.UFansRelations">
+    insert into u_fans_relations (id_, u_id, u_name, 
+      relation_type, u_related_id, u_related_name, 
+      create_time, modity_time, is_deleted, 
+      rela_ext1, rela_ext2, rela_ext3
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, #{uName,jdbcType=VARCHAR}, 
+      #{relationType,jdbcType=SMALLINT}, #{uRelatedId,jdbcType=VARCHAR}, #{uRelatedName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modityTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}, 
+      #{relaExt1,jdbcType=VARCHAR}, #{relaExt2,jdbcType=VARCHAR}, #{relaExt3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.UFansRelations">
+    insert into u_fans_relations
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="relationType != null">
+        relation_type,
+      </if>
+      <if test="uRelatedId != null">
+        u_related_id,
+      </if>
+      <if test="uRelatedName != null">
+        u_related_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modityTime != null">
+        modity_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="relaExt1 != null">
+        rela_ext1,
+      </if>
+      <if test="relaExt2 != null">
+        rela_ext2,
+      </if>
+      <if test="relaExt3 != null">
+        rela_ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationType != null">
+        #{relationType,jdbcType=SMALLINT},
+      </if>
+      <if test="uRelatedId != null">
+        #{uRelatedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uRelatedName != null">
+        #{uRelatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modityTime != null">
+        #{modityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="relaExt1 != null">
+        #{relaExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="relaExt2 != null">
+        #{relaExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="relaExt3 != null">
+        #{relaExt3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.UFansRelations">
+    update u_fans_relations
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationType != null">
+        relation_type = #{relationType,jdbcType=SMALLINT},
+      </if>
+      <if test="uRelatedId != null">
+        u_related_id = #{uRelatedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uRelatedName != null">
+        u_related_name = #{uRelatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modityTime != null">
+        modity_time = #{modityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="relaExt1 != null">
+        rela_ext1 = #{relaExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="relaExt2 != null">
+        rela_ext2 = #{relaExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="relaExt3 != null">
+        rela_ext3 = #{relaExt3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.UFansRelations">
+    update u_fans_relations
+    set u_id = #{uId,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      relation_type = #{relationType,jdbcType=SMALLINT},
+      u_related_id = #{uRelatedId,jdbcType=VARCHAR},
+      u_related_name = #{uRelatedName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modity_time = #{modityTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      rela_ext1 = #{relaExt1,jdbcType=VARCHAR},
+      rela_ext2 = #{relaExt2,jdbcType=VARCHAR},
+      rela_ext3 = #{relaExt3,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UCertifyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.UCertifyInfo">
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="u_id" jdbcType="VARCHAR" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="certify_time" jdbcType="TIMESTAMP" property="certifyTime" />
+    <result column="is_effective" jdbcType="BIT" property="isEffective" />
+    <result column="cetify_type" jdbcType="VARCHAR" property="cetifyType" />
+    <result column="certify_photo" jdbcType="VARCHAR" property="certifyPhoto" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="certify_info" jdbcType="VARCHAR" property="certifyInfo" />
+    <result column="cer_ext1" jdbcType="VARCHAR" property="cerExt1" />
+    <result column="cer_ext2" jdbcType="VARCHAR" property="cerExt2" />
+    <result column="cer_ext3" jdbcType="VARCHAR" property="cerExt3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, u_id, u_name, certify_time, is_effective, cetify_type, certify_photo, modify_time, 
+    certify_info, cer_ext1, cer_ext2, cer_ext3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_certify_info
+    where id_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_certify_info
+    where id_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.UCertifyInfo">
+    insert into u_certify_info (id_, u_id, u_name, 
+      certify_time, is_effective, cetify_type, 
+      certify_photo, modify_time, certify_info, 
+      cer_ext1, cer_ext2, cer_ext3
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, #{uName,jdbcType=VARCHAR}, 
+      #{certifyTime,jdbcType=TIMESTAMP}, #{isEffective,jdbcType=BIT}, #{cetifyType,jdbcType=VARCHAR}, 
+      #{certifyPhoto,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{certifyInfo,jdbcType=VARCHAR}, 
+      #{cerExt1,jdbcType=VARCHAR}, #{cerExt2,jdbcType=VARCHAR}, #{cerExt3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.UCertifyInfo">
+    insert into u_certify_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="certifyTime != null">
+        certify_time,
+      </if>
+      <if test="isEffective != null">
+        is_effective,
+      </if>
+      <if test="cetifyType != null">
+        cetify_type,
+      </if>
+      <if test="certifyPhoto != null">
+        certify_photo,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="certifyInfo != null">
+        certify_info,
+      </if>
+      <if test="cerExt1 != null">
+        cer_ext1,
+      </if>
+      <if test="cerExt2 != null">
+        cer_ext2,
+      </if>
+      <if test="cerExt3 != null">
+        cer_ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="certifyTime != null">
+        #{certifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEffective != null">
+        #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="cetifyType != null">
+        #{cetifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="certifyPhoto != null">
+        #{certifyPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certifyInfo != null">
+        #{certifyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt1 != null">
+        #{cerExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt2 != null">
+        #{cerExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt3 != null">
+        #{cerExt3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.UCertifyInfo">
+    update u_certify_info
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="certifyTime != null">
+        certify_time = #{certifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEffective != null">
+        is_effective = #{isEffective,jdbcType=BIT},
+      </if>
+      <if test="cetifyType != null">
+        cetify_type = #{cetifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="certifyPhoto != null">
+        certify_photo = #{certifyPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certifyInfo != null">
+        certify_info = #{certifyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt1 != null">
+        cer_ext1 = #{cerExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt2 != null">
+        cer_ext2 = #{cerExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="cerExt3 != null">
+        cer_ext3 = #{cerExt3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.UCertifyInfo">
+    update u_certify_info
+    set u_id = #{uId,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      certify_time = #{certifyTime,jdbcType=TIMESTAMP},
+      is_effective = #{isEffective,jdbcType=BIT},
+      cetify_type = #{cetifyType,jdbcType=VARCHAR},
+      certify_photo = #{certifyPhoto,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      certify_info = #{certifyInfo,jdbcType=VARCHAR},
+      cer_ext1 = #{cerExt1,jdbcType=VARCHAR},
+      cer_ext2 = #{cerExt2,jdbcType=VARCHAR},
+      cer_ext3 = #{cerExt3,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

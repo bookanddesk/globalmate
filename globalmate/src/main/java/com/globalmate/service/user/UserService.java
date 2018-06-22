@@ -5,6 +5,7 @@ import com.globalmate.cache.CacheServiceImpl;
 import com.globalmate.data.dao.mapper.UserMapper;
 import com.globalmate.data.entity.User;
 import com.globalmate.exception.CommonBusinessException;
+import com.globalmate.exception.user.UseNotFoundException;
 import com.globalmate.exception.user.UserAddFailException;
 import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.uitl.GMConstant;
@@ -114,6 +115,9 @@ public class UserService implements IUserService, ITokenservice {
         checkNotNull(user.getId());
         checkNotNull(user.getPhone());
         checkNotNull(user.getNikename());
+        if (userMapper.selectByPrimaryKey(user.getId()) == null) {
+            throw new UseNotFoundException("未找到该用户！[" + user.getId() + "]");
+        }
         int i = userMapper.updateByPrimaryKeySelective(user);
         if (i == 1) {
             return userMapper.selectByPrimaryKey(user.getId());

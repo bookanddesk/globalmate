@@ -14,8 +14,16 @@ CREATE TABLE user  (
 	ID_NUMBER_  varchar(64) NULL,  
 	NICE_  int,  
 	WHERE_    varchar(255) NULL,  
-    SCHOOL_   varchar(255) NULL,  
-	HOBBY_    varchar(4000) NULL,  
+  SCHOOL_   varchar(255) NULL,
+	HOBBY_    varchar(4000) NULL,
+	is_certified_ tinyint(1) DEFAULT 0 comment'认证状态',
+	cetifiy_id_ varchar (64) null comment'认证id',
+	user_credit_ varchar (64) null comment'用户信用',
+	user_tag_ varchar (64) null comment'用户标签',
+	resident_ varchar (64) null comment'常驻地',
+	u_ext1_ varchar (64) null,
+	u_ext2_ varchar (64) null,
+	u_ext3_ varchar (64) null,
 	PRIMARY KEY(ID_)
 );
 
@@ -263,3 +271,70 @@ create table T_need_comments
 
 
 -- until 2018-6-20
+
+
+drop table if exists u_certify_info;
+
+/*==============================================================*/
+/* Table: u_certify_info  用户认证信息表                         */
+/*==============================================================*/
+create table u_certify_info
+(
+   id_                  varchar(64) not null,
+   u_id                 varchar(64) comment '用户id',
+   u_name               varchar(64) comment '用户name',
+   certify_time         timestamp comment '认证时间',
+   is_effective         tinyint(1) comment '认证是否有效',
+   cetify_type          varchar(64) comment '认证方式',
+   certify_photo        varchar(64) comment '认证图片',
+   modify_time          timestamp comment '更新时间',
+   certify_info         varchar(64) comment '认证信息',
+   cer_ext1             varchar(64) comment '扩展字段1',
+   cer_ext2             varchar(64) comment '扩展字段2',
+   cer_ext3             varchar(64) comment '扩展字段3',
+   primary key (id_)
+);
+
+drop table if exists u_fans_relations;
+
+/*==============================================================*/
+/* Table: u_fans_relations  用户粉丝关系表                       */
+/*==============================================================*/
+create table u_fans_relations
+(
+   id_                  varchar(64) not null,
+   u_id                 varchar(64) comment '用户id',
+   u_name               varchar(64) comment '用户name',
+   relation_type        smallint(2) comment '关系类型',
+   u_related_id         varchar(64) comment '关系用户id',
+   u_related_name       varchar(64) comment '关系用户name',
+   create_time          timestamp comment '创建时间',
+   modity_time          timestamp comment '修改时间',
+   is_deleted           tinyint(1) comment '删除状态',
+   rela_ext1            varchar(64) comment '扩展字段1',
+   rela_ext2            varchar(64) comment '扩展字段2',
+   rela_ext3            varchar(64) comment '扩展字段3',
+   primary key (id_)
+);
+
+drop table if exists sys_configuration;
+
+/*==============================================================*/
+/* Table: sys_configuration   系统配置表                         */
+/*==============================================================*/
+create table sys_configuration
+(
+   id_                  char(10) not null,
+   type                 smallint(10) comment '配置类型',
+   code                 varchar(32) comment '配置code',
+   nema                 varchar(32) comment '配置名称',
+   content              varchar(64) comment '配置信息',
+   create_time          timestamp comment '创建时间',
+   modify_time          timestamp comment '更新时间',
+   remark               varchar(64) comment '备注',
+   ext1                 varchar(20) comment '扩展1',
+   ext2                 varchar(20) comment '扩展2',
+   primary key (id_)
+);
+
+--util 2018-6-22

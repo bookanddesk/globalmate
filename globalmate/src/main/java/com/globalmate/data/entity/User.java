@@ -1,7 +1,5 @@
 package com.globalmate.data.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.Date;
 
 public class User {
@@ -11,7 +9,6 @@ public class User {
 
     private String name;
 
-    @NotBlank(message = "昵称不能为空")
     private String nikename;
 
     private String password;
@@ -20,7 +17,6 @@ public class User {
 
     private String email;
 
-    @NotBlank(message = "手机号不能为空")
     private String phone;
 
     private String pic;
@@ -40,6 +36,22 @@ public class User {
     private String school;
 
     private String hobby;
+
+    private Boolean isCertified;
+
+    private String cetifiyId;
+
+    private String userCredit;
+
+    private String userTag;
+
+    private String resident;
+
+    private String uExt1;
+
+    private String uExt2;
+
+    private String uExt3;
 
     public String getId() {
         return id;
@@ -175,5 +187,69 @@ public class User {
 
     public void setHobby(String hobby) {
         this.hobby = hobby == null ? null : hobby.trim();
+    }
+
+    public Boolean getIsCertified() {
+        return isCertified;
+    }
+
+    public void setIsCertified(Boolean isCertified) {
+        this.isCertified = isCertified;
+    }
+
+    public String getCetifiyId() {
+        return cetifiyId;
+    }
+
+    public void setCetifiyId(String cetifiyId) {
+        this.cetifiyId = cetifiyId == null ? null : cetifiyId.trim();
+    }
+
+    public String getUserCredit() {
+        return userCredit;
+    }
+
+    public void setUserCredit(String userCredit) {
+        this.userCredit = userCredit == null ? null : userCredit.trim();
+    }
+
+    public String getUserTag() {
+        return userTag;
+    }
+
+    public void setUserTag(String userTag) {
+        this.userTag = userTag == null ? null : userTag.trim();
+    }
+
+    public String getResident() {
+        return resident;
+    }
+
+    public void setResident(String resident) {
+        this.resident = resident == null ? null : resident.trim();
+    }
+
+    public String getuExt1() {
+        return uExt1;
+    }
+
+    public void setuExt1(String uExt1) {
+        this.uExt1 = uExt1 == null ? null : uExt1.trim();
+    }
+
+    public String getuExt2() {
+        return uExt2;
+    }
+
+    public void setuExt2(String uExt2) {
+        this.uExt2 = uExt2 == null ? null : uExt2.trim();
+    }
+
+    public String getuExt3() {
+        return uExt3;
+    }
+
+    public void setuExt3(String uExt3) {
+        this.uExt3 = uExt3 == null ? null : uExt3.trim();
     }
 }
