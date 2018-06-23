@@ -5,17 +5,13 @@ import java.util.Date;
 public class Need {
     private String id;
 
-    private String startType;  //冗余了
+    private String startType;
 
     private String type;
 
     private String userId;
 
-    private String descrition;
-
-    private Double rewardAmount;
-
-    private String payway;
+    private String description;
 
     private Date createTime;
 
@@ -63,28 +59,12 @@ public class Need {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition == null ? null : descrition.trim();
-    }
-
-    public Double getRewardAmount() {
-        return rewardAmount;
-    }
-
-    public void setRewardAmount(Double rewardAmount) {
-        this.rewardAmount = rewardAmount;
-    }
-
-    public String getPayway() {
-        return payway;
-    }
-
-    public void setPayway(String payway) {
-        this.payway = payway == null ? null : payway.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Date getCreateTime() {

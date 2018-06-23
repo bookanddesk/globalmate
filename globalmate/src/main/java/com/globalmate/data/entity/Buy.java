@@ -1,6 +1,10 @@
 package com.globalmate.data.entity;
 
-public class Buy extends BaseTypeEntity{
+public class Buy {
+    private String id;
+
+    private String needId;
+
     private String country;
 
     private String goodsName;
@@ -15,6 +19,25 @@ public class Buy extends BaseTypeEntity{
 
     private String deliveryWay;
 
+    private Double rewardAmount;
+
+    private String payway;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(String needId) {
+        this.needId = needId == null ? null : needId.trim();
+    }
 
     public String getCountry() {
         return country;
@@ -72,4 +95,19 @@ public class Buy extends BaseTypeEntity{
         this.deliveryWay = deliveryWay == null ? null : deliveryWay.trim();
     }
 
+    public Double getRewardAmount() {
+        return rewardAmount;
+    }
+
+    public void setRewardAmount(Double rewardAmount) {
+        this.rewardAmount = rewardAmount;
+    }
+
+    public String getPayway() {
+        return payway;
+    }
+
+    public void setPayway(String payway) {
+        this.payway = payway == null ? null : payway.trim();
+    }
 }

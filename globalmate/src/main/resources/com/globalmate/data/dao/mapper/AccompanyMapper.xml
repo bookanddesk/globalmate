@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.AccompanyMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Accompany">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id_" jdbcType="VARCHAR" property="needId" />
+    <result column="where_" jdbcType="VARCHAR" property="where" />
+    <result column="start_time_" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time_" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="description_" jdbcType="VARCHAR" property="description" />
+    <result column="type_" jdbcType="VARCHAR" property="type" />
+    <result column="doctor_" jdbcType="CHAR" property="doctor" />
+    <result column="REWARD_AMOUNT_" jdbcType="DOUBLE" property="rewardAmount" />
+    <result column="PAYWAY_" jdbcType="CHAR" property="payway" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, need_id_, where_, start_time_, end_time_, description_, type_, doctor_, REWARD_AMOUNT_, 
+    PAYWAY_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accompany
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from accompany
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.Accompany">
+    insert into accompany (ID_, need_id_, where_, 
+      start_time_, end_time_, description_, 
+      type_, doctor_, REWARD_AMOUNT_, 
+      PAYWAY_)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{where,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{doctor,jdbcType=CHAR}, #{rewardAmount,jdbcType=DOUBLE}, 
+      #{payway,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Accompany">
+    insert into accompany
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="needId != null">
+        need_id_,
+      </if>
+      <if test="where != null">
+        where_,
+      </if>
+      <if test="startTime != null">
+        start_time_,
+      </if>
+      <if test="endTime != null">
+        end_time_,
+      </if>
+      <if test="description != null">
+        description_,
+      </if>
+      <if test="type != null">
+        type_,
+      </if>
+      <if test="doctor != null">
+        doctor_,
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_,
+      </if>
+      <if test="payway != null">
+        PAYWAY_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="where != null">
+        #{where,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=CHAR},
+      </if>
+      <if test="rewardAmount != null">
+        #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Accompany">
+    update accompany
+    <set>
+      <if test="needId != null">
+        need_id_ = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="where != null">
+        where_ = #{where,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time_ = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time_ = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description_ = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        doctor_ = #{doctor,jdbcType=CHAR},
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        PAYWAY_ = #{payway,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Accompany">
+    update accompany
+    set need_id_ = #{needId,jdbcType=VARCHAR},
+      where_ = #{where,jdbcType=VARCHAR},
+      start_time_ = #{startTime,jdbcType=TIMESTAMP},
+      end_time_ = #{endTime,jdbcType=TIMESTAMP},
+      description_ = #{description,jdbcType=VARCHAR},
+      type_ = #{type,jdbcType=VARCHAR},
+      doctor_ = #{doctor,jdbcType=CHAR},
+      REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      PAYWAY_ = #{payway,jdbcType=CHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

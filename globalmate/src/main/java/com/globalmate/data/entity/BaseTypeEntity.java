@@ -3,6 +3,7 @@ package com.globalmate.data.entity;
 public class BaseTypeEntity {
     private String id;
     private String needId;
+    private String description;
     
     public String getId() {
         return id;
@@ -19,4 +20,14 @@ public class BaseTypeEntity {
     public void setNeedId(String needId) {
         this.needId = needId;
     }
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    
+    
 }

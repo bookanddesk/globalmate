@@ -2,7 +2,10 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 
-public class Accompany extends BaseTypeEntity{
+public class Accompany {
+    private String id;
+
+    private String needId;
 
     private String where;
 
@@ -10,12 +13,31 @@ public class Accompany extends BaseTypeEntity{
 
     private Date endTime;
 
-    private String descrition;
+    private String description;
 
     private String type;
 
     private String doctor;
 
+    private Double rewardAmount;
+
+    private String payway;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getNeedId() {
+        return needId;
+    }
+
+    public void setNeedId(String needId) {
+        this.needId = needId == null ? null : needId.trim();
+    }
 
     public String getWhere() {
         return where;
@@ -41,12 +63,12 @@ public class Accompany extends BaseTypeEntity{
         this.endTime = endTime;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition == null ? null : descrition.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getType() {
@@ -65,11 +87,19 @@ public class Accompany extends BaseTypeEntity{
         this.doctor = doctor == null ? null : doctor.trim();
     }
 
-//    public String getNeedId() {
-//        return needId;
-//    }
-//
-//    public void setNeedId(String needId) {
-//        this.needId = needId == null ? null : needId.trim();
-//    }
+    public Double getRewardAmount() {
+        return rewardAmount;
+    }
+
+    public void setRewardAmount(Double rewardAmount) {
+        this.rewardAmount = rewardAmount;
+    }
+
+    public String getPayway() {
+        return payway;
+    }
+
+    public void setPayway(String payway) {
+        this.payway = payway == null ? null : payway.trim();
+    }
 }

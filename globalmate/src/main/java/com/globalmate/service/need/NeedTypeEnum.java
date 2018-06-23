@@ -21,4 +21,6 @@ public enum NeedTypeEnum {
 	 * 协作学习
 	 */
 	learn_cooperation,
+	
+	other
 }

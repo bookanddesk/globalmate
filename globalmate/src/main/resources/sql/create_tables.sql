@@ -40,11 +40,9 @@ CREATE TABLE service  (
 CREATE TABLE need( 
 	ID_        	varchar(64) NOT NULL,
 	start_type_	char(1) NULL,  -- //服务发起方，0是需求方发布的，1是服务提供方发布需求方应答的
-	TYPE_     	char(6) NULL,  -- //服务类型
+	TYPE_     	char(64) NULL,  -- //服务类型
 	USER_ID_     	varchar(255) NULL, -- //需要的人
-	descrition_  varchar(2000) NULL, -- //需求描述
-	REWARD_AMOUNT_  double, -- //悬赏金额
-	PAYWAY_     char(6) NULL,  -- //付款方式,
+	description_  varchar(2000) NULL, -- //需求描述
 	CREATE_TIME_     TIMESTAMP NULL,-- //需求提交时间
 	MODIFY_TIME_    TIMESTAMP NULL, -- //需求更新时间
 	END_TIME_    TIMESTAMP NULL, -- //需求结束时间
@@ -62,11 +60,13 @@ CREATE TABLE buy(
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
-	descrition_  varchar(2000) NULL, -- //描述
+	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     char(6) NULL,  -- //交货方式
-	PRIMARY KEY(ID_)
-	foreign key(need_id_)　references need(ID_)
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
 );
 
 CREATE TABLE carry( 
@@ -78,13 +78,15 @@ CREATE TABLE carry(
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
-	descrition_  varchar(2000) NULL, -- //描述
+	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     char(6) NULL,  -- //交货方式
 	volume_         varchar(255) NULL,  -- //体积
 	weight_         varchar(255) NULL,  -- //重量
-	PRIMARY KEY(ID_)
-	foreign key(need_id_)　references need(ID_)
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
 );
 
 CREATE TABLE accompany( 
@@ -93,11 +95,13 @@ CREATE TABLE accompany(
 	where_	varchar(255) NULL,  
 	start_time_	TIMESTAMP   NULL,  
 	end_time_ TIMESTAMP  NULL,  
-	descrition_  varchar(2000) NULL, -- //描述
+	description_  varchar(2000) NULL, -- //描述
 	type_  varchar(255) NULL, -- //想玩儿什么，下拉选一种？？
 	doctor_     char(1) NULL,  -- //是否为看病
-	PRIMARY KEY(ID_)
-	foreign key(need_id_)　references need(ID_)
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式,
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
 );
 
 
@@ -108,9 +112,11 @@ CREATE TABLE clearance(
 	time_	TIMESTAMP   NULL,  -- //时间
 	flight_information_  varchar(255)  NULL, -- //航班信息
 	airport varchar(255) NULL,  -- //通关机场
-	descrition_  varchar(2000) NULL, -- //描述
-	PRIMARY KEY(ID_)
-	foreign key(need_id_)　references need(ID_)
+	description_  varchar(2000) NULL, -- //描述
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式,
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
 )
 
 
@@ -119,9 +125,11 @@ CREATE TABLE learn_cooperation(
 	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	language_ varchar(255) NULL,  -- //语言
 	subject_  varchar(255) NULL,  -- //科目
-	descrition_  varchar(2000) NULL, -- //描述
-	PRIMARY KEY(ID_)
-	foreign key(need_id_)　references need(ID_)
+	description_  varchar(2000) NULL, -- //描述
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式,
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
 );
 
 
