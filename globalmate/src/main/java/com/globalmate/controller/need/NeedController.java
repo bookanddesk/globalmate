@@ -48,23 +48,27 @@ public class NeedController extends BaseController {
         } catch (Exception e) {
             return buildFail(e.getMessage());
         }
-    	needWithTypeEntity.getBaseTypeEntity().setId(need.getId());
         //判断need.getType()根据不同类型插入不同需求表
         switch(need.getType()){
         case "buy":
-        	buyMapper.insert((Buy) needWithTypeEntity.getBaseTypeEntity());
+        	needWithTypeEntity.getBuy().setNeedId(need.getId());
+        	buyMapper.insert(needWithTypeEntity.getBuy());
             break;
         case "carry":
-        	carryMapper.insert((Carry) needWithTypeEntity.getBaseTypeEntity());
+        	needWithTypeEntity.getCarry().setNeedId(need.getId());
+        	carryMapper.insert(needWithTypeEntity.getCarry());
             break;
         case "accompany":
-        	accompanyMapper.insert((Accompany) needWithTypeEntity.getBaseTypeEntity());
+        	needWithTypeEntity.getAccompany().setNeedId(need.getId());
+        	accompanyMapper.insert(needWithTypeEntity.getAccompany());
             break;
         case "learn_cooperation":
-        	learnCooperationMapper.insert((LearnCooperation) needWithTypeEntity.getBaseTypeEntity());
+        	needWithTypeEntity.getLearnCooperation().setNeedId(need.getId());
+        	learnCooperationMapper.insert(needWithTypeEntity.getLearnCooperation());
             break;
         case "clearance":
-        	clearanceMapper.insert((Clearance) needWithTypeEntity.getBaseTypeEntity());
+        	needWithTypeEntity.getClearance().setNeedId(need.getId());
+        	clearanceMapper.insert(needWithTypeEntity.getClearance());
             break;
         default:
         	//...;
