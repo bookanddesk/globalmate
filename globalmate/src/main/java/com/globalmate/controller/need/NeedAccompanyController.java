@@ -51,9 +51,12 @@ public class NeedAccompanyController extends BaseController {
             return buildFail(e.getMessage());
         }
         accompany.setNeedId(need.getId());
+        if (StringUtils.isBlank(accompany.getId())) {
+        	accompany.setId(IdGenerator.generateId());
+        }
         accompanyMapper.insert(accompany);
            
-        return buildSuccess(need);
+        return buildSuccess(accompany);
     }
 
 }

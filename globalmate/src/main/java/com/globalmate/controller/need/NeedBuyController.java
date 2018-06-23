@@ -51,9 +51,12 @@ public class NeedBuyController extends BaseController {
             return buildFail(e.getMessage());
         }
         buy.setNeedId(need.getId());
+        if (StringUtils.isBlank(buy.getId())) {
+        	buy.setId(IdGenerator.generateId());
+        }
         buyMapper.insert(buy);
            
-        return buildSuccess(need);
+        return buildSuccess(buy);
     }
 
 }

@@ -51,9 +51,12 @@ public class NeedLearnCoController extends BaseController {
             return buildFail(e.getMessage());
         }
         learnCooperation.setNeedId(need.getId());
+        if (StringUtils.isBlank(learnCooperation.getId())) {
+        	learnCooperation.setId(IdGenerator.generateId());
+        }
         learnCooperationMapper.insert(learnCooperation);
            
-        return buildSuccess(need);
+        return buildSuccess(learnCooperation);
     }
 
 }

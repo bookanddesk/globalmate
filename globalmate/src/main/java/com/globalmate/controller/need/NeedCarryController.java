@@ -51,9 +51,12 @@ public class NeedCarryController extends BaseController {
             return buildFail(e.getMessage());
         }
         carry.setNeedId(need.getId());
+        if (StringUtils.isBlank(carry.getId())) {
+        	carry.setId(IdGenerator.generateId());
+        }
         carryMapper.insert(carry);
            
-        return buildSuccess(need);
+        return buildSuccess(carry);
     }
 
 }

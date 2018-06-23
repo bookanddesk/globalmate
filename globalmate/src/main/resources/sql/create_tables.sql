@@ -62,7 +62,7 @@ CREATE TABLE buy(
 	type_  varchar(255) NULL, -- //型号
 	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
-	delivery_way_     char(6) NULL,  -- //交货方式
+	delivery_way_     char(2000) NULL,  -- //交货方式
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式
 	PRIMARY KEY(ID_),
@@ -80,7 +80,7 @@ CREATE TABLE carry(
 	type_  varchar(255) NULL, -- //型号
 	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
-	delivery_way_     char(6) NULL,  -- //交货方式
+	delivery_way_     char(2000) NULL,  -- //交货方式
 	volume_         varchar(255) NULL,  -- //体积
 	weight_         varchar(255) NULL,  -- //重量
 	REWARD_AMOUNT_  double, -- //悬赏金额
@@ -125,6 +125,16 @@ CREATE TABLE learn_cooperation(
 	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	language_ varchar(255) NULL,  -- //语言
 	subject_  varchar(255) NULL,  -- //科目
+	description_  varchar(2000) NULL, -- //描述
+	REWARD_AMOUNT_  double, -- //悬赏金额
+	PAYWAY_     char(6) NULL,  -- //付款方式,
+	PRIMARY KEY(ID_),
+	foreign key(need_id_)references need(ID_)
+);
+
+CREATE TABLE need_other( 
+	ID_     varchar(64) NOT NULL,
+	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
 	description_  varchar(2000) NULL, -- //描述
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,

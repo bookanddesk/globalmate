@@ -50,14 +50,20 @@
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
+        
+        
+        <table tableName="need_other"  schema="" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
 
         <!-- 指定数据库表 -->
        <!-- <table tableName="user" domainObjectName="UTag"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-<table tableName="user"  schema="" enableCountByExample="false"
+<!--<table tableName="user"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
 <!--<table tableName="u_certify_info" schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>

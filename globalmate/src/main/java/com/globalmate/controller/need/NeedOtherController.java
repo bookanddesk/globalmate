@@ -15,12 +15,14 @@ import com.globalmate.data.dao.mapper.BuyMapper;
 import com.globalmate.data.dao.mapper.CarryMapper;
 import com.globalmate.data.dao.mapper.ClearanceMapper;
 import com.globalmate.data.dao.mapper.LearnCooperationMapper;
+import com.globalmate.data.dao.mapper.NeedOtherMapper;
 import com.globalmate.data.entity.Accompany;
 import com.globalmate.data.entity.Buy;
 import com.globalmate.data.entity.Carry;
 import com.globalmate.data.entity.Clearance;
 import com.globalmate.data.entity.LearnCooperation;
 import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.NeedOther;
 import com.globalmate.data.entity.NeedWithTypeEntity;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.JsonResult;
@@ -32,14 +34,18 @@ import com.globalmate.uitl.IdGenerator;
 @RestController
 @RequestMapping("need/other")
 public class NeedOtherController extends BaseController {
-    @Autowired
+	@Autowired
     private NeedService needService;
+    @Autowired
+    private NeedOtherMapper needOtherMapper;
     
     @PostMapping("add")
-    public JsonResult addNeed(@RequestBody Need need) {
+    public JsonResult addNeed(@RequestBody NeedOther needOther) {
 
+    	//need自己组装,存储基本信息
+    	Need need=new Need();
     	need.setCreateTime(new Date());
-    	need.setType(NeedTypeEnum.other.name());
+    	need.setType(NeedTypeEnum.learn_cooperation.name());
     	//取当前登录用户
     	need.setUserId("");
         try {
@@ -47,7 +53,13 @@ public class NeedOtherController extends BaseController {
         } catch (Exception e) {
             return buildFail(e.getMessage());
         }
-        return buildSuccess(need);
+        needOther.setNeedId(need.getId());
+        if (StringUtils.isBlank(needOther.getId())) {
+        	needOther.setId(IdGenerator.generateId());
+        }
+        needOtherMapper.insert(needOther);
+           
+        return buildSuccess(needOther);
     }
 
 }

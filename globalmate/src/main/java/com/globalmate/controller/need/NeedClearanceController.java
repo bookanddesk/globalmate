@@ -51,9 +51,12 @@ public class NeedClearanceController extends BaseController {
             return buildFail(e.getMessage());
         }
         clearance.setNeedId(need.getId());
+        if (StringUtils.isBlank(clearance.getId())) {
+        	clearance.setId(IdGenerator.generateId());
+        }
         clearanceMapper.insert(clearance);
            
-        return buildSuccess(need);
+        return buildSuccess(clearance);
     }
 
 }
