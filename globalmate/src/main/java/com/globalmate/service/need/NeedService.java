@@ -45,7 +45,6 @@ public class NeedService implements INeedService{
 	public Need updateNeed(Need need) throws NeedException {
 		 checkNotNull(need);
 	     checkNotNull(need.getId());
-	     checkNotNull(need.getType());
 	     //判断need.getType()根据不同类型更新不同需求表
 	     int i = needMapper.updateByPrimaryKeySelective(need);
 	     if (i == 1) {
