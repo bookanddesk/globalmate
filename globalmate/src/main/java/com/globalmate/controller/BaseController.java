@@ -1,8 +1,12 @@
 package com.globalmate.controller;
 
+import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.JsonResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class BaseController {
 
@@ -21,6 +25,10 @@ public class BaseController {
 
     protected <T> JsonResult buildFail(String msg, T t) {
         return JsonResult.fail(msg, t);
+    }
+
+    protected User getCurrentUser(HttpServletRequest request) {
+        return (User) request.getAttribute("user");
     }
 
 }

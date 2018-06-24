@@ -185,4 +185,20 @@
       p_ext2 = #{pExt2,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectProvides" parameterType="com.globalmate.data.entity.TProvide"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_provide
+    <where>
+      <if test="id != null">
+        id_ = #{id}
+      </if>
+      <if test="uId != null">
+        and u_id = {#uId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

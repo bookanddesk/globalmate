@@ -15,6 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
@@ -30,6 +33,7 @@ public class UserService implements IUserService, ITokenservice {
         if (StringUtils.isBlank(user.getId())) {
             user.setId(IdGenerator.generateId());
         }
+        user.setCreateTime(Date.from(Instant.now()));
         int insert = userMapper.insert(user);
         if (insert > 0) {
             return userMapper.selectByPrimaryKey(user.getId());
@@ -118,6 +122,7 @@ public class UserService implements IUserService, ITokenservice {
         if (userMapper.selectByPrimaryKey(user.getId()) == null) {
             throw new UseNotFoundException("未找到该用户！[" + user.getId() + "]");
         }
+        user.setModifyTime(Date.from(Instant.now()));
         int i = userMapper.updateByPrimaryKeySelective(user);
         if (i == 1) {
             return userMapper.selectByPrimaryKey(user.getId());
