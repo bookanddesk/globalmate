@@ -2,9 +2,16 @@ package com.globalmate.wx.mp.service;
 
 import javax.annotation.PostConstruct;
 
+import com.globalmate.wx.mp.config.WxConfigStorage;
 import com.globalmate.wx.mp.config.WxMpConfig;
 import com.globalmate.wx.mp.handler.*;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +24,9 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.kefu.result.WxMpKfOnlineList;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static me.chanjar.weixin.common.api.WxConsts.*;
 
@@ -171,6 +181,21 @@ public class WeixinService extends WxMpServiceImpl {
 
   protected AbstractHandler getScanHandler() {
     return null;
+  }
+
+  public void sendTemplateMsg() throws WxErrorException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss.SSS");
+    WxConfigStorage configStorage = (WxConfigStorage) getWxMpConfigStorage();
+    WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+            .toUser(configStorage.getOpenid())
+            .templateId(configStorage.getTemplateId())
+            .url(" ")
+            .build();
+
+    templateMessage.addData(new WxMpTemplateData("first", dateFormat.format(new Date()), "#FF00FF"))
+            .addData(new WxMpTemplateData("remark", RandomStringUtils.randomAlphanumeric(100), "#FF00FF"));
+    String msgId = getTemplateMsgService().sendTemplateMsg(templateMessage);
   }
 
 }

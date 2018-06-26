@@ -1,12 +1,7 @@
-package com.github.binarywang.demo.wx.mp.dto;
+package com.globalmate.wx.mp.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * 菜单的dto对象
- * @author Binary Wang
- *
- */
 public class WxMenuKey {
   private String type;
   private String content;
