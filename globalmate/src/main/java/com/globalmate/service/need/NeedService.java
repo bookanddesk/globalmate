@@ -2,20 +2,17 @@ package com.globalmate.service.need;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.globalmate.cache.CacheServiceImpl;
-import com.globalmate.data.dao.mapper.AccompanyMapper;
-import com.globalmate.data.dao.mapper.BuyMapper;
-import com.globalmate.data.dao.mapper.CarryMapper;
-import com.globalmate.data.dao.mapper.ClearanceMapper;
-import com.globalmate.data.dao.mapper.LearnCooperationMapper;
 import com.globalmate.data.dao.mapper.NeedMapper;
 import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.User;
 import com.globalmate.exception.need.NeedException;
-import com.globalmate.exception.user.UserAddFailException;
 import com.globalmate.uitl.IdGenerator;
 
 @Service
@@ -51,6 +48,18 @@ public class NeedService implements INeedService{
 	         return needMapper.selectByPrimaryKey(need.getId());
 	     }
 	     return null;
+	}
+
+	@Override
+	public List<Need> getNeed(User user) {
+		Need need = new Need();
+        if (user != null && user.getId() != null) {
+        	need.setUserId(user.getId());
+        }
+
+        List<Need> needs = needMapper.selectNeeds(need);
+
+        return needs;
 	}
 
 }

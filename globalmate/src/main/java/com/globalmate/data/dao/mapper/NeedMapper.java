@@ -1,5 +1,7 @@
 package com.globalmate.data.dao.mapper;
 
+import java.util.List;
+
 import com.globalmate.data.entity.Need;
 
 public interface NeedMapper {
@@ -14,4 +16,6 @@ public interface NeedMapper {
     int updateByPrimaryKeySelective(Need record);
 
     int updateByPrimaryKey(Need record);
+    
+    List<Need> selectNeeds(Need need);
 }

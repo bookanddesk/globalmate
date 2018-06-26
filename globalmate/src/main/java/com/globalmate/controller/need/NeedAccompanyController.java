@@ -2,6 +2,8 @@ package com.globalmate.controller.need;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,13 +40,15 @@ public class NeedAccompanyController extends BaseController {
     private AccompanyMapper accompanyMapper;
    
     @PostMapping("add")
-    public JsonResult addNeed(@RequestBody Accompany accompany) {
+    public JsonResult addNeed(@RequestBody Accompany accompany,HttpServletRequest request) {
     	//need自己组装,存储基本信息
     	Need need=new Need();
     	need.setCreateTime(new Date());
     	need.setType(NeedTypeEnum.accompany.name());
     	//取当前登录用户
-    	need.setUserId("");
+    	User user = getCurrentUser(request);
+    	if(user != null)
+    		need.setUserId(user.getId());
         try {
         	need=needService.commitNeed(need);
         } catch (Exception e) {

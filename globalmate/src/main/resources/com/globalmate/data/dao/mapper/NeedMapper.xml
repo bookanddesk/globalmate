@@ -174,4 +174,19 @@
       COMMENT_ = #{comment,jdbcType=VARCHAR}
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
+  
+    <select id="selectNeeds" parameterType="com.globalmate.data.entity.Need"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from need
+    <where>
+      <if test="id != null">
+        id_ = #{id}
+      </if>
+      <if test="userId != null">
+        and USER_ID_ = {#userId}
+      </if>
+    </where>
+  </select>
 </mapper>
