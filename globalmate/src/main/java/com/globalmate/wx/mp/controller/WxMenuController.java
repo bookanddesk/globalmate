@@ -1,5 +1,6 @@
 package com.globalmate.wx.mp.controller;
 
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -40,37 +41,52 @@ public class WxMenuController implements WxMpMenuService {
     public String menuCreateSample() throws WxErrorException {
         WxMenu menu = new WxMenu();
         WxMenuButton button1 = new WxMenuButton();
-        button1.setType(MenuButtonType.CLICK);
-        button1.setName("今日歌曲");
-        button1.setKey("V1001_TODAY_MUSIC");
+        button1.setName("求助");
+        WxMenuButton button11 = new WxMenuButton();
+        button11.setType(MenuButtonType.VIEW);
+        button11.setName("帮带");
+        button11.setUrl("http://www.163.com/");
 
-//        WxMenuButton button2 = new WxMenuButton();
-//        button2.setType(WxConsts.BUTTON_MINIPROGRAM);
-//        button2.setName("小程序");
-//        button2.setAppId("wx286b93c14bbf93aa");
-//        button2.setPagePath("pages/lunar/index.html");
-//        button2.setUrl("http://mp.weixin.qq.com");
+        WxMenuButton button12 = new WxMenuButton();
+        button12.setType(MenuButtonType.VIEW);
+        button12.setName("陪伴");
+        button12.setUrl("http://www.sina.com.cn/");
+
+        WxMenuButton button13 = new WxMenuButton();
+        button13.setType(MenuButtonType.VIEW);
+        button13.setName("其他");
+        button13.setUrl("https://github.com/bookanddesk/globalmate/wiki");
+
+        button1.getSubButtons().add(button11);
+        button1.getSubButtons().add(button12);
+        button1.getSubButtons().add(button13);
+
+
+        WxMenuButton button2 = new WxMenuButton();
+        button2.setType(MenuButtonType.VIEW);
+        button2.setName("来帮忙");
+        button2.setUrl("http://mp.weixin.qq.com");
 
         WxMenuButton button3 = new WxMenuButton();
-        button3.setName("菜单");
+        button3.setName("我的");
 
         menu.getButtons().add(button1);
-//        menu.getButtons().add(button2);
+        menu.getButtons().add(button2);
         menu.getButtons().add(button3);
 
         WxMenuButton button31 = new WxMenuButton();
         button31.setType(MenuButtonType.VIEW);
-        button31.setName("搜索");
+        button31.setName("个人中心");
         button31.setUrl("http://www.soso.com/");
 
         WxMenuButton button32 = new WxMenuButton();
         button32.setType(MenuButtonType.VIEW);
-        button32.setName("视频");
+        button32.setName("我的求助");
         button32.setUrl("http://v.qq.com/");
 
         WxMenuButton button33 = new WxMenuButton();
         button33.setType(MenuButtonType.CLICK);
-        button33.setName("赞一下我们");
+        button33.setName("平台反馈");
         button33.setKey("V1001_GOOD");
 
         button3.getSubButtons().add(button31);
