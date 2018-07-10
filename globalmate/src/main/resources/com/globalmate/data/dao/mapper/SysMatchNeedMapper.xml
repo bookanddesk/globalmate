@@ -8,6 +8,7 @@
     <result column="u_need_name" jdbcType="VARCHAR" property="uNeedName" />
     <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
     <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="provide_id" jdbcType="VARCHAR" property="provideId" />
     <result column="match_info" jdbcType="VARCHAR" property="matchInfo" />
     <result column="match_msg_count" jdbcType="INTEGER" property="matchMsgCount" />
     <result column="match_accept" jdbcType="BIT" property="matchAccept" />
@@ -18,7 +19,7 @@
     <result column="match_ext2" jdbcType="VARCHAR" property="matchExt2" />
   </resultMap>
   <sql id="Base_Column_List">
-    id_, need_id, u_need_id, u_need_name, provider_id, provider_name, match_info, match_msg_count, 
+    id_, need_id, u_need_id, u_need_name, provider_id, provider_name, provide_id, match_info, match_msg_count,
     match_accept, match_create_time, match_modify_time, last_push_time, match_ext1, match_ext2
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -196,4 +197,17 @@
       match_ext2 = #{matchExt2,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="queryMatchNeeds" parameterType="com.globalmate.data.entity.SysMatchNeed"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_match_need
+    <where>
+      <if test="providerId != null">
+        provider_id = #{providerId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
 </mapper>

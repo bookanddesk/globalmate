@@ -19,7 +19,7 @@ public class SysAssistanceDeal {
 
     private Date assistCreateTime;
 
-    private String assistModifyTime;
+    private Date assistModifyTime;
 
     private Date assistEndTime;
 
@@ -97,12 +97,12 @@ public class SysAssistanceDeal {
         this.assistCreateTime = assistCreateTime;
     }
 
-    public String getAssistModifyTime() {
+    public Date getAssistModifyTime() {
         return assistModifyTime;
     }
 
-    public void setAssistModifyTime(String assistModifyTime) {
-        this.assistModifyTime = assistModifyTime == null ? null : assistModifyTime.trim();
+    public void setAssistModifyTime(Date assistModifyTime) {
+        this.assistModifyTime = assistModifyTime;
     }
 
     public Date getAssistEndTime() {

@@ -1,6 +1,5 @@
 package com.globalmate.wx.mp.controller;
 
-import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;

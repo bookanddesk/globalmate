@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class BaseController {
+public abstract class BaseController {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 

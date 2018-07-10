@@ -2,6 +2,8 @@ package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.SysMatchNeed;
 
+import java.util.List;
+
 public interface SysMatchNeedMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,8 @@ public interface SysMatchNeedMapper {
     int updateByPrimaryKeySelective(SysMatchNeed record);
 
     int updateByPrimaryKey(SysMatchNeed record);
+
+    List<SysMatchNeed> queryMatchNeeds(SysMatchNeed record);
+
+
 }

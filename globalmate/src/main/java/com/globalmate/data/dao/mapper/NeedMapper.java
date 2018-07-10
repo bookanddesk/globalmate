@@ -18,4 +18,6 @@ public interface NeedMapper {
     int updateByPrimaryKey(Need record);
     
     List<Need> selectNeeds(Need need);
+
+    List<Need> queryByIds(List<String> ids);
 }

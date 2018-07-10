@@ -3,6 +3,8 @@ package com.globalmate.data.dao.mapper;
 import com.globalmate.data.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
@@ -22,4 +24,7 @@ public interface UserMapper {
 
     int falseDelete(@Param("userId") String userId);
 
+    List<String> listSchool();
+
+    List<User> queryUsers(User user);
 }

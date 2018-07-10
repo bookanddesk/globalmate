@@ -5,10 +5,13 @@ import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.service.user.UserService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("user")
@@ -59,6 +62,26 @@ public class UserController extends BaseController {
             return buildSuccess(user);
         }
         return buildFail("更新用户信息失败！");
+    }
+
+    @GetMapping("listSchool")
+    public JsonResult listSchool() {
+        return buildSuccess(userService.listSchool());
+    }
+
+    @GetMapping("list")
+    public JsonResult list(boolean bySchool, boolean byTag){
+        List<User> users = userService.listUsers();
+        if (CollectionUtils.isEmpty(users)) {
+            return buildSuccess();
+        }
+        if (bySchool) {
+            return buildSuccess(users.stream().collect(Collectors.groupingBy(User::getSchool)));
+        }
+        if (byTag) {
+            return buildSuccess(users.stream().collect(Collectors.groupingBy(User::getUserTag)));
+        }
+        return buildSuccess(users);
     }
 
 }

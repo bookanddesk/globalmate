@@ -189,4 +189,20 @@
       </if>
     </where>
   </select>
+
+  <select id="listByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from need
+    <where>
+      ENABLE_ = 1
+      <if test="list != null and list.size() > 0">
+        and id_ in
+        <foreach collection="list" index="idx" item="itm" open="(" separator="," close=")">
+          #{itm}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
 </mapper>

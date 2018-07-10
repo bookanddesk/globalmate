@@ -28,5 +28,13 @@ public interface INeedService {
      * @return
      */
     List<Need> getNeed(User user);
+
+
+	/**
+	 * 根据id批量获取需求
+	 * @param ids
+	 * @return
+	 */
+	List<Need> listByIds(List<String> ids);
     
 }

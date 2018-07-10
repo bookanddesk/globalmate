@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,14 @@ public class NeedService implements INeedService{
         List<Need> needs = needMapper.selectNeeds(need);
 
         return needs;
+	}
+
+	@Override
+	public List<Need> listByIds(List<String> ids) {
+		if (CollectionUtils.isEmpty(ids)) {
+			return null;
+		}
+		return needMapper.queryByIds(ids);
 	}
 
 }

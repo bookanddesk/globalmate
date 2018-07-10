@@ -1,22 +1,25 @@
 package com.globalmate.service.user;
 
-import com.globalmate.cache.CacheService;
 import com.globalmate.cache.CacheServiceImpl;
+import com.globalmate.cache.LocalCache;
 import com.globalmate.data.dao.mapper.UserMapper;
 import com.globalmate.data.entity.User;
-import com.globalmate.exception.CommonBusinessException;
 import com.globalmate.exception.user.UseNotFoundException;
 import com.globalmate.exception.user.UserAddFailException;
 import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.RegexUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -27,6 +30,8 @@ public class UserService implements IUserService, ITokenservice {
     private UserMapper userMapper;
     @Autowired
     private CacheServiceImpl cacheService;
+
+    private static final LocalCache<String, String> userCache = new LocalCache<>();
 
     @Override
     public User registerUser(User user) {
@@ -131,6 +136,35 @@ public class UserService implements IUserService, ITokenservice {
     }
 
     @Override
+    public List<String> listSchool() {
+        return userMapper.listSchool();
+    }
+
+    @Override
+    public List<User> listUsers() {
+        List<User> users = userMapper.queryUsers(new User());
+        return users;
+    }
+
+    @Override
+    public String getName(String id) {
+        if (id == null) {
+            return null;
+        }
+        String name = userCache.get(id);
+        if (name == null) {
+            User user = userMapper.selectByPrimaryKey(id);
+            if (user != null) {
+                name = user.getName();
+                if (name != null) {
+                    userCache.put(id, name);
+                }
+            }
+        }
+        return name;
+    }
+
+    @Override
     public String generateToken() {
         return IdGenerator.generateId();
     }
@@ -149,4 +183,6 @@ public class UserService implements IUserService, ITokenservice {
     public User getTokenUser(String token) {
         return cacheService.getSerializer(token, User.class);
     }
+
+
 }

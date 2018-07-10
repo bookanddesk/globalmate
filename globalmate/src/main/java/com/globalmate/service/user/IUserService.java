@@ -3,6 +3,9 @@ package com.globalmate.service.user;
 import com.globalmate.data.entity.User;
 import com.globalmate.exception.user.UserCheckFailException;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IUserService {
 
     /**
@@ -32,4 +35,9 @@ public interface IUserService {
 
     User updateUser(User user);
 
+    List<String> listSchool();
+
+    List<User> listUsers();
+
+    String getName(String id);
 }

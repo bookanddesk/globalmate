@@ -10,7 +10,7 @@
     <result column="u_provider_id_" jdbcType="VARCHAR" property="uProviderId" />
     <result column="u_provider_name" jdbcType="VARCHAR" property="uProviderName" />
     <result column="assist_create_time" jdbcType="TIMESTAMP" property="assistCreateTime" />
-    <result column="assist_modify_time" jdbcType="CHAR" property="assistModifyTime" />
+    <result column="assist_modify_time" jdbcType="TIMESTAMP" property="assistModifyTime" />
     <result column="assist_end_time" jdbcType="TIMESTAMP" property="assistEndTime" />
     <result column="assist_status" jdbcType="VARCHAR" property="assistStatus" />
     <result column="assist_evaluation" jdbcType="VARCHAR" property="assistEvaluation" />
@@ -42,7 +42,7 @@
       )
     values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{uNeederId,jdbcType=VARCHAR}, 
       #{uNeederName,jdbcType=VARCHAR}, #{provideId,jdbcType=VARCHAR}, #{uProviderId,jdbcType=VARCHAR}, 
-      #{uProviderName,jdbcType=VARCHAR}, #{assistCreateTime,jdbcType=TIMESTAMP}, #{assistModifyTime,jdbcType=CHAR}, 
+      #{uProviderName,jdbcType=VARCHAR}, #{assistCreateTime,jdbcType=TIMESTAMP}, #{assistModifyTime,jdbcType=TIMESTAMP},
       #{assistEndTime,jdbcType=TIMESTAMP}, #{assistStatus,jdbcType=VARCHAR}, #{assistEvaluation,jdbcType=VARCHAR}, 
       #{assistPrice,jdbcType=VARCHAR}, #{assistExt1,jdbcType=VARCHAR}, #{assistExt2,jdbcType=VARCHAR}
       )
@@ -122,7 +122,7 @@
         #{assistCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="assistModifyTime != null">
-        #{assistModifyTime,jdbcType=CHAR},
+        #{assistModifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="assistEndTime != null">
         #{assistEndTime,jdbcType=TIMESTAMP},
@@ -169,7 +169,7 @@
         assist_create_time = #{assistCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="assistModifyTime != null">
-        assist_modify_time = #{assistModifyTime,jdbcType=CHAR},
+        assist_modify_time = #{assistModifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="assistEndTime != null">
         assist_end_time = #{assistEndTime,jdbcType=TIMESTAMP},
@@ -201,7 +201,7 @@
       u_provider_id_ = #{uProviderId,jdbcType=VARCHAR},
       u_provider_name = #{uProviderName,jdbcType=VARCHAR},
       assist_create_time = #{assistCreateTime,jdbcType=TIMESTAMP},
-      assist_modify_time = #{assistModifyTime,jdbcType=CHAR},
+      assist_modify_time = #{assistModifyTime,jdbcType=TIMESTAMP},
       assist_end_time = #{assistEndTime,jdbcType=TIMESTAMP},
       assist_status = #{assistStatus,jdbcType=VARCHAR},
       assist_evaluation = #{assistEvaluation,jdbcType=VARCHAR},
@@ -210,4 +210,22 @@
       assist_ext2 = #{assistExt2,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="queryRecords" parameterType="com.globalmate.data.entity.SysAssistanceDeal" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_assistance_deal
+    <where>
+      <if test="uProviderId != null">
+        u_provider_id_ = #{uProviderId}
+      </if>
+      <if test="assistStatus != null">
+        and assist_status = #{assistStatus}
+      </if>
+      <if test="needId != null">
+        and need_id_ = #{needId}
+      </if>
+    </where>
+  </select>
+
 </mapper>

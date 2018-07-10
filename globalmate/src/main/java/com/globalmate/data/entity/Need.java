@@ -122,4 +122,5 @@ public class Need {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
+
 }

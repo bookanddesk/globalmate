@@ -15,6 +15,8 @@ public class SysMatchNeed {
 
     private String providerName;
 
+    private String provideId;
+
     private String matchInfo;
 
     private Integer matchMsgCount;
@@ -141,5 +143,13 @@ public class SysMatchNeed {
 
     public void setMatchExt2(String matchExt2) {
         this.matchExt2 = matchExt2 == null ? null : matchExt2.trim();
+    }
+
+    public String getProvideId() {
+        return provideId;
+    }
+
+    public void setProvideId(String provideId) {
+        this.provideId = provideId == null ? null : provideId.trim();
     }
 }

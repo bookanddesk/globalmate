@@ -2,6 +2,8 @@ package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.SysAssistanceDeal;
 
+import java.util.List;
+
 public interface SysAssistanceDealMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,6 @@ public interface SysAssistanceDealMapper {
     int updateByPrimaryKeySelective(SysAssistanceDeal record);
 
     int updateByPrimaryKey(SysAssistanceDeal record);
+
+    List<SysAssistanceDeal> queryRecords(SysAssistanceDeal assistanceDeal);
 }

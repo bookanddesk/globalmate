@@ -340,7 +340,7 @@
     </where>
   </select>
 
-  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPhone" parameterType="com.globalmate.data.entity.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user where phone_=#{phone}
@@ -349,5 +349,25 @@
   <update id="falseDelete" parameterType="java.lang.String">
     update user set ENABLE_ = '0' where ID_ = #{userId}
   </update>
+
+  <select id="listSchool" resultType="java.lang.String">
+    select distinct SCHOOL_ from user where ENABLE_ = '1';
+  </select>
+
+  <select id="queryUsers" parameterType="com.globalmate.data.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      ENABLE_ = '1'
+      <if test="school != null">
+        and school_ = {#school}
+      </if>
+      <if test="userTag != null">
+        and user_tag_ = {#userTag}
+      </if>
+    </where>
+    order by user_credit_ desc;
+  </select>
 
 </mapper>
