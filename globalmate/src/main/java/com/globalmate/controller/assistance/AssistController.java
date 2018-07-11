@@ -39,8 +39,8 @@ public class AssistController extends BaseController {
         return buildSuccess(assistanceDeal);
     }
 
-    @GetMapping("{needId}/{status}")
-    public JsonResult assist(@PathVariable("status") String status, @PathVariable("needId") String needId) {
+    @GetMapping("{needId}/{action}")
+    public JsonResult assist(@PathVariable("needId") String needId, @PathVariable("action") String action) {
         return buildSuccess();
     }
 }

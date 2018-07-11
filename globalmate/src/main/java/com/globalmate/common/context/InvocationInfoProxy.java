@@ -34,4 +34,30 @@ public class InvocationInfoProxy {
         return getInvocationInfo().getUserId();
     }
 
+    public static String getLocalStr() {
+        InvocationInfo invocationInfo = getInvocationInfo();
+        if (invocationInfo != null) {
+            return invocationInfo.getLocalStr();
+        }else {
+            return null;
+        }
+    }
+
+    public static void setLocalStr(String localStr) {
+        InvocationInfo invocationInfo = getInvocationInfo();
+        if (invocationInfo != null) {
+            invocationInfo.setLocalStr(localStr);
+        }else {
+            invocationInfo = new InvocationInfo();
+            setInvocationInfo(invocationInfo);
+            invocationInfo.setLocalStr(localStr);
+        }
+    }
+
+    public static void reset() {
+        if (getInvocationInfo() != null) {
+            setInvocationInfo(null);
+        }
+    }
+
 }
