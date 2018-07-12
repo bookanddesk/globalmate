@@ -7,19 +7,24 @@ import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.exception.need.NeedException;
+import com.globalmate.service.common.AssistHandler;
+import com.globalmate.service.common.ICreateService;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.IdGenerator;
+import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -30,7 +35,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @Description
  */
 @Service
-public class AssistService implements IAssistService {
+public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, User>
+        implements IAssistService, ICreateService<SysAssistanceDeal, User>{
 
     @Autowired
     private MatchService matchService;
@@ -79,38 +85,30 @@ public class AssistService implements IAssistService {
         checkNotNull(user);
         checkNotNull(needId);
         checkNotNull(status);
-
         GMEnums.AssistAction assistAction = GMEnums.AssistAction.valueOf(status);
-
-        //更新匹配采纳状态
-        List<SysMatchNeed> matchNeeds = matchService.getByNeedId(user.getId(), needId);
-        if (CollectionUtils.isEmpty(matchNeeds)) {
-            throw new IllegalStateException("matchNeeds not found with providerId:[ "
-                    + user.getId() + "], needId:[" + needId + "]");
-        }
-
-        if (matchNeeds.size() > 0) {
-            //去除多余匹配
-        }
-
-        SysMatchNeed matchNeed = matchNeeds.get(0);
-
-        matchService.updateAssistStatus(matchNeed.getId(), assistAction.equals(GMEnums.AssistAction.AGREE));
-
-        if (GMEnums.AssistAction.REFUSE.equals(assistAction)) {
-            return;
-        }
-
-        //更新需求状态
         List<Need> needs = needService.listByIds(Lists.newArrayList(needId));
         if (CollectionUtils.isEmpty(needs)) {
             throw new NeedException("need not found with id:" + needId);
         }
         Need need = needs.get(0);
-        need.setEnable(String.valueOf(assistAction.getNeedStatus()));
-        needService.updateNeed(need);
+        matchService.handle(need, assistAction, user);
+    }
 
-        //更新帮助交易状态
+    @Override
+    public SysAssistanceDeal create(User user) {
+        SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
+        assistanceDeal.setId(IdGenerator.generateId());
+        assistanceDeal.setuProviderId(user.getId());
+        assistanceDeal.setuProviderName(user.getName());
+        assistanceDeal.setAssistCreateTime(Date.from(Instant.now()));
+        assistanceDeal.setAssistModifyTime(Date.from(Instant.now()));
+        return null;
+    }
+
+
+    @Override
+    public void handle(Need need, GMEnums.AssistAction assistAction, User user) {
+        String needId = need.getId();
         SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
         assistanceDeal.setuProviderId(user.getId());
         assistanceDeal.setNeedId(needId);
@@ -120,20 +118,24 @@ public class AssistService implements IAssistService {
                 throw new IllegalStateException("assistanceDeals is null, but assistAction is " + assistAction.getValue());
             }
             //生成新帮助交易
-            assistanceDeal.setId(IdGenerator.generateId());
-            assistanceDeal.setNeedId(needId);
-            assistanceDeal.setuNeederId(need.getUserId());
-            assistanceDeal.setuNeederName(userService.getName(need.getUserId()));
-            assistanceDeal.setuProviderName(user.getName());
-            assistanceDeal.setAssistStatus(assistAction.getValue());
-            assistanceDeal.setAssistCreateTime(Date.from(Instant.now()));
-            assistanceDeal.setAssistModifyTime(Date.from(Instant.now()));
-            assistanceDeal.setProvideId(matchNeed.getProvideId());
-            assistanceDealMapper.insertSelective(assistanceDeal);
+            SysAssistanceDeal sysAssistanceDeal = create(user);
+            sysAssistanceDeal.setNeedId(needId);
+            sysAssistanceDeal.setuNeederId(need.getUserId());
+            sysAssistanceDeal.setuNeederName(userService.getName(need.getUserId()));
+            sysAssistanceDeal.setAssistStatus(assistAction.getValue());
+            Optional.of(matchService.removeLocal(StringUtils.join_(needId, user.getId())))
+                    .ifPresent(x ->sysAssistanceDeal.setProvideId(String.valueOf(x)));
+            assistanceDealMapper.insertSelective(sysAssistanceDeal);
         } else {
             assistanceDeal.setAssistStatus(assistAction.getValue());
             assistanceDealMapper.updateByPrimaryKeySelective(assistanceDeal);
         }
-
     }
+
+    @PostConstruct
+    public void assistHanlerChain(){
+        matchService.setNextHandler(needService);
+        needService.setNextHandler(this);
+    }
+
 }

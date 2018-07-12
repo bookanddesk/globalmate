@@ -19,7 +19,13 @@ public interface IMatchService {
      */
     List<SysMatchNeed> listMatch(User user);
 
-    int updateAssistStatus(String matchNeedId, boolean agree);
+    /**
+     * 更新匹配的帮助状态
+     * @param matchNeedIds
+     * @param agree
+     * @return
+     */
+    int updateAssistStatus(List<String> matchNeedIds, boolean agree);
 
     List<SysMatchNeed> getByNeedId(String userId, String needId);
 

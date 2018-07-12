@@ -210,4 +210,17 @@
     </where>
   </select>
 
+  <update id="updateMatchAccept">
+    update sys_match_need
+    set match_accept = #{agree}
+    <where>
+      <if test="list != null and list.size() > 0">
+        id_ in
+        <foreach collection="list" index="idx" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
 </mapper>

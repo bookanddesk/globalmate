@@ -19,5 +19,6 @@ public interface SysMatchNeedMapper {
 
     List<SysMatchNeed> queryMatchNeeds(SysMatchNeed record);
 
+    int updateMatchAccept(List<String> ids, boolean agree);
 
 }

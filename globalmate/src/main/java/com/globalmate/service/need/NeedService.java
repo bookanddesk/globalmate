@@ -4,6 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import com.globalmate.data.entity.po.GMEnums;
+import com.globalmate.service.common.AssistHandler;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import com.globalmate.exception.need.NeedException;
 import com.globalmate.uitl.IdGenerator;
 
 @Service
-public class NeedService implements INeedService{
+public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User> implements INeedService{
     @Autowired
     private NeedMapper needMapper;
     @Autowired
@@ -71,4 +73,10 @@ public class NeedService implements INeedService{
 		return needMapper.queryByIds(ids);
 	}
 
+	@Override
+	public void handle(Need need, GMEnums.AssistAction action, User user) {
+		need.setEnable(String.valueOf(action.getNeedStatus()));
+		this.updateNeed(need);
+		nextHandler.handle(need, action, user);
+	}
 }
