@@ -94,7 +94,6 @@ public class MatchTask {
                     continue;
                 }
 
-
                 SysMatchNeed matchNeed = matchService.create(provide);
                 matchNeed.setNeedId(need.getId());
                 matchNeed.setuNeedId(need.getUserId());
