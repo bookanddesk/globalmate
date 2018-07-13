@@ -98,11 +98,13 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
     public SysAssistanceDeal create(User user) {
         SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
         assistanceDeal.setId(IdGenerator.generateId());
-        assistanceDeal.setuProviderId(user.getId());
-        assistanceDeal.setuProviderName(user.getName());
+        if (user != null) {
+            assistanceDeal.setuProviderId(user.getId());
+            assistanceDeal.setuProviderName(user.getName());
+        }
         assistanceDeal.setAssistCreateTime(Date.from(Instant.now()));
         assistanceDeal.setAssistModifyTime(Date.from(Instant.now()));
-        return null;
+        return assistanceDeal;
     }
 
 

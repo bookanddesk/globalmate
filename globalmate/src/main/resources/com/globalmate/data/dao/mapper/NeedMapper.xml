@@ -12,7 +12,7 @@
     <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime" />
     <result column="ENABLE_" jdbcType="CHAR" property="enable" />
     <result column="EVALUATE" jdbcType="INTEGER" property="evaluate" />
-    <result column="RESPONDER_" jdbcType="VARCHAR" property="responder" />
+    <result column="RESPONDER_" jdbcType="VselectNeedsARCHAR" property="responder" />
     <result column="COMMENT_" jdbcType="VARCHAR" property="comment" />
   </resultMap>
   <sql id="Base_Column_List">

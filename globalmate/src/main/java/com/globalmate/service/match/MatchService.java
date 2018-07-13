@@ -1,17 +1,20 @@
 package com.globalmate.service.match;
 
 import com.globalmate.data.dao.mapper.SysMatchNeedMapper;
-import com.globalmate.data.entity.Need;
-import com.globalmate.data.entity.SysMatchNeed;
-import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.*;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.service.common.AssistHandler;
+import com.globalmate.service.common.ICreateService;
+import com.globalmate.service.match.auto.IMatchExecuteSevice;
+import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +24,8 @@ import java.util.stream.Collectors;
  * @Description
  */
 @Service
-public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User> implements IMatchService {
+public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User> implements IMatchService,
+        ICreateService<SysMatchNeed, TProvide>, IMatchExecuteSevice {
 
     @Autowired
     private SysMatchNeedMapper matchNeedMapper;
@@ -55,6 +59,13 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
         return matchNeedMapper.queryMatchNeeds(sysMatchNeed);
     }
 
+    @Override
+    public int addMatchNeeds(List<SysMatchNeed> matchNeeds) {
+        if (CollectionUtils.isNotEmpty(matchNeeds)) {
+            return matchNeedMapper.insertBatch(matchNeeds);
+        }
+        return -1;
+    }
 
 
     @Override
@@ -89,5 +100,23 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
 
         nextHandler.handle(need, action, user);
 
+    }
+
+    @Override
+    public void matchAction() {
+
+    }
+
+    @Override
+    public SysMatchNeed create(TProvide provide) {
+        SysMatchNeed matchNeed = new SysMatchNeed();
+        matchNeed.setId(IdGenerator.generateId());
+        if (provide != null) {
+            matchNeed.setProvideId(provide.getId());
+            matchNeed.setProviderId(provide.getuId());
+            matchNeed.setProviderName(provide.getuName());
+        }
+        matchNeed.setMatchCreateTime(Date.from(Instant.now()));
+        return matchNeed;
     }
 }

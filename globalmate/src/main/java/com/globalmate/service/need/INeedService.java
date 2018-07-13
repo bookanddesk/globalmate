@@ -36,5 +36,13 @@ public interface INeedService {
 	 * @return
 	 */
 	List<Need> listByIds(List<String> ids);
+
+	/**
+	 * 查询未处理的需求
+	 * @return
+	 */
+	List<Need> listUnHandled(User user);
+
+	String[] getKeyWords(Need need);
     
 }

@@ -2,6 +2,8 @@ package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.Buy;
 
+import java.util.List;
+
 public interface BuyMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,6 @@ public interface BuyMapper {
     int updateByPrimaryKeySelective(Buy record);
 
     int updateByPrimaryKey(Buy record);
+
+    List<Buy> selectByNeedId(String needId);
 }

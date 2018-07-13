@@ -223,4 +223,20 @@
     </where>
   </update>
 
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into sys_match_need (id_, need_id, u_need_id,
+      u_need_name, provider_id, provider_name,
+      match_info, match_msg_count, match_accept,
+      match_create_time, match_modify_time, last_push_time,
+      match_ext1, match_ext2)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=VARCHAR}, #{item.needId,jdbcType=VARCHAR}, #{item.uNeedId,jdbcType=VARCHAR},
+      #{item.uNeedName,jdbcType=VARCHAR}, #{item.providerId,jdbcType=VARCHAR}, #{item.providerName,jdbcType=VARCHAR},
+      #{item.matchInfo,jdbcType=VARCHAR}, #{item.matchMsgCount,jdbcType=INTEGER}, #{item.matchAccept,jdbcType=BIT},
+      #{item.matchCreateTime,jdbcType=TIMESTAMP}, #{item.matchModifyTime,jdbcType=TIMESTAMP}, #{item.lastPushTime,jdbcType=TIMESTAMP},
+      #{item.matchExt1,jdbcType=VARCHAR}, #{item.matchExt2,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
 </mapper>

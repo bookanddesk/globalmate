@@ -21,4 +21,6 @@ public interface SysMatchNeedMapper {
 
     int updateMatchAccept(List<String> ids, boolean agree);
 
+    int insertBatch(List<SysMatchNeed> list);
+
 }
