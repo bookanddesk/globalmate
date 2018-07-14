@@ -1,19 +1,20 @@
-CREATE TABLE user  ( 
+drop table if exists `user`;
+CREATE TABLE user  (
 	ID_        	varchar(64) NOT NULL,
 	CODE_     	varchar(255) NULL,
-	NAME_     	varchar(255) NULL, 
-	NIKENAME_	varchar(255) NULL, 
-	PASSWORD_      	varchar(64) NULL,  
+	NAME_     	varchar(255) NULL,
+	NIKENAME_	varchar(255) NULL,
+	PASSWORD_      	varchar(64) NULL,
 	SALT_      	varchar(64) NULL,
-	EMAIL_     	varchar(64) NULL,    
-	PHONE_     	varchar(64) NULL,    
-	PIC_	varchar(64) NULL,           
+	EMAIL_     	varchar(64) NULL,
+	PHONE_     	varchar(64) NULL,
+	PIC_	varchar(64) NULL,
 	CREATE_TIME_     TIMESTAMP NULL,
 	MODIFY_TIME_    TIMESTAMP NULL,
 	ENABLE_     char(1) NULL,
-	ID_NUMBER_  varchar(64) NULL,  
-	NICE_  int,  
-	WHERE_    varchar(255) NULL,  
+	ID_NUMBER_  varchar(64) NULL,
+	NICE_  int,
+	WHERE_    varchar(255) NULL,
   SCHOOL_   varchar(255) NULL,
 	HOBBY_    varchar(4000) NULL,
 	is_certified_ tinyint(1) DEFAULT 0 comment'认证状态',
@@ -27,7 +28,8 @@ CREATE TABLE user  (
 	PRIMARY KEY(ID_)
 );
 
-CREATE TABLE service  ( 
+drop table if exists service;
+CREATE TABLE service  (
 	ID_        	varchar(64) NOT NULL,
 	user_id_     	varchar(64) NOT NULL, -- //提供服务的用户id
 	user_name_     	varchar(64) NOT NULL, -- //提供服务的用户name,查询服务时不需要联查用户表
@@ -37,7 +39,8 @@ CREATE TABLE service  (
 	PRIMARY KEY(ID_)
 );
 
-CREATE TABLE need( 
+drop table if exists need;
+CREATE TABLE need(
 	ID_        	varchar(64) NOT NULL,
 	start_type_	char(1) NULL,  -- //服务发起方，0是需求方发布的，1是服务提供方发布需求方应答的
 	TYPE_     	char(64) NULL,  -- //服务类型
@@ -53,34 +56,36 @@ CREATE TABLE need(
 	PRIMARY KEY(ID_)
 );
 
-CREATE TABLE buy( 
+drop table if exists buy;
+CREATE TABLE buy(
 	ID_        	varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
+	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
 	country_	varchar(64) NULL,  -- //国家
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
 	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
-	delivery_way_     char(2000) NULL,  -- //交货方式
+	delivery_way_     varchar(2000) NULL,  -- //交货方式
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式
 	PRIMARY KEY(ID_),
 	foreign key(need_id_)references need(ID_)
 );
 
-CREATE TABLE carry( 
+drop table if exists carry;
+CREATE TABLE carry(
 	ID_     varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
-	from_	varchar(255) NULL,  
-	to_	varchar(255) NULL,  
-	arrive_	TIMESTAMP  NULL,  
+	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
+	from_	varchar(255) NULL,
+	to_	varchar(255) NULL,
+	arrive_	TIMESTAMP  NULL,
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
 	description_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
-	delivery_way_     char(2000) NULL,  -- //交货方式
+	delivery_way_     varchar(2000) NULL,  -- //交货方式
 	volume_         varchar(255) NULL,  -- //体积
 	weight_         varchar(255) NULL,  -- //重量
 	REWARD_AMOUNT_  double, -- //悬赏金额
@@ -89,12 +94,13 @@ CREATE TABLE carry(
 	foreign key(need_id_)references need(ID_)
 );
 
-CREATE TABLE accompany( 
+drop table if exists accompany;
+CREATE TABLE accompany(
 	ID_     varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
-	where_	varchar(255) NULL,  
-	start_time_	TIMESTAMP   NULL,  
-	end_time_ TIMESTAMP  NULL,  
+	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
+	where_	varchar(255) NULL,
+	start_time_	TIMESTAMP   NULL,
+	end_time_ TIMESTAMP  NULL,
 	description_  varchar(2000) NULL, -- //描述
 	type_  varchar(255) NULL, -- //想玩儿什么，下拉选一种？？
 	doctor_     char(1) NULL,  -- //是否为看病
@@ -104,10 +110,10 @@ CREATE TABLE accompany(
 	foreign key(need_id_)references need(ID_)
 );
 
-
-CREATE TABLE clearance( 
+drop table if exists clearance;
+CREATE TABLE clearance(
 	ID_     varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
+	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
 	where_	varchar(255) NULL,  -- //目的地国家
 	time_	TIMESTAMP   NULL,  -- //时间
 	flight_information_  varchar(255)  NULL, -- //航班信息
@@ -119,10 +125,10 @@ CREATE TABLE clearance(
 	foreign key(need_id_)references need(ID_)
 )
 
-
-CREATE TABLE learn_cooperation( 
+drop table if exists learn_cooperation;
+CREATE TABLE learn_cooperation(
 	ID_     varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
+	need_id_ varchar(64) NOT NULL,  -- //外键，关联need表
 	language_ varchar(255) NULL,  -- //语言
 	subject_  varchar(255) NULL,  -- //科目
 	description_  varchar(2000) NULL, -- //描述
@@ -132,9 +138,10 @@ CREATE TABLE learn_cooperation(
 	foreign key(need_id_)references need(ID_)
 );
 
-CREATE TABLE need_other( 
+drop table if exists need_other;
+CREATE TABLE need_other(
 	ID_     varchar(64) NOT NULL,
-	need_id_    varchar(64) NOT NULL,  --//外键，关联need表
+	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
 	description_  varchar(2000) NULL, -- //描述
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
@@ -142,27 +149,28 @@ CREATE TABLE need_other(
 	foreign key(need_id_)references need(ID_)
 );
 
-
-CREATE TABLE usergroup  ( 
+drop table if exists usergroup;
+CREATE TABLE usergroup  (
 	id_         	varchar(64) NOT NULL,
 	enable_     	char(1) NOT NULL,
 	code_       	varchar(64) NOT NULL,
 	name_       	varchar(255) NOT NULL,
 	descrition_     	varchar(2000) NULL,
-	create_time_	TIMESTAMPNOT NULL,
+	create_time_	TIMESTAMP NOT NULL,
 	creator_    	varchar(64) NULL,
 	PRIMARY KEY(id_)
 );
 
-CREATE TABLE userlink  ( 
+drop table if exists userlink;
+CREATE TABLE userlink  (
 	id_         	varchar(64) NOT NULL,
 	type_       	varchar(32) NOT NULL,
 	enable_     	char(1) NOT NULL,
 	user_id_    	varchar(64) NOT NULL,
 	target_id_  	varchar(64) NOT NULL,
 	MAIN_TARGET_	char(1) NULL,
-	create_time_	TIMESTAMPNOT NULL,
-	authentication_ double ,//认证数目
+	create_time_	TIMESTAMP NOT NULL,
+	authentication_ double , -- //认证数目
 	PRIMARY KEY(id_)
 );
 
@@ -180,7 +188,7 @@ CREATE TABLE   u_credit(
 	id_         	varchar(64) NOT NULL,
 	grade_    	  varchar(12) not NULL comment '信用等级',
 	name_       	varchar(20) default NULL comment '信用名称/别名',
-	privilege_    varchar (20) default null comment '信用特权'
+	privilege_    varchar (20) default null comment '信用特权',
 	busiext1_  	  varchar(20) default NULL,
 	PRIMARY KEY(id_)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment'用户信用';
@@ -356,4 +364,4 @@ create table sys_configuration
    primary key (id_)
 );
 
---util 2018-6-22
+-- util 2018-6-22

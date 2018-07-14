@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class CacheServiceImpl implements CacheService {
 
 
-	private final static String KEY_PREFIX = "OPEN_LIGHTAPP:";
+	private final static String KEY_PREFIX = "gm:";
 
 	@Resource(name = "redisTemplate")
 	private volatile RedisTemplate<String, Object> redisTemplate;
