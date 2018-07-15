@@ -64,7 +64,7 @@ CREATE TABLE buy(
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
-	description_  varchar(2000) NULL, -- //描述
+	descrition_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     varchar(2000) NULL,  -- //交货方式
 	REWARD_AMOUNT_  double, -- //悬赏金额

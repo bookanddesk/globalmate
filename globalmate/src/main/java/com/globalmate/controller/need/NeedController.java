@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.globalmate.data.entity.vo.NeedAggEntity;
+import com.globalmate.uitl.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +38,7 @@ public class NeedController extends BaseController {
     @GetMapping("list")
     public JsonResult select(HttpServletRequest request,
                              @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser) {
-        List<Need> needs = needService.getNeed(onlyCurrentUser ? getCurrentUser(request) : null);
+        List<NeedAggEntity> needs = needService.getNeedAgg(onlyCurrentUser ? getCurrentUser(request) : null);
         return buildSuccess(needs);
     }
 

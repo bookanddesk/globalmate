@@ -2,6 +2,7 @@ package com.globalmate.service.need;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.globalmate.data.dao.mapper.BuyMapper;
@@ -9,6 +10,8 @@ import com.globalmate.data.dao.mapper.CarryMapper;
 import com.globalmate.data.entity.Buy;
 import com.globalmate.data.entity.Carry;
 import com.globalmate.data.entity.po.GMEnums;
+import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.AssistHandler;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -72,6 +75,57 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
         List<Need> needs = needMapper.selectNeeds(need);
 
         return needs;
+	}
+
+	public List<NeedAggEntity> getNeedAgg(User user) {
+		List<Need> needs = getNeed(user);
+		if (CollectionUtils.isEmpty(needs)) {
+			return null;
+		}
+		List<NeedAggEntity> entities = new ArrayList<>(needs.size());
+		for (Need need : needs) {
+			NeedAggEntity entity = buildAgg(need);
+			entities.add(entity);
+		}
+		return entities;
+	}
+
+	private NeedAggEntity buildAgg(Need need) {
+		if (need == null) {
+			return null;
+		}
+		NeedAggEntity entity = new NeedAggEntity();
+		entity.setAbstractNeed(resolveNeed(need));
+		return entity;
+	}
+
+	private AbstractNeed resolveNeed(Need need) {
+		if (need.getType() == null) {
+			return null;
+		}
+		AbstractNeed abstractNeed = null;
+		switch (NeedTypeEnum.valueOf(need.getType())) {
+			case buy:
+				List<Buy> buys = buyMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(buys)) {
+					abstractNeed = buys.get(0);
+				}
+				break;
+			case carry:
+				List<Carry> carries = carryMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(carries)) {
+					abstractNeed = carries.get(0);
+				}
+				break;
+			case accompany:
+			case clearance:
+			case learn_cooperation:
+			case other:
+				break;
+			default:
+					break;
+		}
+		return abstractNeed;
 	}
 
 	@Override

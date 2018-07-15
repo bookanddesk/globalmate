@@ -19,7 +19,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String token = request.getHeader("token");
+        String token = request.getHeader("token") != null ? request.getHeader("token") : request.getParameter("token");
+
         if (StringUtils.isBlank(token)) {
             throw new UserTokenFailException("token不能为空！");
         }

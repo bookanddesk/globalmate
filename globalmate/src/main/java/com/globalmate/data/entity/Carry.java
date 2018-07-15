@@ -1,8 +1,10 @@
 package com.globalmate.data.entity;
 
+import com.globalmate.data.entity.vo.AbstractNeed;
+
 import java.util.Date;
 
-public class Carry {
+public class Carry extends AbstractNeed {
     private String id;
 
     private String needId;

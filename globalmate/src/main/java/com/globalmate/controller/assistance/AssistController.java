@@ -5,10 +5,12 @@ import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.SysAssistanceDeal;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.service.assistance.AssistService;
+import com.globalmate.service.assistance.IAssistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -19,11 +21,12 @@ import java.util.List;
  * @Description
  */
 
+@RestController
 @RequestMapping("assist")
 public class AssistController extends BaseController {
 
     @Autowired
-    private AssistService assistService;
+    private IAssistService assistService;
 
 
     @GetMapping("listSOS")

@@ -1,6 +1,8 @@
 package com.globalmate.data.entity;
 
-public class Buy {
+import com.globalmate.data.entity.vo.AbstractNeed;
+
+public class Buy extends AbstractNeed {
     private String id;
 
     private String needId;
