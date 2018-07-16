@@ -29,5 +29,7 @@ public interface IMatchService {
 
     List<SysMatchNeed> getByNeedId(String userId, String needId);
 
+    int addMatchNeed(SysMatchNeed sysMatchNeed);
+
     int addMatchNeeds(List<SysMatchNeed> matchNeeds);
 }

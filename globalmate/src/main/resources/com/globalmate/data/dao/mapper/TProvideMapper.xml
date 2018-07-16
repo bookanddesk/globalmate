@@ -196,7 +196,7 @@
         id_ = #{id}
       </if>
       <if test="uId != null">
-        and u_id = {#uId}
+        and u_id = #{uId}
       </if>
     </where>
   </select>

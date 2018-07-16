@@ -85,7 +85,7 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
         checkNotNull(user);
         checkNotNull(needId);
         checkNotNull(status);
-        GMEnums.AssistAction assistAction = GMEnums.AssistAction.valueOf(status);
+        GMEnums.AssistAction assistAction = GMEnums.AssistAction.valueOf(status.toUpperCase());
         List<Need> needs = needService.listByIds(Lists.newArrayList(needId));
         if (CollectionUtils.isEmpty(needs)) {
             throw new NeedException("need not found with id:" + needId);
@@ -125,7 +125,7 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
             sysAssistanceDeal.setuNeederId(need.getUserId());
             sysAssistanceDeal.setuNeederName(userService.getName(need.getUserId()));
             sysAssistanceDeal.setAssistStatus(assistAction.getValue());
-            Optional.of(matchService.removeLocal(StringUtils.join_(needId, user.getId())))
+            Optional.ofNullable(matchService.removeLocal(StringUtils.join_(needId, user.getId())))
                     .ifPresent(x ->sysAssistanceDeal.setProvideId(String.valueOf(x)));
             assistanceDealMapper.insertSelective(sysAssistanceDeal);
         } else {

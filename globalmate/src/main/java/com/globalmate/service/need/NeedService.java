@@ -143,6 +143,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		if (user != null) {
 			need.setUserId(user.getId());
 		}
+		need.setEnable(String.valueOf(GMEnums.NeedStatus.OPEN.getCode()));
 		return needMapper.selectNeeds(need);
 	}
 
@@ -152,7 +153,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 
 		String[] keyWords = null;
 		String type = need.getType();
-		if (StringUtils.isBlank(type)) {
+		if (StringUtils.isNotBlank(type)) {
 			keyWords = getKeyWords(need.getId(), NeedTypeEnum.valueOf(type));
 		}
 
@@ -169,7 +170,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	}
 
 	/**
-	 * 获取需求关键字，第一个为地点名，第二个为需求描述
+	 * 获取需求关键字，第一个为地点名，第二个为需求标签
 	 * @param needId
 	 * @param needTypeEnum
 	 * @return
@@ -182,14 +183,16 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 				List<Buy> buys = buyMapper.selectByNeedId(needId);
 				if (CollectionUtils.isNotEmpty(buys)) {
 					Buy buy = buys.get(0);
-					keyWords = new String[] {buy.getCountry(), buy.getDescrition(), buy.getGoodsName(), buy.getBrand()};
+					keyWords = new String[] {buy.getCountry(), NeedTypeEnum.buy.name(),
+							buy.getDescrition(), buy.getGoodsName(), buy.getBrand()};
 				}
 				break;
 			case carry:
 				List<Carry> carries = carryMapper.selectByNeedId(needId);
 				if (CollectionUtils.isNotEmpty(carries)) {
 					Carry carry = carries.get(0);
-					keyWords = new String[] {carry.getFrom(), carry.getDescription(), carry.getGoodsName(), carry.getBrand()};
+					keyWords = new String[] {carry.getFrom(), NeedTypeEnum.carry.name(),
+							carry.getDescription(), carry.getGoodsName(), carry.getBrand()};
 				}
 				break;
 			case accompany:

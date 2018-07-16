@@ -10,7 +10,13 @@ public class GMEnums {
     public enum NeedStatus {
         OPEN (1, "open"),   //开放
         RUN  (2, "run"),    //帮助中
-        CLOSE(0, "close");  //关闭
+        CLOSE(0, "close"),  //关闭
+
+        EDIT  (3, "edit"),    //编辑中
+        NEGOTIATE  (4, "negotiate"),    //洽谈中
+        EXECUTE  (5, "execute"),    //执行中
+        COMPLETED  (6, "completed");    //已完成
+
 
         private int code;
         private String value;

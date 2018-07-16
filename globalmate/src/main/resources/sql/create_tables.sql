@@ -11,7 +11,7 @@ CREATE TABLE user  (
 	PIC_	varchar(64) NULL,
 	CREATE_TIME_     TIMESTAMP NULL,
 	MODIFY_TIME_    TIMESTAMP NULL,
-	ENABLE_     char(1) NULL,
+	ENABLE_     char(1) NULL default '1',
 	ID_NUMBER_  varchar(64) NULL,
 	NICE_  int,
 	WHERE_    varchar(255) NULL,
@@ -53,7 +53,7 @@ CREATE TABLE need(
 	CREATE_TIME_     TIMESTAMP NULL,-- //需求提交时间
 	MODIFY_TIME_    TIMESTAMP NULL, -- //需求更新时间
 	END_TIME_    TIMESTAMP NULL, -- //需求结束时间
-	ENABLE_     CHAR(1)NULL,      -- //需求是否终止
+	ENABLE_     CHAR(1) null default '1',      -- //需求是否终止，新需求默认是开放状态
 	EVALUATE  int,  -- //评价分，这个值加到提供人的好人值上
 	RESPONDER_ varchar(255) NULL, -- //提供服务的人,
 	COMMENT_  varchar(2000) NULL, -- //服务评语
@@ -270,7 +270,7 @@ create table sys_assistance_deal
    u_provider_name      varchar(32) comment '服务提供者name',
    assist_create_time   timestamp comment '帮助创建时间',
    assist_modify_time   timestamp comment '帮助更新时间',
-   assist_end_time      timestamp comment '帮助结束时间',
+   assist_end_time      timestamp default null comment '帮助结束时间',
    assist_status        varchar(64) comment '帮助状态',
    assist_evaluation    varchar(64) comment '帮助评价',
    assist_price         varchar(64) comment '交易代价',
