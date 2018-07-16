@@ -6,7 +6,7 @@ public class NeedAggEntity {
 
     private Need need;
 
-    private AbstractNeed abstractNeed;
+    private AbstractNeed conceretNeed;
 
     public Need getNeed() {
         return need;
@@ -16,11 +16,11 @@ public class NeedAggEntity {
         this.need = need;
     }
 
-    public AbstractNeed getAbstractNeed() {
-        return abstractNeed;
+    public AbstractNeed getConceretNeed() {
+        return conceretNeed;
     }
 
-    public void setAbstractNeed(AbstractNeed abstractNeed) {
-        this.abstractNeed = abstractNeed;
+    public void setConceretNeed(AbstractNeed conceretNeed) {
+        this.conceretNeed = conceretNeed;
     }
 }

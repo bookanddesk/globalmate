@@ -27,6 +27,10 @@ CREATE TABLE user  (
 	u_ext3_ varchar (64) null,
 	PRIMARY KEY(ID_)
 );
+alter table `user` add column country_ varchar(10) default null comment'国家';
+alter table `user` add column city_ varchar(10) default null comment'城市';
+alter table `user` add column help_available_ varchar(255) default null comment'可提供的帮助';
+
 
 drop table if exists service;
 CREATE TABLE service  (

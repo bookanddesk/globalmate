@@ -95,7 +95,8 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 			return null;
 		}
 		NeedAggEntity entity = new NeedAggEntity();
-		entity.setAbstractNeed(resolveNeed(need));
+		entity.setNeed(need);
+		entity.setConceretNeed(resolveNeed(need));
 		return entity;
 	}
 

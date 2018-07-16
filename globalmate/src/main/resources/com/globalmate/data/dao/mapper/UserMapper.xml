@@ -27,11 +27,15 @@
     <result column="u_ext1_" jdbcType="VARCHAR" property="uExt1" />
     <result column="u_ext2_" jdbcType="VARCHAR" property="uExt2" />
     <result column="u_ext3_" jdbcType="VARCHAR" property="uExt3" />
+    <result column="country_" jdbcType="VARCHAR" property="country" />
+    <result column="city_" jdbcType="VARCHAR" property="city" />
+    <result column="help_available_" jdbcType="VARCHAR" property="helpAvailable" />
   </resultMap>
   <sql id="Base_Column_List">
     ID_, CODE_, NAME_, NIKENAME_, PASSWORD_, SALT_, EMAIL_, PHONE_, PIC_, CREATE_TIME_, 
     MODIFY_TIME_, ENABLE_, ID_NUMBER_, NICE_, WHERE_, SCHOOL_, HOBBY_, is_certified_, 
-    cetifiy_id_, user_credit_, user_tag_, resident_, u_ext1_, u_ext2_, u_ext3_
+    cetifiy_id_, user_credit_, user_tag_, resident_, u_ext1_, u_ext2_, u_ext3_,
+     country_, city_, help_available_
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -52,7 +56,7 @@
       SCHOOL_, HOBBY_, is_certified_, 
       cetifiy_id_, user_credit_, user_tag_, 
       resident_, u_ext1_, u_ext2_, 
-      u_ext3_)
+      u_ext3_, country_, city_, help_available_)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{nikename,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
@@ -61,7 +65,7 @@
       #{school,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{isCertified,jdbcType=BIT}, 
       #{cetifiyId,jdbcType=VARCHAR}, #{userCredit,jdbcType=VARCHAR}, #{userTag,jdbcType=VARCHAR}, 
       #{resident,jdbcType=VARCHAR}, #{uExt1,jdbcType=VARCHAR}, #{uExt2,jdbcType=VARCHAR}, 
-      #{uExt3,jdbcType=VARCHAR})
+      #{uExt3,jdbcType=VARCHAR}),#{country,jdbcType=VARCHAR}),#{city,jdbcType=VARCHAR}),#{helpAvailable,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.User">
     insert into user
@@ -294,6 +298,15 @@
       </if>
       <if test="uExt3 != null">
         u_ext3_ = #{uExt3,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country_ = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city_ = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="helpAvailable != null">
+        help_available_ = #{helpAvailable,jdbcType=VARCHAR},
       </if>
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}
