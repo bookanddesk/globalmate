@@ -130,10 +130,15 @@ CREATE TABLE learn_cooperation(
 	ID_     varchar(64) NOT NULL,
 	need_id_ varchar(64) NOT NULL,  -- //外键，关联need表
 	language_ varchar(255) NULL,  -- //语言
+	country_ varchar(255) NULL,  -- //国家
+	city_ varchar(255) NULL,  -- //城市
+	school_ varchar(255) NULL,  -- //学校
 	subject_  varchar(255) NULL,  -- //科目
 	description_  varchar(2000) NULL, -- //描述
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
+	start_time_	TIMESTAMP   NULL,  -- //开始时间,
+	end_time_ TIMESTAMP  NULL,   -- //结束时间,
 	PRIMARY KEY(ID_),
 	foreign key(need_id_)references need(ID_)
 );
