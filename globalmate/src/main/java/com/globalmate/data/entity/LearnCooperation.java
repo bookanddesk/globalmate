@@ -1,5 +1,7 @@
 package com.globalmate.data.entity;
 
+import java.util.Date;
+
 public class LearnCooperation {
     private String id;
 
@@ -14,6 +16,16 @@ public class LearnCooperation {
     private Double rewardAmount;
 
     private String payway;
+
+    private String country;
+
+    private String city;
+
+    private String school;
+
+    private Date startTime;
+
+    private Date endTime;
 
     public String getId() {
         return id;
@@ -69,5 +81,45 @@ public class LearnCooperation {
 
     public void setPayway(String payway) {
         this.payway = payway == null ? null : payway.trim();
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school == null ? null : school.trim();
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }
