@@ -9,9 +9,21 @@
     <result column="descrition_" jdbcType="VARCHAR" property="descrition" />
     <result column="create_time_" jdbcType="TIMESTAMP" property="createTime" />
     <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="public_email_" jdbcType="VARCHAR" property="publicEmail" />
+    <result column="u_group_id_" jdbcType="VARCHAR" property="uGroupId" />
+    <result column="u_principal_id_" jdbcType="VARCHAR" property="uPrincipalId" />
+    <result column="u_principal_name_" jdbcType="VARCHAR" property="uPrincipalName" />
+    <result column="country_" jdbcType="VARCHAR" property="country" />
+    <result column="city_" jdbcType="VARCHAR" property="city" />
+    <result column="pic_" jdbcType="VARCHAR" property="pic" />
+    <result column="qr_code" jdbcType="VARCHAR" property="qrCode" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3" jdbcType="VARCHAR" property="ext3" />
   </resultMap>
   <sql id="Base_Column_List">
-    id_, enable_, code_, name_, descrition_, create_time_, creator_
+    id_, enable_, code_, name_, descrition_, create_time_, creator_, public_email_, u_group_id_, 
+    u_principal_id_, u_principal_name_, country_, city_, pic_, qr_code, ext1, ext2, ext3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -26,10 +38,16 @@
   <insert id="insert" parameterType="com.globalmate.data.entity.Usergroup">
     insert into usergroup (id_, enable_, code_, 
       name_, descrition_, create_time_, 
-      creator_)
+      creator_, public_email_, u_group_id_, 
+      u_principal_id_, u_principal_name_, country_, 
+      city_, pic_, qr_code, 
+      ext1, ext2, ext3)
     values (#{id,jdbcType=VARCHAR}, #{enable,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{creator,jdbcType=VARCHAR})
+      #{creator,jdbcType=VARCHAR}, #{publicEmail,jdbcType=VARCHAR}, #{uGroupId,jdbcType=VARCHAR}, 
+      #{uPrincipalId,jdbcType=VARCHAR}, #{uPrincipalName,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{qrCode,jdbcType=VARCHAR}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.Usergroup">
     insert into usergroup
@@ -55,6 +73,39 @@
       <if test="creator != null">
         creator_,
       </if>
+      <if test="publicEmail != null">
+        public_email_,
+      </if>
+      <if test="uGroupId != null">
+        u_group_id_,
+      </if>
+      <if test="uPrincipalId != null">
+        u_principal_id_,
+      </if>
+      <if test="uPrincipalName != null">
+        u_principal_name_,
+      </if>
+      <if test="country != null">
+        country_,
+      </if>
+      <if test="city != null">
+        city_,
+      </if>
+      <if test="pic != null">
+        pic_,
+      </if>
+      <if test="qrCode != null">
+        qr_code,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+      <if test="ext3 != null">
+        ext3,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -77,6 +128,39 @@
       </if>
       <if test="creator != null">
         #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="publicEmail != null">
+        #{publicEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uGroupId != null">
+        #{uGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPrincipalId != null">
+        #{uPrincipalId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPrincipalName != null">
+        #{uPrincipalName,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCode != null">
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +185,39 @@
       <if test="creator != null">
         creator_ = #{creator,jdbcType=VARCHAR},
       </if>
+      <if test="publicEmail != null">
+        public_email_ = #{publicEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uGroupId != null">
+        u_group_id_ = #{uGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPrincipalId != null">
+        u_principal_id_ = #{uPrincipalId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPrincipalName != null">
+        u_principal_name_ = #{uPrincipalName,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country_ = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city_ = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic_ = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCode != null">
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
     </set>
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
@@ -111,7 +228,18 @@
       name_ = #{name,jdbcType=VARCHAR},
       descrition_ = #{descrition,jdbcType=VARCHAR},
       create_time_ = #{createTime,jdbcType=TIMESTAMP},
-      creator_ = #{creator,jdbcType=VARCHAR}
+      creator_ = #{creator,jdbcType=VARCHAR},
+      public_email_ = #{publicEmail,jdbcType=VARCHAR},
+      u_group_id_ = #{uGroupId,jdbcType=VARCHAR},
+      u_principal_id_ = #{uPrincipalId,jdbcType=VARCHAR},
+      u_principal_name_ = #{uPrincipalName,jdbcType=VARCHAR},
+      country_ = #{country,jdbcType=VARCHAR},
+      city_ = #{city,jdbcType=VARCHAR},
+      pic_ = #{pic,jdbcType=VARCHAR},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

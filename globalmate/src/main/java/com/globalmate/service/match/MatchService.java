@@ -1,21 +1,20 @@
 package com.globalmate.service.match;
 
 import com.globalmate.data.dao.mapper.SysMatchNeedMapper;
-import com.globalmate.data.entity.*;
+import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.SysMatchNeed;
+import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.builder.SysMatchNeedBuilder;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.service.common.AssistHandler;
 import com.globalmate.service.common.ICreateService;
 import com.globalmate.service.match.auto.IMatchExecuteSevice;
-import com.globalmate.service.user.UserService;
-import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,12 +25,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User> implements IMatchService,
-        ICreateService<SysMatchNeed, TProvide>, IMatchExecuteSevice {
+        ICreateService<SysMatchNeed, Need>, IMatchExecuteSevice {
 
     @Autowired
     private SysMatchNeedMapper matchNeedMapper;
-    @Autowired
-    private UserService userService;
 
     @Override
     public List<SysMatchNeed> listMatch(User user) {
@@ -88,7 +85,7 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
 //            throw new IllegalStateException("matchNeeds not found with providerId:[ "
 //                    + user.getId() + "], needId:[" + need.getId() + "]");
 
-            SysMatchNeed matchNeed = create(user, need);
+            SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
             matchNeed.setMatchAccept(true);
             addMatchNeed(matchNeed);
         } else {
@@ -128,34 +125,7 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
     }
 
     @Override
-    public SysMatchNeed create(TProvide provide) {
-        SysMatchNeed matchNeed = new SysMatchNeed();
-        matchNeed.setId(IdGenerator.generateId());
-        if (provide != null) {
-            matchNeed.setProvideId(provide.getId());
-            matchNeed.setProviderId(provide.getuId());
-            matchNeed.setProviderName(provide.getuName());
-        }
-        matchNeed.setMatchCreateTime(Date.from(Instant.now()));
-        return matchNeed;
-    }
-
-    public SysMatchNeed create(User user) {
-        SysMatchNeed matchNeed = new SysMatchNeed();
-        matchNeed.setId(IdGenerator.generateId());
-        if (user != null) {
-            matchNeed.setProviderId(user.getId());
-            matchNeed.setProviderName(user.getNikename());
-        }
-        matchNeed.setMatchCreateTime(Date.from(Instant.now()));
-        return matchNeed;
-    }
-
-    public SysMatchNeed create(User user, Need need) {
-        SysMatchNeed matchNeed = create(user);
-        matchNeed.setNeedId(need.getId());
-        matchNeed.setuNeedId(need.getUserId());
-        matchNeed.setuNeedName(userService.getName(need.getUserId()));
-        return matchNeed;
+    public SysMatchNeed create(Need need) {
+        return new SysMatchNeedBuilder().build().need(need).get();
     }
 }

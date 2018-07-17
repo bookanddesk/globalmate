@@ -30,9 +30,7 @@ import com.globalmate.uitl.IdGenerator;
 public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User> implements INeedService{
     @Autowired
     private NeedMapper needMapper;
-    @Autowired
-    private CacheServiceImpl cacheService;
-    @Autowired
+	@Autowired
 	private BuyMapper buyMapper;
     @Autowired
 	private CarryMapper carryMapper;
@@ -89,6 +87,8 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		}
 		return entities;
 	}
+
+
 
 	private NeedAggEntity buildAgg(Need need) {
 		if (need == null) {
@@ -167,6 +167,19 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		}
 
 		return keyWords;
+	}
+
+	@Override
+	public Need getNeed(String needId) {
+		if (StringUtils.isNotBlank(needId)) {
+			return needMapper.selectByPrimaryKey(needId);
+		}
+		return null;
+	}
+
+	@Override
+	public NeedAggEntity getNeedAgg(String needId) {
+		return buildAgg(getNeed(needId));
 	}
 
 	/**

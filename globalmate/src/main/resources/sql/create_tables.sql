@@ -167,6 +167,17 @@ CREATE TABLE usergroup  (
 	descrition_     	varchar(2000) NULL,
 	create_time_	TIMESTAMP NOT NULL,
 	creator_    	varchar(64) NULL,
+	public_email_ varchar(64) null,
+	u_group_id_ varchar(64) null comment'组织用户id',
+	u_principal_id_ varchar(64) null comment'组织负责人id',
+	u_principal_name_ varchar(64) null comment'组织负责人name',
+	country_      varchar(64) null,
+	city_ varchar(64) null,
+	pic_  varchar(200) null,
+	qr_code varchar(200) null,
+	ext1 varchar(64) null,
+	ext2 varchar (64) null,
+	ext3 varchar (64) null,
 	PRIMARY KEY(id_)
 );
 
@@ -374,3 +385,27 @@ create table sys_configuration
 );
 
 -- util 2018-6-22
+
+
+drop table if exists u_evaluation;
+
+/*==============================================================*/
+/* Table: u_evaluation                                          */
+/*==============================================================*/
+create table u_evaluation
+(
+   id                   varchar(64) not null,
+   u_evaluator_id       varchar(64) comment '评论者id',
+   u_evluator_name      varchar(64) comment '评论者name',
+   u_targeter_id        varchar(64) comment '评论对象id',
+   u_targeter_name      varchar(64) comment '评论对象name',
+   need_id              varchar(64) comment '评论需求id',
+   score                varchar(64) comment '评分',
+   content              varchar(64) comment '评论内容',
+   modify_time          timestamp DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   create_time          timestamp comment '评论时间',
+   eva_ext1             varchar(64) comment '扩展字段1',
+   eva_ext2             varchar(64) comment '扩展字段2',
+   eva_ext3             varchar(64) comment '扩展字段3',
+   primary key (id)
+);

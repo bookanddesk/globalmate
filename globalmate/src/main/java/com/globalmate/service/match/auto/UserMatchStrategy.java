@@ -3,6 +3,7 @@ package com.globalmate.service.match.auto;
 import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.builder.SysMatchNeedBuilder;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.user.UserService;
@@ -83,7 +84,7 @@ public class UserMatchStrategy extends MatchStrategy {
 
                 //标签匹配
                 if (matchTags(keyWords[1], user)) {
-                    SysMatchNeed matchNeed = matchService.create(user, need);
+                    SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
                     matchNeed.setMatchInfo(StringUtils.join_(keyWords[1], user.getHelpAvailable()));
                     sysMatchNeeds.add(matchNeed);
                 }

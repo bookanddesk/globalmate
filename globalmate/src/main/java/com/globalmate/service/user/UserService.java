@@ -19,6 +19,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -147,13 +148,21 @@ public class UserService implements IUserService, ITokenservice {
     }
 
     @Override
+    public User getUser(String id) {
+        if (id != null) {
+            return userMapper.selectByPrimaryKey(id);
+        }
+        return null;
+    }
+
+    @Override
     public String getName(String id) {
         if (id == null) {
             return null;
         }
         String name = userCache.get(id);
         if (name == null) {
-            User user = userMapper.selectByPrimaryKey(id);
+            User user = getUser(id);
             if (user != null) {
                 name = user.getName();
                 if (name != null) {
@@ -162,6 +171,19 @@ public class UserService implements IUserService, ITokenservice {
             }
         }
         return name;
+    }
+
+    @Override
+    public User updateNice(String userId, Integer niceValue) {
+        if (niceValue == null || niceValue == 0) {
+            return null;
+        }
+        User user = getUser(userId);
+        if (user == null) {
+            return null;
+        }
+        user.setNice(Optional.ofNullable(user.getNice()).orElse(0) + niceValue);
+        return updateUser(user);
     }
 
     @Override

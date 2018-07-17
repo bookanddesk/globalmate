@@ -3,6 +3,7 @@ package com.globalmate.service.match.auto;
 import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.TProvide;
+import com.globalmate.data.entity.builder.SysMatchNeedBuilder;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.provider.ProvideService;
@@ -86,10 +87,7 @@ public class ProvideMatchStrategy extends MatchStrategy {
                     continue;
                 }
 
-                SysMatchNeed matchNeed = matchService.create(provide);
-                matchNeed.setNeedId(need.getId());
-                matchNeed.setuNeedId(need.getUserId());
-                matchNeed.setuNeedName(userService.getName(need.getUserId()));
+                SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).provide(provide).get();
                 matchNeed.setMatchInfo(String.valueOf(matchRatio));
                 sysMatchNeeds.add(matchNeed);
 

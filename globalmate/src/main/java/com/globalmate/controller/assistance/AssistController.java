@@ -28,8 +28,6 @@ public class AssistController extends BaseController {
 
     @Autowired
     private IAssistService assistService;
-    @Autowired
-    private MatchTask matchTask;
 
 
     @GetMapping("listSOS")
@@ -50,12 +48,6 @@ public class AssistController extends BaseController {
                              @PathVariable("needId") String needId,
                              @PathVariable("action") String action) {
         assistService.assist(getCurrentUser(request), needId, action);
-        return buildSuccess();
-    }
-
-    @GetMapping("sysMatch")
-    public JsonResult sysMatch() {
-        matchTask.doMatch();
         return buildSuccess();
     }
 

@@ -27,7 +27,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
         User user = userService.getTokenUser(token);
         if (user == null) {
-            throw new UserTokenFailException("根据token查找用户失败！");
+            throw new UserTokenFailException("token失效！");
         }
 
         request.setAttribute("user", user);

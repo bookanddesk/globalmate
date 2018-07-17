@@ -39,5 +39,9 @@ public interface IUserService {
 
     List<User> listUsers();
 
+    User getUser(String id);
+
     String getName(String id);
+
+    User updateNice(String userId, Integer niceValue);
 }

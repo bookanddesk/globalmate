@@ -30,7 +30,7 @@
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.globalmate.data.entity.Need">
-    insert into need (ID_, start_type_, TYPE_, 
+    insert into need (ID_, start_type_, TYPE_,
       USER_ID_, description_, CREATE_TIME_, 
       MODIFY_TIME_, END_TIME_, ENABLE_, 
       EVALUATE, RESPONDER_, COMMENT_
