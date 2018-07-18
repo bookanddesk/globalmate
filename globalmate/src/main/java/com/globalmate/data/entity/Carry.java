@@ -1,10 +1,10 @@
 package com.globalmate.data.entity;
 
-import com.globalmate.data.entity.vo.AbstractNeed;
-
 import java.util.Date;
 
-public class Carry extends AbstractNeed {
+import com.globalmate.data.entity.vo.AbstractNeed;
+
+public class Carry extends AbstractNeed{
     private String id;
 
     private String needId;
@@ -34,6 +34,8 @@ public class Carry extends AbstractNeed {
     private Double rewardAmount;
 
     private String payway;
+
+    private String title;
 
     public String getId() {
         return id;
@@ -153,5 +155,13 @@ public class Carry extends AbstractNeed {
 
     public void setPayway(String payway) {
         this.payway = payway == null ? null : payway.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 }

@@ -2,7 +2,7 @@ package com.globalmate.data.entity;
 
 import com.globalmate.data.entity.vo.AbstractNeed;
 
-public class Buy extends AbstractNeed {
+public class Buy extends AbstractNeed{
     private String id;
 
     private String needId;
@@ -24,6 +24,8 @@ public class Buy extends AbstractNeed {
     private Double rewardAmount;
 
     private String payway;
+
+    private String title;
 
     public String getId() {
         return id;
@@ -111,5 +113,13 @@ public class Buy extends AbstractNeed {
 
     public void setPayway(String payway) {
         this.payway = payway == null ? null : payway.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 }

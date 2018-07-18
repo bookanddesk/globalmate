@@ -64,6 +64,7 @@ CREATE TABLE buy(
 	goods_name_ varchar(255) NULL, -- //物品名称
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
+	title_  varchar(2000) NULL, -- //标题
 	descrition_  varchar(2000) NULL, -- //描述
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     varchar(2000) NULL,  -- //交货方式
@@ -84,6 +85,7 @@ CREATE TABLE carry(
 	brand_	varchar(255) NULL,  -- //品牌
 	type_  varchar(255) NULL, -- //型号
 	description_  varchar(2000) NULL, -- //描述
+	title_  varchar(2000) NULL, -- //标题
 	pic_  varchar(2000) NULL,  -- //图片
 	delivery_way_     varchar(2000) NULL,  -- //交货方式
 	volume_         varchar(255) NULL,  -- //体积
@@ -102,6 +104,7 @@ CREATE TABLE accompany(
 	start_time_	TIMESTAMP   NULL,
 	end_time_ TIMESTAMP  NULL,
 	description_  varchar(2000) NULL, -- //描述
+	title_  varchar(2000) NULL, -- //标题
 	type_  varchar(255) NULL, -- //想玩儿什么，下拉选一种？？
 	doctor_     char(1) NULL,  -- //是否为看病
 	REWARD_AMOUNT_  double, -- //悬赏金额
@@ -119,6 +122,7 @@ CREATE TABLE clearance(
 	flight_information_  varchar(255)  NULL, -- //航班信息
 	airport varchar(255) NULL,  -- //通关机场
 	description_  varchar(2000) NULL, -- //描述
+	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
 	PRIMARY KEY(ID_),
@@ -135,6 +139,7 @@ CREATE TABLE learn_cooperation(
 	school_ varchar(255) NULL,  -- //学校
 	subject_  varchar(255) NULL,  -- //科目
 	description_  varchar(2000) NULL, -- //描述
+	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
 	start_time_	TIMESTAMP   NULL,  -- //开始时间,
@@ -148,6 +153,7 @@ CREATE TABLE need_other(
 	ID_     varchar(64) NOT NULL,
 	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
 	description_  varchar(2000) NULL, -- //描述
+	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
 	PRIMARY KEY(ID_),

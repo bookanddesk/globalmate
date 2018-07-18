@@ -27,6 +27,8 @@ public class LearnCooperation {
 
     private Date endTime;
 
+    private String title;
+
     public String getId() {
         return id;
     }
@@ -121,5 +123,13 @@ public class LearnCooperation {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 }

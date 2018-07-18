@@ -23,6 +23,8 @@ public class Accompany {
 
     private String payway;
 
+    private String title;
+
     public String getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class Accompany {
 
     public void setPayway(String payway) {
         this.payway = payway == null ? null : payway.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 }
