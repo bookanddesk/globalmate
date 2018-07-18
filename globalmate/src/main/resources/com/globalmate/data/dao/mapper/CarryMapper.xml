@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.CarryMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Carry">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id_" jdbcType="VARCHAR" property="needId" />
+    <result column="from_" jdbcType="VARCHAR" property="from" />
+    <result column="to_" jdbcType="VARCHAR" property="to" />
+    <result column="arrive_" jdbcType="TIMESTAMP" property="arrive" />
+    <result column="goods_name_" jdbcType="VARCHAR" property="goodsName" />
+    <result column="brand_" jdbcType="VARCHAR" property="brand" />
+    <result column="type_" jdbcType="VARCHAR" property="type" />
+    <result column="description_" jdbcType="VARCHAR" property="description" />
+    <result column="pic_" jdbcType="VARCHAR" property="pic" />
+    <result column="delivery_way_" jdbcType="VARCHAR" property="deliveryWay" />
+    <result column="volume_" jdbcType="VARCHAR" property="volume" />
+    <result column="weight_" jdbcType="VARCHAR" property="weight" />
+    <result column="REWARD_AMOUNT_" jdbcType="DOUBLE" property="rewardAmount" />
+    <result column="PAYWAY_" jdbcType="CHAR" property="payway" />
+    <result column="title_" jdbcType="VARCHAR" property="title" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, need_id_, from_, to_, arrive_, goods_name_, brand_, type_, description_, pic_, 
+    delivery_way_, volume_, weight_, REWARD_AMOUNT_, PAYWAY_, title_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from carry
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from carry
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.Carry">
+    insert into carry (ID_, need_id_, from_, 
+      to_, arrive_, goods_name_, 
+      brand_, type_, description_, 
+      pic_, delivery_way_, volume_, 
+      weight_, REWARD_AMOUNT_, PAYWAY_, 
+      title_)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, 
+      #{to,jdbcType=VARCHAR}, #{arrive,jdbcType=TIMESTAMP}, #{goodsName,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{pic,jdbcType=VARCHAR}, #{deliveryWay,jdbcType=VARCHAR}, #{volume,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{rewardAmount,jdbcType=DOUBLE}, #{payway,jdbcType=CHAR}, 
+      #{title,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Carry">
+    insert into carry
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="needId != null">
+        need_id_,
+      </if>
+      <if test="from != null">
+        from_,
+      </if>
+      <if test="to != null">
+        to_,
+      </if>
+      <if test="arrive != null">
+        arrive_,
+      </if>
+      <if test="goodsName != null">
+        goods_name_,
+      </if>
+      <if test="brand != null">
+        brand_,
+      </if>
+      <if test="type != null">
+        type_,
+      </if>
+      <if test="description != null">
+        description_,
+      </if>
+      <if test="pic != null">
+        pic_,
+      </if>
+      <if test="deliveryWay != null">
+        delivery_way_,
+      </if>
+      <if test="volume != null">
+        volume_,
+      </if>
+      <if test="weight != null">
+        weight_,
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_,
+      </if>
+      <if test="payway != null">
+        PAYWAY_,
+      </if>
+      <if test="title != null">
+        title_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="to != null">
+        #{to,jdbcType=VARCHAR},
+      </if>
+      <if test="arrive != null">
+        #{arrive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryWay != null">
+        #{deliveryWay,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardAmount != null">
+        #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Carry">
+    update carry
+    <set>
+      <if test="needId != null">
+        need_id_ = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null">
+        from_ = #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="to != null">
+        to_ = #{to,jdbcType=VARCHAR},
+      </if>
+      <if test="arrive != null">
+        arrive_ = #{arrive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsName != null">
+        goods_name_ = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand_ = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description_ = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic_ = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryWay != null">
+        delivery_way_ = #{deliveryWay,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        volume_ = #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight_ = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        PAYWAY_ = #{payway,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        title_ = #{title,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Carry">
+    update carry
+    set need_id_ = #{needId,jdbcType=VARCHAR},
+      from_ = #{from,jdbcType=VARCHAR},
+      to_ = #{to,jdbcType=VARCHAR},
+      arrive_ = #{arrive,jdbcType=TIMESTAMP},
+      goods_name_ = #{goodsName,jdbcType=VARCHAR},
+      brand_ = #{brand,jdbcType=VARCHAR},
+      type_ = #{type,jdbcType=VARCHAR},
+      description_ = #{description,jdbcType=VARCHAR},
+      pic_ = #{pic,jdbcType=VARCHAR},
+      delivery_way_ = #{deliveryWay,jdbcType=VARCHAR},
+      volume_ = #{volume,jdbcType=VARCHAR},
+      weight_ = #{weight,jdbcType=VARCHAR},
+      REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      PAYWAY_ = #{payway,jdbcType=CHAR},
+      title_ = #{title,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+    <select id="selectByNeedId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from carry
+    where need_id_ = #{needId,jdbcType=VARCHAR}
+  </select>
+</mapper>

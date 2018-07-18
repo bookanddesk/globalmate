@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.LearnCooperationMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.LearnCooperation">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="need_id_" jdbcType="VARCHAR" property="needId" />
+    <result column="language_" jdbcType="VARCHAR" property="language" />
+    <result column="subject_" jdbcType="VARCHAR" property="subject" />
+    <result column="description_" jdbcType="VARCHAR" property="description" />
+    <result column="REWARD_AMOUNT_" jdbcType="DOUBLE" property="rewardAmount" />
+    <result column="PAYWAY_" jdbcType="CHAR" property="payway" />
+    <result column="country_" jdbcType="VARCHAR" property="country" />
+    <result column="city_" jdbcType="VARCHAR" property="city" />
+    <result column="school_" jdbcType="VARCHAR" property="school" />
+    <result column="start_time_" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time_" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="title_" jdbcType="VARCHAR" property="title" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, need_id_, language_, subject_, description_, REWARD_AMOUNT_, PAYWAY_, country_, 
+    city_, school_, start_time_, end_time_, title_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from learn_cooperation
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from learn_cooperation
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.LearnCooperation">
+    insert into learn_cooperation (ID_, need_id_, language_, 
+      subject_, description_, REWARD_AMOUNT_, 
+      PAYWAY_, country_, city_, 
+      school_, start_time_, end_time_, 
+      title_)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{rewardAmount,jdbcType=DOUBLE}, 
+      #{payway,jdbcType=CHAR}, #{country,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.LearnCooperation">
+    insert into learn_cooperation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID_,
+      </if>
+      <if test="needId != null">
+        need_id_,
+      </if>
+      <if test="language != null">
+        language_,
+      </if>
+      <if test="subject != null">
+        subject_,
+      </if>
+      <if test="description != null">
+        description_,
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_,
+      </if>
+      <if test="payway != null">
+        PAYWAY_,
+      </if>
+      <if test="country != null">
+        country_,
+      </if>
+      <if test="city != null">
+        city_,
+      </if>
+      <if test="school != null">
+        school_,
+      </if>
+      <if test="startTime != null">
+        start_time_,
+      </if>
+      <if test="endTime != null">
+        end_time_,
+      </if>
+      <if test="title != null">
+        title_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardAmount != null">
+        #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=CHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.LearnCooperation">
+    update learn_cooperation
+    <set>
+      <if test="needId != null">
+        need_id_ = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language_ = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject_ = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description_ = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardAmount != null">
+        REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="payway != null">
+        PAYWAY_ = #{payway,jdbcType=CHAR},
+      </if>
+      <if test="country != null">
+        country_ = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city_ = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        school_ = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time_ = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time_ = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title_ = #{title,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.LearnCooperation">
+    update learn_cooperation
+    set need_id_ = #{needId,jdbcType=VARCHAR},
+      language_ = #{language,jdbcType=VARCHAR},
+      subject_ = #{subject,jdbcType=VARCHAR},
+      description_ = #{description,jdbcType=VARCHAR},
+      REWARD_AMOUNT_ = #{rewardAmount,jdbcType=DOUBLE},
+      PAYWAY_ = #{payway,jdbcType=CHAR},
+      country_ = #{country,jdbcType=VARCHAR},
+      city_ = #{city,jdbcType=VARCHAR},
+      school_ = #{school,jdbcType=VARCHAR},
+      start_time_ = #{startTime,jdbcType=TIMESTAMP},
+      end_time_ = #{endTime,jdbcType=TIMESTAMP},
+      title_ = #{title,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
