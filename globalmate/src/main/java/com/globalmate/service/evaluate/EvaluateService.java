@@ -3,6 +3,7 @@ package com.globalmate.service.evaluate;
 import com.globalmate.data.dao.mapper.UEvaluationMapper;
 import com.globalmate.data.entity.UEvaluation;
 import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.EvaluationAggEntity;
 import com.globalmate.exception.DataNotFoundException;
 import com.globalmate.service.common.ICreateService;
@@ -51,6 +52,9 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
         if (evaluation.getuEvluatorName() == null) {
             evaluation.setuEvluatorName(user.getName());
         }
+        if (evaluation.getEvaExt1() == null) {
+            evaluation.setEvaExt1(GMEnums.EvaluationType.PERSONAL.getValue());
+        }
         evaluation.setCreateTime(Date.from(Instant.now()));
         int i = evaluationMapper.insert(evaluation);
         if (i > 0) {
@@ -68,6 +72,7 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
         uEvaluation.setContent(evaluation.getContent());
         uEvaluation.setuTargeterId(GMConstant.SYS_ID);
         uEvaluation.setuTargeterName(GMConstant.SYS_NAME);
+        uEvaluation.setEvaExt1(GMEnums.EvaluationType.PLATFORM.getValue());
         int i = evaluationMapper.insert(uEvaluation);
         if (i > 0) {
             return evaluationMapper.selectByPrimaryKey(uEvaluation.getId());

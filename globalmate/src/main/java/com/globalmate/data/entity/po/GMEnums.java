@@ -112,4 +112,20 @@ public class GMEnums {
         }
     }
 
+    public enum EvaluationType {
+        PERSONAL(0, "personal"),    //对个人
+        PLATFORM(1, "platform");     //对平台
+
+        private int code;
+        private String value;
+
+        EvaluationType(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+        public String getValue() {
+            return this.value;
+        }
+    }
+
 }

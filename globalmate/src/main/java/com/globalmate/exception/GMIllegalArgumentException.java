@@ -1,11 +1,10 @@
 package com.globalmate.exception;
 
-public class GMIllegalArgumentException extends GMRuntimeException {
+public class GMIllegalArgumentException extends IllegalArgumentException {
     public GMIllegalArgumentException(String msg) {
         super(msg);
     }
 
-    @Override
     protected int getCode() {
         return 0;
     }
