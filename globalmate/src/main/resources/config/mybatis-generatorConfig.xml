@@ -12,9 +12,9 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://172.20.8.236:3306/globalmate?allowMultiQueries=true"
+                        connectionURL="jdbc:mysql://10.4.111.31:3306/globalmate?allowMultiQueries=true"
                         userId="root"
-                        password="">
+                        password="111111">
         </jdbcConnection>
         <!-- 如使用oracle请参考如下 -->
         <!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
@@ -52,7 +52,7 @@
         </javaClientGenerator>
         
         
-        <table tableName="need_other"  schema="" enableCountByExample="false"
+        <table tableName="usergroup"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

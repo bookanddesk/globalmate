@@ -84,4 +84,9 @@ public class UserController extends BaseController {
         return buildSuccess(users);
     }
 
+    @GetMapping("list/{id}")
+    public JsonResult list(@PathVariable("id") String id) {
+        return buildSuccess(userService.getUser(id));
+    }
+
 }

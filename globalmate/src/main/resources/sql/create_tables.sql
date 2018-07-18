@@ -11,7 +11,7 @@ CREATE TABLE user  (
 	PIC_	varchar(64) NULL,
 	CREATE_TIME_     TIMESTAMP NULL,
 	MODIFY_TIME_    TIMESTAMP NULL,
-	ENABLE_     char(1) NULL,
+	ENABLE_     char(1) NULL default '1',
 	ID_NUMBER_  varchar(64) NULL,
 	NICE_  int,
 	WHERE_    varchar(255) NULL,
@@ -27,6 +27,10 @@ CREATE TABLE user  (
 	u_ext3_ varchar (64) null,
 	PRIMARY KEY(ID_)
 );
+alter table `user` add column country_ varchar(10) default null comment'国家';
+alter table `user` add column city_ varchar(10) default null comment'城市';
+alter table `user` add column help_available_ varchar(255) default null comment'可提供的帮助';
+
 
 drop table if exists service;
 CREATE TABLE service  (
@@ -49,7 +53,7 @@ CREATE TABLE need(
 	CREATE_TIME_     TIMESTAMP NULL,-- //需求提交时间
 	MODIFY_TIME_    TIMESTAMP NULL, -- //需求更新时间
 	END_TIME_    TIMESTAMP NULL, -- //需求结束时间
-	ENABLE_     CHAR(1)NULL,      -- //需求是否终止
+	ENABLE_     CHAR(1) null default '1',      -- //需求是否终止，新需求默认是开放状态
 	EVALUATE  int,  -- //评价分，这个值加到提供人的好人值上
 	RESPONDER_ varchar(255) NULL, -- //提供服务的人,
 	COMMENT_  varchar(2000) NULL, -- //服务评语
@@ -169,6 +173,17 @@ CREATE TABLE usergroup  (
 	descrition_     	varchar(2000) NULL,
 	create_time_	TIMESTAMP NOT NULL,
 	creator_    	varchar(64) NULL,
+	public_email_ varchar(64) null,
+	u_group_id_ varchar(64) null comment'组织用户id',
+	u_principal_id_ varchar(64) null comment'组织负责人id',
+	u_principal_name_ varchar(64) null comment'组织负责人name',
+	country_      varchar(64) null,
+	city_ varchar(64) null,
+	pic_  varchar(200) null,
+	qr_code varchar(200) null,
+	ext1 varchar(64) null,
+	ext2 varchar (64) null,
+	ext3 varchar (64) null,
 	PRIMARY KEY(id_)
 );
 
@@ -272,7 +287,7 @@ create table sys_assistance_deal
    u_provider_name      varchar(32) comment '服务提供者name',
    assist_create_time   timestamp comment '帮助创建时间',
    assist_modify_time   timestamp comment '帮助更新时间',
-   assist_end_time      timestamp comment '帮助结束时间',
+   assist_end_time      timestamp default null comment '帮助结束时间',
    assist_status        varchar(64) comment '帮助状态',
    assist_evaluation    varchar(64) comment '帮助评价',
    assist_price         varchar(64) comment '交易代价',
@@ -376,3 +391,27 @@ create table sys_configuration
 );
 
 -- util 2018-6-22
+
+
+drop table if exists u_evaluation;
+
+/*==============================================================*/
+/* Table: u_evaluation                                          */
+/*==============================================================*/
+create table u_evaluation
+(
+   id                   varchar(64) not null,
+   u_evaluator_id       varchar(64) comment '评论者id',
+   u_evluator_name      varchar(64) comment '评论者name',
+   u_targeter_id        varchar(64) comment '评论对象id',
+   u_targeter_name      varchar(64) comment '评论对象name',
+   need_id              varchar(64) comment '评论需求id',
+   score                varchar(64) comment '评分',
+   content              varchar(64) comment '评论内容',
+   modify_time          timestamp DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   create_time          timestamp comment '评论时间',
+   eva_ext1             varchar(64) comment '扩展字段1',
+   eva_ext2             varchar(64) comment '扩展字段2',
+   eva_ext3             varchar(64) comment '扩展字段3',
+   primary key (id)
+);

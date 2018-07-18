@@ -30,7 +30,7 @@
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.globalmate.data.entity.Need">
-    insert into need (ID_, start_type_, TYPE_, 
+    insert into need (ID_, start_type_, TYPE_,
       USER_ID_, description_, CREATE_TIME_, 
       MODIFY_TIME_, END_TIME_, ENABLE_, 
       EVALUATE, RESPONDER_, COMMENT_
@@ -185,19 +185,21 @@
         id_ = #{id}
       </if>
       <if test="userId != null">
-        and USER_ID_ = {#userId}
+        and USER_ID_ = #{userId}
+      </if>
+      <if test="enable != null">
+        and ENABLE_ = #{enable}
       </if>
     </where>
   </select>
 
-  <select id="listByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+  <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from need
     <where>
-      ENABLE_ = 1
       <if test="list != null and list.size() > 0">
-        and id_ in
+        id_ in
         <foreach collection="list" index="idx" item="itm" open="(" separator="," close=")">
           #{itm}
         </foreach>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.UEvaluationMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.UEvaluation">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="u_evaluator_id" jdbcType="VARCHAR" property="uEvaluatorId" />
+    <result column="u_evluator_name" jdbcType="VARCHAR" property="uEvluatorName" />
+    <result column="u_targeter_id" jdbcType="VARCHAR" property="uTargeterId" />
+    <result column="u_targeter_name" jdbcType="VARCHAR" property="uTargeterName" />
+    <result column="need_id" jdbcType="VARCHAR" property="needId" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="eva_ext1" jdbcType="VARCHAR" property="evaExt1" />
+    <result column="eva_ext2" jdbcType="VARCHAR" property="evaExt2" />
+    <result column="eva_ext3" jdbcType="VARCHAR" property="evaExt3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, u_evaluator_id, u_evluator_name, u_targeter_id, u_targeter_name, need_id, score, 
+    content, modify_time, create_time, eva_ext1, eva_ext2, eva_ext3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_evaluation
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from u_evaluation
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.UEvaluation">
+    insert into u_evaluation (id, u_evaluator_id, u_evluator_name, 
+      u_targeter_id, u_targeter_name, need_id, 
+      score, content, modify_time, 
+      create_time, eva_ext1, eva_ext2, 
+      eva_ext3)
+    values (#{id,jdbcType=VARCHAR}, #{uEvaluatorId,jdbcType=VARCHAR}, #{uEvluatorName,jdbcType=VARCHAR}, 
+      #{uTargeterId,jdbcType=VARCHAR}, #{uTargeterName,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, 
+      #{score,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{evaExt1,jdbcType=VARCHAR}, #{evaExt2,jdbcType=VARCHAR}, 
+      #{evaExt3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.UEvaluation">
+    insert into u_evaluation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uEvaluatorId != null">
+        u_evaluator_id,
+      </if>
+      <if test="uEvluatorName != null">
+        u_evluator_name,
+      </if>
+      <if test="uTargeterId != null">
+        u_targeter_id,
+      </if>
+      <if test="uTargeterName != null">
+        u_targeter_name,
+      </if>
+      <if test="needId != null">
+        need_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="evaExt1 != null">
+        eva_ext1,
+      </if>
+      <if test="evaExt2 != null">
+        eva_ext2,
+      </if>
+      <if test="evaExt3 != null">
+        eva_ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uEvaluatorId != null">
+        #{uEvaluatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="uEvluatorName != null">
+        #{uEvluatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="uTargeterId != null">
+        #{uTargeterId,jdbcType=VARCHAR},
+      </if>
+      <if test="uTargeterName != null">
+        #{uTargeterName,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaExt1 != null">
+        #{evaExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="evaExt2 != null">
+        #{evaExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="evaExt3 != null">
+        #{evaExt3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.UEvaluation">
+    update u_evaluation
+    <set>
+      <if test="uEvaluatorId != null">
+        u_evaluator_id = #{uEvaluatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="uEvluatorName != null">
+        u_evluator_name = #{uEvluatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="uTargeterId != null">
+        u_targeter_id = #{uTargeterId,jdbcType=VARCHAR},
+      </if>
+      <if test="uTargeterName != null">
+        u_targeter_name = #{uTargeterName,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        need_id = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaExt1 != null">
+        eva_ext1 = #{evaExt1,jdbcType=VARCHAR},
+      </if>
+      <if test="evaExt2 != null">
+        eva_ext2 = #{evaExt2,jdbcType=VARCHAR},
+      </if>
+      <if test="evaExt3 != null">
+        eva_ext3 = #{evaExt3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.UEvaluation">
+    update u_evaluation
+    set u_evaluator_id = #{uEvaluatorId,jdbcType=VARCHAR},
+      u_evluator_name = #{uEvluatorName,jdbcType=VARCHAR},
+      u_targeter_id = #{uTargeterId,jdbcType=VARCHAR},
+      u_targeter_name = #{uTargeterName,jdbcType=VARCHAR},
+      need_id = #{needId,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      eva_ext1 = #{evaExt1,jdbcType=VARCHAR},
+      eva_ext2 = #{evaExt2,jdbcType=VARCHAR},
+      eva_ext3 = #{evaExt3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryRecords" parameterType="com.globalmate.data.entity.UEvaluation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from u_evaluation
+    <where>
+      <if test="uEvaluatorId != null">
+        u_evaluator_id = #{uEvaluatorId}
+      </if>
+    </where>
+  </select>
+</mapper>

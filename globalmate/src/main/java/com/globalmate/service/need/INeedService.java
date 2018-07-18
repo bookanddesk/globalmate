@@ -5,6 +5,7 @@ import java.util.List;
 import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.TProvide;
 import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.exception.need.NeedException;
 
 public interface INeedService {
@@ -44,5 +45,8 @@ public interface INeedService {
 	List<Need> listUnHandled(User user);
 
 	String[] getKeyWords(Need need);
+
+	Need getNeed(String needId);
+	NeedAggEntity getNeedAgg(String needId);
     
 }

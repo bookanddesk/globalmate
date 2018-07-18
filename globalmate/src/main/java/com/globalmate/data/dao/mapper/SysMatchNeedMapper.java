@@ -1,6 +1,7 @@
 package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.SysMatchNeed;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface SysMatchNeedMapper {
 
     List<SysMatchNeed> queryMatchNeeds(SysMatchNeed record);
 
-    int updateMatchAccept(List<String> ids, boolean agree);
+    int updateMatchAccept(@Param("list") List<String> ids, @Param("agree") boolean agree);
 
     int insertBatch(List<SysMatchNeed> list);
 

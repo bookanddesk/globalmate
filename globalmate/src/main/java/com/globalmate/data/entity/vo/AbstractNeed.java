@@ -1,4 +1,6 @@
 package com.globalmate.data.entity.vo;
 
-public abstract class AbstractNeed {
+import com.globalmate.data.entity.BaseEntity;
+
+public abstract class AbstractNeed extends BaseEntity {
 }

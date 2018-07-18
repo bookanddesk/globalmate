@@ -2,7 +2,7 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 
-public class SysMatchNeed {
+public class SysMatchNeed extends BaseEntity {
     private String id;
 
     private String needId;
@@ -152,4 +152,5 @@ public class SysMatchNeed {
     public void setProvideId(String provideId) {
         this.provideId = provideId == null ? null : provideId.trim();
     }
+
 }

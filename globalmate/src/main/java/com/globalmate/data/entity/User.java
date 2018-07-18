@@ -53,6 +53,10 @@ public class User {
 
     private String uExt3;
 
+    private String country;
+    private String city;
+    private String helpAvailable;
+
     public String getId() {
         return id;
     }
@@ -251,5 +255,37 @@ public class User {
 
     public void setuExt3(String uExt3) {
         this.uExt3 = uExt3 == null ? null : uExt3.trim();
+    }
+
+    public Boolean getCertified() {
+        return isCertified;
+    }
+
+    public void setCertified(Boolean certified) {
+        isCertified = certified;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getHelpAvailable() {
+        return helpAvailable;
+    }
+
+    public void setHelpAvailable(String helpAvailable) {
+        this.helpAvailable = helpAvailable;
     }
 }

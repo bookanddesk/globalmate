@@ -6,6 +6,7 @@ import com.globalmate.data.entity.SysAssistanceDeal;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.service.assistance.AssistService;
 import com.globalmate.service.assistance.IAssistService;
+import com.globalmate.service.match.auto.MatchTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,11 @@ public class AssistController extends BaseController {
     }
 
     @GetMapping("{needId}/{action}")
-    public JsonResult assist(@PathVariable("needId") String needId, @PathVariable("action") String action) {
+    public JsonResult assist(HttpServletRequest request,
+                             @PathVariable("needId") String needId,
+                             @PathVariable("action") String action) {
+        assistService.assist(getCurrentUser(request), needId, action);
         return buildSuccess();
     }
+
 }
