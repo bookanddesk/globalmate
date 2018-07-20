@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.WxMsgTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.WxMsgTemplate">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="template_id" jdbcType="VARCHAR" property="templateId" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="msg_type" jdbcType="VARCHAR" property="msgType" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, template_id, app_id, msg_type, modify_time, create_time, ext1, ext2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_msg_template
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx_msg_template
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.WxMsgTemplate">
+    insert into wx_msg_template (id, template_id, app_id, 
+      msg_type, modify_time, create_time, 
+      ext1, ext2)
+    values (#{id,jdbcType=VARCHAR}, #{templateId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{msgType,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.WxMsgTemplate">
+    insert into wx_msg_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="msgType != null">
+        msg_type,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.WxMsgTemplate">
+    update wx_msg_template
+    <set>
+      <if test="templateId != null">
+        template_id = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null">
+        msg_type = #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.WxMsgTemplate">
+    update wx_msg_template
+    set template_id = #{templateId,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectTemplateId" parameterType="java.lang.String" resultType="java.lang.String">
+    select template_id from wx_msg_template
+    <where>
+      <if test="msgType != null">
+        msg_type = #{msgType}
+      </if>
+      <if test="appId != null">
+        and app_id = #{appId}
+      </if>
+    </where>
+  </select>
+
+</mapper>

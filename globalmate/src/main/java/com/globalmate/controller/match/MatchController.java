@@ -6,6 +6,8 @@ import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.match.auto.MatchTask;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.wx.mp.service.WeixinService;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +29,11 @@ public class MatchController extends BaseController {
 
     @Autowired
     private MatchService matchService;
+//    @Autowired
+//    private MatchTask matchTask;
+
     @Autowired
-    private MatchTask matchTask;
+    private WeixinService weixinService;
 
 
     @GetMapping("{needId}")
@@ -42,8 +47,9 @@ public class MatchController extends BaseController {
     }
 
     @GetMapping("sysMatch")
-    public JsonResult sysMatch() {
-        matchTask.doMatch();
+    public JsonResult sysMatch() throws WxErrorException {
+//        matchTask.doMatch();
+        weixinService.sendTemplateMsg();
         return buildSuccess();
     }
 

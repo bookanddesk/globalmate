@@ -1,6 +1,7 @@
 package com.globalmate.controller.need;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,8 +39,10 @@ public class NeedOtherController extends BaseController {
     	need.setType(NeedTypeEnum.learn_cooperation.name());
     	//取当前登录用户
     	User user = getCurrentUser(request);
-    	if(user != null)
-    		need.setUserId(user.getId());
+        if(user != null) {
+            need.setUserId(user.getId());
+            need.setUserName(Optional.ofNullable(user.getNikename()).orElse(user.getName()));
+        }
         try {
         	need=needService.commitNeed(need);
         } catch (Exception e) {

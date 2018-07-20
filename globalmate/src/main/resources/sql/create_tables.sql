@@ -59,6 +59,7 @@ CREATE TABLE need(
 	COMMENT_  varchar(2000) NULL, -- //服务评语
 	PRIMARY KEY(ID_)
 );
+alter table need add column user_name_ varchar (20) default null comment'需求人姓名或昵称';
 
 drop table if exists buy;
 CREATE TABLE buy(
@@ -413,5 +414,24 @@ create table u_evaluation
    eva_ext1             varchar(64) comment '扩展字段1',
    eva_ext2             varchar(64) comment '扩展字段2',
    eva_ext3             varchar(64) comment '扩展字段3',
+   primary key (id)
+);
+
+
+drop table if exists wx_msg_template;
+
+/*==============================================================*/
+/* Table: wx_msg_template                                       */
+/*==============================================================*/
+create table wx_msg_template
+(
+   id                   varchar(64),
+   template_id          varchar(64) comment '消息模板id',
+   app_id               varchar(64) comment '公众号app_id',
+   msg_type             varchar(64) comment '消息类型',
+   modify_time          timestamp DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP  comment '更新时间',
+   create_time          timestamp comment '创建时间',
+   ext1                 varchar(64),
+   ext2                 varchar(64),
    primary key (id)
 );

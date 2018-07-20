@@ -11,6 +11,8 @@ public class Need {
 
     private String userId;
 
+    private String userName;
+
     private String description;
 
     private Date createTime;
@@ -57,6 +59,14 @@ public class Need {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDescription() {

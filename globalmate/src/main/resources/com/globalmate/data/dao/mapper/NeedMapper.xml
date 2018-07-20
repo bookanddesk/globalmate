@@ -6,6 +6,7 @@
     <result column="start_type_" jdbcType="CHAR" property="startType" />
     <result column="TYPE_" jdbcType="CHAR" property="type" />
     <result column="USER_ID_" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME_" jdbcType="VARCHAR" property="userName" />
     <result column="description_" jdbcType="VARCHAR" property="description" />
     <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime" />
     <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime" />
@@ -16,7 +17,7 @@
     <result column="COMMENT_" jdbcType="VARCHAR" property="comment" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID_, start_type_, TYPE_, USER_ID_, description_, CREATE_TIME_, MODIFY_TIME_, END_TIME_, 
+    ID_, start_type_, TYPE_, USER_ID_, USER_NAME_, description_, CREATE_TIME_, MODIFY_TIME_, END_TIME_,
     ENABLE_, EVALUATE, RESPONDER_, COMMENT_
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -31,12 +32,12 @@
   </delete>
   <insert id="insert" parameterType="com.globalmate.data.entity.Need">
     insert into need (ID_, start_type_, TYPE_,
-      USER_ID_, description_, CREATE_TIME_, 
+      USER_ID_, USER_NAME_, description_, CREATE_TIME_,
       MODIFY_TIME_, END_TIME_, ENABLE_, 
       EVALUATE, RESPONDER_, COMMENT_
       )
     values (#{id,jdbcType=VARCHAR}, #{startType,jdbcType=CHAR}, #{type,jdbcType=CHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{modifyTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=CHAR}, 
       #{evaluate,jdbcType=INTEGER}, #{responder,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}
       )
@@ -131,6 +132,9 @@
       </if>
       <if test="userId != null">
         USER_ID_ = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME_ = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         description_ = #{description,jdbcType=VARCHAR},

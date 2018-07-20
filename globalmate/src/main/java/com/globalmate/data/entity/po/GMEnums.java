@@ -128,4 +128,9 @@ public class GMEnums {
         }
     }
 
+    public enum WXMsgType {
+        SUBSCRIBE,    //关注
+        MATCH;     //匹配
+    }
+
 }

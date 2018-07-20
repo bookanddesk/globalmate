@@ -1,4 +1,6 @@
 package com.globalmate.uitl;
+import org.apache.commons.lang3.time.DateUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +10,7 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DateUtil
+public class DateUtil extends DateUtils
 {
 	/** 日期格式：yyyy-MM-dd */
 	public static final String FMT_DATE = "yyyy-MM-dd";
