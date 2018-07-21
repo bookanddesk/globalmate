@@ -2,6 +2,7 @@ package com.globalmate.wx.mp.handler;
 
 import java.util.Map;
 
+import com.globalmate.uitl.GMConstant;
 import com.globalmate.wx.mp.builder.TextBuilder;
 import com.globalmate.wx.mp.service.WeixinService;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -44,7 +45,7 @@ public class SubscribeHandler extends AbstractHandler {
     }
 
     try {
-      return new TextBuilder().build("感谢关注", wxMessage, weixinService);
+      return new TextBuilder().build(GMConstant.SUBSCRIBE_MSG_TEMP_INFO, wxMessage, weixinService);
     } catch (Exception e) {
       this.logger.error(e.getMessage(), e);
     }

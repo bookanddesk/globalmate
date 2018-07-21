@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.globalmate.data.dao.mapper.BuyMapper;
 import com.globalmate.data.dao.mapper.CarryMapper;
@@ -220,6 +221,15 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 					break;
 		}
 		return keyWords;
+	}
+
+	public String[] getKeyWords(String needId) {
+		AbstractNeed concreteNeed = Optional.ofNullable(getNeedAgg(needId))
+				.map(NeedAggEntity::getConceretNeed).orElse(null);
+		if (concreteNeed != null) {
+			return concreteNeed.getKeywords().toArray(new String[]{});
+		}
+		return null;
 	}
 
 	@Override

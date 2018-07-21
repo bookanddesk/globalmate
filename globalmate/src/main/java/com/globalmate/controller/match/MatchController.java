@@ -32,9 +32,6 @@ public class MatchController extends BaseController {
 //    @Autowired
 //    private MatchTask matchTask;
 
-    @Autowired
-    private WeixinService weixinService;
-
 
     @GetMapping("{needId}")
     public JsonResult list(@PathVariable("needId") String needId) {
@@ -49,7 +46,6 @@ public class MatchController extends BaseController {
     @GetMapping("sysMatch")
     public JsonResult sysMatch() throws WxErrorException {
 //        matchTask.doMatch();
-        weixinService.sendTemplateMsg();
         return buildSuccess();
     }
 

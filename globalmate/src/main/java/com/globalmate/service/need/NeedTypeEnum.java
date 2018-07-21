@@ -4,23 +4,34 @@ public enum NeedTypeEnum {
 	/**
 	 * 代买
 	 */
-	buy,
+	buy("代买"),
 	/**
 	 * 帮带
 	 */
-	carry,
+	carry("帮带"),
 	/**
 	 * 陪同
 	 */
-	accompany,
+	accompany("陪同"),
 	/**
 	 * 清关
 	 */
-	clearance,
+	clearance("清关"),
 	/**
 	 * 协作学习
 	 */
-	learn_cooperation,
+	learn_cooperation("协作学习"),
 	
-	other
+	other("其他");
+
+	private String showValue;
+
+	NeedTypeEnum(String showValue) {
+		this.showValue = showValue;
+	}
+
+	public String getShowValue() {
+		return showValue;
+	}
+
 }

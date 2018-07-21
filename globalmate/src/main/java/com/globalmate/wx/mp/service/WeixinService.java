@@ -183,21 +183,8 @@ public class WeixinService extends WxMpServiceImpl {
     return null;
   }
 
-  public void sendTemplateMsg() throws WxErrorException {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(
-            "yyyy-MM-dd HH:mm:ss.SSS");
-//    WxConfigStorage configStorage = (WxConfigStorage) getWxMpConfigStorage();
-    WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-            .toUser("oJlRH0lOx3EiLRy-G2t8vKvMqnk8")
-            .templateId("VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY")
-            .url("http://www.baidu.com")
-            .build();
-
-    templateMessage.addData(new WxMpTemplateData("first", dateFormat.format(new Date()), "#FF00FF"))
-            .addData(new WxMpTemplateData("keyword1", "日本", "#fffffff"))
-            .addData(new WxMpTemplateData("keyword2", "后天", "#fffffdd"))
-            .addData(new WxMpTemplateData("remark", RandomStringUtils.randomAlphanumeric(100), "#FF00FF"));
-    String msgId = getTemplateMsgService().sendTemplateMsg(templateMessage);
+  public String sendTemplateMsg(WxMpTemplateMessage message) throws WxErrorException {
+    return getTemplateMsgService().sendTemplateMsg(message);
   }
 
 }

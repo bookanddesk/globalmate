@@ -2,13 +2,17 @@ package com.globalmate.service.match.auto;
 
 import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.SysMatchNeed;
+import com.globalmate.data.entity.po.MatchMsg;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
+import com.globalmate.service.wx.MatchMsgSendService;
 import com.globalmate.uitl.CollectionUtils;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,6 +29,8 @@ public class MatchTask {
     private NeedService needService;
     @Autowired
     private MatchContext matchContext;
+    @Autowired
+    private MatchMsgSendService msgSendService;
 
 
 //    @Scheduled(cron = "0 0/30 * * * ?")
@@ -44,6 +50,7 @@ public class MatchTask {
         matchService.addMatchNeeds(sysMatchNeeds);
 
         //发送消息
+        msgSendService.send(sysMatchNeeds);
 
 
     }

@@ -1,8 +1,11 @@
 package com.globalmate.data.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.service.need.NeedTypeEnum;
+import com.google.common.collect.Lists;
 
 public class Carry extends AbstractNeed{
     private String id;
@@ -163,5 +166,26 @@ public class Carry extends AbstractNeed{
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    @Override
+    public String getTag() {
+        return NeedTypeEnum.buy.getShowValue();
+    }
+
+    @Override
+    public List<String> getKeywords() {
+        return Lists.newArrayList(getFrom(), getTag(),
+                getDescription(), getGoodsName(), getBrand());
+    }
+
+    @Override
+    public String getDeparture() {
+        return getFrom();
+    }
+
+    @Override
+    public String getDestination() {
+        return getTo();
     }
 }
