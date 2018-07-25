@@ -15,10 +15,11 @@
     <result column="start_time_" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time_" jdbcType="TIMESTAMP" property="endTime" />
     <result column="title_" jdbcType="VARCHAR" property="title" />
+    <result column="pic_" jdbcType="VARCHAR" property="pic" />
   </resultMap>
   <sql id="Base_Column_List">
     ID_, need_id_, language_, subject_, description_, REWARD_AMOUNT_, PAYWAY_, country_, 
-    city_, school_, start_time_, end_time_, title_
+    city_, school_, start_time_, end_time_, title_, pic_
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -35,12 +36,12 @@
       subject_, description_, REWARD_AMOUNT_, 
       PAYWAY_, country_, city_, 
       school_, start_time_, end_time_, 
-      title_)
+      title_, pic_)
     values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
       #{subject,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{rewardAmount,jdbcType=DOUBLE}, 
       #{payway,jdbcType=CHAR}, #{country,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{title,jdbcType=VARCHAR})
+      #{title,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.LearnCooperation">
     insert into learn_cooperation
@@ -165,6 +166,9 @@
       </if>
       <if test="title != null">
         title_ = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic_ = #{title,jdbcType=VARCHAR},
       </if>
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}

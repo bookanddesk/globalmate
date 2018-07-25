@@ -109,6 +109,7 @@ CREATE TABLE accompany(
 	start_time_	TIMESTAMP   NULL,
 	end_time_ TIMESTAMP  NULL,
 	description_  varchar(2000) NULL, -- //描述
+	pic_  varchar(2000) NULL,  -- //图片
 	title_  varchar(2000) NULL, -- //标题
 	type_  varchar(255) NULL, -- //想玩儿什么，下拉选一种？？
 	doctor_     char(1) NULL,  -- //是否为看病
@@ -127,6 +128,7 @@ CREATE TABLE clearance(
 	flight_information_  varchar(255)  NULL, -- //航班信息
 	airport varchar(255) NULL,  -- //通关机场
 	description_  varchar(2000) NULL, -- //描述
+	pic_  varchar(2000) NULL,  -- //图片
 	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
@@ -144,6 +146,7 @@ CREATE TABLE learn_cooperation(
 	school_ varchar(255) NULL,  -- //学校
 	subject_  varchar(255) NULL,  -- //科目
 	description_  varchar(2000) NULL, -- //描述
+	pic_  varchar(2000) NULL,  -- //图片
 	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,
@@ -158,6 +161,7 @@ CREATE TABLE need_other(
 	ID_     varchar(64) NOT NULL,
 	need_id_    varchar(64) NOT NULL,  -- //外键，关联need表
 	description_  varchar(2000) NULL, -- //描述
+	pic_  varchar(2000) NULL,  -- //图片
 	title_  varchar(2000) NULL, -- //标题
 	REWARD_AMOUNT_  double, -- //悬赏金额
 	PAYWAY_     char(6) NULL,  -- //付款方式,

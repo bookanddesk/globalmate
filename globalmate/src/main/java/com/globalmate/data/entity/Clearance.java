@@ -21,6 +21,10 @@ public class Clearance {
 
     private String payway;
 
+    private String title;
+
+    private String pic;
+
     public String getId() {
         return id;
     }
@@ -91,5 +95,21 @@ public class Clearance {
 
     public void setPayway(String payway) {
         this.payway = payway == null ? null : payway.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

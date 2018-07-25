@@ -64,8 +64,9 @@
       #{idNumber,jdbcType=VARCHAR}, #{nice,jdbcType=INTEGER}, #{where,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{isCertified,jdbcType=BIT}, 
       #{cetifiyId,jdbcType=VARCHAR}, #{userCredit,jdbcType=VARCHAR}, #{userTag,jdbcType=VARCHAR}, 
-      #{resident,jdbcType=VARCHAR}, #{uExt1,jdbcType=VARCHAR}, #{uExt2,jdbcType=VARCHAR}, 
-      #{uExt3,jdbcType=VARCHAR}),#{country,jdbcType=VARCHAR}),#{city,jdbcType=VARCHAR}),#{helpAvailable,jdbcType=VARCHAR})
+      #{resident,jdbcType=VARCHAR}, #{uExt1,jdbcType=VARCHAR}, #{uExt2,jdbcType=VARCHAR},
+      #{uExt3,jdbcType=VARCHAR},#{country,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},
+      #{helpAvailable,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.User">
     insert into user

@@ -89,4 +89,9 @@ public class UserController extends BaseController {
         return buildSuccess(userService.getUser(id));
     }
 
+    @GetMapping("getUserByToken")
+    public JsonResult token(HttpServletRequest request) {
+        return buildSuccess(getCurrentUser(request));
+    }
+
 }

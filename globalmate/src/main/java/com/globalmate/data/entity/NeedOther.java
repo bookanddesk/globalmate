@@ -13,6 +13,8 @@ public class NeedOther {
 
     private String title;
 
+    private String pic;
+
     public String getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class NeedOther {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }
