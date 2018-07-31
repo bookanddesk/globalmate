@@ -37,7 +37,7 @@
     values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{where,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{doctor,jdbcType=CHAR}, #{rewardAmount,jdbcType=DOUBLE}, 
-      #{payway,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}))
+      #{payway,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.Accompany">
     insert into accompany

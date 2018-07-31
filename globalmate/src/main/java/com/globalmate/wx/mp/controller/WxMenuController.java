@@ -8,6 +8,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.menu.WxMpGetSelfMenuInfoResult;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
@@ -18,6 +19,19 @@ public class WxMenuController implements WxMpMenuService {
 
     @Autowired
     private WxMpService wxService;
+
+    @Value("${homePage}")
+    private String homePage;
+    @Value("${helpPage}")
+    private String helpPage;
+    @Value("${personalPage}")
+    private String personalPage;
+    @Value("${myNeed}")
+    private String myNeed;
+    @Value("${sysEvaluate}")
+    private String sysEvaluate;
+
+
 
     /**
      * <pre>
@@ -41,30 +55,33 @@ public class WxMenuController implements WxMpMenuService {
         WxMenu menu = new WxMenu();
         WxMenuButton button1 = new WxMenuButton();
         button1.setName("求助");
-        WxMenuButton button11 = new WxMenuButton();
-        button11.setType(MenuButtonType.VIEW);
-        button11.setName("帮带");
-        button11.setUrl("http://www.163.com/");
+        button1.setType(MenuButtonType.VIEW);
+        button1.setUrl(homePage);
 
-        WxMenuButton button12 = new WxMenuButton();
-        button12.setType(MenuButtonType.VIEW);
-        button12.setName("陪伴");
-        button12.setUrl("http://www.sina.com.cn/");
-
-        WxMenuButton button13 = new WxMenuButton();
-        button13.setType(MenuButtonType.VIEW);
-        button13.setName("其他");
-        button13.setUrl("https://github.com/bookanddesk/globalmate/wiki");
-
-        button1.getSubButtons().add(button11);
-        button1.getSubButtons().add(button12);
-        button1.getSubButtons().add(button13);
+//        WxMenuButton button11 = new WxMenuButton();
+//        button11.setType(MenuButtonType.VIEW);
+//        button11.setName("帮带");
+//        button11.setUrl("http://www.163.com/");
+//
+//        WxMenuButton button12 = new WxMenuButton();
+//        button12.setType(MenuButtonType.VIEW);
+//        button12.setName("陪伴");
+//        button12.setUrl("http://www.sina.com.cn/");
+//
+//        WxMenuButton button13 = new WxMenuButton();
+//        button13.setType(MenuButtonType.VIEW);
+//        button13.setName("其他");
+//        button13.setUrl("https://github.com/bookanddesk/globalmate/wiki");
+//
+//        button1.getSubButtons().add(button11);
+//        button1.getSubButtons().add(button12);
+//        button1.getSubButtons().add(button13);
 
 
         WxMenuButton button2 = new WxMenuButton();
         button2.setType(MenuButtonType.VIEW);
         button2.setName("来帮忙");
-        button2.setUrl("http://mp.weixin.qq.com");
+        button2.setUrl(helpPage);
 
         WxMenuButton button3 = new WxMenuButton();
         button3.setName("我的");
@@ -76,21 +93,21 @@ public class WxMenuController implements WxMpMenuService {
         WxMenuButton button31 = new WxMenuButton();
         button31.setType(MenuButtonType.VIEW);
         button31.setName("个人中心");
-        button31.setUrl("http://www.soso.com/");
+        button31.setUrl(personalPage);
 
         WxMenuButton button32 = new WxMenuButton();
         button32.setType(MenuButtonType.VIEW);
         button32.setName("我的求助");
-        button32.setUrl("http://v.qq.com/");
+        button32.setUrl(myNeed);
 
         WxMenuButton button33 = new WxMenuButton();
-        button33.setType(MenuButtonType.CLICK);
+        button33.setType(MenuButtonType.VIEW);
         button33.setName("平台反馈");
-        button33.setKey("V1001_GOOD");
+        button33.setKey(sysEvaluate);
 
         button3.getSubButtons().add(button31);
         button3.getSubButtons().add(button32);
-        button3.getSubButtons().add(button33);
+//        button3.getSubButtons().add(button33);
 
         return this.wxService.getMenuService().menuCreate(menu);
     }
