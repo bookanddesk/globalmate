@@ -7,12 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.uitl.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.globalmate.controller.BaseController;
 import com.globalmate.data.entity.Need;
@@ -40,6 +35,11 @@ public class NeedController extends BaseController {
                              @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser) {
         List<NeedAggEntity> needs = needService.getNeedAgg(onlyCurrentUser ? getCurrentUser(request) : null);
         return buildSuccess(needs);
+    }
+
+    @GetMapping("list/{id}")
+    public JsonResult selectConceret(@PathVariable("id") String id) {
+        return buildSuccess(needService.getNeedAgg(id));
     }
 
 }
