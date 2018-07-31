@@ -1,6 +1,12 @@
 package com.globalmate.data.entity;
 
-public class NeedOther {
+import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.service.need.NeedTypeEnum;
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
+public class NeedOther extends AbstractNeed {
     private String id;
 
     private String needId;
@@ -33,6 +39,17 @@ public class NeedOther {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String getTag() {
+        return NeedTypeEnum.other.getShowValue();
+    }
+
+    @Override
+    public List<String> getKeywords() {
+        return Lists.newArrayList(null, getTag(),
+                getDescription(), getTitle());
     }
 
     public void setDescription(String description) {

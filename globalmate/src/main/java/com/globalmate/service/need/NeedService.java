@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.globalmate.data.dao.mapper.BuyMapper;
-import com.globalmate.data.dao.mapper.CarryMapper;
-import com.globalmate.data.entity.Buy;
-import com.globalmate.data.entity.Carry;
+import com.globalmate.data.dao.mapper.*;
+import com.globalmate.data.entity.*;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.data.entity.vo.NeedAggEntity;
@@ -21,9 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.globalmate.cache.CacheServiceImpl;
-import com.globalmate.data.dao.mapper.NeedMapper;
-import com.globalmate.data.entity.Need;
-import com.globalmate.data.entity.User;
 import com.globalmate.exception.need.NeedException;
 import com.globalmate.uitl.IdGenerator;
 
@@ -35,6 +30,14 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	private BuyMapper buyMapper;
     @Autowired
 	private CarryMapper carryMapper;
+    @Autowired
+	private AccompanyMapper accompanyMapper;
+    @Autowired
+	private ClearanceMapper clearanceMapper;
+    @Autowired
+	private LearnCooperationMapper learnCooperationMapper;
+    @Autowired
+	private NeedOtherMapper needOtherMapper;
 
 	@Override
 	public Need commitNeed(Need need) throws NeedException {
@@ -120,9 +123,28 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 				}
 				break;
 			case accompany:
+				List<Accompany> accompanies = accompanyMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(accompanies)) {
+					abstractNeed = accompanies.get(0);
+				}
+				break;
 			case clearance:
+				List<Clearance> clearances = clearanceMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(clearances)) {
+					abstractNeed = clearances.get(0);
+				}
+				break;
 			case learn_cooperation:
+				List<LearnCooperation> learnCooperations = learnCooperationMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(learnCooperations)) {
+					abstractNeed = learnCooperations.get(0);
+				}
+				break;
 			case other:
+				List<NeedOther> needOthers = needOtherMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(needOthers)) {
+					abstractNeed = needOthers.get(0);
+				}
 				break;
 			default:
 					break;

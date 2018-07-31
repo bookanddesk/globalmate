@@ -2,6 +2,8 @@ package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.Clearance;
 
+import java.util.List;
+
 public interface ClearanceMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,6 @@ public interface ClearanceMapper {
     int updateByPrimaryKeySelective(Clearance record);
 
     int updateByPrimaryKey(Clearance record);
+
+    List<Clearance> selectByNeedId(String needId);
 }

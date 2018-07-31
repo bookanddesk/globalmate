@@ -149,4 +149,10 @@
       PAYWAY_ = #{payway,jdbcType=CHAR}
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectByNeedId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from clearance
+    where need_id_ = #{needId,jdbcType=VARCHAR}
+  </select>
 </mapper>

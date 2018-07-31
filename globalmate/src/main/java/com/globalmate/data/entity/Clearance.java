@@ -1,8 +1,13 @@
 package com.globalmate.data.entity;
 
-import java.util.Date;
+import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.service.need.NeedTypeEnum;
+import com.google.common.collect.Lists;
 
-public class Clearance {
+import java.util.Date;
+import java.util.List;
+
+public class Clearance extends AbstractNeed {
     private String id;
 
     private String needId;
@@ -75,6 +80,17 @@ public class Clearance {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String getTag() {
+        return NeedTypeEnum.clearance.getShowValue();
+    }
+
+    @Override
+    public List<String> getKeywords() {
+        return Lists.newArrayList(getWhere(), getTag(),
+                getDescription(), getTitle(), getAirport());
     }
 
     public void setDescription(String description) {

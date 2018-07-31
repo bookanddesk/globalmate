@@ -1,8 +1,13 @@
 package com.globalmate.data.entity;
 
-import java.util.Date;
+import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.service.need.NeedTypeEnum;
+import com.google.common.collect.Lists;
 
-public class Accompany {
+import java.util.Date;
+import java.util.List;
+
+public class Accompany extends AbstractNeed {
     private String id;
 
     private String needId;
@@ -69,6 +74,17 @@ public class Accompany {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String getTag() {
+        return  NeedTypeEnum.accompany.getShowValue();
+    }
+
+    @Override
+    public List<String> getKeywords() {
+        return Lists.newArrayList(getWhere(), getTag(),
+                getDescription(), getTitle(), getType());
     }
 
     public void setDescription(String description) {

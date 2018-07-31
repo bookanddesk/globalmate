@@ -2,6 +2,8 @@ package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.Accompany;
 
+import java.util.List;
+
 public interface AccompanyMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +16,6 @@ public interface AccompanyMapper {
     int updateByPrimaryKeySelective(Accompany record);
 
     int updateByPrimaryKey(Accompany record);
+
+    List<Accompany> selectByNeedId(String needId);
 }

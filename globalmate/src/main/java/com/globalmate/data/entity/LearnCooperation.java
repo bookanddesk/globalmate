@@ -1,8 +1,13 @@
 package com.globalmate.data.entity;
 
-import java.util.Date;
+import com.globalmate.data.entity.vo.AbstractNeed;
+import com.globalmate.service.need.NeedTypeEnum;
+import com.google.common.collect.Lists;
 
-public class LearnCooperation {
+import java.util.Date;
+import java.util.List;
+
+public class LearnCooperation extends AbstractNeed {
     private String id;
 
     private String needId;
@@ -65,6 +70,17 @@ public class LearnCooperation {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String getTag() {
+        return NeedTypeEnum.learn_cooperation.getShowValue();
+    }
+
+    @Override
+    public List<String> getKeywords() {
+        return Lists.newArrayList(getCountry(), getTag(),
+                getDescription(), getTitle(), getSubject());
     }
 
     public void setDescription(String description) {

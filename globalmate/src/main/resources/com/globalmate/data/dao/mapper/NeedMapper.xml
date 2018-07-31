@@ -195,6 +195,7 @@
         and ENABLE_ = #{enable}
       </if>
     </where>
+      order by CREATE_TIME_ desc
   </select>
 
   <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
