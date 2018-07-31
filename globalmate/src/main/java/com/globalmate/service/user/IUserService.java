@@ -37,11 +37,14 @@ public interface IUserService {
 
     List<String> listSchool();
 
-    List<User> listUsers();
+    List<User> listAllUsers();
+
+    List<User> listUsersLike(User user);
 
     User getUser(String id);
 
     String getName(String id);
 
     User updateNice(String userId, Integer niceValue);
+
 }

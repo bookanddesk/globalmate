@@ -120,6 +120,11 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
         return evaluationMapper.queryRecords(evaluation);
     }
 
+    @Override
+    public List<UEvaluation> listEvaluation(UEvaluation evaluation) {
+        return evaluationMapper.queryRecords(Optional.ofNullable(evaluation).orElse(new UEvaluation()));
+    }
+
     public List<EvaluationAggEntity> listEvaluationAgg(User user) {
         List<UEvaluation> uEvaluations = listEvaluation(user);
         if (CollectionUtils.isEmpty(uEvaluations)) {

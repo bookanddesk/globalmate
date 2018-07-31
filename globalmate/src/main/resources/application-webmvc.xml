@@ -30,9 +30,38 @@
             <mvc:exclude-mapping path="/**/user/add" />
             <mvc:exclude-mapping path="/**/user/login/**" />
             <mvc:exclude-mapping path="/**/wechat/**" />
+            <mvc:exclude-mapping path="/**/login" />
             <bean class="com.globalmate.common.TokenInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <property name="defaultContentType" value="text/html"/>
+                <property name="mediaTypes">
+                    <map>
+                        <entry key="json" value="application/json"/>
+                        <entry key="xml" value="application/xml"/>
+                        <entry key="html" value="text/html"/>
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
+            </list>
+        </property>
+    </bean>
 
     <bean id="gmExceptionResolver" class="com.globalmate.exception.GMExceptionResolver"/>
 

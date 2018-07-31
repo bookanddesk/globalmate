@@ -8,4 +8,9 @@
         <setting name="callSettersOnNulls" value="true"/>
         <setting name="returnInstanceForEmptyRow" value="true"/>
     </settings>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
 </configuration>

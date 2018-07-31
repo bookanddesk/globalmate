@@ -40,7 +40,7 @@ public class UserMatchStrategy extends MatchStrategy {
 
     @Override
     public List<SysMatchNeed> match(List<Need> needs) {
-        List<User> users = userService.listUsers();
+        List<User> users = userService.listAllUsers();
         if (CollectionUtils.isEmpty(users)) {
             return null;
         }

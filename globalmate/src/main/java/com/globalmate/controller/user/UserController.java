@@ -5,6 +5,7 @@ import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.service.user.UserService;
+import com.globalmate.uitl.GMConstant;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,8 @@ public class UserController extends BaseController {
 
         String token = userService.generateToken();
         userService.putUserToken(token, user) ;
+        request.getSession().setAttribute(GMConstant.TOKEN, token);
+        request.getSession().setAttribute(GMConstant.USER, user);
         return buildSuccess(token);
     }
 
@@ -71,7 +74,7 @@ public class UserController extends BaseController {
 
     @GetMapping("list")
     public JsonResult list(boolean bySchool, boolean byTag){
-        List<User> users = userService.listUsers();
+        List<User> users = userService.listAllUsers();
         if (CollectionUtils.isEmpty(users)) {
             return buildSuccess();
         }

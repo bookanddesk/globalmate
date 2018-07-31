@@ -4,6 +4,7 @@ import com.globalmate.data.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
@@ -27,4 +28,5 @@ public interface UserMapper {
     List<String> listSchool();
 
     List<User> queryUsers(User user);
+
 }

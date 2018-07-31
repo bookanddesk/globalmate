@@ -60,4 +60,19 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return (one = one < two ? one : two) < three ? one : three;
     }
 
+    public static boolean isMobileDevice(String userAgent) {
+        if (StringUtils.isBlank(userAgent)) {
+            return false;
+        }
+        boolean isMobileDev = false;
+        String[] deviceArray = new String[]{"android","mac os","windows phone"};
+        for(int i=0;i<deviceArray.length;i++){
+            if(userAgent.indexOf(deviceArray[i])>0){
+                isMobileDev = true;
+                break;
+            }
+        }
+        return isMobileDev;
+    }
+
 }

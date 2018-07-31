@@ -4,6 +4,7 @@ import com.globalmate.common.context.InvocationInfoProxy;
 import com.globalmate.data.entity.User;
 import com.globalmate.exception.user.UserTokenFailException;
 import com.globalmate.service.user.UserService;
+import com.globalmate.uitl.GMConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -19,7 +20,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String token = request.getHeader("token") != null ? request.getHeader("token") : request.getParameter("token");
+        String token = request.getHeader(GMConstant.TOKEN) != null ? request.getHeader(GMConstant.TOKEN) :
+                request.getParameter(GMConstant.TOKEN) != null ? request.getParameter(GMConstant.TOKEN) :
+                        (String) request.getSession().getAttribute(GMConstant.TOKEN);
 
         if (StringUtils.isBlank(token)) {
             throw new UserTokenFailException("token不能为空！");

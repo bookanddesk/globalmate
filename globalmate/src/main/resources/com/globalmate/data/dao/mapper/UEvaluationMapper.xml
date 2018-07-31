@@ -191,8 +191,11 @@
     <include refid="Base_Column_List" />
     from u_evaluation
     <where>
-      <if test="uEvaluatorId != null">
-        u_evaluator_id = #{uEvaluatorId}
+      <if test="uEvaluatorId != null and uEvaluatorId != '' ">
+        u_evaluator_id like concat('%', (concat(#{uEvaluatorId}, '%')))
+      </if>
+      <if test="uEvluatorName != null and uEvluatorName != '' ">
+        and u_evluator_name like concat('%', (concat(#{uEvluatorName}, '%')))
       </if>
     </where>
   </select>

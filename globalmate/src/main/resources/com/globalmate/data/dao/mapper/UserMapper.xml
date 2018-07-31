@@ -374,14 +374,17 @@
     from user
     <where>
       ENABLE_ = '1'
-      <if test="school != null">
-        and school_ = {#school}
+      <if test="nikename != null and nikename != ''">
+        and NIKENAME_ like concat('%', (concat(#{nikename}, '%')))
+      </if>
+      <if test="school != null and school != '' ">
+        and school_ like concat('%', (concat(#{school}, '%')))
       </if>
       <if test="userTag != null">
-        and user_tag_ = {#userTag}
+        and user_tag_ like concat('%', (concat(#{userTag}, '%')))
       </if>
     </where>
-    order by user_credit_ desc;
+    order by user_credit_ desc
   </select>
 
 </mapper>

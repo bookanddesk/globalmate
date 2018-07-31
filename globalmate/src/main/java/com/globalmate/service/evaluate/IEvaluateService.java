@@ -39,6 +39,8 @@ public interface IEvaluateService {
      */
     List<UEvaluation> listEvaluation(User user);
 
+    List<UEvaluation> listEvaluation(UEvaluation evaluation);
+
     /**
      * 更新帮助者好人值
      * @param evaluation

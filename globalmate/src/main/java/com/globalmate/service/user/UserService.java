@@ -40,6 +40,8 @@ public class UserService implements IUserService, ITokenservice {
             user.setId(IdGenerator.generateId());
         }
         user.setCreateTime(Date.from(Instant.now()));
+        user.setEnable(GMConstant.ONE_STR_VALUE);
+        user.setNice(GMConstant.ZERO_INT_VALUE);
         int insert = userMapper.insert(user);
         if (insert > 0) {
             return userMapper.selectByPrimaryKey(user.getId());
@@ -142,9 +144,13 @@ public class UserService implements IUserService, ITokenservice {
     }
 
     @Override
-    public List<User> listUsers() {
-        List<User> users = userMapper.queryUsers(new User());
-        return users;
+    public List<User> listAllUsers() {
+        return listUsersLike(null);
+    }
+
+    @Override
+    public List<User> listUsersLike(User user) {
+        return userMapper.queryUsers(Optional.ofNullable(user).orElse(new User()));
     }
 
     @Override

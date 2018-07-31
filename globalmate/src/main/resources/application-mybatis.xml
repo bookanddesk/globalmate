@@ -48,6 +48,7 @@
         <property name="transactionFactory">
             <bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory"/>
         </property>
+        <property name="configLocation" value="classpath:config/mybatis.xml"/>
     </bean>
 
 
@@ -61,7 +62,7 @@
     <!-- 采用自动扫描方式创建mapper bean(单个更新模式) -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.globalmate.data.dao.mapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
    
