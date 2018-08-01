@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -94,7 +95,10 @@ public class UserController extends BaseController {
 
     @GetMapping("getUserByToken")
     public JsonResult token(HttpServletRequest request) {
-        return buildSuccess(getCurrentUser(request));
+        User user = Optional.ofNullable(getCurrentUser(request))
+                .map(x->userService.getUser(x.getId()))
+                .orElse(null);
+        return buildSuccess(user);
     }
 
 }

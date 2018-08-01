@@ -125,8 +125,8 @@ public class UserService implements IUserService, ITokenservice {
     public User updateUser(User user) {
         checkNotNull(user);
         checkNotNull(user.getId());
-        checkNotNull(user.getPhone());
-        checkNotNull(user.getNikename());
+//        checkNotNull(user.getPhone());
+//        checkNotNull(user.getNikename());
         if (userMapper.selectByPrimaryKey(user.getId()) == null) {
             throw new UseNotFoundException("未找到该用户！[" + user.getId() + "]");
         }
