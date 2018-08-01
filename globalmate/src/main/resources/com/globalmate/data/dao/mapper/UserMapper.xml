@@ -30,12 +30,19 @@
     <result column="country_" jdbcType="VARCHAR" property="country" />
     <result column="city_" jdbcType="VARCHAR" property="city" />
     <result column="help_available_" jdbcType="VARCHAR" property="helpAvailable" />
+    <result column="subscribe" jdbcType="BIT" property="subscribe" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="subscribe_scene" jdbcType="VARCHAR" property="subscribe_scene" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
   </resultMap>
   <sql id="Base_Column_List">
     ID_, CODE_, NAME_, NIKENAME_, PASSWORD_, SALT_, EMAIL_, PHONE_, PIC_, CREATE_TIME_, 
     MODIFY_TIME_, ENABLE_, ID_NUMBER_, NICE_, WHERE_, SCHOOL_, HOBBY_, is_certified_, 
     cetifiy_id_, user_credit_, user_tag_, resident_, u_ext1_, u_ext2_, u_ext3_,
-     country_, city_, help_available_
+     country_, city_, help_available_, subscribe, openid, sex, `language`,
+     subscribe_scene, province
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -56,7 +63,9 @@
       SCHOOL_, HOBBY_, is_certified_, 
       cetifiy_id_, user_credit_, user_tag_, 
       resident_, u_ext1_, u_ext2_, 
-      u_ext3_, country_, city_, help_available_)
+      u_ext3_, country_, city_, help_available_,
+      subscribe, openid, sex, `language`,
+      subscribe_scene, province)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{nikename,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
@@ -66,7 +75,10 @@
       #{cetifiyId,jdbcType=VARCHAR}, #{userCredit,jdbcType=VARCHAR}, #{userTag,jdbcType=VARCHAR}, 
       #{resident,jdbcType=VARCHAR}, #{uExt1,jdbcType=VARCHAR}, #{uExt2,jdbcType=VARCHAR},
       #{uExt3,jdbcType=VARCHAR},#{country,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},
-      #{helpAvailable,jdbcType=VARCHAR})
+      #{helpAvailable,jdbcType=VARCHAR}, #{subscribe,jdbcType=BIT}, #{openid,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{subscribe_scene,jdbcType=VARCHAR},
+      #{province,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.User">
     insert into user
@@ -309,6 +321,24 @@
       <if test="helpAvailable != null">
         help_available_ = #{helpAvailable,jdbcType=VARCHAR},
       </if>
+       <if test="subscribe != null">
+         subscribe = #{subscribe,jdbcType=BIT},
+      </if>
+       <if test="openid != null">
+         openid = #{openid,jdbcType=VARCHAR},
+      </if>
+       <if test="sex != null">
+         sex = #{sex,jdbcType=VARCHAR},
+      </if>
+       <if test="language != null">
+         language = #{language,jdbcType=VARCHAR},
+      </if>
+       <if test="subscribe_scene != null">
+         subscribe_scene = #{subscribe_scene,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
@@ -385,6 +415,13 @@
       </if>
     </where>
     order by user_credit_ desc
+  </select>
+
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where openid = #{openId,jdbcType=VARCHAR}
   </select>
 
 </mapper>

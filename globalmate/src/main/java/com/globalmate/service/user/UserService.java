@@ -10,6 +10,7 @@ import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.RegexUtils;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,6 +191,43 @@ public class UserService implements IUserService, ITokenservice {
         }
         user.setNice(Optional.ofNullable(user.getNice()).orElse(0) + niceValue);
         return updateUser(user);
+    }
+
+    @Override
+    public List<User> selectWXUser(String openId) {
+        if (StringUtils.isNotBlank(openId)) {
+            return userMapper.selectByOpenId(openId);
+        }
+        return null;
+    }
+
+    @Override
+    public int handleWxUser(WxMpUser wxMpUser) {
+        List<User> users = selectWXUser(wxMpUser.getOpenId());
+        if (CollectionUtils.isEmpty(users)) {
+            User user = new User();
+            user.setId(IdGenerator.generateId());
+            copyProperties(user, wxMpUser);
+            return userMapper.insert(user);
+        }
+
+        User user = users.get(0);
+        copyProperties(user, wxMpUser);
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    private User copyProperties(User user, WxMpUser wxMpUser) {
+        user.setNikename(wxMpUser.getNickname());
+        user.setSubscribe(wxMpUser.getSubscribe());
+        user.setSex(wxMpUser.getSexDesc());
+        user.setLanguage(wxMpUser.getLanguage());
+        user.setCity(wxMpUser.getCity() == null ? wxMpUser.getProvince() : wxMpUser.getCity());
+        user.setCountry(wxMpUser.getCountry());
+        user.setPic(wxMpUser.getHeadImgUrl());
+        user.setCreateTime(Date.from(Instant.ofEpochMilli(wxMpUser.getSubscribeTime())));
+        user.setSubscribe_scene(wxMpUser.getSubscribeScene());
+        user.setProvince(wxMpUser.getProvince());
+        return user;
     }
 
     @Override

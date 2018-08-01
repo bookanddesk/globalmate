@@ -2,6 +2,7 @@ package com.globalmate.service.user;
 
 import com.globalmate.data.entity.User;
 import com.globalmate.exception.user.UserCheckFailException;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
 import java.util.List;
 import java.util.Map;
@@ -46,5 +47,9 @@ public interface IUserService {
     String getName(String id);
 
     User updateNice(String userId, Integer niceValue);
+
+    List<User> selectWXUser(String openId);
+
+    int handleWxUser(WxMpUser wxMpUser);
 
 }

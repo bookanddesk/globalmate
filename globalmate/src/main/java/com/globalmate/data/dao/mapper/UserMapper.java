@@ -29,4 +29,6 @@ public interface UserMapper {
 
     List<User> queryUsers(User user);
 
+    List<User> selectByOpenId(String openId);
+
 }

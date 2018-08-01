@@ -56,6 +56,12 @@ public class User {
     private String country;
     private String city;
     private String helpAvailable;
+    private Boolean subscribe;
+    private String openid;
+    private String sex;
+    private String language;
+    private String subscribe_scene;
+    private String province;
 
     public String getId() {
         return id;
@@ -287,5 +293,53 @@ public class User {
 
     public void setHelpAvailable(String helpAvailable) {
         this.helpAvailable = helpAvailable;
+    }
+
+    public Boolean getSubscribe() {
+        return subscribe;
+    }
+
+    public void setSubscribe(Boolean subscribe) {
+        this.subscribe = subscribe;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getSubscribe_scene() {
+        return subscribe_scene;
+    }
+
+    public void setSubscribe_scene(String subscribe_scene) {
+        this.subscribe_scene = subscribe_scene;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

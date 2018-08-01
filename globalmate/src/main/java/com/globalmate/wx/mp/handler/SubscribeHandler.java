@@ -2,10 +2,12 @@ package com.globalmate.wx.mp.handler;
 
 import java.util.Map;
 
+import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.wx.mp.builder.TextBuilder;
 import com.globalmate.wx.mp.service.WeixinService;
 import me.chanjar.weixin.common.error.WxErrorException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -17,6 +19,9 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
 @Component
 public class SubscribeHandler extends AbstractHandler {
+
+  @Autowired
+  private UserService userService;
 
   @Override
   public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService,
@@ -30,19 +35,19 @@ public class SubscribeHandler extends AbstractHandler {
     WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
 
     if (userWxInfo != null) {
-      // TODO 可以添加关注用户到本地
+      userService.handleWxUser(userWxInfo);
     }
 
-    WxMpXmlOutMessage responseResult = null;
-    try {
-      responseResult = handleSpecial(wxMessage);
-    } catch (Exception e) {
-      this.logger.error(e.getMessage(), e);
-    }
-
-    if (responseResult != null) {
-      return responseResult;
-    }
+//    WxMpXmlOutMessage responseResult = null;
+//    try {
+//      responseResult = handleSpecial(wxMessage);
+//    } catch (Exception e) {
+//      this.logger.error(e.getMessage(), e);
+//    }
+//
+//    if (responseResult != null) {
+//      return responseResult;
+//    }
 
     try {
       return new TextBuilder().build(GMConstant.SUBSCRIBE_MSG_TEMP_INFO, wxMessage, weixinService);
