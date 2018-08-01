@@ -36,6 +36,7 @@ public class NeedClearanceController extends BaseController {
     	Need need=new Need();
     	need.setCreateTime(new Date());
     	need.setType(NeedTypeEnum.clearance.name());
+    	need.setWhere(clearance.getWhere());
     	//取当前登录用户
     	User user = getCurrentUser(request);
         if(user != null) {

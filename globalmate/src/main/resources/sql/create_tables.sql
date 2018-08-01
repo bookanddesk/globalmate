@@ -60,6 +60,10 @@ CREATE TABLE need(
 	PRIMARY KEY(ID_)
 );
 alter table need add column user_name_ varchar (20) default null comment'需求人姓名或昵称';
+alter table need add column where_ varchar (20) default null comment'地点';
+alter table need add column ext1_ varchar (20) default null;
+alter table need add column ext2_ varchar (200) default null;
+alter table need add column ext3_ varchar (200) default null;
 
 drop table if exists buy;
 CREATE TABLE buy(

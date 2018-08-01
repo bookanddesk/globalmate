@@ -36,6 +36,7 @@ public class NeedCarryController extends BaseController {
     	Need need=new Need();
     	need.setCreateTime(new Date());
     	need.setType(NeedTypeEnum.carry.name());
+    	need.setWhere(com.globalmate.uitl.StringUtils.join_(carry.getFrom(), carry.getTo()));
     	//取当前登录用户
     	User user = getCurrentUser(request);
         if(user != null) {

@@ -171,6 +171,11 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	}
 
 	@Override
+	public List<Need> queryLike(Need need) {
+		return needMapper.queryNeeds(need);
+	}
+
+	@Override
 	public String[] getKeyWords(Need need) {
 		checkNotNull(need);
 

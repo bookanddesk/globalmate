@@ -29,7 +29,8 @@ public class NeedController extends BaseController {
         }
         return buildSuccess(need);
     }
-    
+
+    @Deprecated
     @GetMapping("list")
     public JsonResult select(HttpServletRequest request,
                              @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser) {
@@ -40,6 +41,11 @@ public class NeedController extends BaseController {
     @GetMapping("list/{id}")
     public JsonResult selectConceret(@PathVariable("id") String id) {
         return buildSuccess(needService.getNeedAgg(id));
+    }
+
+    @GetMapping("query")
+    public JsonResult query(Need need) {
+        return buildSuccess(needService.queryLike(need));
     }
 
 }

@@ -37,6 +37,7 @@ public class NeedBuyController extends BaseController {
     	Need need=new Need();
     	need.setCreateTime(new Date());
     	need.setType(NeedTypeEnum.buy.name());
+    	need.setWhere(buy.getCountry());
     	//取当前登录用户
     	User user = getCurrentUser(request);
     	if(user != null) {

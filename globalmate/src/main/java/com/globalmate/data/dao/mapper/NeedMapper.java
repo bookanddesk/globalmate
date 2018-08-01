@@ -19,5 +19,7 @@ public interface NeedMapper {
     
     List<Need> selectNeeds(Need need);
 
+    List<Need> queryNeeds(Need need);
+
     List<Need> queryByIds(List<String> ids);
 }

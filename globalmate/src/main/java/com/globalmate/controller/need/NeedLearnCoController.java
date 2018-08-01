@@ -36,6 +36,7 @@ public class NeedLearnCoController extends BaseController {
     	Need need=new Need();
     	need.setCreateTime(new Date());
     	need.setType(NeedTypeEnum.learn_cooperation.name());
+    	need.setWhere(com.globalmate.uitl.StringUtils.join_(learnCooperation.getCountry(), learnCooperation.getCity()));
     	//取当前登录用户
     	User user = getCurrentUser(request);
         if(user != null) {

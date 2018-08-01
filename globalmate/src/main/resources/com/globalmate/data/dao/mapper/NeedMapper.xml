@@ -15,13 +15,17 @@
     <result column="EVALUATE" jdbcType="INTEGER" property="evaluate" />
     <result column="RESPONDER_" jdbcType="VARCHAR" property="responder" />
     <result column="COMMENT_" jdbcType="VARCHAR" property="comment" />
+    <result column="where_" jdbcType="VARCHAR" property="where" />
+    <result column="ext1_" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2_" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3_" jdbcType="VARCHAR" property="ext3" />
   </resultMap>
   <sql id="Base_Column_List">
     ID_, start_type_, TYPE_, USER_ID_, USER_NAME_, description_, CREATE_TIME_, MODIFY_TIME_, END_TIME_,
-    ENABLE_, EVALUATE, RESPONDER_, COMMENT_
+    ENABLE_, EVALUATE, RESPONDER_, COMMENT_, where_, ext1_, ext2_, ext3_
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from need
     where ID_ = #{id,jdbcType=VARCHAR}
@@ -34,12 +38,14 @@
     insert into need (ID_, start_type_, TYPE_,
       USER_ID_, USER_NAME_, description_, CREATE_TIME_,
       MODIFY_TIME_, END_TIME_, ENABLE_, 
-      EVALUATE, RESPONDER_, COMMENT_
+      EVALUATE, RESPONDER_, COMMENT_,
+      where_, ext1_, ext2_, ext3_
       )
     values (#{id,jdbcType=VARCHAR}, #{startType,jdbcType=CHAR}, #{type,jdbcType=CHAR}, 
       #{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{modifyTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=CHAR}, 
-      #{evaluate,jdbcType=INTEGER}, #{responder,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}
+      #{evaluate,jdbcType=INTEGER}, #{responder,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR},
+      #{where,jdbcType=VARCHAR},#{ext1,jdbcType=VARCHAR},#{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.Need">
@@ -160,6 +166,18 @@
       <if test="comment != null">
         COMMENT_ = #{comment,jdbcType=VARCHAR},
       </if>
+      <if test="where != null">
+        where_ = #{where,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        ext1_ = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2_ = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3_ = #{ext3,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
@@ -178,7 +196,7 @@
       COMMENT_ = #{comment,jdbcType=VARCHAR}
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
-  
+
     <select id="selectNeeds" parameterType="com.globalmate.data.entity.Need"
           resultMap="BaseResultMap">
     select
@@ -197,6 +215,22 @@
     </where>
       order by CREATE_TIME_ desc
   </select>
+
+    <select id="queryNeeds" parameterType="com.globalmate.data.entity.Need"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from need
+        <where>
+            <if test="where != null and where != '' ">
+                and where_ like concat('%', (concat(#{where}, '%')))
+            </if>
+            <if test="type != null and type != '' ">
+                and type_ like concat('%', (concat(#{type}, '%')))
+            </if>
+        </where>
+        order by CREATE_TIME_ desc
+    </select>
 
   <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
     select
