@@ -132,5 +132,14 @@ public class GMEnums {
         SUBSCRIBE,    //关注
         MATCH;     //匹配
     }
+    
+    public enum UCertifyType {
+    	
+    	IDCARD,    //身份证
+        PASSPORT,     //护照
+        STUDENTID,    //学生证认证
+        ALIPAYID;     //支付宝认证
+
+    }
 
 }

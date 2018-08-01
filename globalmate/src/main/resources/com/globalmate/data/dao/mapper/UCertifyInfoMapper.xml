@@ -174,4 +174,18 @@
       cer_ext3 = #{cerExt3,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
+  
+    <select id="queryRecords" parameterType="com.globalmate.data.entity.UCertifyInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from u_certify_info
+    <where>
+      <if test="uId != null and uId != '' ">
+        u_id like concat('%', (concat(#{uId}, '%')))
+      </if>
+      <if test="uName != null and uName != '' ">
+        and u_name like concat('%', (concat(#{uName}, '%')))
+      </if>
+    </where>
+  </select>
 </mapper>
