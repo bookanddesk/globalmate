@@ -44,7 +44,7 @@ public interface INeedService {
 	 */
 	List<Need> listUnHandled(User user);
 
-	List<Need> queryLike(Need need);
+	List<NeedAggEntity> queryLike(Need need);
 
 	String[] getKeyWords(Need need);
 

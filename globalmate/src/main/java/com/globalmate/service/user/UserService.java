@@ -219,12 +219,13 @@ public class UserService implements IUserService, ITokenservice {
     private User copyProperties(User user, WxMpUser wxMpUser) {
         user.setNikename(wxMpUser.getNickname());
         user.setSubscribe(wxMpUser.getSubscribe());
+        user.setOpenid(wxMpUser.getOpenId());
         user.setSex(wxMpUser.getSexDesc());
         user.setLanguage(wxMpUser.getLanguage());
         user.setCity(wxMpUser.getCity() == null ? wxMpUser.getProvince() : wxMpUser.getCity());
         user.setCountry(wxMpUser.getCountry());
         user.setPic(wxMpUser.getHeadImgUrl());
-        user.setCreateTime(Date.from(Instant.ofEpochMilli(wxMpUser.getSubscribeTime())));
+        user.setCreateTime(new Date(wxMpUser.getSubscribeTime()));
         user.setSubscribe_scene(wxMpUser.getSubscribeScene());
         user.setProvince(wxMpUser.getProvince());
         return user;

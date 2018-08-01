@@ -171,8 +171,16 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	}
 
 	@Override
-	public List<Need> queryLike(Need need) {
-		return needMapper.queryNeeds(need);
+	public List<NeedAggEntity> queryLike(Need need) {
+		List<Need> needs = needMapper.queryNeeds(need);
+		if (CollectionUtils.isEmpty(needs)) {
+			return null;
+		}
+		List<NeedAggEntity> entities = new ArrayList<>(needs.size());
+		for (Need n : needs) {
+			entities.add(buildAgg(n));
+		}
+		return entities;
 	}
 
 	@Override
