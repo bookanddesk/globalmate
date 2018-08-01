@@ -27,16 +27,16 @@ CREATE TABLE user  (
 	u_ext3_ varchar (64) null,
 	PRIMARY KEY(ID_)
 );
-alter table `user` add column country_ varchar(10) default null comment'国家';
-alter table `user` add column city_ varchar(10) default null comment'城市';
+alter table `user` add column country_ varchar(64) default null comment'国家';
+alter table `user` add column city_ varchar(64) default null comment'城市';
 alter table `user` add column help_available_ varchar(255) default null comment'可提供的帮助';
 -- 微信用户特殊字段
 alter table `user` add column subscribe tinyint(1) default null comment'是否关注公众号';
 alter table `user` add column openid varchar(64) default null comment'微信用户id';
 alter table `user` add column sex varchar(2) default null comment'性别';
 alter table `user` add column language varchar(10) default null comment'用户的语言，简体中文为zh_CN';
-alter table `user` add column province varchar(10) default null comment'省份';
-alter table `user` add column subscribe_scene varchar(10) default null comment'用户关注的渠道来源';
+alter table `user` add column province varchar(64) default null comment'省份';
+alter table `user` add column subscribe_scene varchar(64) default null comment'用户关注的渠道来源';
 
 
 drop table if exists service;

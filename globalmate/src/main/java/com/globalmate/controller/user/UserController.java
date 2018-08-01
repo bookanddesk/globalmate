@@ -6,6 +6,7 @@ import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.exception.user.UserCheckFailException;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
+import com.globalmate.uitl.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -99,6 +100,22 @@ public class UserController extends BaseController {
                 .map(x->userService.getUser(x.getId()))
                 .orElse(null);
         return buildSuccess(user);
+    }
+
+    @GetMapping("getToken")
+    public JsonResult getToken (String userId, String openId) {
+        User user = userService.getUser(userId);
+        if (user == null) {
+            List<User> users = userService.selectWXUser(openId);
+            if (CollectionUtils.isNotEmpty(users)) {
+                user = users.get(0);
+            }
+        }
+        if (user != null) {
+            return buildSuccess(userService.putUserToken(null, user));
+        }
+        return buildFail("can't find user with userid["
+                + userId + "] and openid[" + openId + "]");
     }
 
 }

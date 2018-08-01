@@ -28,6 +28,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/**/user/add" />
+            <mvc:exclude-mapping path="/**/user/getToken" />
             <mvc:exclude-mapping path="/**/user/login/**" />
             <mvc:exclude-mapping path="/**/wechat/**" />
             <mvc:exclude-mapping path="/**/login" />
