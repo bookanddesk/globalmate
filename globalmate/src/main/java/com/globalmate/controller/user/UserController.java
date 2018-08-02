@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,10 +77,14 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("list")
-    public JsonResult list(boolean bySchool, boolean byTag){
+    public JsonResult list(boolean bySchool, boolean byTag, boolean byNice){
         List<User> users = userService.listAllUsers();
         if (CollectionUtils.isEmpty(users)) {
             return buildSuccess();
+        }
+        if (byNice) {
+            users.sort(Comparator.comparing(User::getNice));
+            return buildSuccess(users);
         }
         if (bySchool) {
             return buildSuccess(users.stream().collect(Collectors.groupingBy(User::getSchool)));

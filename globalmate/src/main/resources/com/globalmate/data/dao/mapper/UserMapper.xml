@@ -424,4 +424,10 @@
     where openid = #{openId,jdbcType=VARCHAR}
   </select>
 
+  <update id="updateSubscribeStatus" parameterType="java.util.Map">
+    update user
+    set subscribe = #{subscribe,jdbcType=BIT}
+    where openid =  #{openId,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

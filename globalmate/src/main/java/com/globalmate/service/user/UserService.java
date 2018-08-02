@@ -216,6 +216,33 @@ public class UserService implements IUserService, ITokenservice {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
+    @Override
+    public String getOpenId(String id) {
+        if (id == null) {
+            return null;
+        }
+        String chKey = GMConstant.CACHE_OPENID + id,
+                openId = cacheService.getSerializer(chKey, String.class);
+        if (openId == null) {
+            User user = getUser(id);
+            if (user != null) {
+                openId = user.getOpenid();
+                if (openId != null) {
+                    cacheService.setSerializer(chKey, openId, GMConstant.TOKEN_EXP_TIME);
+                }
+            }
+        }
+        return openId;
+    }
+
+    @Override
+    public int userUnsubscribe(String openid) {
+        if (StringUtils.isBlank(openid)) {
+            return -1;
+        }
+        return userMapper.updateSubscribeStatus(openid, false);
+    }
+
     private User copyProperties(User user, WxMpUser wxMpUser) {
         user.setNikename(wxMpUser.getNickname());
         user.setSubscribe(wxMpUser.getSubscribe());

@@ -31,4 +31,6 @@ public interface UserMapper {
 
     List<User> selectByOpenId(String openId);
 
+    int updateSubscribeStatus(@Param("openId") String openId, @Param("subscribe") Boolean subscribe);
+
 }

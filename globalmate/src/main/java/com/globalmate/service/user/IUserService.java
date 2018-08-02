@@ -52,4 +52,8 @@ public interface IUserService {
 
     int handleWxUser(WxMpUser wxMpUser);
 
+    String getOpenId(String id);
+
+    int userUnsubscribe(String openid);
+
 }

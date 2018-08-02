@@ -8,6 +8,7 @@ import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.ICreateService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.need.NeedTypeEnum;
+import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.CollectionUtils;
 import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.StringUtils;
@@ -33,6 +34,8 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
     private MsgTemplateService templateService;
     @Autowired
     private NeedService needService;
+    @Autowired
+    private UserService userService;
 
     public void send(List<SysMatchNeed> sysMatchNeeds) {
         if (CollectionUtils.isEmpty(sysMatchNeeds)) {
@@ -54,7 +57,7 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         Preconditions.checkNotNull(sysMatchNeed.getProviderId());
 
         MatchMsg matchMsg = new MatchMsg();
-        matchMsg.setToUserId(sysMatchNeed.getProvideId());
+        matchMsg.setToUserId(userService.getOpenId(sysMatchNeed.getProvideId()));
         matchMsg.setMsgTempId(getMsgTemplateId(matchMsg));
         matchMsg.setUrl(matchMsg.getUrl());
         matchMsg.setCreateTime(Date.from(Instant.now()));

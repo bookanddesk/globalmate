@@ -41,5 +41,7 @@ public class GMConstant {
     public static final String ZERO_STR_VALUE = "0";
     public static final int ZERO_INT_VALUE = 0;
 
+    public static final String CACHE_OPENID = "openid:";
+
 
 }
