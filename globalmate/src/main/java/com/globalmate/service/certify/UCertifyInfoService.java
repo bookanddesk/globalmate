@@ -14,7 +14,9 @@ import com.globalmate.data.dao.mapper.UCertifyInfoMapper;
 import com.globalmate.data.entity.UCertifyInfo;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.GMEnums;
+import com.globalmate.data.entity.po.GMEnums.UCertifyEffectiveType;
 import com.globalmate.uitl.IdGenerator;
+import com.globalmate.uitl.StringUtils;
 
 @Service
 public class UCertifyInfoService implements IUCertifyInfoService{
@@ -38,6 +40,15 @@ public class UCertifyInfoService implements IUCertifyInfoService{
         	//默认身份证认证方式
         	ucertifyInfo.setCetifyType(GMEnums.UCertifyType.IDCARD.name());
         }
+        
+        if (ucertifyInfo.getIsEffective()!= GMEnums.UCertifyEffectiveType.PASS.getValue() && ucertifyInfo.getIsEffective()!= GMEnums.UCertifyEffectiveType.NOTPASS.getValue()) {
+        	//默认为未验证状态
+        	ucertifyInfo.setIsEffective( GMEnums.UCertifyEffectiveType.UNCHECKED.getValue());
+        }
+        
+        
+        
+
         ucertifyInfo.setCertifyTime(Date.from(Instant.now()));
         int i = ucertifyInfoMapper.insert(ucertifyInfo);
         if (i > 0) {
@@ -61,6 +72,14 @@ public class UCertifyInfoService implements IUCertifyInfoService{
             return ucertifyInfoMapper.selectByPrimaryKey(record.getId());
         }
         return null;
+	}
+
+	@Override
+	public UCertifyInfo getUCertifyInfo(String id) {
+		if (StringUtils.isNoneBlank(id)) {
+			return ucertifyInfoMapper.selectByPrimaryKey(id);
+		}
+		return null;
 	}
 
 }

@@ -141,5 +141,25 @@ public class GMEnums {
         ALIPAYID;     //支付宝认证
 
     }
+    
+    public enum UCertifyEffectiveType {
+    	
+    	UNCHECKED("unchecked",0),    //未校验
+    	PASS("pass",1),    //校验通过
+    	NOTPASS("notpass",2);     //校验未通过
+
+        private String code;
+        private int value;
+
+        UCertifyEffectiveType(String code, int value) {
+            this.code = code;
+            this.value = value;
+        }
+        public int getValue() {
+            return this.value;
+        }
+
+
+    }
 
 }

@@ -55,6 +55,16 @@ public class BasicDataController extends BaseController {
         List<UCertifyInfo> ucertifyInfos = ucertifyInfoService.listCertifyInfo(certifyInfo);
         return buildMV(GMConstant.CETIFIY_PAGE, ucertifyInfos, certifyInfo);
     }
+    
+    @GetMapping("cetifiyUpdate")
+    public void cetifiyUpdate(UCertifyInfo certifyInfo) {
+        int isEffective = certifyInfo.getIsEffective();
+        UCertifyInfo ucertifyInfo = ucertifyInfoService.getUCertifyInfo(certifyInfo.getId());
+        if(ucertifyInfo!=null){
+        	ucertifyInfo.setIsEffective(isEffective);
+        	ucertifyInfoService.updateUCertifyInfo(ucertifyInfo);
+        }
+    }
 
     @GetMapping({"", "login", "index"})
     public ModelAndView login() {
