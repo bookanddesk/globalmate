@@ -33,6 +33,10 @@
     <bean id="cacheService" name="cacheService"
           class="com.globalmate.cache.CacheServiceImpl"></bean>
 
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="maxInactiveIntervalInSeconds" value="7200" />
+    </bean>
+
     <aop:aspectj-autoproxy/>
 
 </beans>

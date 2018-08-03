@@ -2,7 +2,7 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 
-public class User {
+public class User extends BaseEntity{
     private String id;
 
     private String code;
