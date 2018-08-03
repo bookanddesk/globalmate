@@ -355,7 +355,7 @@ create table u_certify_info
    certify_time         timestamp comment '认证时间',
    is_effective         tinyint(1) comment '认证是否有效',
    cetify_type          varchar(64) comment '认证方式',
-   certify_photo        varchar(64) comment '认证图片',
+   certify_photo        varchar(2000) comment '认证图片',
    modify_time          timestamp comment '更新时间',
    certify_info         varchar(64) comment '认证信息',
    cer_ext1             varchar(64) comment '扩展字段1',

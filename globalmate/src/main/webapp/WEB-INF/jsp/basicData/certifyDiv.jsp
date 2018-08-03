@@ -97,13 +97,24 @@
                         <tr align="center" valign="middle" class="dr_ord">
                             <td style="display: none;">${cerObj.id}</td>
                             <td>${cerObj.uName}</td>
-                            <td>${cerObj.cetifyType}</td>
-                            <td>${cerObj.certifyPhoto}</td>
+							<script type="text/javascript">
+								if ('${cerObj.cetifyType}' == 'IDCARD') {
+									document.write('<td>身份证</td>');
+								}
+								else if('${cerObj.cetifyType}' == 'PASSPORT') {
+									document.write('<td>护照</td>');
+								}
+								else if('${cerObj.cetifyType}' == 'STUDENTID') {
+									document.write('<td>学生证</td>');
+								}
+								else if('${cerObj.cetifyType}' == 'ALIPAYID') {
+									document.write('<td>支付宝</td>');
+								}
+							</script>
+                            <td><img src=${cerObj.certifyPhoto} width="128" height="128"></td>
                             <td><fmt:formatDate value="${cerObj.certifyTime}" type="both" pattern="yyyy-MM-dd HH:mm" /></td>
 							<script type="text/javascript">
 								if (${cerObj.isEffective} == 1) {
-									document.write('<td>通过</td>');
-									document.write('<td>通过</td>');
 									document.write('<td>通过</td>');
 								}
 								else if(${cerObj.isEffective} == 2) {
