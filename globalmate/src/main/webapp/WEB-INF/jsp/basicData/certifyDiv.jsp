@@ -86,11 +86,12 @@
                     <tr class="tc_ord">
                         <td width="3%">昵称</td>
                         <td width="3%">认证方式</td>
-                        <td width="5%">认证图片</td>
+                        <td width="5%">认证图片1</td>
+						<td width="5%">认证图片2</td>
                         <td width="3%">认证时间</td>
                         <td width="3%">认证状态</td>
-                        <td width="3%"></td>
-                        <td width="3%"></td>
+                        <td width="2%"></td>
+                        <td width="2%"></td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="cerObj" varStatus="index">
@@ -110,8 +111,16 @@
 								else if('${cerObj.cetifyType}' == 'ALIPAYID') {
 									document.write('<td>支付宝</td>');
 								}
+								var photoUrl='${cerObj.certifyPhoto}';
+								if (photoUrl) {
+									var photos= new Array(); 
+									photos=photoUrl.split(";"); 
+									document.write('<td><img src='+photos[0]+' width="128" height="128"></td>');
+									document.write('<td><img src='+photos[1]+' width="128" height="128"></td>');
+									
+								}
 							</script>
-                            <td><img src=${cerObj.certifyPhoto} width="128" height="128"></td>
+
                             <td><fmt:formatDate value="${cerObj.certifyTime}" type="both" pattern="yyyy-MM-dd HH:mm" /></td>
 							<script type="text/javascript">
 								if (${cerObj.isEffective} == 1) {
