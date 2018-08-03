@@ -11,7 +11,7 @@ public class UCertifyInfo {
 
     private Date certifyTime;
 
-    private Boolean isEffective;
+    private int isEffective;
 
     private String cetifyType;
 
@@ -59,15 +59,17 @@ public class UCertifyInfo {
         this.certifyTime = certifyTime;
     }
 
-    public Boolean getIsEffective() {
-        return isEffective;
-    }
+   
 
-    public void setIsEffective(Boolean isEffective) {
-        this.isEffective = isEffective;
-    }
+    public int getIsEffective() {
+		return isEffective;
+	}
 
-    public String getCetifyType() {
+	public void setIsEffective(int isEffective) {
+		this.isEffective = isEffective;
+	}
+
+	public String getCetifyType() {
         return cetifyType;
     }
 

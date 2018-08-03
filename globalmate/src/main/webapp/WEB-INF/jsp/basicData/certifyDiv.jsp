@@ -10,7 +10,50 @@
                 queryUrl : "${path}/rest/basicData/cetifiyQuery",
                 uName :$('#userNameId').val()
             }
-        }
+        };
+        
+        function pass(id) {
+        	var queryUrl = "${path}/rest/basicData/cetifiyUpdate";
+        	var  param =
+        	{
+        		isEffective : 1,
+            	id : id
+        	}
+        	$.ajax({
+                async : false,
+                type : "GET",
+                url : queryUrl,
+                data : param,
+                success: function (data) {
+                	$.tooltip('校验成功');
+                },
+                error:function (data){
+                    $.tooltip('校验失败');
+                }
+            });
+        	
+        };
+        
+        function notPass(id) {
+        	var queryUrl = "${path}/rest/basicData/cetifiyUpdate";
+        	var  param =
+        	{
+        		isEffective : 2,
+            	id : id
+        	}
+        	$.ajax({
+                async : false,
+                type : "GET",
+                url : queryUrl,
+                data : param,
+                success: function (data) {
+                	$.tooltip('校验成功');
+                },
+                error:function (data){
+                    $.tooltip('校验失败');
+                }
+            });
+        };
 
     </script>
 </head>
@@ -45,6 +88,9 @@
                         <td width="3%">认证方式</td>
                         <td width="5%">认证图片</td>
                         <td width="3%">认证时间</td>
+                        <td width="3%">认证状态</td>
+                        <td width="3%"></td>
+                        <td width="3%"></td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="cerObj" varStatus="index">
@@ -53,7 +99,21 @@
                             <td>${cerObj.uName}</td>
                             <td>${cerObj.cetifyType}</td>
                             <td>${cerObj.certifyPhoto}</td>
-                             <td><fmt:formatDate value="${cerObj.certifyTime}" type="both" pattern="yyyy-MM-dd HH:mm" /></td>
+                            <td><fmt:formatDate value="${cerObj.certifyTime}" type="both" pattern="yyyy-MM-dd HH:mm" /></td>
+							<script type="text/javascript">
+								if (${cerObj.isEffective} == 1) {
+									document.write('<td>通过</td>');
+									document.write('<td>通过</td>');
+									document.write('<td>通过</td>');
+								}
+								else if(${cerObj.isEffective} == 2) {
+									document.write('<td>不通过</td>');
+								}
+								else 
+									document.write('<td>未校验</td>');
+							</script>
+                            <td> <button onclick="pass(${cerObj.id})" type="submit">通过</button></td>
+                            <td> <button onclick="notPass(${cerObj.id})" type="submit">不通过</button></td>
                         </tr>
                     </c:forEach>
                 </table>
