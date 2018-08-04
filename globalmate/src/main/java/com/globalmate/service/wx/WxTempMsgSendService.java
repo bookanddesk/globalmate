@@ -32,6 +32,7 @@ public abstract class WxTempMsgSendService implements IMsgSendService {
 
     @Override
     public WxMpTemplateMessage buildWxTempMsg(MsgEntity msgEntity) {
+        msgEntity.setMsgTempId("VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY");
         checkNotNull(msgEntity);
         checkNotNull(msgEntity.getToUserId());
         checkNotNull(msgEntity.getMsgTempId());

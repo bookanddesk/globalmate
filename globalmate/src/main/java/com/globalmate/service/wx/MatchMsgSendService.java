@@ -56,8 +56,12 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         Preconditions.checkNotNull(sysMatchNeed);
         Preconditions.checkNotNull(sysMatchNeed.getProviderId());
 
+        String openId = userService.getOpenId(sysMatchNeed.getProviderId());
+        if (openId == null) {
+            return null;
+        }
         MatchMsg matchMsg = new MatchMsg();
-        matchMsg.setToUserId(userService.getOpenId(sysMatchNeed.getProvideId()));
+        matchMsg.setToUserId(openId);
         matchMsg.setMsgTempId(getMsgTemplateId(matchMsg));
         matchMsg.setUrl(matchMsg.getUrl());
         matchMsg.setCreateTime(Date.from(Instant.now()));

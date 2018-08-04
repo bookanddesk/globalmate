@@ -33,9 +33,9 @@ public class MatchTask {
     private MatchMsgSendService msgSendService;
 
 
-//    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0/5 0 * * * ?")
     public void doMatch() {
-
+        System.out.println("match match -------------------------------------");
         List<Need> needs = needService.listUnHandled(null);
         if (CollectionUtils.isEmpty(needs)) {
             return;

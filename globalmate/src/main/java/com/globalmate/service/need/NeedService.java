@@ -232,7 +232,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 				List<Buy> buys = buyMapper.selectByNeedId(needId);
 				if (CollectionUtils.isNotEmpty(buys)) {
 					Buy buy = buys.get(0);
-					keyWords = new String[] {buy.getCountry(), NeedTypeEnum.buy.name(),
+					keyWords = new String[] {buy.getCountry(), NeedTypeEnum.buy.getShowValue(),
 							buy.getDescrition(), buy.getGoodsName(), buy.getBrand()};
 				}
 				break;
@@ -240,8 +240,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 				List<Carry> carries = carryMapper.selectByNeedId(needId);
 				if (CollectionUtils.isNotEmpty(carries)) {
 					Carry carry = carries.get(0);
-					keyWords = new String[] {carry.getFrom(), NeedTypeEnum.carry.name(),
-							carry.getDescription(), carry.getGoodsName(), carry.getBrand()};
+					keyWords = carry.getKeywords().toArray(new String[]{});
 				}
 				break;
 			case accompany:

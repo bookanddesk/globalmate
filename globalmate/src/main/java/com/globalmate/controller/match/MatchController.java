@@ -29,8 +29,8 @@ public class MatchController extends BaseController {
 
     @Autowired
     private MatchService matchService;
-//    @Autowired
-//    private MatchTask matchTask;
+    @Autowired
+    private MatchTask matchTask;
 
 
     @GetMapping("{needId}")
@@ -45,7 +45,7 @@ public class MatchController extends BaseController {
 
     @GetMapping("sysMatch")
     public JsonResult sysMatch() throws WxErrorException {
-//        matchTask.doMatch();
+        matchTask.doMatch();
         return buildSuccess();
     }
 

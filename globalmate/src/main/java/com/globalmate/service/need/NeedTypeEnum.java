@@ -4,7 +4,7 @@ public enum NeedTypeEnum {
 	/**
 	 * 代买
 	 */
-	buy("代买"),
+	buy("代购"),
 	/**
 	 * 帮带
 	 */
@@ -12,7 +12,7 @@ public enum NeedTypeEnum {
 	/**
 	 * 陪同
 	 */
-	accompany("陪同"),
+	accompany("陪玩"),
 	/**
 	 * 清关
 	 */
@@ -20,7 +20,7 @@ public enum NeedTypeEnum {
 	/**
 	 * 协作学习
 	 */
-	learn_cooperation("协作学习"),
+	learn_cooperation("学习互助"),
 	
 	other("其他");
 
