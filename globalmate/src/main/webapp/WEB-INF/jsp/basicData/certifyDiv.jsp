@@ -90,8 +90,8 @@
 						<td width="5%">认证图片2</td>
                         <td width="3%">认证时间</td>
                         <td width="3%">认证状态</td>
-                        <td width="2%"></td>
-                        <td width="2%"></td>
+                        <td width="1%"></td>
+                        <td width="1%"></td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="cerObj" varStatus="index">
@@ -132,8 +132,8 @@
 								else 
 									document.write('<td>未校验</td>');
 							</script>
-                            <td> <button onclick="pass(${cerObj.id})" type="submit">通过</button></td>
-                            <td> <button onclick="notPass(${cerObj.id})" type="submit">不通过</button></td>
+                            <td> <button onclick="pass('${cerObj.id}')" style="color: red; width: 100%;" class="btn btn-block btn-danger" >通过</button></td>
+                            <td> <button onclick="notPass('${cerObj.id}')" style="color: red; width: 100%;" class="btn btn-block btn-danger">不通过</button></td>
                         </tr>
                     </c:forEach>
                 </table>
