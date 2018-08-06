@@ -6,6 +6,7 @@ import com.globalmate.data.entity.po.MatchMsg;
 import com.globalmate.data.entity.po.MsgEntity;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.ICreateService;
+import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.UserService;
@@ -14,6 +15,7 @@ import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -36,6 +38,11 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
     private NeedService needService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MatchService matchService;
+
+    @Value("${homePage}")
+    private String homePage;
 
     public void send(List<SysMatchNeed> sysMatchNeeds) {
         if (CollectionUtils.isEmpty(sysMatchNeeds)) {
@@ -47,7 +54,10 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
                 continue;
             }
             MatchMsg matchMsg = create(sysMatchNeed);
-            send(matchMsg);
+            String send = send(matchMsg);
+            if (StringUtils.isNotBlank(send)) {
+                matchService.addMsgSendCount(sysMatchNeed);
+            }
         }
     }
 
@@ -74,6 +84,7 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
                             String.format("从 %s 到 %s", x.getDeparture(), x.getDestination()));
                     matchMsg.setKeyword2(x.getTag());
                     matchMsg.setRemark(x.getDescription());
+                    matchMsg.setUrl(homePage);
                 });
 
         return matchMsg;

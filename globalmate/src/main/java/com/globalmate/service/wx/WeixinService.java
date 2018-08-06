@@ -1,20 +1,18 @@
-package com.globalmate.wx.mp.service;
+package com.globalmate.service.wx;
 
 import javax.annotation.PostConstruct;
 
-import com.globalmate.wx.mp.config.WxConfigStorage;
-import com.globalmate.wx.mp.config.WxMpConfig;
-import com.globalmate.wx.mp.handler.*;
+import com.globalmate.service.wx.config.WxMpConfig;
+import com.globalmate.service.wx.handler.*;
+import me.chanjar.weixin.common.bean.menu.WxMenu;
+import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpConfigStorage;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -24,9 +22,6 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.kefu.result.WxMpKfOnlineList;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static me.chanjar.weixin.common.api.WxConsts.*;
 
@@ -65,6 +60,17 @@ public class WeixinService extends WxMpServiceImpl {
   private SubscribeHandler subscribeHandler;
 
   private WxMpMessageRouter router;
+
+  @Value("${homePage}")
+  private String homePage;
+  @Value("${helpPage}")
+  private String helpPage;
+  @Value("${personalPage}")
+  private String personalPage;
+  @Value("${myNeed}")
+  private String myNeed;
+  @Value("${sysEvaluate}")
+  private String sysEvaluate;
 
   @PostConstruct
   public void init() {
@@ -185,6 +191,47 @@ public class WeixinService extends WxMpServiceImpl {
 
   public String sendTemplateMsg(WxMpTemplateMessage message) throws WxErrorException {
     return getTemplateMsgService().sendTemplateMsg(message);
+  }
+
+  public String menuCreate() throws WxErrorException {
+    WxMenu menu = new WxMenu();
+    WxMenuButton button1 = new WxMenuButton();
+    button1.setName("求助");
+    button1.setType(MenuButtonType.VIEW);
+    button1.setUrl(homePage);
+
+    WxMenuButton button2 = new WxMenuButton();
+    button2.setType(MenuButtonType.VIEW);
+    button2.setName("来帮忙");
+    button2.setUrl(helpPage);
+
+    WxMenuButton button3 = new WxMenuButton();
+    button3.setName("我的");
+
+    menu.getButtons().add(button1);
+    menu.getButtons().add(button2);
+    menu.getButtons().add(button3);
+
+    WxMenuButton button31 = new WxMenuButton();
+    button31.setType(MenuButtonType.VIEW);
+    button31.setName("个人中心");
+    button31.setUrl(personalPage);
+
+    WxMenuButton button32 = new WxMenuButton();
+    button32.setType(MenuButtonType.VIEW);
+    button32.setName("我的求助");
+    button32.setUrl(myNeed);
+
+//    WxMenuButton button33 = new WxMenuButton();
+//    button33.setType(MenuButtonType.VIEW);
+//    button33.setName("平台反馈");
+//    button33.setKey(sysEvaluate);
+
+    button3.getSubButtons().add(button31);
+    button3.getSubButtons().add(button32);
+//        button3.getSubButtons().add(button33);
+
+        return this.getMenuService().menuCreate(menu);
   }
 
 }

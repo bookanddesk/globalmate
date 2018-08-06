@@ -1,6 +1,6 @@
-package com.globalmate.wx.mp.controller;
+package com.globalmate.controller.wx;
 
-import com.globalmate.wx.mp.service.WeixinService;
+import com.globalmate.service.wx.WeixinService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

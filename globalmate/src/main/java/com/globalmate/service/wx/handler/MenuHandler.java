@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;

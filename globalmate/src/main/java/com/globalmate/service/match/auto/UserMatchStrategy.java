@@ -83,11 +83,18 @@ public class UserMatchStrategy extends MatchStrategy {
                 }
 
                 //标签匹配
-                if (matchTags(keyWords[1], user)) {
-                    SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
-                    matchNeed.setMatchInfo(StringUtils.join_(keyWords[1], user.getHelpAvailable()));
-                    sysMatchNeeds.add(matchNeed);
+                if (!matchTags(keyWords[1], user)) {
+                    continue;
                 }
+
+                //匹配已存在
+                if (isMatchExist(need.getId(), user.getId())) {
+                    continue;
+                }
+
+                SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
+                matchNeed.setMatchInfo(StringUtils.join_(keyWords[1], user.getHelpAvailable()));
+                sysMatchNeeds.add(matchNeed);
             }
         }
 
@@ -129,6 +136,13 @@ public class UserMatchStrategy extends MatchStrategy {
             } while (split.hasNext());
         }
         return match;
+    }
+
+    private boolean isMatchExist(String needId, String userId) {
+        SysMatchNeed matchNeed = new SysMatchNeed();
+        matchNeed.setNeedId(needId);
+        matchNeed.setProviderId(userId);
+        return CollectionUtils.isNotEmpty( matchService.queryLike(matchNeed));
     }
 
 

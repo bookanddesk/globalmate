@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.controller;
+package com.globalmate.controller.wx;
 
 import com.globalmate.controller.BaseController;
 import com.globalmate.data.entity.User;

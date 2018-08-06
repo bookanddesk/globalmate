@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-public class NullHandler extends AbstractHandler {
+public class KfSessionHandler extends AbstractHandler {
 
-    @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
-            Map<String, Object> context, WxMpService wxMpService,
+  @Override
+  public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
+      Map<String, Object> context, WxMpService wxMpService,
             WxSessionManager sessionManager) {
-        return null;
-    }
+    //TODO 对会话做处理
+    return null;
+  }
 
 }

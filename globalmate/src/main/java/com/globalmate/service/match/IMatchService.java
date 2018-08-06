@@ -32,4 +32,8 @@ public interface IMatchService {
     int addMatchNeed(SysMatchNeed sysMatchNeed);
 
     int addMatchNeeds(List<SysMatchNeed> matchNeeds);
+
+    List<SysMatchNeed> queryLike(SysMatchNeed matchNeed);
+
+    int addMsgSendCount(SysMatchNeed matchNeed);
 }

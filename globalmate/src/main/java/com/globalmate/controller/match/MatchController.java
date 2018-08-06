@@ -6,7 +6,6 @@ import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.match.auto.MatchTask;
 import com.globalmate.uitl.CollectionUtils;
-import com.globalmate.wx.mp.service.WeixinService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -207,6 +207,7 @@ public class UserService implements IUserService, ITokenservice {
         if (CollectionUtils.isEmpty(users)) {
             User user = new User();
             user.setId(IdGenerator.generateId());
+            user.setEnable(GMConstant.ONE_STR_VALUE);
             copyProperties(user, wxMpUser);
             return userMapper.insert(user);
         }

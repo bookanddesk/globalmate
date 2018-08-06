@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;

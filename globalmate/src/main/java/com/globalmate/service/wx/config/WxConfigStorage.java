@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.config;
+package com.globalmate.service.wx.config;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;

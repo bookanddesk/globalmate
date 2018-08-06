@@ -15,7 +15,7 @@
     <util:properties id="wxProperties" location="classpath:config/wx.properties"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.globalmate"/>
+    <context:component-scan base-package="com.globalmate.service;com.globalmate.common"/>
 
 
 </beans>

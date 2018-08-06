@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -73,6 +74,23 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
             return matchNeedMapper.insertBatch(matchNeeds);
         }
         return -1;
+    }
+
+    @Override
+    public List<SysMatchNeed> queryLike(SysMatchNeed matchNeed) {
+        if (matchNeed != null) {
+            return matchNeedMapper.queryMatchNeeds(matchNeed);
+        }
+        return null;
+    }
+
+    @Override
+    public int addMsgSendCount(SysMatchNeed matchNeed) {
+        if (matchNeed != null && matchNeed.getId() != null) {
+            matchNeed.setMatchMsgCount(Optional.ofNullable(matchNeed.getMatchMsgCount()).orElse(0) + 1);
+            return matchNeedMapper.updateByPrimaryKeySelective(matchNeed);
+        }
+        return 0;
     }
 
 

@@ -1,11 +1,11 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import java.util.Map;
 
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
-import com.globalmate.wx.mp.builder.TextBuilder;
-import com.globalmate.wx.mp.service.WeixinService;
+import com.globalmate.service.wx.builder.TextBuilder;
+import com.globalmate.service.wx.WeixinService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

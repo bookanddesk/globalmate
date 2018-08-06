@@ -1,9 +1,8 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import java.util.Map;
 
 import com.globalmate.service.user.UserService;
-import com.globalmate.wx.mp.handler.AbstractHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

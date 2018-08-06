@@ -207,6 +207,9 @@
       <if test="providerId != null">
         provider_id = #{providerId,jdbcType=VARCHAR}
       </if>
+      <if test="needId != null">
+        and need_id = #{needId,jdbcType=VARCHAR}
+      </if>
     </where>
   </select>
 

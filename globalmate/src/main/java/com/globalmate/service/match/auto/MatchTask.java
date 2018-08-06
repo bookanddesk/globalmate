@@ -11,6 +11,7 @@ import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 import java.util.List;
@@ -33,9 +34,10 @@ public class MatchTask {
     private MatchMsgSendService msgSendService;
 
 
-    @Scheduled(cron = "0/5 0 * * * ?")
+    @Scheduled(cron = "0 */3 * * * ?")
     public void doMatch() {
-        System.out.println("match match -------------------------------------");
+        System.out.println("match match --run-----------------------------count:" +
+                ++anInt + "---threadId:" + Thread.currentThread().getId());
         List<Need> needs = needService.listUnHandled(null);
         if (CollectionUtils.isEmpty(needs)) {
             return;
@@ -53,6 +55,13 @@ public class MatchTask {
         msgSendService.send(sysMatchNeeds);
 
 
+    }
+
+    int anInt = 0;
+//    @Scheduled(cron = "*/5 * * * * ?")
+    public void run() {
+        System.out.println("match match --run-----------------------------count:" +
+                ++anInt + "---threadId:" + Thread.currentThread().getId());
     }
 
 }

@@ -2,14 +2,12 @@ package com.globalmate.service.wx;
 
 import com.globalmate.data.entity.po.MsgEntity;
 import com.globalmate.uitl.StringUtils;
-import com.globalmate.wx.mp.service.WeixinService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -80,4 +78,5 @@ public abstract class WxTempMsgSendService implements IMsgSendService {
     }
 
     abstract String getMsgTemplateId(MsgEntity msgEntity);
+
 }

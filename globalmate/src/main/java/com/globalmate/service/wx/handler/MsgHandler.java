@@ -1,8 +1,8 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 import com.globalmate.uitl.GMConstant;
-import com.globalmate.wx.mp.builder.TextBuilder;
-import com.globalmate.wx.mp.service.WeixinService;
+import com.globalmate.service.wx.builder.TextBuilder;
+import com.globalmate.service.wx.WeixinService;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

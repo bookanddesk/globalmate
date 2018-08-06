@@ -1,6 +1,7 @@
 package com.globalmate.service.need;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.apache.commons.lang3.ArrayUtils.toArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.AssistHandler;
 import com.globalmate.uitl.GMConstant;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -93,8 +95,6 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		}
 		return entities;
 	}
-
-
 
 	private NeedAggEntity buildAgg(Need need) {
 		if (need == null) {
@@ -190,9 +190,12 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		checkNotNull(need);
 
 		String[] keyWords = null;
-		String type = need.getType();
-		if (StringUtils.isNotBlank(type)) {
-			keyWords = getKeyWords(need.getId(), NeedTypeEnum.valueOf(type));
+
+		AbstractNeed concreteNeed = resolveNeed(need);
+		if (concreteNeed != null) {
+			keyWords = Optional.ofNullable(concreteNeed.getKeywords())
+					.map(x -> x.toArray(new String[x.size()]))
+					.orElse(null);
 		}
 
 		if (ArrayUtils.isNotEmpty(keyWords)) {

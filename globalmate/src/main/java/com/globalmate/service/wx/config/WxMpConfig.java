@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.config;
+package com.globalmate.service.wx.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

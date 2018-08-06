@@ -1,4 +1,4 @@
-package com.globalmate.wx.mp.handler;
+package com.globalmate.service.wx.handler;
 
 public abstract class ScanHandler extends AbstractHandler {
 

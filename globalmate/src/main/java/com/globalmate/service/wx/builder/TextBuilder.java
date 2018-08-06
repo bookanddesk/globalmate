@@ -1,6 +1,6 @@
-package com.globalmate.wx.mp.builder;
+package com.globalmate.service.wx.builder;
 
-import com.globalmate.wx.mp.service.WeixinService;
+import com.globalmate.service.wx.WeixinService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
