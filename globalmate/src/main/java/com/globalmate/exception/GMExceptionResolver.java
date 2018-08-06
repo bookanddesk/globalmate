@@ -20,15 +20,15 @@ public class GMExceptionResolver implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest httpServletRequest,
                                          HttpServletResponse httpServletResponse,
                                          Object o, Exception e) {
-        if (StringUtils.isMobileDevice(httpServletRequest.getHeader(GMConstant.USER_AGENT))) {
+//        if (StringUtils.isMobileDevice(httpServletRequest.getHeader(GMConstant.USER_AGENT))) {
             MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
             String excepitonMsg = ExceptionParser.getExcepitonMsg(e);
             JsonResult fail = JsonResult.fail(excepitonMsg);
             Map<String, Object> map = BeanMapUtils.beanToMap(fail);
             return new ModelAndView(jsonView, map);
-        }else {
-            return new ModelAndView(new RedirectView(GMConstant.LOGIN_PAGE));
-        }
+//        }else {
+//            return new ModelAndView(new RedirectView(GMConstant.LOGIN_PAGE));
+//        }
 
     }
 }
