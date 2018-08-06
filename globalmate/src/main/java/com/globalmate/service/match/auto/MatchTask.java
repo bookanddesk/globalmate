@@ -34,10 +34,8 @@ public class MatchTask {
     private MatchMsgSendService msgSendService;
 
 
-    @Scheduled(cron = "0 */3 * * * ?")
+    @Scheduled(cron = "0 */30 * * * ?")
     public void doMatch() {
-        System.out.println("match match --run-----------------------------count:" +
-                ++anInt + "---threadId:" + Thread.currentThread().getId());
         List<Need> needs = needService.listUnHandled(null);
         if (CollectionUtils.isEmpty(needs)) {
             return;
@@ -57,11 +55,5 @@ public class MatchTask {
 
     }
 
-    int anInt = 0;
-//    @Scheduled(cron = "*/5 * * * * ?")
-    public void run() {
-        System.out.println("match match --run-----------------------------count:" +
-                ++anInt + "---threadId:" + Thread.currentThread().getId());
-    }
 
 }

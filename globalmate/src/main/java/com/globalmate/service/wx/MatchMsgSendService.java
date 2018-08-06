@@ -43,6 +43,8 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
 
     @Value("${homePage}")
     private String homePage;
+    @Value("${matchMsgTempId}")
+    private String matchMsgTempId;
 
     public void send(List<SysMatchNeed> sysMatchNeeds) {
         if (CollectionUtils.isEmpty(sysMatchNeeds)) {
@@ -85,6 +87,7 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
                     matchMsg.setKeyword2(x.getTag());
                     matchMsg.setRemark(x.getDescription());
                     matchMsg.setUrl(homePage);
+                    matchMsg.setMsgTempId(matchMsgTempId);
                 });
 
         return matchMsg;
