@@ -12,6 +12,7 @@ import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.AssistHandler;
+import com.globalmate.uitl.GMConstant;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
         if (StringUtils.isBlank(need.getId())) {
         	need.setId(IdGenerator.generateId());
         }
+        need.setEnable(GMConstant.ONE_STR_VALUE);
         int insert = needMapper.insert(need);
         Need returnNeed=null;
         if (insert > 0) {
