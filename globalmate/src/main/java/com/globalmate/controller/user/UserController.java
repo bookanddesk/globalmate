@@ -1,13 +1,16 @@
 package com.globalmate.controller.user;
 
 import com.globalmate.controller.BaseController;
+import com.globalmate.data.entity.Location;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.exception.user.UserCheckFailException;
+import com.globalmate.service.location.LocationService;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +27,8 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private LocationService locationService;
 
     @PostMapping("add")
     public JsonResult addUser(@RequestBody User user) {
@@ -123,5 +128,24 @@ public class UserController extends BaseController {
         return buildFail("can't find user with userid["
                 + userId + "] and openid[" + openId + "]");
     }
+
+//    @GetMapping("location")
+    public JsonResult locationInit() throws DocumentException {
+        locationService.resolveLocation(null);
+        return buildSuccess();
+    }
+
+
+    @GetMapping("country")
+    public JsonResult country() {
+        return buildSuccess(locationService.getCountries());
+    }
+
+    @GetMapping("city")
+    public JsonResult city(Location location) {
+        return buildSuccess(locationService.getLocations(location));
+    }
+
+
 
 }

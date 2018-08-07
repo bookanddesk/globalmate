@@ -52,7 +52,7 @@
         </javaClientGenerator>
         
         
-        <table tableName="wx_msg_template"  schema="" enableCountByExample="false"
+        <table tableName="location_en"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

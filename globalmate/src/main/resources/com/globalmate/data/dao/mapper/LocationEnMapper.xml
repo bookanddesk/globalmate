@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.LocationEnMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.LocationEn">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="CountryRegion" jdbcType="VARCHAR" property="countryregion" />
+    <result column="State" jdbcType="VARCHAR" property="state" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, CountryRegion, State, City
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from location_en
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from location_en
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.LocationEn">
+    insert into location_en (id, CountryRegion, State, 
+      City)
+    values (#{id,jdbcType=VARCHAR}, #{countryregion,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.LocationEn">
+    insert into location_en
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="countryregion != null">
+        CountryRegion,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="countryregion != null">
+        #{countryregion,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.LocationEn">
+    update location_en
+    <set>
+      <if test="countryregion != null">
+        CountryRegion = #{countryregion,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        State = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.LocationEn">
+    update location_en
+    set CountryRegion = #{countryregion,jdbcType=VARCHAR},
+      State = #{state,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insertBatch" parameterType="com.globalmate.data.entity.LocationEn">
+    insert into location_en (id, CountryRegion, State,
+    City)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=VARCHAR}, #{item.countryregion,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR},
+      #{item.city,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+</mapper>
