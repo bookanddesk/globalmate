@@ -22,4 +22,6 @@ public abstract class AbstractNeed extends BaseEntity {
 
     public abstract List<String> getKeywords();
 
+    public abstract String getTimeInfo();
+
 }

@@ -2,10 +2,12 @@ package com.globalmate.data.entity;
 
 import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.service.need.NeedTypeEnum;
+import com.globalmate.uitl.DateUtil;
 import com.google.common.collect.Lists;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class Clearance extends AbstractNeed {
     private String id;
@@ -127,5 +129,10 @@ public class Clearance extends AbstractNeed {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    @Override
+    public String getTimeInfo() {
+        return Optional.ofNullable(getTime()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null);
     }
 }

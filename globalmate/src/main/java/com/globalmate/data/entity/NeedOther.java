@@ -52,6 +52,11 @@ public class NeedOther extends AbstractNeed {
                 getDescription(), getTitle());
     }
 
+    @Override
+    public String getTimeInfo() {
+        return null;
+    }
+
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }

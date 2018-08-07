@@ -4,6 +4,7 @@ import com.globalmate.data.entity.Need;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.po.MatchMsg;
 import com.globalmate.data.entity.po.MsgEntity;
+import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.ICreateService;
 import com.globalmate.service.match.MatchService;
@@ -80,11 +81,15 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
 
         String needId = sysMatchNeed.getNeedId();
         NeedAggEntity needAgg = needService.getNeedAgg(needId);
+
         Optional.ofNullable(needAgg).map(NeedAggEntity::getConceretNeed)
                 .ifPresent(x -> {
-                    matchMsg.setKeyword1(x.getDestination() == null ? x.getDeparture() :
+                    matchMsg.setFirst(x.getTag());
+                    matchMsg.setKeyword1(x.getDestination() == null ?
+                            x.getDeparture() == null ? needAgg.getNeed().getWhere() : x.getDeparture() :
                             String.format("从 %s 到 %s", x.getDeparture(), x.getDestination()));
-                    matchMsg.setKeyword2(x.getTag());
+                    matchMsg.setKeyword2(x.getTimeInfo() != null ? x.getTimeInfo() :
+                            DateUtil.format(needAgg.getNeed().getCreateTime(), DateUtil.FMT_DATETIME));
                     matchMsg.setRemark(x.getDescription());
                     matchMsg.setUrl(homePage);
                     matchMsg.setMsgTempId(matchMsgTempId);

@@ -47,7 +47,7 @@ public class MatchTask {
             return ;
         }
 
-        matchService.addMatchNeeds(sysMatchNeeds);
+//        matchService.addMatchNeeds(sysMatchNeeds);
 
         //发送消息
         msgSendService.send(sysMatchNeeds);

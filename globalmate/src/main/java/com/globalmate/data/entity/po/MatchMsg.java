@@ -12,9 +12,10 @@ import com.globalmate.uitl.GMConstant;
 public class MatchMsg extends MsgEntity {
 
     public MatchMsg() {
+        super.setFirst(GMConstant.MATCH_MSG_TEMP_FIRST);
         super.setKeyword1(GMConstant.MATCH_MSG_TEMP_KEYWORD1);
-        super.setKeyword1(GMConstant.MATCH_MSG_TEMP_KEYWORD2);
-        super.setKeyword1(GMConstant.MATCH_MSG_TEMP_REMARK);
+        super.setKeyword2(GMConstant.MATCH_MSG_TEMP_KEYWORD2);
+        super.setRemark(GMConstant.MATCH_MSG_TEMP_REMARK);
     }
 
     @Override
@@ -36,6 +37,11 @@ public class MatchMsg extends MsgEntity {
 
     public void setKeyword2(String keyword2) {
         getData().put(getKeyword2(), keyword2);
+    }
+
+    @Override
+    public void setFirst(String first) {
+        getData().put(getFirst(), first);
     }
 
     public String getRemark() {

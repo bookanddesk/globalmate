@@ -2,10 +2,13 @@ package com.globalmate.data.entity;
 
 import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.service.need.NeedTypeEnum;
+import com.globalmate.uitl.DateUtil;
+import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class Accompany extends AbstractNeed {
     private String id;
@@ -137,5 +140,10 @@ public class Accompany extends AbstractNeed {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    @Override
+    public String getTimeInfo() {
+        return StringUtils.join_(Optional.ofNullable(getStartTime()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null), Optional.ofNullable(getEndTime()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null));
     }
 }

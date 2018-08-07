@@ -18,7 +18,7 @@ public interface INeedService {
     
     /**
      * 更改需求
-     * @param user
+     * @param need
      * @return
      */
 	Need updateNeed(Need need) throws NeedException;

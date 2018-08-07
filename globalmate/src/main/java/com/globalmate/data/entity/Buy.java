@@ -147,4 +147,9 @@ public class Buy extends AbstractNeed{
         return Lists.newArrayList(getCountry(), getTag(),
                 getDescrition(), getGoodsName(), getBrand());
     }
+
+    @Override
+    public String getTimeInfo() {
+        return null;
+    }
 }

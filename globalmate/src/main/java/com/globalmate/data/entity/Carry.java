@@ -2,10 +2,13 @@ package com.globalmate.data.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.service.need.NeedTypeEnum;
+import com.globalmate.uitl.DateUtil;
 import com.google.common.collect.Lists;
+import me.chanjar.weixin.common.util.DataUtils;
 
 public class Carry extends AbstractNeed{
     private String id;
@@ -187,5 +190,10 @@ public class Carry extends AbstractNeed{
     @Override
     public String getDestination() {
         return getTo();
+    }
+
+    @Override
+    public String getTimeInfo() {
+        return Optional.ofNullable(getArrive()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null);
     }
 }

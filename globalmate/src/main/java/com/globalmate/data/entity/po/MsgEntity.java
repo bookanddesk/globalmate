@@ -20,6 +20,7 @@ public abstract class MsgEntity {
     private String colour;
     private Date createTime;
 
+    protected String first;
     protected String keyword1;
     protected String keyword2;
     protected String remark;
@@ -77,6 +78,14 @@ public abstract class MsgEntity {
 
     protected void setData(Map<String, String> data) {
         this.data = data;
+    }
+
+    public String getFirst() {
+        return first;
+    }
+
+    public void setFirst(String first) {
+        this.first = first;
     }
 
     public String getKeyword1() {
