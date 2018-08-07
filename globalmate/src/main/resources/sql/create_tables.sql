@@ -450,3 +450,28 @@ create table wx_msg_template
    ext2                 varchar(64),
    primary key (id)
 );
+
+-- ----------------------------
+-- Table structure for `location` 国家地区
+-- ----------------------------
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE `location` (
+  `id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `CountryRegion` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `State` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `City` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- ----------------------------
+-- Table structure for `location_en` 国家地区英文
+-- ----------------------------
+DROP TABLE IF EXISTS `location_en`;
+CREATE TABLE `location_en` (
+  `id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `CountryRegion` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `State` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `City` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
