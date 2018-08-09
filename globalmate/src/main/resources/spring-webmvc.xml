@@ -15,11 +15,35 @@
 
     <mvc:annotation-driven>
         <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
-                <property name="supportedMediaTypes" value="application/json;charset=utf-8"/>
-            </bean>
+            <ref bean="fastJsonHttpMessageConverter4"/>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <bean id="fastJsonHttpMessageConverter4" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/plain</value>
+                <value>text/xml</value>
+            </list>
+        </property>
+        <property name="fastJsonConfig">
+            <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+                <property name="serializerFeatures">
+                    <list>
+                        <value>DisableCircularReferenceDetect </value>
+                        <value>WriteMapNullValue</value>
+                        <value>WriteNullListAsEmpty</value>
+                        <value>WriteNullStringAsEmpty</value>
+                        <value>WriteNullNumberAsZero</value>
+                        <value>WriteNullBooleanAsFalse</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
 
     <mvc:default-servlet-handler/>
 

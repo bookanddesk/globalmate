@@ -387,7 +387,7 @@
   <select id="selectByPhone" parameterType="com.globalmate.data.entity.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from user where phone_=#{phone}
+    from user where ENABLE_ = '1' and phone_=#{phone}
   </select>
 
   <update id="falseDelete" parameterType="java.lang.String">

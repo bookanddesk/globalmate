@@ -42,8 +42,8 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
     @Autowired
     private MatchService matchService;
 
-    @Value("${homePage}")
-    private String homePage;
+    @Value("${needDetailPage}")
+    private String needDetailPage;
     @Value("${matchMsgTempId}")
     private String matchMsgTempId;
 
@@ -91,10 +91,9 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
                     matchMsg.setKeyword2(x.getTimeInfo() != null ? x.getTimeInfo() :
                             DateUtil.format(needAgg.getNeed().getCreateTime(), DateUtil.FMT_DATETIME));
                     matchMsg.setRemark(x.getDescription());
-                    matchMsg.setUrl(homePage);
                     matchMsg.setMsgTempId(matchMsgTempId);
                 });
-
+        matchMsg.setUrl(String.format(needDetailPage, needId, sysMatchNeed.getProviderId(), openId));
         return matchMsg;
     }
 
