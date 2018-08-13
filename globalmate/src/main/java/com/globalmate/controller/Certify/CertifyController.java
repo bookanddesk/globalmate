@@ -1,22 +1,26 @@
 package com.globalmate.controller.Certify;
 
-import com.globalmate.controller.BaseController;
-import com.globalmate.data.entity.UCertifyInfo;
-import com.globalmate.data.entity.UEvaluation;
-import com.globalmate.data.entity.User;
-import com.globalmate.data.entity.po.JsonResult;
-import com.globalmate.data.entity.vo.EvaluationAggEntity;
-import com.globalmate.service.certify.UCertifyInfoService;
-import com.globalmate.service.evaluate.EvaluateService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-import java.util.List;
+import com.globalmate.controller.BaseController;
+import com.globalmate.data.entity.UCertifyInfo;
+import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.po.JsonResult;
+import com.globalmate.service.certify.UCertifyInfoService;
 
 /**
  * @author zhuyjh
@@ -37,6 +41,24 @@ public class CertifyController extends BaseController {
         handleValidateError(bindingResult);
         ucertifyInfo = ucertifyInfoService.addUCertifyInfo(getCurrentUser(request), ucertifyInfo);
         return buildSuccess(ucertifyInfo);
+    }
+    
+    @PostMapping("addList")
+    public JsonResult addList(@RequestBody @Validated UCertifyInfo[] ucertifyInfoList,
+                          BindingResult bindingResult,
+                          HttpServletRequest request) {
+        handleValidateError(bindingResult);
+        List<UCertifyInfo> newUcertifyInfoList = new ArrayList<UCertifyInfo>();
+        if(ucertifyInfoList !=null && ucertifyInfoList.length>0){
+	        for(int i=0;i<ucertifyInfoList.length;i++){
+	        	UCertifyInfo ucertifyInfo = ucertifyInfoList[i];
+	        	if(ucertifyInfo !=null){
+	        		ucertifyInfo = ucertifyInfoService.addUCertifyInfo(getCurrentUser(request), ucertifyInfo);
+	        		newUcertifyInfoList.add(ucertifyInfo);
+	        	}
+	        }
+        }
+        return buildSuccess(newUcertifyInfoList);
     }
 
     @PutMapping("update")
