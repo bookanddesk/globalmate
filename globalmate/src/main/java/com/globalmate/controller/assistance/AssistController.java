@@ -48,8 +48,7 @@ public class AssistController extends BaseController {
     }
 
     @GetMapping("{needId}/{action}")
-    public JsonResult assist(HttpServletRequest request,
-                             @PathVariable("needId") String needId,
+    public JsonResult assist(@PathVariable("needId") String needId,
                              @PathVariable("action") String action,
                              String providerId) {
         User provider ;

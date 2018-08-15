@@ -4,6 +4,8 @@ import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.uitl.BeanMapUtils;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -15,12 +17,14 @@ import java.util.Map;
 
 public class GMExceptionResolver implements HandlerExceptionResolver {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest,
                                          HttpServletResponse httpServletResponse,
                                          Object o, Exception e) {
 //        if (StringUtils.isMobileDevice(httpServletRequest.getHeader(GMConstant.USER_AGENT))) {
+        logger.error(e.getMessage(), e);
             MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
             String excepitonMsg = ExceptionParser.getExcepitonMsg(e);
             JsonResult fail = JsonResult.fail(excepitonMsg);

@@ -35,11 +35,11 @@ public class MatchController extends BaseController {
     @GetMapping("{needId}")
     public JsonResult list(@PathVariable("needId") String needId) {
         List<SysMatchNeed> matchNeeds = matchService.getByNeedId(null, needId);
-        if (CollectionUtils.isNotEmpty(matchNeeds)) {
-            Map<Boolean, List<SysMatchNeed>> collect = matchNeeds.stream().collect(Collectors.groupingBy(SysMatchNeed::getMatchAccept));
-            return buildSuccess(collect);
-        }
-        return buildSuccess();
+//        if (CollectionUtils.isNotEmpty(matchNeeds)) {
+//            Map<Boolean, List<SysMatchNeed>> collect = matchNeeds.stream().collect(Collectors.groupingBy(SysMatchNeed::getMatchAccept));
+//            return buildSuccess(collect);
+//        }
+        return buildSuccess(matchNeeds);
     }
 
     @GetMapping("sysMatch")
