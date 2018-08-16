@@ -36,7 +36,7 @@ public class NeedOtherController extends BaseController {
     	//need自己组装,存储基本信息
     	Need need=new Need();
     	need.setCreateTime(new Date());
-    	need.setType(NeedTypeEnum.learn_cooperation.name());
+    	need.setType(NeedTypeEnum.other.name());
     	need.setWhere(needOther.getDeparture());
     	//取当前登录用户
     	User user = getCurrentUser(request);
