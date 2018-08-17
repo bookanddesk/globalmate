@@ -7,11 +7,15 @@ import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.exception.user.UserRelationException;
 import com.globalmate.service.user.RelationService;
 import com.globalmate.service.user.UserService;
+import com.globalmate.uitl.CollectionUtils;
 import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author XingJiajun
@@ -52,6 +56,19 @@ public class UserRelationController extends BaseController {
         }
         return buildFail("addFriend failed with userId : ["
                 + getCurrentUser().getId() + "],targetUserId : [" + targetUserId + "]");
+    }
+
+    @GetMapping("getFriends")
+    public JsonResult getFriends(String userId) {
+        userId = userId == null ? getCurrentUser().getId() : userId;
+        List<UFansRelations> friendRelations = relationService.getFriendRelations(userId);
+        if (CollectionUtils.isNotEmpty(friendRelations)) {
+            List<User> collect = friendRelations.stream()
+                    .map(x -> userService.getUser(x.getuRelatedId()))
+                    .collect(Collectors.toList());
+            return buildSuccess(collect);
+        }
+        return buildSuccess(null);
     }
 
 }

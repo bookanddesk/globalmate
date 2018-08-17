@@ -182,4 +182,15 @@
       and relation_type = #{relationType,jdbcType=SMALLINT}
   </select>
 
+  <select id="queryLike" parameterType="com.globalmate.data.entity.UFansRelations"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from u_fans_relations
+    where is_deleted = 0
+    <if test="uId != null and uId != '' ">
+      and u_id = #{uId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
 </mapper>

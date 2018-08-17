@@ -3,6 +3,8 @@ package com.globalmate.data.dao.mapper;
 import com.globalmate.data.entity.UFansRelations;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UFansRelationsMapper {
     int deleteByPrimaryKey(String id);
 
@@ -19,4 +21,6 @@ public interface UFansRelationsMapper {
     int relationsCount(@Param("uId") String userId,
                        @Param("uRelatedId") String targetUserId,
                        @Param("relationType") short relationType);
+
+    List<UFansRelations> queryLike(UFansRelations relations);
 }

@@ -54,7 +54,7 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
 
         UFansRelations relations = create(targetUser);
         relations.setRelationType(friendCode);
-        int insert = relationsMapper.insert(relations);
+        int insert = relationsMapper.insertSelective(relations);
         if (insert > 0) {
             return relationsMapper.selectByPrimaryKey(relations.getId());
         }
@@ -63,7 +63,9 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
 
     @Override
     public List<UFansRelations> getFriendRelations(String userId) {
-        return null;
+        UFansRelations relations = new UFansRelations();
+        relations.setuId(userId);
+        return relationsMapper.queryLike(relations);
     }
 
     @Override
@@ -77,6 +79,7 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
         relations.setuId(user.getId());
         relations.setuName(user.getNikename());
         relations.setCreateTime(Date.from(Instant.now()));
+        relations.setModityTime(Date.from(Instant.now()));
         if (targetUser != null) {
             relations.setuRelatedId(targetUser.getId());
             relations.setuRelatedName(targetUser.getNikename());
