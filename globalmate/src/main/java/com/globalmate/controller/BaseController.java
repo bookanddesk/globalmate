@@ -44,11 +44,11 @@ public abstract class BaseController {
     }
 
     protected User getCurrentUser(HttpServletRequest request) {
-        return (User) request.getAttribute("user");
+        return (User) request.getAttribute(GMConstant.USER);
     }
 
     protected User getCurrentUser() {
-        return (User) request.getAttribute("user");
+        return (User) request.getAttribute(GMConstant.USER);
     }
 
     protected String getMsg(String msgKey) {

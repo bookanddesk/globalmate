@@ -158,8 +158,28 @@ public class GMEnums {
         public int getValue() {
             return this.value;
         }
+    }
 
+    /**
+     * 用户关系类型
+     */
+    public enum UserRelationType {
+        friend((short)0, "好友"),    //好友关系
+        fans((short)1, "粉丝");     //粉丝关系
 
+        private short code;
+        private String value;
+
+        UserRelationType(short code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+        public String getValue() {
+            return this.value;
+        }
+        public short getCode() {
+            return this.code;
+        }
     }
 
 }

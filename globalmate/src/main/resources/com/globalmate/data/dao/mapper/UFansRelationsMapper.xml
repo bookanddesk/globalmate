@@ -174,4 +174,12 @@
       rela_ext3 = #{relaExt3,jdbcType=VARCHAR}
     where id_ = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="relationsCount" resultType="java.lang.Integer">
+    select count(1) from u_fans_relations
+    where u_id = #{uId,jdbcType=VARCHAR}
+      and u_related_id = #{uRelatedId,jdbcType=VARCHAR}
+      and relation_type = #{relationType,jdbcType=SMALLINT}
+  </select>
+
 </mapper>
