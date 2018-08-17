@@ -85,6 +85,7 @@
         <weixin-java-tools.version>3.1.0</weixin-java-tools.version>
         <aliyun-sdk.oss.version>2.3.0</aliyun-sdk.oss.version>
         <pagehelper.version>5.1.4</pagehelper.version>
+        <poi.version>3.10-Final</poi.version>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
     </properties>

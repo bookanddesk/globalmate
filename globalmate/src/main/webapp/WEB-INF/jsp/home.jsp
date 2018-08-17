@@ -50,6 +50,7 @@
                 <li class="hov_bg"><a href="<%=request.getContextPath()%>/rest/userQuery" target="content">用户信息</a></li>
                 <li class="hov_bg"><a href="<%=request.getContextPath() %>/rest/evaluateQuery" target="content">评价信息</a></li>
                 <li class="hov_bg"><a href="<%=request.getContextPath() %>/rest/cetifiyQuery" target="content">认证信息</a></li>
+                <li class="hov_bg"><a href="<%=request.getContextPath() %>/rest/schoolQuery" target="content">学校信息</a></li>
             </ul>
         </div>
 

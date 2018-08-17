@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.DDLMapper">
+
+    <insert id="insertData" parameterType="java.util.Map">
+        <if test="fields != null and fields.size() &gt; 0">
+            insert into ${tableName}
+            <foreach collection="fields" item="field" open="(" close=")" separator=",">
+                <if test="field.fieldValue != null ">
+                    ${field.fieldName}
+                </if>
+            </foreach>
+            values
+            <foreach collection="fields" item="field" open="(" close=")" separator=",">
+                <if test="field.fieldValue != null ">
+                    #{field.fieldValue}
+                </if>
+            </foreach>
+        </if>
+    </insert>
+
+
+</mapper>
