@@ -1,6 +1,7 @@
 package com.globalmate.service.assistance;
 
 import com.globalmate.data.entity.*;
+import com.globalmate.data.entity.vo.NeedAggEntity;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public interface IAssistService {
      * @param user
      * @return
      */
-    List<Need> listSOS(User user);
+    List<NeedAggEntity> listSOS(User user);
 
     /**
      * 实施帮助

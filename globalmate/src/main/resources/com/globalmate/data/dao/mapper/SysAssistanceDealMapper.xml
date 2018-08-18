@@ -228,4 +228,16 @@
     </where>
   </select>
 
+  <select id="queryAssists" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_assistance_deal
+    <where>
+      <if test="uProviderId != null and uProviderId != '' ">
+        u_provider_id_ = #{uProviderId}
+      </if>
+      and assist_status != 'refuse'
+    </where>
+  </select>
+
 </mapper>

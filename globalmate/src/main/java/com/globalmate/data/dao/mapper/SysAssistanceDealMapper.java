@@ -1,6 +1,7 @@
 package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.SysAssistanceDeal;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface SysAssistanceDealMapper {
     int updateByPrimaryKey(SysAssistanceDeal record);
 
     List<SysAssistanceDeal> queryRecords(SysAssistanceDeal assistanceDeal);
+
+    List<SysAssistanceDeal> queryAssists(@Param("uProviderId") String providerId);
 }

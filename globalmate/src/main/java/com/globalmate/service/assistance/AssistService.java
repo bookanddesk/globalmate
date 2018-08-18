@@ -6,6 +6,7 @@ import com.globalmate.data.entity.SysAssistanceDeal;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.GMEnums;
+import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.exception.need.NeedException;
 import com.globalmate.service.common.AssistHandler;
 import com.globalmate.service.common.ICreateService;
@@ -61,22 +62,24 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
 
     @Override
     public List<SysAssistanceDeal> getAssistanceDeal(User user) {
-        SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
-        if (user != null) {
-            assistanceDeal.setuProviderId(user.getId());
-        }
-        assistanceDeal.setAssistStatus(GMEnums.ServiceStatus.END.getValue());
-        return assistanceDealMapper.queryRecords(assistanceDeal);
+//        SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
+//        if (user != null) {
+//            assistanceDeal.setuProviderId(user.getId());
+//        }
+//        assistanceDeal.setAssistStatus(GMEnums.ServiceStatus.END.getValue());
+        return assistanceDealMapper.queryAssists(user.getId());
     }
 
     @Override
-    public List<Need> listSOS(User user) {
+    public List<NeedAggEntity> listSOS(User user) {
         List<SysMatchNeed> sysMatchNeeds = matchService.listMatch(user);
         if (CollectionUtils.isEmpty(sysMatchNeeds)) {
             return null;
         }
-        List<String> needIds = sysMatchNeeds.stream().map(SysMatchNeed::getNeedId).collect(Collectors.toList());
-        return needService.listByIds(needIds);
+        List<NeedAggEntity> entities = sysMatchNeeds.stream()
+                .map(x -> needService.getNeedAgg(x.getNeedId()))
+                .collect(Collectors.toList());
+        return entities;
     }
 
     @Override
