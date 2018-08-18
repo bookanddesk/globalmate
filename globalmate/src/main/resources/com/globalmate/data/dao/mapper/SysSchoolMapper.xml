@@ -170,6 +170,7 @@
         `name` like concat('%', (concat(#{name,jdbcType=VARCHAR}, '%')))
       </if>
     </where>
+    order by `name` asc
   </select>
 
 </mapper>

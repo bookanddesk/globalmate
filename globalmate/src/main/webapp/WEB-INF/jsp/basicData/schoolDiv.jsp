@@ -63,7 +63,7 @@
                             <p>
                                 <button type="submit">查询</button>
                             </p>
-                           <%-- <p>
+                            <%--<p>
                                 <button type="button" onclick="exportExcelTemplate()">导出模板</button>
                             </p>--%>
                         </li>
@@ -84,7 +84,7 @@
                     <tr class="tc_ord">
                         <td width="3%">学校名称</td>
                         <td width="3%">所在地</td>
-                        <td width="5%">层次</td>
+                        <td width="5%">校徽</td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="schoolObj" varStatus="index">
@@ -92,7 +92,7 @@
                             <td style="display: none;">${schoolObj.id}</td>
                             <td>${schoolObj.name}</td>
                             <td>${schoolObj.location}</td>
-                            <td>${schoolObj.level}</td>
+                            <td><img src=${schoolObj.ext3}></td>
                         </tr>
                     </c:forEach>
                 </table>

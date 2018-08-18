@@ -60,10 +60,12 @@ public class SchoolService extends AbstractExcelService implements ISchoolServic
     private Map<String, String> getFieldCodeNameMap() {
         Map<String, String> map = Maps.newLinkedHashMap();
         map.put("name", "学校名称");
-        map.put("code", "学校标识码");
-        map.put("supervisor", "主管部门");
+//        map.put("code", "学校标识码");
+//        map.put("supervisor", "主管部门");
         map.put("location","所在地");
-        map.put("level", "办学层次");
+//        map.put("level", "办学层次");
+        map.put("ext3", "imgUrl");
+        map.put("ext1", "国别");
         return map;
     }
     private List<String> getColumnCodes() {

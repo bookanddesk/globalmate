@@ -457,9 +457,9 @@ create table wx_msg_template
 DROP TABLE IF EXISTS `location`;
 CREATE TABLE `location` (
   `id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `CountryRegion` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `State` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `City` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CountryRegion` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,-- 国家
+  `State` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,-- 省
+  `City` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,-- 城市
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
