@@ -34,12 +34,12 @@
             </activation>
             <properties>
                 <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
-                <!--<pom.jdbc.url>jdbc:mysql://rm-uf6ku3q0992inwq39so.mysql.rds.aliyuncs.com/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.url>jdbc:mysql://rm-uf6ku3q0992inwq39so.mysql.rds.aliyuncs.com/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
                 <pom.jdbc.username>gm</pom.jdbc.username>
-                <pom.jdbc.password>Globalmate88</pom.jdbc.password>-->
-                <pom.jdbc.url>jdbc:mysql://10.4.111.31:3306/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.password>Globalmate88</pom.jdbc.password>
+                <!--<pom.jdbc.url>jdbc:mysql://10.4.111.31:3306/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
                 <pom.jdbc.username>root</pom.jdbc.username>
-                <pom.jdbc.password>111111</pom.jdbc.password>
+                <pom.jdbc.password>111111</pom.jdbc.password>-->
                 <pom.redis.host>39.107.125.163</pom.redis.host>
                 <pom.redis.password>gmgm</pom.redis.password>
                 <pom.wx.appid>wx4107d508cc1d5171</pom.wx.appid>
