@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface ILocationService {
 
-    List<String> getCountries();
+    List<String> getCountries(boolean isEN);
 
-    List<Location> getLocations(Location location);
+    Object getLocations(boolean isEN, Location location);
 
 }

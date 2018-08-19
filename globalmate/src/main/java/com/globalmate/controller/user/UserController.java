@@ -137,13 +137,13 @@ public class UserController extends BaseController {
 
 
     @GetMapping("country")
-    public JsonResult country() {
-        return buildSuccess(locationService.getCountries());
+    public JsonResult country(Boolean isEN) {
+        return buildSuccess(locationService.getCountries(Optional.ofNullable(isEN).orElse(false)));
     }
 
     @GetMapping("city")
-    public JsonResult city(Location location) {
-        return buildSuccess(locationService.getLocations(location));
+    public JsonResult city(Boolean isEN, Location location) {
+        return buildSuccess(locationService.getLocations(Optional.ofNullable(isEN).orElse(false), location));
     }
 
 

@@ -32,13 +32,14 @@ public class LocationService implements ILocationService {
     private LocationEnMapper locationEnMapper;
 
     @Override
-    public List<String> getCountries() {
-        return locationMapper.distinctCountries();
+    public List<String> getCountries(boolean isEN) {
+        return isEN ? locationEnMapper.distinctCountries() : locationMapper.distinctCountries();
     }
 
     @Override
-    public List<Location> getLocations(Location location) {
-        return locationMapper.queryLike(Optional.ofNullable(location).orElse(new Location()));
+    public Object getLocations(boolean isEN, Location location) {
+        location = Optional.ofNullable(location).orElse(new Location());
+        return isEN ? locationEnMapper.queryLike(location) : locationMapper.queryLike(location);
     }
 
     public void resolveLocation(String fileName) throws DocumentException {

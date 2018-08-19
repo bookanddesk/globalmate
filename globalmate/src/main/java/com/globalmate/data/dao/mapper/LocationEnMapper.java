@@ -1,5 +1,6 @@
 package com.globalmate.data.dao.mapper;
 
+import com.globalmate.data.entity.Location;
 import com.globalmate.data.entity.LocationEn;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface LocationEnMapper {
     int updateByPrimaryKey(LocationEn record);
 
     int insertBatch(List<LocationEn> locationEns);
+
+    List<String> distinctCountries();
+
+    List<LocationEn> queryLike(Location location);
 }

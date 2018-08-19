@@ -90,4 +90,19 @@
     </foreach>
   </insert>
 
+  <select id="distinctCountries" resultType="java.lang.String">
+    select distinct CountryRegion from location_en;
+  </select>
+
+  <select id="queryLike" parameterType="com.globalmate.data.entity.Location" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from location_en
+    <where>
+      <if test="countryregion != null and countryregion != ''">
+        countryregion = #{countryregion}
+      </if>
+    </where>
+  </select>
+
 </mapper>
