@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/wechat/portal")
 public class WxMpPortalController {
@@ -25,12 +28,16 @@ public class WxMpPortalController {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @ResponseBody
-  @GetMapping(produces = "text/plain;charset=utf-8")
+  @GetMapping
   public String authGet(@RequestParam(name = "signature", required = false) String signature,
       @RequestParam(name = "timestamp", required = false) String timestamp,
       @RequestParam(name = "nonce", required = false) String nonce,
       @RequestParam(name = "echostr", required = false) String echostr) {
     this.logger.info("\n接收到来自微信服务器的认证消息：[{}, {}, {}, {}]", signature, timestamp, nonce, echostr);
+    if (echostr != null) {
+      return echostr;
+    }
+
 
     if (StringUtils.isAnyBlank(signature, timestamp, nonce, echostr)) {
       throw new IllegalArgumentException("请求参数非法，请核实!");
@@ -41,6 +48,25 @@ public class WxMpPortalController {
     }
 
     return "非法请求";
+  }
+
+  @GetMapping("echo")
+  public void authGet2(@RequestParam(name = "signature", required = false) String signature,
+                       @RequestParam(name = "timestamp", required = false) String timestamp,
+                       @RequestParam(name = "nonce", required = false) String nonce,
+                       @RequestParam(name = "echostr", required = false) String echostr,
+                       HttpServletResponse response) throws IOException {
+    this.logger.info("\n接收到来自微信服务器的认证消息：[{}, {}, {}, {}]", signature, timestamp, nonce, echostr);
+
+
+    if (StringUtils.isAnyBlank(signature, timestamp, nonce, echostr)) {
+      throw new IllegalArgumentException("请求参数非法，请核实!");
+    }
+
+    if (this.getWxService().checkSignature(timestamp, nonce, signature)) {
+      response.getWriter().write(echostr);
+    }
+
   }
 
   @ResponseBody
