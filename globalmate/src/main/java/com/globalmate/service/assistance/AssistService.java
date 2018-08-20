@@ -88,12 +88,24 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
         checkNotNull(user);
         checkNotNull(needId);
         checkNotNull(status);
+
         GMEnums.AssistAction assistAction = GMEnums.AssistAction.valueOf(status.toUpperCase());
         List<Need> needs = needService.listByIds(Lists.newArrayList(needId));
         if (CollectionUtils.isEmpty(needs)) {
             throw new NeedException("need not found with id:" + needId);
         }
         Need need = needs.get(0);
+
+        if (StringUtils.equals(need.getUserId(), user.getId())) {
+            if (assistAction.equals(GMEnums.AssistAction.COMPLETE)) {
+                need.setEnable(String.valueOf(assistAction.getNeedStatus()));
+                needService.updateNeed(need);
+                return;
+            }
+            throw new IllegalStateException("user can only do complete action oneself:[ "
+                    + user.getId() + "], needId:[" + need.getId() + "]");
+        }
+
         matchService.handle(need, assistAction, user);
     }
 
