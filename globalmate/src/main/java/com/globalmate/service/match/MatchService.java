@@ -113,22 +113,31 @@ public class MatchService extends AssistHandler<Need, GMEnums.AssistAction, User
 
             SysMatchNeed matchNeed = matchNeeds.get(0);
             boolean agree = action.equals(GMEnums.AssistAction.AGREE);
-            this.updateAssistStatus(Lists.newArrayList(matchNeed.getId()), agree);
 
             if (agree) {
+//                this.updateAssistStatus(Lists.newArrayList(matchNeed.getId()), agree);
                 this.setLocal(StringUtils.join_(need.getId(), user.getId()), matchNeed.getProvideId());
                 //更新其他匹配的状态
-                List<SysMatchNeed> sysMatchNeeds = this.getByNeedId(null, need.getId());
-                if (CollectionUtils.isNotEmpty(sysMatchNeeds)) {
-                    this.updateAssistStatus(sysMatchNeeds.stream()
-                            .map(SysMatchNeed::getId)
-                            .filter(x -> StringUtils.equals(x, need.getId()))
-                            .collect(Collectors.toList()),
-                            !agree);
-                }
+//                List<SysMatchNeed> sysMatchNeeds = this.getByNeedId(null, need.getId());
+//                if (CollectionUtils.isNotEmpty(sysMatchNeeds)) {
+////                    this.updateAssistStatus(sysMatchNeeds.stream()
+////                            .map(SysMatchNeed::getId)
+////                            .filter(x -> StringUtils.equals(x, need.getId()))
+////                            .collect(Collectors.toList()),
+////                            !agree);
+//                    this.updateAssistStatus(sysMatchNeeds.stream()
+//                            .filter(x -> !user.getId().equals(x.getProviderId()))
+//                            .map(SysMatchNeed::getId)
+//                            .collect(Collectors.toList()),
+//                            !agree);
+//                }
+                matchNeedMapper.updateMatchAcceptByCase(need.getId(), user.getId());
             }
 
             if (GMEnums.AssistAction.REFUSE.equals(action)) {
+                matchNeed.setMatchAccept(agree);
+                matchNeed.setMatchExt1(action.getValue());
+                matchNeedMapper.updateByPrimaryKeySelective(matchNeed);
                 return;
             }
         }

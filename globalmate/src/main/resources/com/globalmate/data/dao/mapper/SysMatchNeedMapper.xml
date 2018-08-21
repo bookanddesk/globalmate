@@ -242,4 +242,11 @@
     </foreach>
   </insert>
 
+  <update id="updateMatchAcceptByCase" parameterType="java.lang.String">
+    update  sys_match_need
+    set match_accept =
+    case when provider_id = #{providerId} then 1 else 0 end
+    where need_id = #{needId}
+  </update>
+
 </mapper>

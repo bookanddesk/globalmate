@@ -246,4 +246,8 @@
     </where>
   </select>
 
+  <update id="updateNeedEnable" parameterType="java.lang.String" >
+    update need set ENABLE_ = #{enable,jdbcType=CHAR} where id_ = #{id,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

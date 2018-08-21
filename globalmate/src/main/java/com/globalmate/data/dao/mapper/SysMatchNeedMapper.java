@@ -22,6 +22,10 @@ public interface SysMatchNeedMapper {
 
     int updateMatchAccept(@Param("list") List<String> ids, @Param("agree") boolean agree);
 
+    int updateMatchAcceptByCase(@Param("needId") String needId, @Param("providerId") String providerId);
+
     int insertBatch(List<SysMatchNeed> list);
+
+
 
 }

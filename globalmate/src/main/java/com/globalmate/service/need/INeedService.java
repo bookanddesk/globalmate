@@ -50,5 +50,7 @@ public interface INeedService {
 
 	Need getNeed(String needId);
 	NeedAggEntity getNeedAgg(String needId);
+
+	int closeNeed(String needId);
     
 }

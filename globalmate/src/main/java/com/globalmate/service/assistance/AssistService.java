@@ -98,8 +98,9 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
 
         if (StringUtils.equals(need.getUserId(), user.getId())) {
             if (assistAction.equals(GMEnums.AssistAction.COMPLETE)) {
-                need.setEnable(String.valueOf(assistAction.getNeedStatus()));
-                needService.updateNeed(need);
+//                need.setEnable(String.valueOf(assistAction.getNeedStatus()));
+//                needService.updateNeed(need);
+                needService.closeNeed(needId);
                 return;
             }
             throw new IllegalStateException("user can only do complete action oneself:[ "

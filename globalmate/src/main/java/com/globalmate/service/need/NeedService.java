@@ -223,6 +223,14 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		return buildAgg(getNeed(needId));
 	}
 
+	@Override
+	public int closeNeed(String needId) {
+		if(StringUtils.isNotBlank(needId)) {
+			return needMapper.updateNeedEnable(needId, String.valueOf(GMEnums.NeedStatus.CLOSE.getCode()));
+		}
+		return -1;
+	}
+
 	/**
 	 * 获取需求关键字，第一个为地点名，第二个为需求标签
 	 * @param needId

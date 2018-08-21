@@ -22,4 +22,6 @@ public interface NeedMapper {
     List<Need> queryNeeds(Need need);
 
     List<Need> queryByIds(List<String> ids);
+
+    int updateNeedEnable(String needId, String enableStr);
 }
