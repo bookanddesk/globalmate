@@ -24,8 +24,8 @@
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
-                <value>text/plain</value>
-                <value>text/xml</value>
+                <!--<value>text/plain</value>
+                <value>text/xml</value>-->
             </list>
         </property>
         <property name="fastJsonConfig">
