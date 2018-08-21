@@ -3,6 +3,7 @@ package com.globalmate.data.dao.mapper;
 import java.util.List;
 
 import com.globalmate.data.entity.Need;
+import org.apache.ibatis.annotations.Param;
 
 public interface NeedMapper {
     int deleteByPrimaryKey(String id);
@@ -23,5 +24,5 @@ public interface NeedMapper {
 
     List<Need> queryByIds(List<String> ids);
 
-    int updateNeedEnable(String needId, String enableStr);
+    int updateNeedEnable(@Param("needId") String needId, @Param("enableStr") String enableStr);
 }
