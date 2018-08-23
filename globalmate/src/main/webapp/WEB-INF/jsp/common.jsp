@@ -36,4 +36,5 @@
 <script src="<%=path %>/static/js/xialjs/nav.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.hDialog.js"></script>

@@ -46,6 +46,8 @@ public interface INeedService {
 
 	List<NeedAggEntity> queryLike(Need need);
 
+	List<Need> queryNeedLike(Need need);
+
 	String[] getKeyWords(Need need);
 
 	Need getNeed(String needId);

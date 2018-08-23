@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -13,12 +13,20 @@
 
     <context:component-scan base-package="com.globalmate.controller"/>
 
-    <mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <ref bean="fastJsonHttpMessageConverter4"/>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.globalmate.service.convert.DateConvert" p:format="yyyy-MM-dd"/>
+            </list>
+        </property>
+    </bean>
 
     <bean id="fastJsonHttpMessageConverter4" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
         <property name="supportedMediaTypes">
@@ -32,7 +40,7 @@
             <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
                 <property name="serializerFeatures">
                     <list>
-                        <value>DisableCircularReferenceDetect </value>
+                        <value>DisableCircularReferenceDetect</value>
                         <value>WriteMapNullValue</value>
                         <value>WriteNullListAsEmpty</value>
                         <value>WriteNullStringAsEmpty</value>
@@ -55,12 +63,12 @@
 
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/**/user/add" />
-            <mvc:exclude-mapping path="/**/user/getToken" />
-            <mvc:exclude-mapping path="/**/user/login/**" />
-            <mvc:exclude-mapping path="/**/wechat/**" />
-            <mvc:exclude-mapping path="/**/login" />
-            <bean class="com.globalmate.common.TokenInterceptor" />
+            <mvc:exclude-mapping path="/**/user/add"/>
+            <mvc:exclude-mapping path="/**/user/getToken"/>
+            <mvc:exclude-mapping path="/**/user/login/**"/>
+            <mvc:exclude-mapping path="/**/wechat/**"/>
+            <mvc:exclude-mapping path="/**/login"/>
+            <bean class="com.globalmate.common.TokenInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -108,7 +116,7 @@
     </bean>-->
     <!-- 多语言 end -->
 
-    <task:annotation-driven />
+    <task:annotation-driven/>
 
     <!--文件上传-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

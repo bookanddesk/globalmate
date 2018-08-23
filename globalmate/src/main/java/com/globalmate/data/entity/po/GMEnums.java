@@ -8,14 +8,14 @@ package com.globalmate.data.entity.po;
 public class GMEnums {
 
     public enum NeedStatus {
-        OPEN (1, "open"),   //开放
-        RUN  (2, "run"),    //帮助中
-        CLOSE(0, "close"),  //关闭
+        OPEN (1, "开放"),   //开放
+        RUN  (2, "帮助中"),    //帮助中
+        CLOSE(0, "关闭"),  //关闭
 
-        EDIT  (3, "edit"),    //编辑中
-        NEGOTIATE  (4, "negotiate"),    //洽谈中
-        EXECUTE  (5, "execute"),    //执行中
-        COMPLETED  (6, "completed");    //已完成
+        EDIT  (3, "编辑中"),    //编辑中
+        NEGOTIATE  (4, "洽谈中"),    //洽谈中
+        EXECUTE  (5, "执行中"),    //执行中
+        COMPLETED  (6, "已完成");    //已完成
 
 
         private int code;
@@ -32,6 +32,17 @@ public class GMEnums {
 
         public int getCode() {
             return this.code;
+        }
+
+        public static NeedStatus transformCode(int code) {
+            NeedStatus needStatus = null;
+            for (NeedStatus status : NeedStatus.values()) {
+                if (code == status.getCode()) {
+                    needStatus = status;
+                    break;
+                }
+            }
+            return needStatus;
         }
     }
 

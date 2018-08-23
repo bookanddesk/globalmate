@@ -69,6 +69,24 @@ public class CertifyController extends BaseController {
         ucertifyInfo = ucertifyInfoService.updateUCertifyInfo(ucertifyInfo);
         return buildSuccess(ucertifyInfo);
     }
+
+    @PostMapping("updateList")
+    public JsonResult updateList(@RequestBody @Validated UCertifyInfo[] ucertifyInfoList,
+                              BindingResult bindingResult,
+                              HttpServletRequest request) {
+        handleValidateError(bindingResult);
+        List<UCertifyInfo> newUcertifyInfoList = new ArrayList<UCertifyInfo>();
+        if(ucertifyInfoList !=null && ucertifyInfoList.length>0){
+            for(int i=0;i<ucertifyInfoList.length;i++){
+                UCertifyInfo ucertifyInfo = ucertifyInfoList[i];
+                if(ucertifyInfo !=null){
+                    ucertifyInfo = ucertifyInfoService.updateUCertifyInfo(ucertifyInfo);
+                    newUcertifyInfoList.add(ucertifyInfo);
+                }
+            }
+        }
+        return buildSuccess(newUcertifyInfoList);
+    }
     
     @GetMapping("list")
     public JsonResult list(HttpServletRequest request,

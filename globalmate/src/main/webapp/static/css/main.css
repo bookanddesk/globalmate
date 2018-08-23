@@ -500,7 +500,7 @@ opacity:0.0;/*鍏堕�忔槑搴�50%*/}
 .Order_fist ul .ding_rig{ float:right;}
 .Order_fist ul .ding_rig button{ width:90px; height:29px; background:#1c98e7; float:left; text-align:center; font-size:14px; margin-left:4px; color:#fff; line-height:29px;}
 .Order_fist ul .ding_rig button:hover{ background:#1884c7;}
-.din_input{ width:200px; height:29px; border:1px solid #ddd; outline:none; line-height:29px; font-family:Arial, "寰蒋闆呴粦"; padding-left: 6px;}
+.din_input{ width:150px; height:29px; border:1px solid #ddd; outline:none; line-height:29px; font-family:Arial, "寰蒋闆呴粦"; padding-left: 6px;}
 .din_input:hover{ border:1px solid #1c98e7;}
 .Order_table{ width:100%; float:left; /**height:640px;**/ border:1px solid #ddd; border-bottom:none; margin-top:22px; margin-bottom: 30px;font-size: 14px}
 .Order_table table .tc_ord{ background: #1c98e7;height:34px;color: #fff;}

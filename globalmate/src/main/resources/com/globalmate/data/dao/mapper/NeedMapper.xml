@@ -225,8 +225,17 @@
             <if test="where != null and where != '' ">
                 and where_ like concat('%', (concat(#{where}, '%')))
             </if>
+            <if test="userName != null and userName != '' ">
+                and USER_NAME_ like concat('%', (concat(#{userName}, '%')))
+            </if>
+            <if test="enable != null and enable != '' ">
+                and ENABLE_ = #{enable,jdbcType=CHAR}
+            </if>
             <if test="type != null and type != '' ">
-                and type_ like concat('%', (concat(#{type}, '%')))
+                and TYPE_ = #{type}
+            </if>
+            <if test="createTime != null ">
+                and CREATE_TIME_ > #{createTime}
             </if>
         </where>
         order by CREATE_TIME_ desc
