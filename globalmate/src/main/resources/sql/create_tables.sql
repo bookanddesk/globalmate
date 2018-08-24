@@ -426,7 +426,7 @@ create table u_evaluation
    content              varchar(64) comment '评论内容',
    modify_time          timestamp DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
    create_time          timestamp comment '评论时间',
-   eva_ext1             varchar(64) comment '扩展字段1',
+   eva_ext1             varchar(64) comment '扩展字段1', -- //评价类型，personal针对个人  platform针对平台
    eva_ext2             varchar(64) comment '扩展字段2',
    eva_ext3             varchar(64) comment '扩展字段3',
    primary key (id)

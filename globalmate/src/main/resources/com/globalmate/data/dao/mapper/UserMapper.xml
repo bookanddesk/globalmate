@@ -410,8 +410,11 @@
       <if test="school != null and school != '' ">
         and school_ like concat('%', (concat(#{school}, '%')))
       </if>
-      <if test="userTag != null">
+      <if test="userTag != null and userTag != '' ">
         and user_tag_ like concat('%', (concat(#{userTag}, '%')))
+      </if>
+      <if test="uExt1 != null and uExt1 != '' ">
+        and u_ext1_ > #{uExt1}
       </if>
     </where>
     order by user_credit_ desc
@@ -428,6 +431,11 @@
     update user
     set subscribe = #{subscribe,jdbcType=BIT}
     where openid =  #{openId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateExt1" parameterType="java.lang.String">
+    update user
+    set u_ext1_ = #{ext1,jdbcType=VARCHAR}
+    where ID_ = #{id,jdbcType=VARCHAR}
   </update>
 
 </mapper>

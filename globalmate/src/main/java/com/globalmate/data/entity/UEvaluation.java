@@ -27,7 +27,7 @@ public class UEvaluation {
 
     private Date createTime;
 
-    private String evaExt1;
+    private String evaExt1;//评价类型，personal针对个人  platform针对平台
 
     private String evaExt2;
 

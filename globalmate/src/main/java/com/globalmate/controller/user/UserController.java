@@ -123,6 +123,7 @@ public class UserController extends BaseController {
             }
         }
         if (user != null) {
+            userService.updateLoginTime(user);
             return buildSuccess(userService.putUserToken(null, user));
         }
         return buildFail("can't find user with userid["

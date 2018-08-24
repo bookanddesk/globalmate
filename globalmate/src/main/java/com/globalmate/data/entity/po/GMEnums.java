@@ -1,5 +1,7 @@
 package com.globalmate.data.entity.po;
 
+import com.globalmate.uitl.StringUtils;
+
 /**
  * @author XingJiajun
  * @Date 2018/7/10 15:38
@@ -65,28 +67,28 @@ public class GMEnums {
 
     public enum AssistAction {
         //同意
-        AGREE(1, "agree") {
+        AGREE(1, "agree", "同意") {
             @Override
             public int getNeedStatus() {
                 return NeedStatus.RUN.getCode();
             }
         },
         //拒绝
-        REFUSE(-1, "refuse") {
+        REFUSE(-1, "refuse", "拒绝") {
             @Override
             public int getNeedStatus() {
                 return NeedStatus.OPEN.getCode();
             }
         },
         //完成
-        COMPLETE(0, "coplete") {
+        COMPLETE(0, "coplete", "完成") {
             @Override
            public int getNeedStatus() {
                 return NeedStatus.CLOSE.getCode();
             }
         },
         //评价
-        EVALUATION (2, "evaluation") {
+        EVALUATION (2, "evaluation", "评价") {
             @Override
             public int getNeedStatus() {
                 return NeedStatus.CLOSE.getCode();
@@ -95,17 +97,32 @@ public class GMEnums {
 
         private int code;
         private String value;
+        private String text;
 
-        AssistAction(int code, String value) {
+        AssistAction(int code, String value, String text) {
             this.code = code;
             this.value = value;
+            this.text = text;
         }
         public String getValue() {
             return this.value;
         }
+        public String getText() {
+            return this.text;
+        }
 
         public abstract int getNeedStatus();
 
+        public static AssistAction convertValue(String value) {
+            AssistAction assistAction = null;
+            for (AssistAction action : AssistAction.values()) {
+                if (StringUtils.equalsIgnoreCase(action.getValue(), value)) {
+                    assistAction = action;
+                    break;
+                }
+            }
+            return assistAction;
+        }
     }
 
     public enum UserLinkType {

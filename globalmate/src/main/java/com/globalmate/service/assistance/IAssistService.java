@@ -45,4 +45,6 @@ public interface IAssistService {
      */
     void assist(User user, String needId, String status);
 
+    List<SysAssistanceDeal> queryLike(SysAssistanceDeal deal);
+
 }

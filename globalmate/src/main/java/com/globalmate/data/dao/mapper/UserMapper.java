@@ -1,6 +1,7 @@
 package com.globalmate.data.dao.mapper;
 
 import com.globalmate.data.entity.User;
+import com.globalmate.uitl.StringUtils;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,5 +33,7 @@ public interface UserMapper {
     List<User> selectByOpenId(String openId);
 
     int updateSubscribeStatus(@Param("openId") String openId, @Param("subscribe") Boolean subscribe);
+
+    int updateExt1(@Param("id")String id, @Param("ext1")String ext1);
 
 }

@@ -216,14 +216,20 @@
     <include refid="Base_Column_List" />
     from sys_assistance_deal
     <where>
-      <if test="uProviderId != null">
+      <if test="uProviderId != null and uProviderId != '' ">
         u_provider_id_ = #{uProviderId}
       </if>
-      <if test="assistStatus != null">
+      <if test="assistStatus != null and assistStatus != '' ">
         and assist_status = #{assistStatus}
       </if>
-      <if test="needId != null">
+      <if test="needId != null and needId != '' ">
         and need_id_ = #{needId}
+      </if>
+      <if test="uNeederName != null and uNeederName != '' ">
+        and u_needer_name like concat('%', (concat(#{uNeederName}, '%')))
+      </if>
+      <if test="assistCreateTime != null">
+        and assist_create_time > #{assistCreateTime}
       </if>
     </where>
   </select>

@@ -111,6 +111,11 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
     }
 
     @Override
+    public List<SysAssistanceDeal> queryLike(SysAssistanceDeal deal) {
+        return assistanceDealMapper.queryRecords(Optional.ofNullable(deal).orElse(new SysAssistanceDeal()));
+    }
+
+    @Override
     public SysAssistanceDeal create(User user) {
         SysAssistanceDeal assistanceDeal = new SysAssistanceDeal();
         assistanceDeal.setId(IdGenerator.generateId());

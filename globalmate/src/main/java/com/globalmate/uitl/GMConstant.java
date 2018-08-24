@@ -35,6 +35,7 @@ public class GMConstant {
     public static final String CETIFIY_PAGE = "basicData/certifyDiv";
     public static final String SCHOOL_PAGE = "basicData/schoolDiv";
     public static final String NEED_PAGE = "basicData/needDiv";
+    public static final String DEAL_PAGE = "basicData/dealDiv";
     public static final String LOGIN_PAGE = "login";
     public static final String HOME_PAGE = "home";
 

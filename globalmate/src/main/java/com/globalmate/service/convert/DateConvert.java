@@ -1,5 +1,6 @@
 package com.globalmate.service.convert;
 
+import com.globalmate.uitl.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 
 import java.text.ParseException;
@@ -17,6 +18,9 @@ public class DateConvert implements Converter<String, Date> {
 
     @Override
     public Date convert(String s) {
+        if (StringUtils.isBlank(s)) {
+            return null;
+        }
         Date date = null;
         try {
             date = new SimpleDateFormat(format).parse(s);

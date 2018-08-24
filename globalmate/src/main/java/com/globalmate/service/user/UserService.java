@@ -7,6 +7,7 @@ import com.globalmate.data.entity.User;
 import com.globalmate.exception.user.UseNotFoundException;
 import com.globalmate.exception.user.UserAddFailException;
 import com.globalmate.exception.user.UserCheckFailException;
+import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.RegexUtils;
@@ -209,11 +210,13 @@ public class UserService implements IUserService, ITokenservice {
             user.setId(IdGenerator.generateId());
             user.setEnable(GMConstant.ONE_STR_VALUE);
             copyProperties(user, wxMpUser);
+            user.setCreateTime(Date.from(Instant.now()));
             return userMapper.insert(user);
         }
 
         User user = users.get(0);
         copyProperties(user, wxMpUser);
+        user.setModifyTime(Date.from(Instant.now()));
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -253,7 +256,7 @@ public class UserService implements IUserService, ITokenservice {
         user.setCity(wxMpUser.getCity() == null ? wxMpUser.getProvince() : wxMpUser.getCity());
         user.setCountry(wxMpUser.getCountry());
         user.setPic(wxMpUser.getHeadImgUrl());
-        user.setCreateTime(new Date(wxMpUser.getSubscribeTime()));
+//        user.setCreateTime(new Date(wxMpUser.getSubscribeTime()));
         user.setSubscribe_scene(wxMpUser.getSubscribeScene());
         user.setProvince(wxMpUser.getProvince());
         return user;
@@ -277,6 +280,11 @@ public class UserService implements IUserService, ITokenservice {
     @Override
     public User getTokenUser(String token) {
         return cacheService.getSerializer(token, User.class);
+    }
+
+
+    public int updateLoginTime(User user) {
+        return userMapper.updateExt1(user.getId(), DateUtil.format(Date.from(Instant.now()), DateUtil.FMT_DATETIME));
     }
 
 

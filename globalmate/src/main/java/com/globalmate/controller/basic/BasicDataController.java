@@ -4,12 +4,15 @@ import com.globalmate.controller.BaseController;
 import com.globalmate.data.entity.*;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.NeedAggEntity;
+import com.globalmate.service.assistance.AssistService;
+import com.globalmate.service.assistance.IAssistService;
 import com.globalmate.service.certify.UCertifyInfoService;
 import com.globalmate.service.evaluate.EvaluateService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.SchoolService;
 import com.globalmate.service.user.UserService;
+import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.GMConstant;
 
 import com.globalmate.uitl.StringUtils;
@@ -47,13 +50,25 @@ public class BasicDataController extends BaseController {
     private SchoolService schoolService;
     @Autowired
     private NeedService needService;
+    @Autowired
+    private IAssistService assistService;
 
 
     @GetMapping("userQuery")
-    public ModelAndView userQuery(User user) {
+    public ModelAndView userQuery(User user, String uExt1_2) {
         startPage();
         List<User> users = userService.listUsersLike(user);
-        return buildMV(GMConstant.USER_PAGE, users, user);
+        if (StringUtils.isNotBlank(uExt1_2)) {
+            Date util = DateUtil.parse(uExt1_2, DateUtil.FMT_DATE);
+            users = users.stream()
+                            .filter(x ->
+                                    StringUtils.isNotBlank(x.getuExt1()) &&
+                                            DateUtil.parse(x.getuExt1(), DateUtil.FMT_DATE).before(util))
+                            .collect(Collectors.toList());
+        }
+        ModelAndView modelAndView = buildMV(GMConstant.USER_PAGE, users, user);
+        modelAndView.addObject("uExt1_2", uExt1_2);
+        return modelAndView;
     }
 
     @GetMapping("evaluateQuery")
@@ -123,9 +138,12 @@ public class BasicDataController extends BaseController {
     }
 
     @GetMapping("needQuery")
-    public ModelAndView needQuery(Need need, @Param("createTime2")Date createTime2) {
+    public ModelAndView needQuery(Need need, @Param("createTime2") Date createTime2) {
         startPage();
         List<Need> needs = needService.queryNeedLike(need);
+        if (createTime2 != null) {
+            needs = needs.stream().filter(x -> x.getCreateTime().before(createTime2)).collect(Collectors.toList());
+        }
         needs.forEach(x -> {
             String enable = x.getEnable();
             x.setEnable(Optional.ofNullable(GMEnums.NeedStatus.transformCode(Integer.parseInt(enable)).getValue())
@@ -133,10 +151,6 @@ public class BasicDataController extends BaseController {
             String type = x.getType();
             x.setType(NeedTypeEnum.valueOf(type).getShowValue());
         });
-
-        if (createTime2 != null) {
-            needs = needs.stream().filter(x -> x.getCreateTime().compareTo(createTime2) <= 0).collect(Collectors.toList());
-        }
 
         ModelAndView modelAndView = buildMV(GMConstant.NEED_PAGE, needs, need);
 
@@ -168,5 +182,34 @@ public class BasicDataController extends BaseController {
         return modelAndView;
     }
 
+
+    @GetMapping("dealQuery")
+    public ModelAndView dealQuery(SysAssistanceDeal deal, @Param("assistCreateTime2")Date assistCreateTime2) {
+        startPage();
+        List<SysAssistanceDeal> deals = assistService.queryLike(deal);
+
+        if (assistCreateTime2 != null) {
+            deals = deals.stream().filter(x -> x.getAssistCreateTime().before(assistCreateTime2)).collect(Collectors.toList());
+        }
+
+        deals.forEach(x -> x.setAssistStatus(GMEnums.AssistAction.valueOf(x.getAssistStatus().toUpperCase()).getText()));
+
+        ModelAndView modelAndView = buildMV(GMConstant.DEAL_PAGE, deals, deal);
+
+        GMEnums.AssistAction[] values = GMEnums.AssistAction.values();
+        List<Map<String, Object>> actionOptions = new ArrayList<>(values.length);
+        for (GMEnums.AssistAction assistAction : values) {
+            Map<String, Object> option = new HashMap<>(3, 1);
+            option.put("text", assistAction.getText());
+            option.put("value", assistAction.getValue());
+            option.put("selected", StringUtils.equals(deal.getAssistStatus(), assistAction.getValue()));
+            actionOptions.add(option);
+        }
+        modelAndView.addObject("actionOptions", actionOptions);
+
+        modelAndView.addObject("assistCreateTime2", assistCreateTime2);
+
+        return modelAndView;
+    }
 
 }

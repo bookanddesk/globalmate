@@ -46,6 +46,7 @@
 	</script>
 </head>
 <body>
+${pageInfo.pageSize}条/页 共${pageInfo.total}条
 &lt;&lt;
 <c:choose>
 	<c:when test="${pageInfo.pageNum >1}">

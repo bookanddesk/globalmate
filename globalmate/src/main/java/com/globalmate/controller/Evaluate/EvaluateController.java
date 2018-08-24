@@ -5,6 +5,7 @@ import com.globalmate.data.entity.UEvaluation;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.data.entity.vo.EvaluationAggEntity;
 import com.globalmate.service.evaluate.EvaluateService;
+import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +31,9 @@ public class EvaluateController extends BaseController {
                           BindingResult bindingResult,
                           HttpServletRequest request) {
         handleValidateError(bindingResult);
+        if(StringUtils.isBlank(evaluation.getNeedId())) {
+            return buildFail("needId can't be blank when evaluate others!");
+        }
         evaluation = evaluateService.addEvaluation(getCurrentUser(request), evaluation);
         return buildSuccess(evaluation);
     }

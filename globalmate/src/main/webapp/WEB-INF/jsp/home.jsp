@@ -57,11 +57,12 @@
             </ul>
             <ul class="biaot" onClick="turnit(2,2);">
                 <li><a onclick="javascript:void(0);">
-                    <p>需求信息</p>
+                    <p>需求统计</p>
                     <i><img src="<%=request.getContextPath() %>/static/images/a.png" id="img2"></i> </a></li>
             </ul>
             <ul class="open" id="content2" style="display: none">
-                <li class="hov_bg"><a href="<%=request.getContextPath()%>/rest/needQuery" target="content">需求统计</a></li>
+                <li class="hov_bg"><a href="<%=request.getContextPath()%>/rest/needQuery" target="content">需求信息</a></li>
+                <li class="hov_bg"><a href="<%=request.getContextPath()%>/rest/dealQuery" target="content">帮助交易</a></li>
             </ul>
         </div>
 
