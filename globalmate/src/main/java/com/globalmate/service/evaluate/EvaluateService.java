@@ -43,16 +43,16 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
     @Override
     public UEvaluation addEvaluation(User user, UEvaluation evaluation) {
         checkNotNull(evaluation);
-        if (evaluation.getId() == null) {
+        if (StringUtils.isBlank(evaluation.getId())) {
             evaluation.setId(IdGenerator.generateId());
         }
-        if (evaluation.getuEvaluatorId() == null) {
+        if (StringUtils.isBlank(evaluation.getuEvaluatorId())) {
             evaluation.setuEvaluatorId(user.getId());
         }
-        if (evaluation.getuEvluatorName() == null) {
+        if (StringUtils.isBlank(evaluation.getuEvluatorName())) {
             evaluation.setuEvluatorName(user.getName());
         }
-        if (evaluation.getEvaExt1() == null) {
+        if (StringUtils.isBlank(evaluation.getEvaExt1())) {
             evaluation.setEvaExt1(GMEnums.EvaluationType.PERSONAL.getValue());
         }
         evaluation.setCreateTime(Date.from(Instant.now()));
