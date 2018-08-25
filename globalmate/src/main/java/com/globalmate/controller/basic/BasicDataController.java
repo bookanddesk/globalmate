@@ -57,15 +57,7 @@ public class BasicDataController extends BaseController {
     @GetMapping("userQuery")
     public ModelAndView userQuery(User user, String uExt1_2) {
         startPage();
-        List<User> users = userService.listUsersLike(user);
-        if (StringUtils.isNotBlank(uExt1_2)) {
-            Date util = DateUtil.parse(uExt1_2, DateUtil.FMT_DATE);
-            users = users.stream()
-                            .filter(x ->
-                                    StringUtils.isNotBlank(x.getuExt1()) &&
-                                            DateUtil.parse(x.getuExt1(), DateUtil.FMT_DATE).before(util))
-                            .collect(Collectors.toList());
-        }
+        List<User> users = userService.queryByLoginTime(user, uExt1_2);
         ModelAndView modelAndView = buildMV(GMConstant.USER_PAGE, users, user);
         modelAndView.addObject("uExt1_2", uExt1_2);
         return modelAndView;

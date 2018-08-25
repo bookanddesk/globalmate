@@ -21,8 +21,31 @@ public enum NeedTypeEnum {
 	 * 协作学习
 	 */
 	learn_cooperation("学习互助"),
-	
+	/**
+	 * 租赁
+	 */
+	rent("租赁"),
+	/**
+	 * 就医
+	 */
+	medical("就医"),
+	/**
+	 * 换汇
+	 */
+	exchange("换汇"),
+	/**
+	 * 教材
+	 */
+	teaching_material("教材"),
+	/**
+	 * 办手续
+	 */
+	formality("办手续"),
+
+
 	other("其他");
+
+
 
 	private String showValue;
 

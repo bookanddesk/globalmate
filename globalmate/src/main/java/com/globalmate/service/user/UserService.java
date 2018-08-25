@@ -247,6 +247,11 @@ public class UserService implements IUserService, ITokenservice {
         return userMapper.updateSubscribeStatus(openid, false);
     }
 
+    @Override
+    public List<User> queryByLoginTime(User user, String utilDateStr) {
+        return userMapper.queryByLoginTime(user, utilDateStr);
+    }
+
     private User copyProperties(User user, WxMpUser wxMpUser) {
         user.setNikename(wxMpUser.getNickname());
         user.setSubscribe(wxMpUser.getSubscribe());

@@ -36,4 +36,6 @@ public interface UserMapper {
 
     int updateExt1(@Param("id")String id, @Param("ext1")String ext1);
 
+    List<User> queryByLoginTime(@Param("user") User user, @Param("uExt1") String uExt1);
+
 }

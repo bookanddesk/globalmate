@@ -56,4 +56,6 @@ public interface IUserService {
 
     int userUnsubscribe(String openid);
 
+    List<User> queryByLoginTime(User user, String utilDateStr);
+
 }

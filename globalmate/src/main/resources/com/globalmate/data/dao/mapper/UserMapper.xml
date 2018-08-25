@@ -438,4 +438,23 @@
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
 
+  <select id="queryByLoginTime" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      ENABLE_ = '1'
+      <if test="user.nikename != null and user.nikename != ''">
+        and NIKENAME_ like concat('%', (concat(#{user.nikename}, '%')))
+      </if>
+      <if test="user.uExt1 != null and user.uExt1 != '' ">
+        and u_ext1_ > #{user.uExt1}
+      </if>
+      <if test="uExt1 != null and uExt1 != '' ">
+        and u_ext1_ &lt;= #{uExt1}
+      </if>
+    </where>
+    order by u_ext1_ desc
+  </select>
+
 </mapper>

@@ -91,7 +91,7 @@ public class GMEnums {
         EVALUATION (2, "evaluation", "评价") {
             @Override
             public int getNeedStatus() {
-                return NeedStatus.CLOSE.getCode();
+                return NeedStatus.COMPLETED.getCode();
             }
         };
 
