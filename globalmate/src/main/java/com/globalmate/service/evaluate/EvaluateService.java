@@ -6,6 +6,7 @@ import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.EvaluationAggEntity;
 import com.globalmate.exception.DataNotFoundException;
+import com.globalmate.service.assistance.IAssistService;
 import com.globalmate.service.common.ICreateService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.user.UserService;
@@ -39,6 +40,8 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
     private UserService userService;
     @Autowired
     private NeedService needService;
+    @Autowired
+    private IAssistService assistService;
 
     @Override
     public UEvaluation addEvaluation(User user, UEvaluation evaluation) {
@@ -59,6 +62,8 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
         int i = evaluationMapper.insert(evaluation);
         if (i > 0) {
             updateUserNiceValue(evaluation);
+            assistService.assist(userService.getUser(evaluation.getuTargeterId()),
+                    evaluation.getNeedId(), GMEnums.AssistAction.EVALUATION.getValue());
             return evaluationMapper.selectByPrimaryKey(evaluation.getId());
         }
         return null;
