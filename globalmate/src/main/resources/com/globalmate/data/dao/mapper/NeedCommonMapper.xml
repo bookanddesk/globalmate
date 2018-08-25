@@ -12,12 +12,13 @@
     <result column="reward" jdbcType="VARCHAR" property="reward" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
     <result column="ext1" jdbcType="VARCHAR" property="ext1" />
     <result column="ext2" jdbcType="VARCHAR" property="ext2" />
     <result column="ext3" jdbcType="VARCHAR" property="ext3" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, need_id, type, start_time, end_time, country, city, reward, title, description, 
+    id, need_id, type, start_time, end_time, country, city, reward, title, description, pic,
     ext1, ext2, ext3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -34,12 +35,12 @@
     insert into need_common (id, need_id, type, 
       start_time, end_time, country, 
       city, reward, title, 
-      description, ext1, ext2, 
+      description, pic, ext1, ext2,
       ext3)
     values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{country,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{reward,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR},
       #{ext3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.globalmate.data.entity.NeedCommon">
@@ -74,6 +75,9 @@
       </if>
       <if test="description != null">
         description,
+      </if>
+      <if test="pic != null">
+        pic,
       </if>
       <if test="ext1 != null">
         ext1,
@@ -115,6 +119,9 @@
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
       </if>
       <if test="ext1 != null">
         #{ext1,jdbcType=VARCHAR},

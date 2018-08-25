@@ -5,6 +5,7 @@ import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class NeedCommon extends AbstractNeed {
 
     private String needId;
 
+    @NotBlank(message = "type can't be blank!")
     private String type;
 
     private Date startTime;
@@ -30,6 +32,8 @@ public class NeedCommon extends AbstractNeed {
     private String title;
 
     private String description;
+
+    private String pic;
 
     private String ext1;
 
@@ -115,6 +119,14 @@ public class NeedCommon extends AbstractNeed {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     public String getExt1() {
