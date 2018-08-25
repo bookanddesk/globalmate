@@ -497,6 +497,7 @@ ROW_FORMAT=DYNAMIC
 
 CREATE TABLE `need_common` (
 `id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+`need_id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
 `type`  varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
 `start_time`  timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP ,
 `end_time`  timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP ,

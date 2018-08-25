@@ -55,8 +55,10 @@ public class EvaluateController extends BaseController {
     
     @GetMapping("list")
     public JsonResult list(HttpServletRequest request,
-                           @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser) {
-        List<EvaluationAggEntity> entities = evaluateService.listEvaluationAgg(onlyCurrentUser ? getCurrentUser(request) : null);
+                           @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser,
+                           @RequestParam(required = false, defaultValue = "false") Boolean acquired) {
+        List<EvaluationAggEntity> entities = evaluateService
+                .listEvaluationAgg(onlyCurrentUser ? getCurrentUser(request) : null, acquired);
         return buildSuccess(entities);
     }
 

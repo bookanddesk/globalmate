@@ -39,6 +39,8 @@ public interface IEvaluateService {
      */
     List<UEvaluation> listEvaluation(User user);
 
+    List<UEvaluation> listAcquired(User user);
+
     List<UEvaluation> listEvaluation(UEvaluation evaluation);
 
     /**

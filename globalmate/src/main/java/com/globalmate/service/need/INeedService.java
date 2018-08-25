@@ -3,6 +3,7 @@ package com.globalmate.service.need;
 import java.util.List;
 
 import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.TProvide;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.vo.NeedAggEntity;
@@ -54,5 +55,7 @@ public interface INeedService {
 	NeedAggEntity getNeedAgg(String needId);
 
 	int closeNeed(String needId);
+
+	Need addCommonNeed(NeedCommon needCommon, User user);
     
 }

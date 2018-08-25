@@ -52,7 +52,7 @@
         </javaClientGenerator>
         
         
-        <table tableName="sys_school"  schema="" enableCountByExample="false"
+        <table tableName="need_common"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

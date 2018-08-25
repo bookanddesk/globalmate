@@ -192,10 +192,16 @@
     from u_evaluation
     <where>
       <if test="uEvaluatorId != null and uEvaluatorId != '' ">
-        u_evaluator_id like concat('%', (concat(#{uEvaluatorId}, '%')))
+        u_evaluator_id = #{uEvaluatorId}
       </if>
       <if test="uEvluatorName != null and uEvluatorName != '' ">
         and u_evluator_name like concat('%', (concat(#{uEvluatorName}, '%')))
+      </if>
+      <if test="uTargeterId != null and uTargeterId != '' ">
+        u_targeter_id = #{uTargeterId}
+      </if>
+      <if test="evaExt1 != null and evaExt1 != '' ">
+        and eva_ext1 = #{evaExt1}
       </if>
     </where>
   </select>

@@ -66,6 +66,7 @@ public class BasicDataController extends BaseController {
     @GetMapping("evaluateQuery")
     public ModelAndView evaluateQuery(UEvaluation evaluation) {
         startPage();
+        evaluation.setEvaExt1(GMEnums.EvaluationType.PLATFORM.getValue());
         List<UEvaluation> uEvaluations = evaluateService.listEvaluation(evaluation);
         return buildMV(GMConstant.EVLUATION_PAGE, uEvaluations, evaluation);
     }

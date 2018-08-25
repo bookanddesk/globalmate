@@ -3,7 +3,9 @@ package com.globalmate.service.need;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.apache.commons.lang3.ArrayUtils.toArray;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ import org.springframework.stereotype.Service;
 import com.globalmate.cache.CacheServiceImpl;
 import com.globalmate.exception.need.NeedException;
 import com.globalmate.uitl.IdGenerator;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User> implements INeedService{
@@ -41,6 +46,9 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	private LearnCooperationMapper learnCooperationMapper;
     @Autowired
 	private NeedOtherMapper needOtherMapper;
+    @Autowired
+	private NeedCommonMapper commonMapper;
+
 
 	@Override
 	public Need commitNeed(Need need) throws NeedException {
@@ -148,6 +156,15 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 					abstractNeed = needOthers.get(0);
 				}
 				break;
+			case rent:
+			case medical:
+			case exchange:
+			case formality:
+			case teaching_material:
+				List<NeedCommon> needCommons = commonMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(needCommons)) {
+					abstractNeed = needCommons.get(0);
+				}
 			default:
 					break;
 		}
@@ -234,6 +251,30 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 			return needMapper.updateNeedEnable(needId, String.valueOf(GMEnums.NeedStatus.CLOSE.getCode()));
 		}
 		return -1;
+	}
+
+	@Transactional
+	@Override
+	public Need addCommonNeed(NeedCommon needCommon, User user) {
+		Need need = buildFromCommonNeed(needCommon);
+		need.setUserName(user.getName());
+		need.setUserId(user.getId());
+		need = commitNeed(need);
+		if (StringUtils.isBlank(needCommon.getId())) {
+			needCommon.setId(IdGenerator.generateId());
+		}
+		needCommon.setNeedId(need.getId());
+		commonMapper.insertSelective(needCommon);
+		return need;
+	}
+
+	private Need buildFromCommonNeed(NeedCommon needCommon) {
+		Need need = new Need();
+		need.setType(needCommon.getType());
+		need.setWhere(StringUtils.join(needCommon.getCountry(), needCommon.getCity()));
+		need.setCreateTime(Date.from(Instant.now()));
+		need.setDescription(needCommon.getDescription());
+		return need;
 	}
 
 	/**

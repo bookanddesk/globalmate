@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.uitl.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.globalmate.controller.BaseController;
@@ -46,6 +48,13 @@ public class NeedController extends BaseController {
     @GetMapping("query")
     public JsonResult query(Need need) {
         return buildSuccess(needService.queryLike(need));
+    }
+
+
+    @PostMapping("addCommon")
+    public JsonResult addCommonNeed(@RequestBody NeedCommon needCommon, BindingResult result) {
+        handleValidateError(result);
+        return buildSuccess(needService.addCommonNeed(needCommon, getCurrentUser()));
     }
 
 }

@@ -126,12 +126,21 @@ public class EvaluateService implements IEvaluateService, ICreateService<UEvalua
     }
 
     @Override
+    public List<UEvaluation> listAcquired(User user) {
+        UEvaluation evaluation = new UEvaluation();
+        if (user != null) {
+            evaluation.setuTargeterId(user.getId());
+        }
+        return evaluationMapper.queryRecords(evaluation);
+    }
+
+    @Override
     public List<UEvaluation> listEvaluation(UEvaluation evaluation) {
         return evaluationMapper.queryRecords(Optional.ofNullable(evaluation).orElse(new UEvaluation()));
     }
 
-    public List<EvaluationAggEntity> listEvaluationAgg(User user) {
-        List<UEvaluation> uEvaluations = listEvaluation(user);
+    public List<EvaluationAggEntity> listEvaluationAgg(User user, boolean acquired) {
+        List<UEvaluation> uEvaluations = acquired ? listAcquired(user) : listEvaluation(user);
         if (CollectionUtils.isEmpty(uEvaluations)) {
             return null;
         }
