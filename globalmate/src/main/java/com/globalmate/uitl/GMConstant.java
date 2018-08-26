@@ -48,5 +48,9 @@ public class GMConstant {
 
     public static final String CACHE_OPENID = "openid:";
 
+    public static final String UNDERLINE = "_";
+
+
+
 
 }

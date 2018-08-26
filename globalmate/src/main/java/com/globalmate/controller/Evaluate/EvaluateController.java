@@ -5,6 +5,7 @@ import com.globalmate.data.entity.UEvaluation;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.data.entity.vo.EvaluationAggEntity;
 import com.globalmate.service.evaluate.EvaluateService;
+import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,8 @@ public class EvaluateController extends BaseController {
 
     @Autowired
     private EvaluateService evaluateService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("add")
     public JsonResult add(@RequestBody @Validated UEvaluation evaluation,
@@ -59,6 +62,14 @@ public class EvaluateController extends BaseController {
                            @RequestParam(required = false, defaultValue = "false") Boolean acquired) {
         List<EvaluationAggEntity> entities = evaluateService
                 .listEvaluationAgg(onlyCurrentUser ? getCurrentUser(request) : null, acquired);
+        return buildSuccess(entities);
+    }
+
+    @GetMapping("list/{userId}")
+    public JsonResult list(@PathVariable("userId") String userId,
+                           @RequestParam(required = false, defaultValue = "true") Boolean acquired) {
+        List<EvaluationAggEntity> entities = evaluateService
+                .listEvaluationAgg(userService.getUser(userId), acquired);
         return buildSuccess(entities);
     }
 

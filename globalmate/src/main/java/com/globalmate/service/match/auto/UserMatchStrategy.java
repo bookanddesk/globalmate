@@ -6,8 +6,10 @@ import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.builder.SysMatchNeedBuilder;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
+import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
@@ -44,9 +46,11 @@ public class UserMatchStrategy extends MatchStrategy {
         if (CollectionUtils.isEmpty(users)) {
             return null;
         }
-        List<SysMatchNeed> sysMatchNeeds = matching(needs, users);
+//        List<SysMatchNeed> sysMatchNeeds = matching(needs, users);
+        List<SysMatchNeed> sysMatchNeeds = commonMatching(needs, users);
         return sysMatchNeeds;
     }
+
 
     /**
      * 根据用户Tag匹配需求，先过滤位置，再匹配需求描述
@@ -103,12 +107,61 @@ public class UserMatchStrategy extends MatchStrategy {
     }
 
     /**
+     * 通用需求匹配，国家，城市，标签
+     * @param needs
+     * @param users
+     * @return
+     */
+    private List<SysMatchNeed> commonMatching(List<Need> needs, List<User> users) {
+        List<SysMatchNeed> sysMatchNeeds = Lists.newArrayList();
+
+        for (Need need : needs) {
+
+            if (need == null) {
+                continue;
+            }
+
+
+            for (User user : users) {
+                if (user == null ||
+                        StringUtils.isBlank(user.getOpenid()) ||
+                        StringUtils.isBlank(user.getCountry()) ||
+                        StringUtils.isBlank(user.getCity()) ||
+                        StringUtils.equalsIgnoreCase(user.getId(), need.getUserId())) {
+                    continue;
+                }
+                //过滤位置
+                if (!locationMatch(need, user)) {
+                    continue;
+                }
+
+                //标签匹配
+                if (!matchTags(NeedTypeEnum.valueOf(need.getType()).getShowValue(), user)) {
+                    continue;
+                }
+
+                //匹配已存在
+                if (isMatchExist(need.getId(), user.getId())) {
+                    continue;
+                }
+
+                SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
+                matchNeed.setMatchInfo(StringUtils.join_(need.getType(), user.getHelpAvailable()));
+                sysMatchNeeds.add(matchNeed);
+            }
+        }
+
+
+        return sysMatchNeeds;
+    }
+
+    /**
      * 位置过滤
      * @param location
      * @return
      */
     private boolean filterUser(String location, User user) {
-        if (StringUtils.isEmpty(location) || user == null) {
+        if (StringUtils.isEmpty(location)) {
             return false;
         }
         boolean filter = false;
@@ -127,7 +180,7 @@ public class UserMatchStrategy extends MatchStrategy {
     private boolean matchTags(String needTag, User user) {
         boolean match = false;
         if (user != null && StringUtils.isNoneBlank(user.getHelpAvailable())) {
-            Iterator<String> split = Splitter.on(",").omitEmptyStrings().split(user.getHelpAvailable()).iterator();
+            Iterator<String> split = Splitter.on("、").omitEmptyStrings().split(user.getHelpAvailable()).iterator();
             do {
                 if (matchSuccess(needTag, split.next())) {
                     match = true;
@@ -145,5 +198,23 @@ public class UserMatchStrategy extends MatchStrategy {
         return CollectionUtils.isNotEmpty( matchService.queryLike(matchNeed));
     }
 
+    private boolean locationMatch(Need need, User targetUser) {
+        if (StringUtils.isBlank(need.getWhere())) {
+            return false;
+        }
+        String[] split = need.getWhere().split(GMConstant.UNDERLINE);
+        if (split.length < 2) {
+            return false;
+        }
+        String country = split[0], city = split[1];
+        if(!locationMatch(country, targetUser.getCountry())) {
+            return false;
+        }
+        return locationMatch(city, targetUser.getCity());
+    }
+
+    private boolean locationMatch(String location, String targetLocation) {
+        return StringUtils.equalsIgnoreCase(location, targetLocation);
+    }
 
 }

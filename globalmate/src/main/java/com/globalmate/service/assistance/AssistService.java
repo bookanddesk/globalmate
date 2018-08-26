@@ -77,6 +77,7 @@ public class AssistService extends AssistHandler<Need, GMEnums.AssistAction, Use
             return null;
         }
         List<NeedAggEntity> entities = sysMatchNeeds.stream()
+                .filter(x -> Optional.ofNullable(x.getMatchMsgCount()).orElse(0) > 0)
                 .map(x -> needService.getNeedAgg(x.getNeedId()))
                 .collect(Collectors.toList());
         return entities;

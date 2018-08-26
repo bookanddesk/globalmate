@@ -82,18 +82,35 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         String needId = sysMatchNeed.getNeedId();
         NeedAggEntity needAgg = needService.getNeedAgg(needId);
 
-        Optional.ofNullable(needAgg).map(NeedAggEntity::getConceretNeed)
-                .ifPresent(x -> {
-                    matchMsg.setFirst(x.getTag());
-                    matchMsg.setKeyword1(x.getDestination() == null ?
-                            x.getDeparture() == null ? needAgg.getNeed().getWhere() : x.getDeparture() :
-                            String.format("从 %s 到 %s", x.getDeparture(), x.getDestination()));
-                    matchMsg.setKeyword2(x.getTimeInfo() != null ? x.getTimeInfo() :
-                            DateUtil.format(needAgg.getNeed().getCreateTime(), DateUtil.FMT_DATETIME));
-                    matchMsg.setRemark(x.getDescription());
-                    matchMsg.setMsgTempId(matchMsgTempId);
-                });
+//        Optional.ofNullable(needAgg).map(NeedAggEntity::getConceretNeed)
+//                .ifPresent(x -> {
+//                    matchMsg.setFirst(x.getTag());
+//                    matchMsg.setKeyword1(x.getDestination() == null ?
+//                            x.getDeparture() == null ? needAgg.getNeed().getWhere() : x.getDeparture() :
+//                            String.format("从 %s 到 %s", x.getDeparture(), x.getDestination()));
+//                    matchMsg.setKeyword2(x.getTimeInfo() != null ? x.getTimeInfo() :
+//                            DateUtil.format(needAgg.getNeed().getCreateTime(), DateUtil.FMT_DATETIME));
+//                    matchMsg.setRemark(x.getDescription());
+//                    matchMsg.setMsgTempId(matchMsgTempId);
+//                });
+        setMsgInfo(matchMsg, needAgg);
         matchMsg.setUrl(String.format(needDetailPage, needId, sysMatchNeed.getProviderId(), openId));
+        return matchMsg;
+    }
+
+    private MatchMsg setMsgInfo(MatchMsg matchMsg, NeedAggEntity entity) {
+        if (entity == null) {
+            return matchMsg;
+        }
+        AbstractNeed conceretNeed = entity.getConceretNeed();
+        if (conceretNeed == null) {
+            return matchMsg;
+        }
+        matchMsg.setFirst(String.format("来自[%s]的[%s]需求", entity.getNeed().getUserName(), conceretNeed.getTag()));
+        matchMsg.setKeyword1(entity.getNeed().getWhere().replace("_", "-"));
+        matchMsg.setKeyword2(conceretNeed.getTimeInfo());
+        matchMsg.setRemark(conceretNeed.getDescription());
+        matchMsg.setMsgTempId(matchMsgTempId);
         return matchMsg;
     }
 

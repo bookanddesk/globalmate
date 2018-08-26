@@ -160,12 +160,18 @@ public class NeedCommon extends AbstractNeed {
 
     @Override
     public List<String> getKeywords() {
-        return Lists.newArrayList(getCountry(), getTag(), getCity(), getTitle());
+        return Lists.newArrayList(getCountry(), getCity(), getTag(),  getTitle());
     }
 
     @Override
     public String getTimeInfo() {
-        return StringUtils.join_(Optional.ofNullable(getStartTime()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null), Optional.ofNullable(getEndTime()).map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME)).orElse(null));
+        return StringUtils.join(new String[] {
+                Optional.ofNullable(getStartTime())
+                                .map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME))
+                                .orElse(null),
+                Optional.ofNullable(getEndTime())
+                        .map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME))
+                        .orElse(null)}, "~");
     }
 
     @Override

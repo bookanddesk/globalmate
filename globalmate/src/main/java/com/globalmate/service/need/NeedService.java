@@ -118,7 +118,14 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		if (need.getType() == null) {
 			return null;
 		}
+
 		AbstractNeed abstractNeed = null;
+
+		List<NeedCommon> needCommons = commonMapper.selectByNeedId(need.getId());
+		if (CollectionUtils.isNotEmpty(needCommons)) {
+			return needCommons.get(0);
+		}
+
 		switch (NeedTypeEnum.valueOf(need.getType())) {
 			case buy:
 				List<Buy> buys = buyMapper.selectByNeedId(need.getId());
@@ -161,9 +168,9 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 			case exchange:
 			case formality:
 			case teaching_material:
-				List<NeedCommon> needCommons = commonMapper.selectByNeedId(need.getId());
-				if (CollectionUtils.isNotEmpty(needCommons)) {
-					abstractNeed = needCommons.get(0);
+				List<NeedCommon> commons = commonMapper.selectByNeedId(need.getId());
+				if (CollectionUtils.isNotEmpty(commons)) {
+					abstractNeed = commons.get(0);
 				}
 			default:
 					break;
@@ -271,7 +278,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	private Need buildFromCommonNeed(NeedCommon needCommon) {
 		Need need = new Need();
 		need.setType(needCommon.getType());
-		need.setWhere(StringUtils.join(needCommon.getCountry(), needCommon.getCity()));
+		need.setWhere(com.globalmate.uitl.StringUtils.join_(needCommon.getCountry(), needCommon.getCity()));
 		need.setCreateTime(Date.from(Instant.now()));
 		need.setDescription(needCommon.getDescription());
 		return need;

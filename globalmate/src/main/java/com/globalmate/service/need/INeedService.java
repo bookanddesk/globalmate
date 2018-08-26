@@ -49,6 +49,11 @@ public interface INeedService {
 
 	List<Need> queryNeedLike(Need need);
 
+	/**
+	 * 获取需求关键字，数组顺序：【国家，城市，标签，标题】
+	 * @param need
+	 * @return
+	 */
 	String[] getKeyWords(Need need);
 
 	Need getNeed(String needId);

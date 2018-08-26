@@ -10,7 +10,7 @@ import com.google.common.base.Joiner;
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     public static <E> String join_ (E... els) {
-        return Joiner.on("_").skipNulls().join(els);
+        return Joiner.on(GMConstant.UNDERLINE).skipNulls().join(els);
     }
 
     public static float matchRatio(String str, String target) {
