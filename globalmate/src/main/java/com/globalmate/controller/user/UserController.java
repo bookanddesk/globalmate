@@ -9,7 +9,9 @@ import com.globalmate.service.location.LocationService;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
+import com.google.common.primitives.Ints;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.ibatis.annotations.Param;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -88,7 +90,8 @@ public class UserController extends BaseController {
             return buildSuccess();
         }
         if (byNice) {
-            users.sort(Comparator.comparing(User::getNice));
+            users.sort((x, y) -> Ints.compare(Optional.ofNullable(y.getNice()).orElse(0),
+                    Optional.ofNullable(x.getNice()).orElse(0)));
             return buildSuccess(users);
         }
         if (bySchool) {
