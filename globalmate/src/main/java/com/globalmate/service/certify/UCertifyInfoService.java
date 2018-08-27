@@ -34,7 +34,7 @@ public class UCertifyInfoService implements IUCertifyInfoService{
         	ucertifyInfo.setuId(user.getId());
         }
         if (ucertifyInfo.getuName() == null) {
-        	ucertifyInfo.setuName(user.getName());
+        	ucertifyInfo.setuName(user.getNikename() == null ? user.getName() : user.getNikename());
         }
         if (ucertifyInfo.getCetifyType() == null) {
         	//默认身份证认证方式
@@ -45,14 +45,10 @@ public class UCertifyInfoService implements IUCertifyInfoService{
         	//默认为未验证状态
         	ucertifyInfo.setIsEffective( GMEnums.UCertifyEffectiveType.UNCHECKED.getValue());
         }
-        
-        
-        
 
         ucertifyInfo.setCertifyTime(Date.from(Instant.now()));
         int i = ucertifyInfoMapper.insert(ucertifyInfo);
         if (i > 0) {
-        	updateUCertifyInfo(ucertifyInfo);
             return ucertifyInfoMapper.selectByPrimaryKey(ucertifyInfo.getId());
         }
         return null;

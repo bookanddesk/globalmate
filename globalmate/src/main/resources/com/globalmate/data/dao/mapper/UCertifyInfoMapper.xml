@@ -187,5 +187,6 @@
         and u_name like concat('%', (concat(#{uName}, '%')))
       </if>
     </where>
+      order  by certify_time desc , u_name desc
   </select>
 </mapper>

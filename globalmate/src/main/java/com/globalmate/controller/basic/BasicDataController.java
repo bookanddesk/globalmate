@@ -3,6 +3,7 @@ package com.globalmate.controller.basic;
 import com.globalmate.controller.BaseController;
 import com.globalmate.data.entity.*;
 import com.globalmate.data.entity.po.GMEnums;
+import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.assistance.AssistService;
 import com.globalmate.service.assistance.IAssistService;
@@ -75,17 +76,25 @@ public class BasicDataController extends BaseController {
     public ModelAndView cetifiyQuery(UCertifyInfo certifyInfo) {
         startPage();
         List<UCertifyInfo> ucertifyInfos = ucertifyInfoService.listCertifyInfo(certifyInfo);
+        ucertifyInfos.forEach(
+                x -> {
+                    x.setCetifyType(GMEnums.UCertifyType.valueOf(x.getCetifyType()).getShowValue());
+                    if (StringUtils.isNotBlank(x.getCertifyPhoto()))
+                        x.setCertifyPhoto(x.getCertifyPhoto().replace("\",\"", ";"));
+                });
         return buildMV(GMConstant.CETIFIY_PAGE, ucertifyInfos, certifyInfo);
     }
 
     @GetMapping("cetifiyUpdate")
-    public void cetifiyUpdate(UCertifyInfo certifyInfo) {
+    public @ResponseBody
+    JsonResult cetifiyUpdate(UCertifyInfo certifyInfo) {
         int isEffective = certifyInfo.getIsEffective();
         UCertifyInfo ucertifyInfo = ucertifyInfoService.getUCertifyInfo(certifyInfo.getId());
         if (ucertifyInfo != null) {
             ucertifyInfo.setIsEffective(isEffective);
             ucertifyInfoService.updateUCertifyInfo(ucertifyInfo);
         }
+        return JsonResult.success();
     }
 
     @GetMapping({"", "login", "index"})

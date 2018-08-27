@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../common.jsp" %>
 <html>
@@ -7,54 +8,33 @@
     <script type="text/javascript">
         function getConceretPageParams() {
             return {
-                queryUrl : "${path}/rest/basicData/cetifiyQuery",
-                uName :$('#userNameId').val()
+                queryUrl: "${path}/rest/basicData/cetifiyQuery",
+                uName: $('#userNameId').val()
             }
         };
-        
-        function pass(id) {
-        	var queryUrl = "${path}/rest/basicData/cetifiyUpdate";
-        	var  param =
-        	{
-        		isEffective : 1,
-            	id : id
-        	}
-        	$.ajax({
-                async : false,
-                type : "GET",
-                url : queryUrl,
-                data : param,
-                success: function (data) {
-                	$.tooltip('校验成功');
-                },
-                error:function (data){
-                    $.tooltip('校验失败');
-                }
-            });
-        	
-        };
-        
-        function notPass(id) {
-        	var queryUrl = "${path}/rest/basicData/cetifiyUpdate";
-        	var  param =
-        	{
-        		isEffective : 2,
-            	id : id
-        	}
-        	$.ajax({
-                async : false,
-                type : "GET",
-                url : queryUrl,
-                data : param,
-                success: function (data) {
-                	$.tooltip('校验成功');
-                },
-                error:function (data){
-                    $.tooltip('校验失败');
-                }
-            });
-        };
 
+        function pass(id, pass) {
+            var queryUrl = "${path}/rest/basicData/cetifiyUpdate";
+            var param =
+                {
+                    isEffective: pass ? 1 : 2,
+                    id: id
+                }
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: queryUrl,
+                data: param,
+                success: function (data) {
+                    $.tooltip('审核成功', 2000, true);
+                    $('#submitBtn').trigger('click')
+                },
+                error: function (data) {
+                    $.tooltip('审核失败');
+                }
+            });
+
+        };
     </script>
 </head>
 <body>
@@ -73,7 +53,7 @@
                                    placeholder="用户昵称">&nbsp;&nbsp;
                         </p>
                             <p>
-                                <button type="submit">查询</button>
+                                <button id="submitBtn" type="submit">查询</button>
                             </p>
                         </li>
                     </ul>
@@ -87,53 +67,44 @@
                         <td width="3%">昵称</td>
                         <td width="3%">认证方式</td>
                         <td width="5%">认证图片1</td>
-						<td width="5%">认证图片2</td>
+                        <td width="5%">认证图片2</td>
                         <td width="3%">认证时间</td>
                         <td width="3%">认证状态</td>
-                        <td width="1%"></td>
-                        <td width="1%"></td>
+                        <td width="5%">操作</td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="cerObj" varStatus="index">
                         <tr align="center" valign="middle" class="dr_ord">
                             <td style="display: none;">${cerObj.id}</td>
                             <td>${cerObj.uName}</td>
-							<script type="text/javascript">
-								if ('${cerObj.cetifyType}' == 'IDCARD') {
-									document.write('<td>身份证</td>');
-								}
-								else if('${cerObj.cetifyType}' == 'PASSPORT') {
-									document.write('<td>护照</td>');
-								}
-								else if('${cerObj.cetifyType}' == 'STUDENTID') {
-									document.write('<td>学生证</td>');
-								}
-								else if('${cerObj.cetifyType}' == 'ALIPAYID') {
-									document.write('<td>支付宝</td>');
-								}
-								var photoUrl='${cerObj.certifyPhoto}';
-								if (photoUrl) {
-									var photos= new Array(); 
-									photos=photoUrl.split(";"); 
-									document.write('<td><img src='+photos[0]+' width="128" height="128"></td>');
-									document.write('<td><img src='+photos[1]+' width="128" height="128"></td>');
-									
-								}
-							</script>
-
-                            <td><fmt:formatDate value="${cerObj.certifyTime}" type="both" pattern="yyyy-MM-dd HH:mm" /></td>
-							<script type="text/javascript">
-								if (${cerObj.isEffective} == 1) {
-									document.write('<td>通过</td>');
-								}
-								else if(${cerObj.isEffective} == 2) {
-									document.write('<td>不通过</td>');
-								}
-								else 
-									document.write('<td>未校验</td>');
-							</script>
-                            <td> <button onclick="pass('${cerObj.id}')" style="color: red; width: 100%;" class="btn btn-block btn-danger" >通过</button></td>
-                            <td> <button onclick="notPass('${cerObj.id}')" style="color: red; width: 100%;" class="btn btn-block btn-danger">不通过</button></td>
+                            <td>${cerObj.cetifyType}</td>
+                            <c:set var="url" value="${cerObj.certifyPhoto}"/>
+                            <c:set var="split" value="${fn:split(url, ';')}"/>
+                            <td><img src="${split[0]}" width="128" height="128"></td>
+                            <td><img src="${split[1]}" width="128" height="128"></td>
+                            <td><fmt:formatDate value="${cerObj.certifyTime}" type="both"
+                                                pattern="yyyy-MM-dd HH:mm"/></td>
+                            <c:choose>
+                                <c:when test="${cerObj.isEffective == 1}">
+                                    <td>通过</td>
+                                    <td>
+                                        <a href="#" onclick="pass('${cerObj.id}', false)">不通过</a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${cerObj.isEffective == 2}">
+                                    <td>不通过</td>
+                                    <td>
+                                        <a href="#" onclick="pass('${cerObj.id}', true)">通过</a>
+                                    </td>
+                                </c:when>
+                                <c:when test="${cerObj.isEffective == 0}">
+                                    <td>未审核</td>
+                                    <td >
+                                        <a href="#" onclick="pass('${cerObj.id}', true)">通过</a>
+                                        <a href="#" onclick="pass('${cerObj.id}', false)">不通过</a>
+                                    </td>
+                                </c:when>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </table>

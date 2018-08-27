@@ -163,10 +163,20 @@ public class GMEnums {
     
     public enum UCertifyType {
     	
-    	IDCARD,    //身份证
-        PASSPORT,     //护照
-        STUDENTID,    //学生证认证
-        ALIPAYID;     //支付宝认证
+    	IDCARD("身份证"),    //身份证
+        PASSPORT("护照"),     //护照
+        STUDENTID("学生证"),    //学生证
+        ALIPAYID("支付宝");     //支付宝认证
+
+        private String showValue;
+
+        UCertifyType(String showValue) {
+            this.showValue = showValue;
+        }
+
+        public String getShowValue() {
+            return this.showValue;
+        }
 
     }
     

@@ -1,5 +1,7 @@
 package com.globalmate.data.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 public class UCertifyInfo {
@@ -13,8 +15,10 @@ public class UCertifyInfo {
 
     private int isEffective;
 
+    @NotBlank(message = "certifyType can't be null!")
     private String cetifyType;
 
+    @NotBlank(message = "certifyPhotoUrl can't be null!")
     private String certifyPhoto;
 
     private Date modifyTime;
