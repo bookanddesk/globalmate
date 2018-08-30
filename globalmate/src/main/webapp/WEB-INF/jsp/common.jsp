@@ -26,7 +26,7 @@
 <link href="${pageContext.request.contextPath}/static/css/register.css" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/static/css/reveal.css" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/static/css/common/districtDiv_modal.css" rel="stylesheet"/>
-<link href="${pageContext.request.contextPath}/static/css/common/simpleAlert.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/static/css/common/bootstrap.css" rel="stylesheet"/>
 
 <link rel="stylesheet" href="https://www.js-css.cn/jscode/open/open15/css/common.css"/><!-- 基本样式 -->
 <link rel="stylesheet" href="https://www.js-css.cn/jscode/open/open15/css/animate.min.css"/> <!-- 动画效果 -->
@@ -37,4 +37,4 @@
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.hDialog.js"></script>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.hDialog.js"></script>--%>

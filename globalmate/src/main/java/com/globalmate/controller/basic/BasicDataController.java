@@ -79,8 +79,8 @@ public class BasicDataController extends BaseController {
         ucertifyInfos.forEach(
                 x -> {
                     x.setCetifyType(GMEnums.UCertifyType.valueOf(x.getCetifyType()).getShowValue());
-                    if (StringUtils.isNotBlank(x.getCertifyPhoto()))
-                        x.setCertifyPhoto(x.getCertifyPhoto().replace("\",\"", ";"));
+//                    if (StringUtils.isNotBlank(x.getCertifyPhoto()))
+//                        x.setCertifyPhoto(x.getCertifyPhoto().replace("\",\"", ";"));
                 });
         return buildMV(GMConstant.CETIFIY_PAGE, ucertifyInfos, certifyInfo);
     }

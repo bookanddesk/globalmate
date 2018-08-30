@@ -66,7 +66,7 @@
 
         $('.submitBtn').click(
             function () {
-                var PhoneReg = /^0{0,1}(13[0-9]|15[0-9]|153|156|18[7-9])[0-9]{8}$/; //手机正则
+                var PhoneReg = /^0{0,1}(13[0-9]|15[0-9]|153|156|18[0-9])[0-9]{8}$/; //手机正则
                 var $loginName = $('.nickname');
                 var $password = $('.email');
                 var encodePwd = "";
@@ -117,4 +117,5 @@
         $("#HBox")[0].style.display = "block";
     }
 </script>
+<script src="https://www.js-css.cn/jscode/open/open15/js/jquery.hDialog.js"></script>
 </html>
