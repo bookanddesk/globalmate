@@ -1,12 +1,19 @@
 package com.globalmate.service.location;
 
+import com.alibaba.fastjson.JSONObject;
+import com.globalmate.data.dao.mapper.LocationCnEnMapper;
 import com.globalmate.data.dao.mapper.LocationEnMapper;
 import com.globalmate.data.dao.mapper.LocationMapper;
 import com.globalmate.data.entity.Location;
+import com.globalmate.data.entity.LocationCnEn;
 import com.globalmate.data.entity.LocationEn;
+import com.globalmate.service.excel.AbstractExcelService;
+import com.globalmate.service.excel.ExcelInfo;
 import com.globalmate.uitl.CollectionUtils;
 import com.globalmate.uitl.IdGenerator;
+import com.globalmate.uitl.StringUtils;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -14,9 +21,7 @@ import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author XingJiajun
@@ -24,12 +29,14 @@ import java.util.Optional;
  * @Description
  */
 @Service
-public class LocationService implements ILocationService {
+public class LocationService extends AbstractExcelService implements ILocationService {
 
     @Autowired
     private LocationMapper locationMapper;
     @Autowired
     private LocationEnMapper locationEnMapper;
+    @Autowired
+    private LocationCnEnMapper locationCnEnMapper;
 
     @Override
     public List<String> getCountries(boolean isEN) {
@@ -41,6 +48,53 @@ public class LocationService implements ILocationService {
         location = Optional.ofNullable(location).orElse(new Location());
         return isEN ? locationEnMapper.queryLike(location) : locationMapper.queryLike(location);
     }
+
+    @Override
+    public boolean countryEquals(String country, String target) {
+        if (StringUtils.isBlank(country) || StringUtils.isBlank(target)) {
+            return false;
+        }
+
+        if (StringUtils.equalsIgnoreCase(country, target)) {
+            return true;
+        }
+
+        LocationCnEn locationCnEn = locationCnEnMapper.selectByCountry(target);
+
+        if (StringUtils.equalsIgnoreCase(country, locationCnEn.getCountryEn())) {
+            return true;
+        }
+
+        if (StringUtils.equalsIgnoreCase(country, locationCnEn.getCountryCn())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean cityEquals(String city, String target) {
+        if (StringUtils.isBlank(city) || StringUtils.isBlank(target)) {
+            return false;
+        }
+
+        if (StringUtils.equalsIgnoreCase(city, target)) {
+            return true;
+        }
+
+        LocationCnEn locationCnEn = locationCnEnMapper.selectByCity(target);
+
+        if (StringUtils.equalsIgnoreCase(city, locationCnEn.getCityEn())) {
+            return true;
+        }
+
+        if (StringUtils.equalsIgnoreCase(city, locationCnEn.getCityCn())) {
+            return true;
+        }
+
+        return false;
+    }
+
 
     public void resolveLocation(String fileName) throws DocumentException {
         if (fileName == null) {
@@ -107,5 +161,21 @@ public class LocationService implements ILocationService {
         return -1;
     }
 
+    public Map<String, String> getFieldCodeNameMap() {
+        Map<String, String> map = Maps.newLinkedHashMap();
+        map.put("country_cn", "国家");
+        map.put("country_en", "country");
+        map.put("state_cn", "省");
+        map.put("state_en","state");
+        map.put("city_cn", "城市");
+        map.put("city_en", "city");
+//        map.put("ext1", "国别");
+        return map;
+    }
 
+
+    @Override
+    protected String getTableName() {
+        return "location_cn_en";
+    }
 }

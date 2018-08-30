@@ -1,8 +1,10 @@
 package com.globalmate.service.excel;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.globalmate.data.dao.mapper.DDLMapper;
 import com.globalmate.uitl.IdGenerator;
+import com.google.common.collect.Lists;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,10 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //@Service
 public abstract class AbstractExcelService {
@@ -148,7 +147,37 @@ public abstract class AbstractExcelService {
         return wookbook;
     }
 
-    public abstract ExcelInfo generateExcelInfo();
+    protected ExcelInfo generateExcelInfo() {
+        ExcelInfo excelInfo = new ExcelInfo();
+        excelInfo.setField(getFieldsNameList());
+        excelInfo.setExtraInfo(getFieldCodeNameMap());
+        excelInfo.setTableName(getExcelName());
+        excelInfo.setColumCodes(getColumnCodes());
+        return excelInfo;
+    };
+
+    private String getExcelName() {
+        return getTableName();
+    }
+
+    private ArrayList<String> getFieldsNameList(){
+        Map<String, String> fieldCodeNameMap = getFieldCodeNameMap();
+        Collection<String> strings = fieldCodeNameMap.values();
+        return Lists.newArrayList(strings);
+    }
+
+    private List<String> getColumnCodes() {
+        List<String> list = Lists.newArrayList();
+        Collection<String> strings = getFieldCodeNameMap().keySet();
+        for (String code : strings) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("columnCode", code);
+            list.add(jsonObject.toJSONString());
+        }
+        return list;
+    }
+
+    public abstract Map<String, String> getFieldCodeNameMap();
 
     protected abstract String getTableName();
 }

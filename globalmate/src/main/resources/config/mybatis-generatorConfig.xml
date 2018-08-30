@@ -52,7 +52,7 @@
         </javaClientGenerator>
         
         
-        <table tableName="need_common"  schema="" enableCountByExample="false"
+        <table tableName="location_cn_en"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

@@ -15,4 +15,8 @@ public interface ILocationService {
 
     Object getLocations(boolean isEN, Location location);
 
+    boolean countryEquals(String country, String target);
+
+    boolean cityEquals(String city, String target);
+
 }

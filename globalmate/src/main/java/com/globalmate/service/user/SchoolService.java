@@ -57,7 +57,7 @@ public class SchoolService extends AbstractExcelService implements ISchoolServic
         return Lists.newArrayList(strings);
     }
 
-    private Map<String, String> getFieldCodeNameMap() {
+    public Map<String, String> getFieldCodeNameMap() {
         Map<String, String> map = Maps.newLinkedHashMap();
         map.put("name", "学校名称");
 //        map.put("code", "学校标识码");

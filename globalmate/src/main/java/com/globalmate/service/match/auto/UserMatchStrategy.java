@@ -1,14 +1,18 @@
 package com.globalmate.service.match.auto;
 
 import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.builder.SysMatchNeedBuilder;
+import com.globalmate.data.entity.vo.NeedAggEntity;
+import com.globalmate.service.location.LocationService;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.base.Splitter;
@@ -17,6 +21,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +40,8 @@ public class UserMatchStrategy extends MatchStrategy {
     private NeedService needService;
     @Autowired
     private MatchService matchService;
+    @Autowired
+    private LocationService locationService;
 
     @Override
     public void match() {
@@ -121,6 +129,10 @@ public class UserMatchStrategy extends MatchStrategy {
                 continue;
             }
 
+            if (timeOutCheck(need)) {
+                needService.closeNeed(need.getId());
+                continue;
+            }
 
             for (User user : users) {
                 if (user == null ||
@@ -136,7 +148,7 @@ public class UserMatchStrategy extends MatchStrategy {
                 }
 
                 //标签匹配
-                if (!matchTags(NeedTypeEnum.valueOf(need.getType()).getShowValue(), user)) {
+                if (!matchTags(NeedTypeEnum.valueOf(need.getType()), user)) {
                     continue;
                 }
 
@@ -191,6 +203,20 @@ public class UserMatchStrategy extends MatchStrategy {
         return match;
     }
 
+    private boolean matchTags(NeedTypeEnum needTypeEnum, User user) {
+        boolean match = false;
+        if (user != null && StringUtils.isNoneBlank(user.getHelpAvailable())) {
+            Iterator<String> split = Splitter.on("、").omitEmptyStrings().split(user.getHelpAvailable()).iterator();
+            do {
+                if (needTypeEnum.equals(NeedTypeEnum.convert(split.next()))) {
+                    match = true;
+                    break;
+                }
+            } while (split.hasNext());
+        }
+        return match;
+    }
+
     private boolean isMatchExist(String needId, String userId) {
         SysMatchNeed matchNeed = new SysMatchNeed();
         matchNeed.setNeedId(needId);
@@ -207,14 +233,33 @@ public class UserMatchStrategy extends MatchStrategy {
             return false;
         }
         String country = split[0], city = split[1];
-        if(!locationMatch(country, targetUser.getCountry())) {
+//        if(!locationMatch(country, targetUser.getCountry())) {
+////            return false;
+////        }
+////        return locationMatch(city, targetUser.getCity());
+        if (!locationService.countryEquals(country, targetUser.getCountry())) {
             return false;
         }
-        return locationMatch(city, targetUser.getCity());
+        return locationService.cityEquals(city, targetUser.getCity());
     }
 
     private boolean locationMatch(String location, String targetLocation) {
         return StringUtils.equalsIgnoreCase(location, targetLocation);
+    }
+
+    private boolean timeOutCheck (Need need) {
+        NeedAggEntity needAgg = needService.getNeedAgg(need.getId());
+        if (needAgg.getConceretNeed() == null) {
+            return true;
+        }
+        if (needAgg.getConceretNeed() instanceof NeedCommon) {
+            NeedCommon common = (NeedCommon) needAgg.getConceretNeed();
+            if (common.getEndTime() == null) {
+                return false;
+            }
+            return Date.from(Instant.now()).after(common.getEndTime());
+        }
+        return false;
     }
 
 }

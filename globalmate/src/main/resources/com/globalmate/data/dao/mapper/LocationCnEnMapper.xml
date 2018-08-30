@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.LocationCnEnMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.LocationCnEn">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="country_cn" jdbcType="VARCHAR" property="countryCn" />
+    <result column="country_en" jdbcType="VARCHAR" property="countryEn" />
+    <result column="state_cn" jdbcType="VARCHAR" property="stateCn" />
+    <result column="state_en" jdbcType="VARCHAR" property="stateEn" />
+    <result column="city_cn" jdbcType="VARCHAR" property="cityCn" />
+    <result column="city_en" jdbcType="VARCHAR" property="cityEn" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3" jdbcType="VARCHAR" property="ext3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, country_cn, country_en, state_cn, state_en, city_cn, city_en, ext1, ext2, ext3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from location_cn_en
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from location_cn_en
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.LocationCnEn">
+    insert into location_cn_en (id, country_cn, country_en, 
+      state_cn, state_en, city_cn, 
+      city_en, ext1, ext2, 
+      ext3)
+    values (#{id,jdbcType=VARCHAR}, #{countryCn,jdbcType=VARCHAR}, #{countryEn,jdbcType=VARCHAR}, 
+      #{stateCn,jdbcType=VARCHAR}, #{stateEn,jdbcType=VARCHAR}, #{cityCn,jdbcType=VARCHAR}, 
+      #{cityEn,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, 
+      #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.LocationCnEn">
+    insert into location_cn_en
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="countryCn != null">
+        country_cn,
+      </if>
+      <if test="countryEn != null">
+        country_en,
+      </if>
+      <if test="stateCn != null">
+        state_cn,
+      </if>
+      <if test="stateEn != null">
+        state_en,
+      </if>
+      <if test="cityCn != null">
+        city_cn,
+      </if>
+      <if test="cityEn != null">
+        city_en,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+      <if test="ext3 != null">
+        ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCn != null">
+        #{countryCn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEn != null">
+        #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCn != null">
+        #{stateCn,jdbcType=VARCHAR},
+      </if>
+      <if test="stateEn != null">
+        #{stateEn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCn != null">
+        #{cityCn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityEn != null">
+        #{cityEn,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.LocationCnEn">
+    update location_cn_en
+    <set>
+      <if test="countryCn != null">
+        country_cn = #{countryCn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEn != null">
+        country_en = #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCn != null">
+        state_cn = #{stateCn,jdbcType=VARCHAR},
+      </if>
+      <if test="stateEn != null">
+        state_en = #{stateEn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCn != null">
+        city_cn = #{cityCn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityEn != null">
+        city_en = #{cityEn,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.LocationCnEn">
+    update location_cn_en
+    set country_cn = #{countryCn,jdbcType=VARCHAR},
+      country_en = #{countryEn,jdbcType=VARCHAR},
+      state_cn = #{stateCn,jdbcType=VARCHAR},
+      state_en = #{stateEn,jdbcType=VARCHAR},
+      city_cn = #{cityCn,jdbcType=VARCHAR},
+      city_en = #{cityEn,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByCountry" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select country_cn, country_en
+    from location_cn_en
+    where country_cn = #{country} or country_en = #{country}
+    limit 1
+  </select>
+
+  <select id="selectByCity" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select city_cn, city_en
+    from location_cn_en
+    where city_cn = #{city} or city_en = #{city}
+    limit 1
+  </select>
+
+</mapper>
