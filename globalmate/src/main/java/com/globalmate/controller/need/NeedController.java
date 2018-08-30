@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -35,9 +36,12 @@ public class NeedController extends BaseController {
 
     @Deprecated
     @GetMapping("list")
-    public JsonResult select(HttpServletRequest request,
-                             @RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser) {
-        List<NeedAggEntity> needs = needService.getNeedAgg(onlyCurrentUser ? getCurrentUser(request) : null);
+    public JsonResult select(@RequestParam(required = false, defaultValue = "false") Boolean onlyCurrentUser,
+                             @RequestParam(required = false) String pageNum) {
+        if (StringUtils.isNotBlank(pageNum)) {
+            startPage();
+        }
+        List<NeedAggEntity> needs = needService.getNeedAgg(onlyCurrentUser ? getCurrentUser() : null);
         return buildSuccess(needs);
     }
 

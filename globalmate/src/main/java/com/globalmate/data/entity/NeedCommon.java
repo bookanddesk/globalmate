@@ -155,7 +155,12 @@ public class NeedCommon extends AbstractNeed {
 
     @Override
     public String getTag() {
-        return NeedTypeEnum.valueOf(type.toLowerCase()).getShowValue();
+        try {
+            return NeedTypeEnum.valueOf(type.toLowerCase()).getShowValue();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

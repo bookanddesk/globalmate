@@ -45,7 +45,6 @@ public class UserMatchStrategy extends MatchStrategy {
 
     @Override
     public void match() {
-
     }
 
     @Override
@@ -162,7 +161,6 @@ public class UserMatchStrategy extends MatchStrategy {
                 sysMatchNeeds.add(matchNeed);
             }
         }
-
 
         return sysMatchNeeds;
     }
