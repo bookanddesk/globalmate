@@ -151,7 +151,11 @@ public class BasicDataController extends BaseController {
             x.setEnable(Optional.ofNullable(GMEnums.NeedStatus.transformCode(Integer.parseInt(enable)).getValue())
                     .orElse(enable));
             String type = x.getType();
-            x.setType(NeedTypeEnum.valueOf(type).getShowValue());
+            try {
+                x.setType(NeedTypeEnum.valueOf(type).getShowValue());
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
         });
 
         ModelAndView modelAndView = buildMV(GMConstant.NEED_PAGE, needs, need);
