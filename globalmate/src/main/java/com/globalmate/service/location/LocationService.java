@@ -61,6 +61,10 @@ public class LocationService extends AbstractExcelService implements ILocationSe
 
         LocationCnEn locationCnEn = locationCnEnMapper.selectByCountry(target);
 
+        if (locationCnEn == null) {
+            return false;
+        }
+
         if (StringUtils.equalsIgnoreCase(country, locationCnEn.getCountryEn())) {
             return true;
         }
@@ -83,6 +87,10 @@ public class LocationService extends AbstractExcelService implements ILocationSe
         }
 
         LocationCnEn locationCnEn = locationCnEnMapper.selectByCity(target);
+
+        if (locationCnEn == null) {
+            return false;
+        }
 
         if (StringUtils.equalsIgnoreCase(city, locationCnEn.getCityEn())) {
             return true;
