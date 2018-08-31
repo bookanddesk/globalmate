@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -52,6 +53,9 @@ public class NeedController extends BaseController {
 
     @GetMapping("query")
     public JsonResult query(Need need) {
+        if (StringUtils.isNotBlank(getParameter(GMConstant.PAGE_NUM))) {
+            startPage();
+        }
         return buildSuccess(needService.queryLike(need));
     }
 

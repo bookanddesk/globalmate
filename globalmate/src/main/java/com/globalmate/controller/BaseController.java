@@ -101,4 +101,8 @@ public abstract class BaseController {
         return buildMV(viewName, datas).addObject(GMConstant.QUERY_PARAM, p);
     }
 
+    protected String getParameter(String param) {
+        return request.getParameter(param);
+    }
+
 }
