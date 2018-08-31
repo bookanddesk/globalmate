@@ -232,6 +232,9 @@
             <if test="enable != null and enable != '' ">
                 and ENABLE_ = #{enable,jdbcType=CHAR}
             </if>
+            <if test="enable == null">
+              and ENABLE_ != '0'
+            </if>
             <if test="type != null and type != '' ">
                 and TYPE_ = #{type}
             </if>
