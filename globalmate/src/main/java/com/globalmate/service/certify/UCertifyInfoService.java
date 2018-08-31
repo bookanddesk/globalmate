@@ -27,9 +27,11 @@ public class UCertifyInfoService implements IUCertifyInfoService{
 	@Override
 	public UCertifyInfo addUCertifyInfo(User user, UCertifyInfo ucertifyInfo) {
 		checkNotNull(ucertifyInfo);
-        if (ucertifyInfo.getId() == null) {
-        	ucertifyInfo.setId(IdGenerator.generateId());
-        }
+		if(StringUtils.isNotBlank(ucertifyInfo.getId())) {
+			return this.updateUCertifyInfo(ucertifyInfo);
+		}
+
+		ucertifyInfo.setId(IdGenerator.generateId());
         if (ucertifyInfo.getuId() == null) {
         	ucertifyInfo.setuId(user.getId());
         }
