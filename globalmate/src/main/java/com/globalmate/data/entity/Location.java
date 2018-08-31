@@ -1,6 +1,8 @@
 package com.globalmate.data.entity;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private String id;
 
     private String countryregion;

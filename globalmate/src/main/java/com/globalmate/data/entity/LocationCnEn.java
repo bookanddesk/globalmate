@@ -1,6 +1,8 @@
 package com.globalmate.data.entity;
 
-public class LocationCnEn {
+import java.io.Serializable;
+
+public class LocationCnEn implements Serializable {
     private String id;
 
     private String countryCn;
