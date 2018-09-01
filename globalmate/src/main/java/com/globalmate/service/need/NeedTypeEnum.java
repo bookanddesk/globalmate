@@ -14,7 +14,7 @@ public enum NeedTypeEnum {
 	/**
 	 * 陪同
 	 */
-	accompany("accompany", "陪玩"),
+	accompany("accompany", "陪伴"),
 	/**
 	 * 清关
 	 */
