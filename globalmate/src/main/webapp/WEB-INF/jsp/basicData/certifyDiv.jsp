@@ -26,8 +26,8 @@
                 url: queryUrl,
                 data: param,
                 success: function (data) {
-                    $.tooltip('审核成功', 2000, true);
                     $('#submitBtn').trigger('click')
+                    $.tooltip('审核成功', 2000, true);
                 },
                 error: function (data) {
                     $.tooltip('审核失败');
