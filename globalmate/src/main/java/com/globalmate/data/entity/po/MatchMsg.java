@@ -15,6 +15,7 @@ public class MatchMsg extends MsgEntity {
         super.setFirst(GMConstant.MATCH_MSG_TEMP_FIRST);
         super.setKeyword1(GMConstant.MATCH_MSG_TEMP_KEYWORD1);
         super.setKeyword2(GMConstant.MATCH_MSG_TEMP_KEYWORD2);
+        super.setKeyword3(GMConstant.MATCH_MSG_TEMP_KEYWORD3);
         super.setRemark(GMConstant.MATCH_MSG_TEMP_REMARK);
     }
 
@@ -28,7 +29,7 @@ public class MatchMsg extends MsgEntity {
     }
 
     public void setKeyword1(String keyword1) {
-        getData().put(getKeyword1(), keyword1);
+        getData().put(getKeyword1(), new MsgValCol(keyword1, getColour()));
     }
 
     public String getKeyword2() {
@@ -36,12 +37,17 @@ public class MatchMsg extends MsgEntity {
     }
 
     public void setKeyword2(String keyword2) {
-        getData().put(getKeyword2(), keyword2);
+        getData().put(getKeyword2(), new MsgValCol(keyword2, getColour()));
+    }
+
+    @Override
+    public void setKeyword3(String keyword3) {
+        getData().put(getKeyword3(), new MsgValCol(keyword3, getColour()));
     }
 
     @Override
     public void setFirst(String first) {
-        getData().put(getFirst(), first);
+        getData().put(getFirst(), new MsgValCol(first, GMConstant.MATCH_MSG_TEMP_FONT_COLOUR_BLACK));
     }
 
     public String getRemark() {
@@ -49,6 +55,6 @@ public class MatchMsg extends MsgEntity {
     }
 
     public void setRemark(String remark) {
-        getData().put(getRemark(), remark);
+        getData().put(getRemark(), new MsgValCol(remark, GMConstant.MATCH_MSG_TEMP_FONT_COLOUR_GOLDEN));
     }
 }

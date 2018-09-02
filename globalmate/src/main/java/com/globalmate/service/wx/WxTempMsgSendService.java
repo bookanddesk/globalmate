@@ -33,7 +33,7 @@ public abstract class WxTempMsgSendService implements IMsgSendService {
         checkNotNull(msgEntity);
         checkNotNull(msgEntity.getToUserId());
         checkNotNull(msgEntity.getMsgTempId());
-        Map<String, String> data = msgEntity.getData();
+        Map<String, MsgEntity.MsgValCol> data = msgEntity.getData();
         checkNotNull(data);
 
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -43,11 +43,10 @@ public abstract class WxTempMsgSendService implements IMsgSendService {
                 .build();
 
         List<WxMpTemplateData> dataList = new ArrayList<>(data.size());
-        String colour = msgEntity.getColour();
-        for (Iterator<Map.Entry<String, String>> iterator = data.entrySet().iterator(); iterator.hasNext(); ) {
-            Map.Entry<String, String> next = iterator.next();
+        for (Iterator<Map.Entry<String, MsgEntity.MsgValCol>> iterator = data.entrySet().iterator(); iterator.hasNext(); ) {
+            Map.Entry<String, MsgEntity.MsgValCol> next = iterator.next();
             if (StringUtils.isNotBlank(next.getKey())) {
-                dataList.add(new WxMpTemplateData(next.getKey(), next.getValue(), colour));
+                dataList.add(new WxMpTemplateData(next.getKey(), next.getValue().getValue(), next.getValue().getColor()));
             }
         }
         templateMessage.setData(dataList);

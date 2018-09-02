@@ -1,6 +1,7 @@
 package com.globalmate.service.wx;
 
 import com.globalmate.data.entity.Need;
+import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.po.MatchMsg;
 import com.globalmate.data.entity.po.MsgEntity;
@@ -106,10 +107,13 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         if (conceretNeed == null) {
             return matchMsg;
         }
-        matchMsg.setFirst(String.format("来自[%s]的[%s]需求", entity.getNeed().getUserName(), conceretNeed.getTag()));
-        matchMsg.setKeyword1(entity.getNeed().getWhere().replace("_", "-"));
-        matchMsg.setKeyword2(conceretNeed.getTimeInfo());
-        matchMsg.setRemark(conceretNeed.getDescription());
+        NeedCommon needCommon = (NeedCommon) conceretNeed;
+        matchMsg.setFirst(String.format("来自 %s 的 %s 需求", entity.getNeed().getUserName(), conceretNeed.getTag()));
+        matchMsg.setKeyword1(needCommon.getTitle());
+        matchMsg.setKeyword2(entity.getNeed().getWhere().replace("_", "-"));
+        matchMsg.setKeyword3(conceretNeed.getTimeInfo());
+        matchMsg.setRemark(StringUtils.isBlank(conceretNeed.getDescription()) ?
+                conceretNeed.getDescription() : "请点击查看需求详情。");
         matchMsg.setMsgTempId(matchMsgTempId);
         return matchMsg;
     }

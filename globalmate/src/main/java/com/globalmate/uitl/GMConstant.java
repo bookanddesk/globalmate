@@ -14,10 +14,13 @@ public class GMConstant {
     public static final String ORG_CODE = "000_org_code";
 
 
-    public static final String MATCH_MSG_TEMP_FONT_COLOUR = "#FF00FF";
+    public static final String MATCH_MSG_TEMP_FONT_COLOUR = "#0076a4";
+    public static final String MATCH_MSG_TEMP_FONT_COLOUR_BLACK = "#111";
+    public static final String MATCH_MSG_TEMP_FONT_COLOUR_GOLDEN = "#fbaf5a";
     public static final String MATCH_MSG_TEMP_FIRST = "first";
     public static final String MATCH_MSG_TEMP_KEYWORD1 = "keyword1";
     public static final String MATCH_MSG_TEMP_KEYWORD2 = "keyword2";
+    public static final String MATCH_MSG_TEMP_KEYWORD3 = "keyword3";
     public static final String MATCH_MSG_TEMP_REMARK = "remark";
     public static final String MATCH_MSG_TEMP_ID = "VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY";
 

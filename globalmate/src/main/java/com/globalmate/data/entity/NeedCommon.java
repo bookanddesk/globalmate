@@ -172,10 +172,10 @@ public class NeedCommon extends AbstractNeed {
     public String getTimeInfo() {
         return StringUtils.join(new String[] {
                 Optional.ofNullable(getStartTime())
-                                .map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME))
+                                .map(x -> DateUtil.format(x, DateUtil.FMT_DATE))
                                 .orElse(null),
                 Optional.ofNullable(getEndTime())
-                        .map(x -> DateUtil.format(x, DateUtil.FMT_DATETIME))
+                        .map(x -> DateUtil.format(x, DateUtil.FMT_DATE))
                         .orElse(null)}, "~");
     }
 

@@ -23,9 +23,10 @@ public abstract class MsgEntity {
     protected String first;
     protected String keyword1;
     protected String keyword2;
+    protected String keyword3;
     protected String remark;
 
-    private Map<String, String> data;
+    private Map<String, MsgValCol> data;
 
     public MsgEntity() {
         data = new HashMap<>();
@@ -72,11 +73,11 @@ public abstract class MsgEntity {
         this.createTime = createTime;
     }
 
-    public Map<String, String> getData() {
+    public Map<String, MsgValCol> getData() {
         return data;
     }
 
-    protected void setData(Map<String, String> data) {
+    protected void setData(Map<String, MsgValCol> data) {
         this.data = data;
     }
 
@@ -127,4 +128,40 @@ public abstract class MsgEntity {
     public void setColour(String colour) {
         this.colour = colour;
     }
+
+    public String getKeyword3() {
+        return keyword3;
+    }
+
+    public void setKeyword3(String keyword3) {
+        this.keyword3 = keyword3;
+    }
+
+    public class MsgValCol {
+        private String value;
+        private String color;
+
+        public MsgValCol(String value, String color) {
+            this.value = value;
+            this.color = color;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+    }
+
+
 }
