@@ -5,11 +5,13 @@
   <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Location">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="CountryRegion" jdbcType="VARCHAR" property="countryregion" />
+    <result column="country_Initials" jdbcType="VARCHAR" property="countryInitials" />
     <result column="State" jdbcType="VARCHAR" property="state" />
     <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="city_Initials" jdbcType="VARCHAR" property="cityInitials" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, CountryRegion, State, City
+    id, CountryRegion, country_Initials, State, City, city_Initials
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -95,9 +97,24 @@
     select distinct CountryRegion from location;
   </select>
 
+  <select id="selectCountries" resultMap="BaseResultMap">
+    SELECT CountryRegion, Country_Initials from location GROUP BY CountryRegion;
+  </select>
+
   <select id="queryLike" parameterType="com.globalmate.data.entity.Location" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
+    from location
+    <where>
+      <if test="countryregion != null and countryregion != ''">
+        countryregion = #{countryregion}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectCities" parameterType="com.globalmate.data.entity.Location" resultMap="BaseResultMap">
+    select
+    City, city_Initials
     from location
     <where>
       <if test="countryregion != null and countryregion != ''">

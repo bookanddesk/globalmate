@@ -23,4 +23,8 @@ public interface LocationEnMapper {
     List<String> distinctCountries();
 
     List<LocationEn> queryLike(Location location);
+
+    List<Location> selectCountries();
+
+    List<Location> selectCities(Location location);
 }

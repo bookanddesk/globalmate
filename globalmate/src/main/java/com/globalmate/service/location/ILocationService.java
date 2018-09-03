@@ -19,4 +19,8 @@ public interface ILocationService {
 
     boolean cityEquals(String city, String target);
 
+    List<Location> getCountriesWithInitials(boolean isEN);
+
+    List<Location> getCitiesWithInitials(boolean isEN, Location location);
+
 }

@@ -106,4 +106,29 @@
     </where>
   </select>
 
+
+  <resultMap id="LocationResultMap" type="com.globalmate.data.entity.Location">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="CountryRegion" jdbcType="VARCHAR" property="countryregion" />
+    <result column="country_Initials" jdbcType="VARCHAR" property="countryInitials" />
+    <result column="State" jdbcType="VARCHAR" property="state" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="city_Initials" jdbcType="VARCHAR" property="cityInitials" />
+  </resultMap>
+
+  <select id="selectCountries" resultMap="LocationResultMap">
+    SELECT CountryRegion, Country_Initials from location_en GROUP BY CountryRegion;
+  </select>
+
+  <select id="selectCities" parameterType="com.globalmate.data.entity.Location" resultMap="LocationResultMap">
+    select
+    City, city_Initials
+    from location_en
+    <where>
+      <if test="countryregion != null and countryregion != ''">
+        countryregion = #{countryregion}
+      </if>
+    </where>
+  </select>
+
 </mapper>

@@ -145,9 +145,25 @@ public class UserController extends BaseController {
         return buildSuccess(locationService.getCountries(Optional.ofNullable(isEN).orElse(false)));
     }
 
+    @GetMapping("countryWithInitials")
+    public JsonResult countryWithInitials(Boolean isEN) {
+        List<Location> countries = locationService.getCountriesWithInitials(Optional.ofNullable(isEN).orElse(false));
+        return buildSuccess(countries
+                .stream()
+                .collect(Collectors.groupingBy(Location::getCountryInitials)));
+    }
+
     @GetMapping("city")
     public JsonResult city(Boolean isEN, Location location) {
         return buildSuccess(locationService.getLocations(Optional.ofNullable(isEN).orElse(false), location));
+    }
+
+    @GetMapping("cityWithInitials")
+    public JsonResult cityWithInitials(Boolean isEN, Location location) {
+        List<Location> cities = locationService.getCitiesWithInitials(Optional.ofNullable(isEN).orElse(false), location);
+        return buildSuccess(cities
+                .stream()
+                .collect(Collectors.groupingBy(Location::getCityInitials)));
     }
 
 

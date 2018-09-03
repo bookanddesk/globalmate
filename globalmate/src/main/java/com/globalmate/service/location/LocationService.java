@@ -103,6 +103,17 @@ public class LocationService extends AbstractExcelService implements ILocationSe
         return false;
     }
 
+    @Override
+    public List<Location> getCountriesWithInitials(boolean isEN) {
+        return isEN ? locationEnMapper.selectCountries() : locationMapper.selectCountries();
+    }
+
+    @Override
+    public List<Location> getCitiesWithInitials(boolean isEN, Location location) {
+        location = Optional.ofNullable(location).orElse(new Location());
+        return isEN ? locationEnMapper.selectCities(location) : locationMapper.selectCities(location);
+    }
+
 
     public void resolveLocation(String fileName) throws DocumentException {
         if (fileName == null) {
@@ -171,12 +182,12 @@ public class LocationService extends AbstractExcelService implements ILocationSe
 
     public Map<String, String> getFieldCodeNameMap() {
         Map<String, String> map = Maps.newLinkedHashMap();
-        map.put("country_cn", "国家");
-        map.put("country_en", "country");
-        map.put("state_cn", "省");
-        map.put("state_en","state");
-        map.put("city_cn", "城市");
-        map.put("city_en", "city");
+        map.put("CountryRegion", "国家");
+        map.put("Country_Initials", "Country_Initials");
+        map.put("State", "省");
+//        map.put("state_en","state");
+        map.put("City", "城市");
+        map.put("City_Initials", "City_Initials");
 //        map.put("ext1", "国别");
         return map;
     }
@@ -184,6 +195,6 @@ public class LocationService extends AbstractExcelService implements ILocationSe
 
     @Override
     protected String getTableName() {
-        return "location_cn_en";
+        return "location_en";
     }
 }

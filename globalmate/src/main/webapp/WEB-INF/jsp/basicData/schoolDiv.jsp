@@ -63,20 +63,20 @@
                             <p>
                                 <button type="submit">查询</button>
                             </p>
-                            <p>
+                            <%--<p>
                                 <button type="button" onclick="exportExcelTemplate()">导出模板</button>
-                            </p>
+                            </p>--%>
                         </li>
                     </ul>
                 </form>
 
-                <p>
+                <%--<p>
                 <form id="fileForm" action="<%=path%>/rest/basicData/importSchool"
                       method="post" enctype="multipart/form-data">
                     选择文件:<input type="file" name="file"/>
                     <input type="submit" value="导入"/>
                 </form>
-                </p>
+                </p>--%>
             </div>
 
             <div class="Order_table" style="/**width:1000px; height:500px;**/ overflow:scroll;">

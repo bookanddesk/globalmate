@@ -21,5 +21,10 @@ public interface LocationMapper {
 
     List<String> distinctCountries();
 
+
     List<Location> queryLike(Location location);
+
+    List<Location> selectCountries();
+
+    List<Location> selectCities(Location location);
 }
