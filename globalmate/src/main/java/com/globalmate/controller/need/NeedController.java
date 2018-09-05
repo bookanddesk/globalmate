@@ -52,11 +52,12 @@ public class NeedController extends BaseController {
     }
 
     @GetMapping("query")
-    public JsonResult query(Need need) {
+    public JsonResult query(Need need, @RequestParam(required = false) String searchText) {
         if (StringUtils.isNotBlank(getParameter(GMConstant.PAGE_NUM))) {
             startPage();
         }
-        return buildSuccess(needService.queryLike(need));
+        return buildSuccess(needService.associatedQuery(need, searchText));
+//        return buildSuccess(needService.queryLike(need));
     }
 
 

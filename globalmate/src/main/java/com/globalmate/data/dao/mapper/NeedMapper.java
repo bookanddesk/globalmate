@@ -25,4 +25,6 @@ public interface NeedMapper {
     List<Need> queryByIds(List<String> ids);
 
     int updateNeedEnable(@Param("needId") String needId, @Param("enableStr") String enableStr);
+
+    List<Need> associatedQuery(@Param("need") Need need, @Param("keyword") String keyword);
 }

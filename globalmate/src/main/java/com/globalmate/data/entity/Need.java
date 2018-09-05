@@ -34,6 +34,8 @@ public class Need implements Serializable {
     private String ext2;
     private String ext3;
 
+    private NeedCommon needCommon;
+
     public String getId() {
         return id;
     }
@@ -168,5 +170,13 @@ public class Need implements Serializable {
 
     public void setExt3(String ext3) {
         this.ext3 = ext3;
+    }
+
+    public NeedCommon getNeedCommon() {
+        return needCommon;
+    }
+
+    public void setNeedCommon(NeedCommon needCommon) {
+        this.needCommon = needCommon;
     }
 }

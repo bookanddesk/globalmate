@@ -214,7 +214,12 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		return needMapper.queryNeeds(Optional.ofNullable(need).orElse(new Need()));
 	}
 
-	@Override
+    @Override
+    public List<Need> associatedQuery(Need need, String searchText) {
+        return needMapper.associatedQuery(need, searchText);
+    }
+
+    @Override
 	public String[] getKeyWords(Need need) {
 		checkNotNull(need);
 

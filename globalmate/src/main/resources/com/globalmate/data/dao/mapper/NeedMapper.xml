@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.globalmate.data.dao.mapper.NeedMapper">
-  <cache/>
-  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Need">
-    <id column="ID_" jdbcType="VARCHAR" property="id" />
-    <result column="start_type_" jdbcType="CHAR" property="startType" />
-    <result column="TYPE_" jdbcType="CHAR" property="type" />
-    <result column="USER_ID_" jdbcType="VARCHAR" property="userId" />
-    <result column="USER_NAME_" jdbcType="VARCHAR" property="userName" />
-    <result column="description_" jdbcType="VARCHAR" property="description" />
-    <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime" />
-    <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="ENABLE_" jdbcType="CHAR" property="enable" />
-    <result column="EVALUATE" jdbcType="INTEGER" property="evaluate" />
-    <result column="RESPONDER_" jdbcType="VARCHAR" property="responder" />
-    <result column="COMMENT_" jdbcType="VARCHAR" property="comment" />
-    <result column="where_" jdbcType="VARCHAR" property="where" />
-    <result column="ext1_" jdbcType="VARCHAR" property="ext1" />
-    <result column="ext2_" jdbcType="VARCHAR" property="ext2" />
-    <result column="ext3_" jdbcType="VARCHAR" property="ext3" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <cache/>
+    <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Need">
+        <id column="ID_" jdbcType="VARCHAR" property="id"/>
+        <result column="start_type_" jdbcType="CHAR" property="startType"/>
+        <result column="TYPE_" jdbcType="CHAR" property="type"/>
+        <result column="USER_ID_" jdbcType="VARCHAR" property="userId"/>
+        <result column="USER_NAME_" jdbcType="VARCHAR" property="userName"/>
+        <result column="description_" jdbcType="VARCHAR" property="description"/>
+        <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="ENABLE_" jdbcType="CHAR" property="enable"/>
+        <result column="EVALUATE" jdbcType="INTEGER" property="evaluate"/>
+        <result column="RESPONDER_" jdbcType="VARCHAR" property="responder"/>
+        <result column="COMMENT_" jdbcType="VARCHAR" property="comment"/>
+        <result column="where_" jdbcType="VARCHAR" property="where"/>
+        <result column="ext1_" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2_" jdbcType="VARCHAR" property="ext2"/>
+        <result column="ext3_" jdbcType="VARCHAR" property="ext3"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     ID_, start_type_, TYPE_, USER_ID_, USER_NAME_, description_, CREATE_TIME_, MODIFY_TIME_, END_TIME_,
     ENABLE_, EVALUATE, RESPONDER_, COMMENT_, where_, ext1_, ext2_, ext3_
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from need
-    where ID_ = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from need
+        where ID_ = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from need
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.globalmate.data.entity.Need">
+    <insert id="insert" parameterType="com.globalmate.data.entity.Need">
     insert into need (ID_, start_type_, TYPE_,
       USER_ID_, USER_NAME_, description_, CREATE_TIME_,
       MODIFY_TIME_, END_TIME_, ENABLE_, 
@@ -49,140 +49,140 @@
       #{where,jdbcType=VARCHAR},#{ext1,jdbcType=VARCHAR},#{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.globalmate.data.entity.Need">
-    insert into need
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID_,
-      </if>
-      <if test="startType != null">
-        start_type_,
-      </if>
-      <if test="type != null">
-        TYPE_,
-      </if>
-      <if test="userId != null">
-        USER_ID_,
-      </if>
-      <if test="description != null">
-        description_,
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME_,
-      </if>
-      <if test="modifyTime != null">
-        MODIFY_TIME_,
-      </if>
-      <if test="endTime != null">
-        END_TIME_,
-      </if>
-      <if test="enable != null">
-        ENABLE_,
-      </if>
-      <if test="evaluate != null">
-        EVALUATE,
-      </if>
-      <if test="responder != null">
-        RESPONDER_,
-      </if>
-      <if test="comment != null">
-        COMMENT_,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="startType != null">
-        #{startType,jdbcType=CHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=CHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enable != null">
-        #{enable,jdbcType=CHAR},
-      </if>
-      <if test="evaluate != null">
-        #{evaluate,jdbcType=INTEGER},
-      </if>
-      <if test="responder != null">
-        #{responder,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null">
-        #{comment,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Need">
-    update need
-    <set>
-      <if test="startType != null">
-        start_type_ = #{startType,jdbcType=CHAR},
-      </if>
-      <if test="type != null">
-        TYPE_ = #{type,jdbcType=CHAR},
-      </if>
-      <if test="userId != null">
-        USER_ID_ = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        USER_NAME_ = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description_ = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        MODIFY_TIME_ = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        END_TIME_ = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enable != null">
-        ENABLE_ = #{enable,jdbcType=CHAR},
-      </if>
-      <if test="evaluate != null">
-        EVALUATE = #{evaluate,jdbcType=INTEGER},
-      </if>
-      <if test="responder != null">
-        RESPONDER_ = #{responder,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null">
-        COMMENT_ = #{comment,jdbcType=VARCHAR},
-      </if>
-      <if test="where != null">
-        where_ = #{where,jdbcType=VARCHAR},
-      </if>
-      <if test="ext1 != null">
-        ext1_ = #{ext1,jdbcType=VARCHAR},
-      </if>
-      <if test="ext2 != null">
-        ext2_ = #{ext2,jdbcType=VARCHAR},
-      </if>
-      <if test="ext3 != null">
-        ext3_ = #{ext3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID_ = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Need">
+    <insert id="insertSelective" parameterType="com.globalmate.data.entity.Need">
+        insert into need
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID_,
+            </if>
+            <if test="startType != null">
+                start_type_,
+            </if>
+            <if test="type != null">
+                TYPE_,
+            </if>
+            <if test="userId != null">
+                USER_ID_,
+            </if>
+            <if test="description != null">
+                description_,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME_,
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME_,
+            </if>
+            <if test="endTime != null">
+                END_TIME_,
+            </if>
+            <if test="enable != null">
+                ENABLE_,
+            </if>
+            <if test="evaluate != null">
+                EVALUATE,
+            </if>
+            <if test="responder != null">
+                RESPONDER_,
+            </if>
+            <if test="comment != null">
+                COMMENT_,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="startType != null">
+                #{startType,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=CHAR},
+            </if>
+            <if test="evaluate != null">
+                #{evaluate,jdbcType=INTEGER},
+            </if>
+            <if test="responder != null">
+                #{responder,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.Need">
+        update need
+        <set>
+            <if test="startType != null">
+                start_type_ = #{startType,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                TYPE_ = #{type,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                USER_ID_ = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME_ = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description_ = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                MODIFY_TIME_ = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                END_TIME_ = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enable != null">
+                ENABLE_ = #{enable,jdbcType=CHAR},
+            </if>
+            <if test="evaluate != null">
+                EVALUATE = #{evaluate,jdbcType=INTEGER},
+            </if>
+            <if test="responder != null">
+                RESPONDER_ = #{responder,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                COMMENT_ = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="where != null">
+                where_ = #{where,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                ext1_ = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2_ = #{ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="ext3 != null">
+                ext3_ = #{ext3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID_ = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.Need">
     update need
     set start_type_ = #{startType,jdbcType=CHAR},
       TYPE_ = #{type,jdbcType=CHAR},
@@ -199,23 +199,23 @@
   </update>
 
     <select id="selectNeeds" parameterType="com.globalmate.data.entity.Need"
-          resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from need
-    <where>
-      <if test="id != null">
-        id_ = #{id}
-      </if>
-      <if test="userId != null">
-        and USER_ID_ = #{userId}
-      </if>
-      <if test="enable != null">
-        and ENABLE_ = #{enable}
-      </if>
-    </where>
-      order by CREATE_TIME_ desc
-  </select>
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from need
+        <where>
+            <if test="id != null">
+                id_ = #{id}
+            </if>
+            <if test="userId != null">
+                and USER_ID_ = #{userId}
+            </if>
+            <if test="enable != null">
+                and ENABLE_ = #{enable}
+            </if>
+        </where>
+        order by CREATE_TIME_ desc
+    </select>
 
     <select id="queryNeeds" parameterType="com.globalmate.data.entity.Need"
             resultMap="BaseResultMap">
@@ -233,7 +233,7 @@
                 and ENABLE_ = #{enable,jdbcType=CHAR}
             </if>
             <if test="enable == null">
-              and ENABLE_ != '0'
+                and ENABLE_ != '0'
             </if>
             <if test="type != null and type != '' ">
                 and TYPE_ = #{type}
@@ -245,22 +245,95 @@
         order by CREATE_TIME_ desc
     </select>
 
-  <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from need
-    <where>
-      <if test="list != null and list.size() > 0">
-        id_ in
-        <foreach collection="list" index="idx" item="itm" open="(" separator="," close=")">
-          #{itm}
-        </foreach>
-      </if>
-    </where>
-  </select>
+    <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from need
+        <where>
+            <if test="list != null and list.size() > 0">
+                id_ in
+                <foreach collection="list" index="idx" item="itm" open="(" separator="," close=")">
+                    #{itm}
+                </foreach>
+            </if>
+        </where>
+    </select>
 
-  <update id="updateNeedEnable" parameterType="java.lang.String" >
+    <update id="updateNeedEnable" parameterType="java.lang.String">
     update need set ENABLE_ = #{enableStr,jdbcType=CHAR} where id_ = #{needId,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="NeedCommonResultMap" type="com.globalmate.data.entity.Need">
+        <id column="ID_" jdbcType="VARCHAR" property="id"/>
+        <result column="start_type_" jdbcType="CHAR" property="startType"/>
+        <result column="TYPE_" jdbcType="CHAR" property="type"/>
+        <result column="USER_ID_" jdbcType="VARCHAR" property="userId"/>
+        <result column="USER_NAME_" jdbcType="VARCHAR" property="userName"/>
+        <result column="description_" jdbcType="VARCHAR" property="description"/>
+        <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="ENABLE_" jdbcType="CHAR" property="enable"/>
+        <result column="EVALUATE" jdbcType="INTEGER" property="evaluate"/>
+        <result column="RESPONDER_" jdbcType="VARCHAR" property="responder"/>
+        <result column="COMMENT_" jdbcType="VARCHAR" property="comment"/>
+        <result column="where_" jdbcType="VARCHAR" property="where"/>
+        <result column="ext1_" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2_" jdbcType="VARCHAR" property="ext2"/>
+        <result column="ext3_" jdbcType="VARCHAR" property="ext3"/>
+        <association property="needCommon" javaType="com.globalmate.data.entity.NeedCommon">
+            <id column="id" jdbcType="VARCHAR" property="id"/>
+            <result column="need_id" jdbcType="VARCHAR" property="needId"/>
+            <result column="type" jdbcType="VARCHAR" property="type"/>
+            <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+            <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+            <result column="country" jdbcType="VARCHAR" property="country"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="reward" jdbcType="VARCHAR" property="reward"/>
+            <result column="title" jdbcType="VARCHAR" property="title"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="pic" jdbcType="VARCHAR" property="pic"/>
+            <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+            <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
+            <result column="ext3" jdbcType="VARCHAR" property="ext3"/>
+        </association>
+    </resultMap>
+    <select id="associatedQuery" resultMap="NeedCommonResultMap">
+        select *
+        from need n, need_common c
+        where n.id_ = c.need_id
+        <if test="need.id != null and need.id != '' ">
+            and n.id_ = #{need.id}
+        </if>
+        <if test="need.where != null and need.where != '' ">
+            and n.where_ like concat('%', (concat(#{need.where}, '%')))
+        </if>
+        <if test="need.userName != null and need.userName != '' ">
+            and n.USER_NAME_ like concat('%', (concat(#{need.userName}, '%')))
+        </if>
+        <if test="need.enable != null and need.enable != '' ">
+            and n.ENABLE_ = #{need.enable,jdbcType=CHAR}
+        </if>
+        <if test="need.enable == null">
+            and n.ENABLE_ != '0'
+        </if>
+        <if test="need.type != null and need.type != '' ">
+            and n.TYPE_ = #{need.type}
+        </if>
+        <if test="need.createTime != null ">
+            and n.CREATE_TIME_ > #{need.createTime}
+        </if>
+        <if test="keyword != null and keyword != '' ">
+            and (
+            c.title like concat('%', (concat(#{keyword}, '%')))
+            or
+            c.description like concat('%', (concat(#{keyword}, '%')))
+            or
+            c.country like concat('%', (concat(#{keyword}, '%')))
+            or
+            c.city like concat('%', (concat(#{keyword}, '%')))
+            )
+        </if>
+    </select>
 
 </mapper>
