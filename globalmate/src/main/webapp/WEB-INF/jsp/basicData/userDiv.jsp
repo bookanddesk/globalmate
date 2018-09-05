@@ -66,6 +66,7 @@
                         <td width="5%">加入时间</td>
                         <td width="5%">好人值</td>
                         <td width="5%">帮助服务</td>
+                        <td width="5%">会员号</td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="userObj" varStatus="index">
@@ -81,6 +82,7 @@
                                                 pattern="yyyy-MM-dd HH:mm"/></td>
                             <td>${userObj.nice}</td>
                             <td>${userObj.helpAvailable}</td>
+                            <td>${userObj.uExt2}</td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -211,12 +211,16 @@ public class UserService implements IUserService, ITokenservice {
             user.setEnable(GMConstant.ONE_STR_VALUE);
             copyProperties(user, wxMpUser);
             user.setCreateTime(Date.from(Instant.now()));
+            user.setuExt2(generateMemberId());
             return userMapper.insert(user);
         }
 
         User user = users.get(0);
         copyProperties(user, wxMpUser);
         user.setModifyTime(Date.from(Instant.now()));
+        if (StringUtils.isEmpty(user.getuExt2())) {
+            user.setuExt2(generateMemberId());
+        }
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -250,6 +254,12 @@ public class UserService implements IUserService, ITokenservice {
     @Override
     public List<User> queryByLoginTime(User user, String utilDateStr) {
         return userMapper.queryByLoginTime(user, utilDateStr);
+    }
+
+    @Override
+    public String generateMemberId() {
+        String lastMemberId = Optional.ofNullable(userMapper.selectMaxExt2()).orElse(GMConstant.ZERO_STR_VALUE);
+        return IdGenerator.generateMemberId(lastMemberId);
     }
 
     private User copyProperties(User user, WxMpUser wxMpUser) {

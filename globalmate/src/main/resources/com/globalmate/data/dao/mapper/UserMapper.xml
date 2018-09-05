@@ -458,4 +458,8 @@
     order by u_ext1_ desc
   </select>
 
+  <select id="selectMaxExt2" resultType="java.lang.String">
+    select max(u_ext2_) from `user`
+  </select>
+
 </mapper>

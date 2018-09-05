@@ -49,7 +49,7 @@ public class User extends BaseEntity{
 
     private String uExt1;//最后登录时间
 
-    private String uExt2;
+    private String uExt2;//会员号
 
     private String uExt3;
 

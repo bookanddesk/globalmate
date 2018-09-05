@@ -38,4 +38,6 @@ public interface UserMapper {
 
     List<User> queryByLoginTime(@Param("user") User user, @Param("uExt1") String uExt1);
 
+    String selectMaxExt2();
+
 }

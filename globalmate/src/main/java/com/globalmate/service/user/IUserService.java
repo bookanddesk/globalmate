@@ -58,4 +58,5 @@ public interface IUserService {
 
     List<User> queryByLoginTime(User user, String utilDateStr);
 
+    String generateMemberId();
 }
