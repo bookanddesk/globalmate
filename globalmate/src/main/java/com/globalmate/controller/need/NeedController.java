@@ -1,6 +1,7 @@
 package com.globalmate.controller.need;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,7 +57,19 @@ public class NeedController extends BaseController {
         if (StringUtils.isNotBlank(getParameter(GMConstant.PAGE_NUM))) {
             startPage();
         }
-        return buildSuccess(needService.associatedQuery(need, searchText));
+        List<Need> needs = needService.associatedQuery(need, searchText);
+        if (CollectionUtils.isNotEmpty(needs)) {
+            List<NeedAggEntity> collect = needs.stream()
+                    .map(x -> {
+                        NeedAggEntity entity = new NeedAggEntity();
+                        entity.setNeed(x);
+                        entity.setConceretNeed(x.getNeedCommon());
+                        entity.getNeed().setNeedCommon(null);
+                        return entity;
+                    }).collect(Collectors.toList());
+            return buildSuccess(collect);
+        }
+        return buildSuccess(needs);
 //        return buildSuccess(needService.queryLike(need));
     }
 
