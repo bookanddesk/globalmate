@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.globalmate.uitl.GMConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,8 @@ public class UCertifyInfoService implements IUCertifyInfoService{
         	ucertifyInfo.setIsEffective( GMEnums.UCertifyEffectiveType.UNCHECKED.getValue());
         }
 
+        ucertifyInfo.setCerExt3(GMConstant.ZERO_STR_VALUE);
+
         ucertifyInfo.setCertifyTime(Date.from(Instant.now()));
         int i = ucertifyInfoMapper.insert(ucertifyInfo);
         if (i > 0) {
@@ -65,6 +68,11 @@ public class UCertifyInfoService implements IUCertifyInfoService{
 	public UCertifyInfo updateUCertifyInfo(UCertifyInfo record) {
 		checkNotNull(record);
         record.setModifyTime(Date.from(Instant.now()));
+
+        if (UCertifyEffectiveType.NOTPASS.getValue() == record.getIsEffective()) {
+        	record.setCerExt3(GMConstant.ONE_STR_VALUE);
+		}
+
         int i = ucertifyInfoMapper.updateByPrimaryKeySelective(record);
         if (i > 0) {
             return ucertifyInfoMapper.selectByPrimaryKey(record.getId());

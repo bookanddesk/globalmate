@@ -12,6 +12,8 @@ import com.globalmate.service.match.auto.MatchTask;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.GMConstant;
+import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +44,9 @@ public class AssistController extends BaseController {
 
     @GetMapping("listSOS")
     public JsonResult listSOS(HttpServletRequest request){
+        if (StringUtils.isNotBlank(getParameter(GMConstant.PAGE_NUM))) {
+            startPage();
+        }
         return buildSuccess(assistService.listSOS(getCurrentUser(request)));
     }
 

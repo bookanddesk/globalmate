@@ -180,8 +180,9 @@
     <include refid="Base_Column_List" />
     from u_certify_info
     <where>
+      cer_ext3 = '0'
       <if test="uId != null and uId != '' ">
-        u_id like concat('%', (concat(#{uId}, '%')))
+        and u_id like concat('%', (concat(#{uId}, '%')))
       </if>
       <if test="uName != null and uName != '' ">
         and u_name like concat('%', (concat(#{uName}, '%')))

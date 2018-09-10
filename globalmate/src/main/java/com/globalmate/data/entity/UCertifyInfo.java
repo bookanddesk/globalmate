@@ -29,7 +29,7 @@ public class UCertifyInfo {
 
     private String cerExt2;
 
-    private String cerExt3;
+    private String cerExt3;//删除标志 0 未删除， 1 已删除
 
     public String getId() {
         return id;
