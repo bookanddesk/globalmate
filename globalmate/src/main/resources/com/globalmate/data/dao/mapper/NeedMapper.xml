@@ -325,6 +325,8 @@
         </if>
         <if test="keyword != null and keyword != '' ">
             and (
+            n.USER_NAME_ like concat('%', (concat(#{keyword}, '%')))
+            or
             c.title like concat('%', (concat(#{keyword}, '%')))
             or
             c.description like concat('%', (concat(#{keyword}, '%')))
@@ -332,6 +334,8 @@
             c.country like concat('%', (concat(#{keyword}, '%')))
             or
             c.city like concat('%', (concat(#{keyword}, '%')))
+            or
+            c.reward like concat('%', (concat(#{keyword}, '%')))
             )
         </if>
     </select>
