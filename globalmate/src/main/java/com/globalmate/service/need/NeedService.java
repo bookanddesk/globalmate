@@ -4,10 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.apache.commons.lang3.ArrayUtils.toArray;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.globalmate.data.dao.mapper.*;
 import com.globalmate.data.entity.*;
@@ -16,6 +13,7 @@ import com.globalmate.data.entity.vo.AbstractNeed;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.common.AssistHandler;
 import com.globalmate.uitl.GMConstant;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -216,6 +214,10 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 
     @Override
     public List<Need> associatedQuery(Need need, String searchText) {
+		String enable = need.getEnable();
+		if (StringUtils.isNotEmpty(enable)) {
+			need.setEnable("('" + enable.replaceAll(",", "','") + "')");
+		}
         return needMapper.associatedQuery(need, searchText);
     }
 

@@ -312,7 +312,7 @@
             and n.USER_NAME_ like concat('%', (concat(#{need.userName}, '%')))
         </if>
         <if test="need.enable != null and need.enable != '' ">
-            and n.ENABLE_ = #{need.enable,jdbcType=CHAR}
+            and n.ENABLE_ in ${need.enable}
         </if>
         <if test="need.enable == null">
             and n.ENABLE_ != '0'
