@@ -271,7 +271,7 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 	@Override
 	public Need addCommonNeed(NeedCommon needCommon, User user) {
 		Need need = buildFromCommonNeed(needCommon);
-		need.setUserName(user.getName());
+		need.setUserName(StringUtils.isNotEmpty(user.getName()) ? user.getName() : user.getNikename());
 		need.setUserId(user.getId());
 		need = commitNeed(need);
 		if (StringUtils.isBlank(needCommon.getId())) {

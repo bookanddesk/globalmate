@@ -91,11 +91,11 @@
                 <pom.wx.token>globalmate</pom.wx.token>
                 <pom.wx.aeskey>fMmDXXNepvCVec0cvGKsuq6z4l6aKRCi2wgO21BFoN3</pom.wx.aeskey>
                 <!--wxMenuUrl-->
-                <pom.wxMenuUrl.homePage>http://glmate.cuibq.com/dist/index.html#/</pom.wxMenuUrl.homePage>
-                <pom.wxMenuUrl.needDetailPage>${pom.wxMenuUrl.homePage}detail?id=%s&amp;userId=%s&amp;openId=%s</pom.wxMenuUrl.needDetailPage>
-                <pom.wxMenuUrl.helpPage>${pom.wxMenuUrl.homePage}seekHelpList</pom.wxMenuUrl.helpPage>
-                <pom.wxMenuUrl.personalPage>${pom.wxMenuUrl.homePage}mine</pom.wxMenuUrl.personalPage>
-                <pom.wxMenuUrl.myNeed>${pom.wxMenuUrl.homePage}myAssist</pom.wxMenuUrl.myNeed>
+                <pom.wxMenuUrl.homePage>http://glmate.cuibq.com/dist/static/login.html</pom.wxMenuUrl.homePage>
+                <pom.wxMenuUrl.needDetailPage>http://glmate.cuibq.com/dist/index.html#/detail?id=%s&amp;userId=%s&amp;openId=%s</pom.wxMenuUrl.needDetailPage>
+                <pom.wxMenuUrl.helpPage>${pom.wxMenuUrl.homePage}?router=seekHelpList</pom.wxMenuUrl.helpPage>
+                <pom.wxMenuUrl.personalPage>${pom.wxMenuUrl.homePage}?router=mine</pom.wxMenuUrl.personalPage>
+                <pom.wxMenuUrl.myNeed>${pom.wxMenuUrl.homePage}?router=myAssist</pom.wxMenuUrl.myNeed>
                 <pom.wxMenuUrl.sysEvaluate>${pom.wxMenuUrl.homePage}feedback</pom.wxMenuUrl.sysEvaluate>
                 <!--wxTempMsgId-->
                 <pom.wxTempMsg.matchMsgId>r40inr6jznFDqSF1T5lLK7X2mND9VwqY8OOlvIiFVNo</pom.wxTempMsg.matchMsgId>
