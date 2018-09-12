@@ -103,19 +103,47 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         if (entity == null) {
             return matchMsg;
         }
-        AbstractNeed conceretNeed = entity.getConceretNeed();
-        if (conceretNeed == null) {
+        AbstractNeed concertNeed = entity.getConceretNeed();
+        if (concertNeed == null) {
             return matchMsg;
         }
-        NeedCommon needCommon = (NeedCommon) conceretNeed;
-        matchMsg.setFirst(String.format("来自 %s 的 %s 需求", entity.getNeed().getUserName(), conceretNeed.getTag()));
-        matchMsg.setKeyword1(needCommon.getTitle());
-        matchMsg.setKeyword2(entity.getNeed().getWhere().replace("_", "-"));
-        matchMsg.setKeyword3(conceretNeed.getTimeInfo());
-        matchMsg.setRemark(StringUtils.isBlank(conceretNeed.getDescription()) ?
-                conceretNeed.getDescription() : "请点击查看需求详情。");
+        matchMsg.setFirst(getFirstData(entity));
+        matchMsg.setKeyword1(getKeyword1(entity));
+        matchMsg.setKeyword2(getKeyword2(entity));
+        matchMsg.setKeyword3(getKeyword3(entity));
+        matchMsg.setRemark(getRemark(entity));
         matchMsg.setMsgTempId(matchMsgTempId);
         return matchMsg;
+    }
+
+    private String getFirstData(NeedAggEntity entity) {
+        String firstData = String.format("来自 %s 的 %s 需求",
+                entity.getNeed().getUserName(), entity.getConceretNeed().getTag());
+        return firstData;
+    }
+
+    private String getKeyword1(NeedAggEntity entity) {
+//        String keyword1 = ((NeedCommon) entity.getConceretNeed()).getTitle();
+        String keyword1 = entity.getConceretNeed().getTimeInfo();
+        return keyword1;
+    }
+
+    private String getKeyword2(NeedAggEntity entity) {
+        String keyword2 = entity.getNeed().getWhere().replace("_", "-");
+        return keyword2;
+    }
+
+    private String getKeyword3(NeedAggEntity entity) {
+//        String keyword3 = entity.getConceretNeed().getTimeInfo();
+        String keyword3 = entity.getNeed().getUserName();
+        return keyword3;
+    }
+
+    private String getRemark(NeedAggEntity entity) {
+        AbstractNeed concertNeed = entity.getConceretNeed();
+        String remark = StringUtils.isNotBlank(concertNeed.getDescription()) ?
+                concertNeed.getDescription() : "请点击查看需求详情。";
+        return remark;
     }
 
 

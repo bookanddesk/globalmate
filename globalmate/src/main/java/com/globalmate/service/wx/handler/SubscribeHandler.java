@@ -50,6 +50,9 @@ public class SubscribeHandler extends AbstractHandler {
 //    }
 
     try {
+
+
+
       return new TextBuilder().build(GMConstant.SUBSCRIBE_MSG_TEMP_INFO, wxMessage, weixinService);
     } catch (Exception e) {
       this.logger.error(e.getMessage(), e);

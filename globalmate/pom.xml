@@ -76,7 +76,8 @@
                 <pom.jdbc.username>gm</pom.jdbc.username>
                 <pom.jdbc.password>Globalmate88</pom.jdbc.password>
                 <!--redis-->
-                <pom.redis.host>127.0.0.1</pom.redis.host>
+                <!--<pom.redis.host>127.0.0.1</pom.redis.host>-->
+                <pom.redis.host>39.107.125.163</pom.redis.host>
                 <pom.redis.password>gmgm</pom.redis.password>
                 <!--oss-->
                 <pom.oss.bucket>globalmate</pom.oss.bucket>
@@ -86,7 +87,7 @@
                 <pom.oss.host>http://globalmate.oss-cn-beijing.aliyuncs.com</pom.oss.host>
                 <!--wxConfig-->
                 <pom.wx.appid>wxfd37dadae5230dc9</pom.wx.appid>
-                <pom.wx.appsecret>2d437dabf5d45f5bbaed8f727631c6cb</pom.wx.appsecret>
+                <pom.wx.appsecret>2e3bb44a9bea31b7ef4adee7fc75045b</pom.wx.appsecret>
                 <pom.wx.token>globalmate</pom.wx.token>
                 <pom.wx.aeskey>fMmDXXNepvCVec0cvGKsuq6z4l6aKRCi2wgO21BFoN3</pom.wx.aeskey>
                 <!--wxMenuUrl-->
@@ -97,7 +98,7 @@
                 <pom.wxMenuUrl.myNeed>${pom.wxMenuUrl.homePage}myAssist</pom.wxMenuUrl.myNeed>
                 <pom.wxMenuUrl.sysEvaluate>${pom.wxMenuUrl.homePage}feedback</pom.wxMenuUrl.sysEvaluate>
                 <!--wxTempMsgId-->
-                <pom.wxTempMsgId.matchMsg>VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY</pom.wxTempMsgId.matchMsg>
+                <pom.wxTempMsg.matchMsgId>r40inr6jznFDqSF1T5lLK7X2mND9VwqY8OOlvIiFVNo</pom.wxTempMsg.matchMsgId>
             </properties>
         </profile>
 
