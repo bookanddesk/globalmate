@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.globalmate.data.dao.mapper.NeedMapper">
-    <cache/>
+    <!--<cache/>-->
     <resultMap id="BaseResultMap" type="com.globalmate.data.entity.Need">
         <id column="ID_" jdbcType="VARCHAR" property="id"/>
         <result column="start_type_" jdbcType="CHAR" property="startType"/>
