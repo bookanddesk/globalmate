@@ -338,6 +338,7 @@
             c.reward like concat('%', (concat(#{keyword}, '%')))
             )
         </if>
+        order by n.CREATE_TIME_ desc 
     </select>
 
 </mapper>
