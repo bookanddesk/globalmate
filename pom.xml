@@ -70,6 +70,7 @@
         <commons-pool2.version>2.4.2</commons-pool2.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-codec.version>1.10</commons-codec.version>
+        <commons-email.version>1.5</commons-email.version>
         <httpclient-version>4.5.2</httpclient-version>
         <httpmime-version>4.5.3</httpmime-version>
         <kafka-client.version>0.10.2.0</kafka-client.version>
@@ -702,6 +703,12 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>${commons-email.version}</version>
             </dependency>
 
         </dependencies>

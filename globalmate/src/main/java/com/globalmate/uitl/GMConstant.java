@@ -54,6 +54,15 @@ public class GMConstant {
     public static final String UNDERLINE = "_";
     public static final String COMMA = ",";
 
+    public static final String EMAIL_SUBJECT = "Glohelp验证码";
+    public static final String EMAIL_MSG_PREFIX = "您在Glohelp的验证码是：";
+    public static final String EMAIL_HOST_NAME = "smtp.126.com";
+    public static final String EMAIL_CHARSET = "utf-8";
+    public static final String EMAIL_FROM = "glohelp@126.com";
+    public static final String EMAIL_AUTHENTICATION_USERNAME = "glohelp@126.com";
+    public static final String EMAIL_AUTHENTICATION_PASSWORD = "glohelp666";
+    public static final int EMAIL_HOST_PORT = 25;
+    public static final int EMAIL_VERIFICATION_CODE_COUNT = 4;
 
 
 

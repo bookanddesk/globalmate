@@ -458,6 +458,11 @@
             <version>${poi.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
+
     </dependencies>
 
 

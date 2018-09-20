@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.globalmate.uitl.EmailUtils;
+import com.globalmate.uitl.RegexUtils;
+import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -100,6 +103,13 @@ public class CertifyController extends BaseController {
         return buildSuccess(ucertifyInfoList);
     }
 
+    @GetMapping("emailVerify")
+    public JsonResult emailVerify(String email) {
+        if(StringUtils.isEmpty(email) || !RegexUtils.checkEmail(email)) {
+            return JsonResult.fail("emailAddress is illegal!");
+        }
+        return JsonResult.success(EmailUtils.sendVerificationCode(email));
+    }
 
 
 }
