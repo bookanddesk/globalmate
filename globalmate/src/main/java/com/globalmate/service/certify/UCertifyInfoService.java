@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.globalmate.uitl.GMConstant;
+import com.globalmate.uitl.RegexUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,33 +21,36 @@ import com.globalmate.uitl.IdGenerator;
 import com.globalmate.uitl.StringUtils;
 
 @Service
-public class UCertifyInfoService implements IUCertifyInfoService{
-	
-	 @Autowired
-	 private UCertifyInfoMapper ucertifyInfoMapper;
+public class UCertifyInfoService implements IUCertifyInfoService {
 
-	@Override
-	public UCertifyInfo addUCertifyInfo(User user, UCertifyInfo ucertifyInfo) {
-		checkNotNull(ucertifyInfo);
-		if(StringUtils.isNotBlank(ucertifyInfo.getId())) {
-			return this.updateUCertifyInfo(ucertifyInfo);
-		}
+    @Autowired
+    private UCertifyInfoMapper ucertifyInfoMapper;
 
-		ucertifyInfo.setId(IdGenerator.generateId());
+    @Override
+    public UCertifyInfo addUCertifyInfo(User user, UCertifyInfo ucertifyInfo) {
+        checkNotNull(ucertifyInfo);
+
+        checkCertifyEmail(ucertifyInfo);
+
+        if (StringUtils.isNotBlank(ucertifyInfo.getId())) {
+            return this.updateUCertifyInfo(ucertifyInfo);
+        }
+
+        ucertifyInfo.setId(IdGenerator.generateId());
         if (ucertifyInfo.getuId() == null) {
-        	ucertifyInfo.setuId(user.getId());
+            ucertifyInfo.setuId(user.getId());
         }
         if (ucertifyInfo.getuName() == null) {
-        	ucertifyInfo.setuName(user.getNikename() == null ? user.getName() : user.getNikename());
+            ucertifyInfo.setuName(user.getNikename() == null ? user.getName() : user.getNikename());
         }
         if (ucertifyInfo.getCetifyType() == null) {
-        	//默认身份证认证方式
-        	ucertifyInfo.setCetifyType(GMEnums.UCertifyType.IDCARD.name());
+            //默认身份证认证方式
+            ucertifyInfo.setCetifyType(GMEnums.UCertifyType.IDCARD.name());
         }
-        
-        if (ucertifyInfo.getIsEffective()!= GMEnums.UCertifyEffectiveType.PASS.getValue() && ucertifyInfo.getIsEffective()!= GMEnums.UCertifyEffectiveType.NOTPASS.getValue()) {
-        	//默认为未验证状态
-        	ucertifyInfo.setIsEffective( GMEnums.UCertifyEffectiveType.UNCHECKED.getValue());
+
+        if (ucertifyInfo.getIsEffective() != GMEnums.UCertifyEffectiveType.PASS.getValue() && ucertifyInfo.getIsEffective() != GMEnums.UCertifyEffectiveType.NOTPASS.getValue()) {
+            //默认为未验证状态
+            ucertifyInfo.setIsEffective(GMEnums.UCertifyEffectiveType.UNCHECKED.getValue());
         }
 
         ucertifyInfo.setCerExt3(GMConstant.ZERO_STR_VALUE);
@@ -57,35 +61,48 @@ public class UCertifyInfoService implements IUCertifyInfoService{
             return ucertifyInfoMapper.selectByPrimaryKey(ucertifyInfo.getId());
         }
         return null;
-	}
+    }
 
-	@Override
-	public List<UCertifyInfo> listCertifyInfo(UCertifyInfo certifyInfo) {
-		 return ucertifyInfoMapper.queryRecords(Optional.ofNullable(certifyInfo).orElse(new UCertifyInfo()));
-	}
+    @Override
+    public List<UCertifyInfo> listCertifyInfo(UCertifyInfo certifyInfo) {
+        return ucertifyInfoMapper.queryRecords(Optional.ofNullable(certifyInfo).orElse(new UCertifyInfo()));
+    }
 
-	@Override
-	public UCertifyInfo updateUCertifyInfo(UCertifyInfo record) {
-		checkNotNull(record);
+    @Override
+    public UCertifyInfo updateUCertifyInfo(UCertifyInfo record) {
+        checkNotNull(record);
         record.setModifyTime(Date.from(Instant.now()));
 
         if (UCertifyEffectiveType.NOTPASS.getValue() == record.getIsEffective()) {
-        	record.setCerExt3(GMConstant.ONE_STR_VALUE);
-		}
+            record.setCerExt3(GMConstant.ONE_STR_VALUE);
+        }
 
         int i = ucertifyInfoMapper.updateByPrimaryKeySelective(record);
         if (i > 0) {
             return ucertifyInfoMapper.selectByPrimaryKey(record.getId());
         }
         return null;
-	}
+    }
 
-	@Override
-	public UCertifyInfo getUCertifyInfo(String id) {
-		if (StringUtils.isNoneBlank(id)) {
-			return ucertifyInfoMapper.selectByPrimaryKey(id);
-		}
-		return null;
-	}
+    @Override
+    public UCertifyInfo getUCertifyInfo(String id) {
+        if (StringUtils.isNoneBlank(id)) {
+            return ucertifyInfoMapper.selectByPrimaryKey(id);
+        }
+        return null;
+    }
+
+    private void checkCertifyEmail(UCertifyInfo info) {
+        if (!GMEnums.UCertifyType.EMAIL.name().equalsIgnoreCase(info.getCetifyType())) {
+            return;
+        }
+        String email = info.getCerExt2();
+        if (StringUtils.isEmpty(email)) {
+            throw new IllegalStateException("email address can't be empty when certify by email!");
+        }
+        if (!RegexUtils.checkEmail(email)) {
+            throw new IllegalStateException("email address is illegal!");
+        }
+    }
 
 }

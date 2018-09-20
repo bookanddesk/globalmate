@@ -166,7 +166,8 @@ public class GMEnums {
     	IDCARD("身份证"),    //身份证
         PASSPORT("护照"),     //护照
         STUDENTID("学生证"),    //学生证
-        ALIPAYID("支付宝");     //支付宝认证
+        ALIPAYID("支付宝"),     //支付宝认证
+        EMAIL("邮箱");     //邮箱认证
 
         private String showValue;
 

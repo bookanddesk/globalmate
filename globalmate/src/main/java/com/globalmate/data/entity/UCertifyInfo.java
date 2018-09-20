@@ -18,7 +18,7 @@ public class UCertifyInfo {
     @NotBlank(message = "certifyType can't be null!")
     private String cetifyType;
 
-    @NotBlank(message = "certifyPhotoUrl can't be null!")
+//    @NotBlank(message = "certifyPhotoUrl can't be null!")
     private String certifyPhoto;
 
     private Date modifyTime;
@@ -27,7 +27,7 @@ public class UCertifyInfo {
 
     private String cerExt1;
 
-    private String cerExt2;
+    private String cerExt2;//认证邮箱地址
 
     private String cerExt3;//删除标志 0 未删除， 1 已删除
 
