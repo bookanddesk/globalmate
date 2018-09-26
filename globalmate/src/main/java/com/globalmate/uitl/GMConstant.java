@@ -64,6 +64,8 @@ public class GMConstant {
     public static final int EMAIL_HOST_PORT = 25;
     public static final int EMAIL_VERIFICATION_CODE_COUNT = 4;
 
+    public static final String V_TAG = "vTag";
+
 
 
 }

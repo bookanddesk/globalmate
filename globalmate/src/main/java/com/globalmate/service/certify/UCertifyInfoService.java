@@ -1,30 +1,32 @@
 package com.globalmate.service.certify;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import com.globalmate.uitl.GMConstant;
-import com.globalmate.uitl.RegexUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globalmate.data.dao.mapper.UCertifyInfoMapper;
 import com.globalmate.data.entity.UCertifyInfo;
 import com.globalmate.data.entity.User;
 import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.po.GMEnums.UCertifyEffectiveType;
+import com.globalmate.service.user.UserService;
+import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.IdGenerator;
+import com.globalmate.uitl.RegexUtils;
 import com.globalmate.uitl.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class UCertifyInfoService implements IUCertifyInfoService {
 
     @Autowired
     private UCertifyInfoMapper ucertifyInfoMapper;
+    @Autowired
+    private UserService userService;
 
     @Override
     public UCertifyInfo addUCertifyInfo(User user, UCertifyInfo ucertifyInfo) {
@@ -79,9 +81,35 @@ public class UCertifyInfoService implements IUCertifyInfoService {
 
         int i = ucertifyInfoMapper.updateByPrimaryKeySelective(record);
         if (i > 0) {
-            return ucertifyInfoMapper.selectByPrimaryKey(record.getId());
+            record = ucertifyInfoMapper.selectByPrimaryKey(record.getId());
+            if (UCertifyEffectiveType.PASS.getValue() == record.getIsEffective()) {
+                updateVTag(record);
+            }
+            return record;
         }
         return null;
+    }
+
+    private void updateVTag(UCertifyInfo record) {
+        GMEnums.vTag vTag = null;
+        try {
+            GMEnums.UCertifyType uCertifyType = GMEnums.UCertifyType.valueOf(record.getCetifyType());
+            vTag = GMEnums.vTag.valueOf(uCertifyType.getVTag());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        if (vTag == null) {
+            return;
+        }
+        String userTag = userService.getUserTag(record.getuId());
+        try {
+            if (StringUtils.isEmpty(userTag)
+                    || vTag.compareTo(GMEnums.vTag.valueOf(userTag)) < 0) {
+                userService.updateUserTag(record.getuId(), vTag.name());
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -98,10 +126,10 @@ public class UCertifyInfoService implements IUCertifyInfoService {
         }
         String email = info.getCerExt2();
         if (StringUtils.isEmpty(email)) {
-            throw new IllegalStateException("email address can't be empty when certify by email!");
+            throw new IllegalArgumentException("email address can't be empty when certify by email!");
         }
         if (!RegexUtils.checkEmail(email)) {
-            throw new IllegalStateException("email address is illegal!");
+            throw new IllegalArgumentException("email address is illegal!");
         }
     }
 

@@ -262,6 +262,20 @@ public class UserService implements IUserService, ITokenservice {
         return IdGenerator.generateMemberId(lastMemberId);
     }
 
+    @Override
+    public User updateUserTag(String userId, String tag) {
+        User user = new User();
+        user.setId(userId);
+        user.setUserTag(tag);
+        return updateUser(user);
+    }
+
+    @Override
+    public String getUserTag(String userId) {
+        checkNotNull(userId);
+        return userMapper.queryUserTag(userId);
+    }
+
     private User copyProperties(User user, WxMpUser wxMpUser) {
         user.setNikename(wxMpUser.getNickname());
         user.setSubscribe(wxMpUser.getSubscribe());

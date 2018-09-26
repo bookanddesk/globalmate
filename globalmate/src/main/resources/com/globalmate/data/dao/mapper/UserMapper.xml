@@ -462,4 +462,8 @@
     select max(u_ext2_) from `user`
   </select>
 
+  <select id="queryUserTag" parameterType="java.lang.String" resultType="java.lang.String">
+    select user_tag_ from `user` where ID_ = #{id,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

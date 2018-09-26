@@ -59,4 +59,8 @@ public interface IUserService {
     List<User> queryByLoginTime(User user, String utilDateStr);
 
     String generateMemberId();
+
+    User updateUserTag(String userId, String tag);
+
+    String getUserTag(String userId);
 }

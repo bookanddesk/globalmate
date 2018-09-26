@@ -40,4 +40,6 @@ public interface UserMapper {
 
     String selectMaxExt2();
 
+    String queryUserTag(@Param("id")String id);
+
 }

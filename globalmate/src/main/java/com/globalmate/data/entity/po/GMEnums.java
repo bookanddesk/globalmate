@@ -160,14 +160,45 @@ public class GMEnums {
         SUBSCRIBE,    //关注
         MATCH;     //匹配
     }
+
+    public enum vTag{
+        vGold,
+        vSilver,
+        vCopper
+    }
     
     public enum UCertifyType {
     	
-    	IDCARD("身份证"),    //身份证
-        PASSPORT("护照"),     //护照
-        STUDENTID("学生证"),    //学生证
-        ALIPAYID("支付宝"),     //支付宝认证
-        EMAIL("邮箱");     //邮箱认证
+    	IDCARD("身份证"){
+            @Override
+            public String getVTag() {
+                return vTag.vGold.name();
+            }
+        },    //身份证
+        PASSPORT("护照") {
+            @Override
+            public String getVTag() {
+                return vTag.vGold.name();
+            }
+        },     //护照
+        EMAIL("邮箱") {
+            @Override
+            public String getVTag() {
+                return vTag.vSilver.name();
+            }
+        },//邮箱认证
+        STUDENTID("学生证") {
+            @Override
+            public String getVTag() {
+                return vTag.vCopper.name();
+            }
+        },    //学生证
+        ALIPAYID("支付宝") {
+            @Override
+            public String getVTag() {
+                return null;
+            }
+        };   //支付宝认证
 
         private String showValue;
 
@@ -179,6 +210,7 @@ public class GMEnums {
             return this.showValue;
         }
 
+        public abstract String getVTag();
     }
     
     public enum UCertifyEffectiveType {

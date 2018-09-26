@@ -51,7 +51,7 @@ public class User extends BaseEntity{
 
     private String uExt2;//会员号
 
-    private String uExt3;
+    private String uExt3;//接受用户协议
 
     private String country;
     private String city;

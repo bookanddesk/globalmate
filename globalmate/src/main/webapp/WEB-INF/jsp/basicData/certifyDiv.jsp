@@ -70,7 +70,7 @@
                         <td width="5%">认证图片2</td>
                         <td width="3%">认证时间</td>
                         <td width="3%">认证状态</td>
-                        <td width="5%">操作</td>
+                        <%--<td width="5%">操作</td>--%>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="cerObj" varStatus="index">
@@ -87,18 +87,18 @@
                             <c:choose>
                                 <c:when test="${cerObj.isEffective == 1}">
                                     <td>通过</td>
-                                    <td>
-                                        <a href="#" onclick="pass('${cerObj.id}', false)">不通过</a>
-                                    </td>
+                                    <%--<td>
+                                        &lt;%&ndash;<a href="#" onclick="pass('${cerObj.id}', false)">不通过</a>&ndash;%&gt;
+                                    </td>--%>
                                 </c:when>
                                 <c:when test="${cerObj.isEffective == 2}">
                                     <td>不通过</td>
-                                    <td>
-                                        <a href="#" onclick="pass('${cerObj.id}', true)">通过</a>
-                                    </td>
+                                    <%--<td>
+                                        &lt;%&ndash;<a href="#" onclick="pass('${cerObj.id}', true)">通过</a>&ndash;%&gt;
+                                    </td>--%>
                                 </c:when>
                                 <c:when test="${cerObj.isEffective == 0}">
-                                    <td>未审核</td>
+                                    <%--<td>未审核</td>--%>
                                     <td >
                                         <a href="#" onclick="pass('${cerObj.id}', true)">通过</a>
                                         <a href="#" onclick="pass('${cerObj.id}', false)">不通过</a>
