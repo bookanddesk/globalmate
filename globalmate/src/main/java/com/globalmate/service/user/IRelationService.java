@@ -16,6 +16,8 @@ public interface IRelationService {
     UFansRelations addFriend(User targetUser) throws UserRelationException;
 
     List<UFansRelations> getFriendRelations(String userId);
+    
+    boolean friendRelationExist(String userId, String targetUserId);
 
 
 }

@@ -45,15 +45,13 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
                     + targetUser.getId() + "] !");
         }
 
-        short friendCode = GMEnums.UserRelationType.friend.getCode();
-        int relationsCount = relationsMapper.relationsCount(user.getId(), targetUser.getId(), friendCode);
-        if (relationsCount > 0) {
+        if (friendRelationExist(user.getId(), targetUser.getId())) {
             throw new UserRelationException("friend Relation already exists with userId : ["
                     + user.getId() + "] and targetUserId : [" + targetUser.getId() + "] !");
         }
 
         UFansRelations relations = create(targetUser);
-        relations.setRelationType(friendCode);
+        relations.setRelationType(GMEnums.UserRelationType.friend.getCode());
         relations.setIsDeleted(false);
         int insert = relationsMapper.insertSelective(relations);
         if (insert > 0) {
@@ -68,6 +66,12 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
         relations.setuId(userId);
         relations.setRelationType(GMEnums.UserRelationType.friend.getCode());
         return relationsMapper.queryLike(relations);
+    }
+
+    @Override
+    public boolean friendRelationExist(String userId, String targetUserId) {
+        short friendCode = GMEnums.UserRelationType.friend.getCode();
+        return relationsMapper.relationsCount(userId, targetUserId, friendCode) > 0;
     }
 
     @Override

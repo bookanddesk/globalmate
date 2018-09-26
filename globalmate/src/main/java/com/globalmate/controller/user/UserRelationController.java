@@ -72,4 +72,12 @@ public class UserRelationController extends BaseController {
         return buildSuccess(null);
     }
 
+    @GetMapping("checkFriend")
+    public JsonResult checkFriend(String targetUserId) {
+        if (StringUtils.isBlank(targetUserId)) {
+            return buildFail("targetUserId can't be blank!");
+        }
+        return buildSuccess(relationService.friendRelationExist(getCurrentUser().getId(), targetUserId));
+    }
+
 }
