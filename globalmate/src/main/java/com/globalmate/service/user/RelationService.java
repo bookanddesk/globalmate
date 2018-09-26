@@ -54,6 +54,7 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
 
         UFansRelations relations = create(targetUser);
         relations.setRelationType(friendCode);
+        relations.setIsDeleted(false);
         int insert = relationsMapper.insertSelective(relations);
         if (insert > 0) {
             return relationsMapper.selectByPrimaryKey(relations.getId());
@@ -65,6 +66,7 @@ public class RelationService implements IRelationService, ICreateService<UFansRe
     public List<UFansRelations> getFriendRelations(String userId) {
         UFansRelations relations = new UFansRelations();
         relations.setuId(userId);
+        relations.setRelationType(GMEnums.UserRelationType.friend.getCode());
         return relationsMapper.queryLike(relations);
     }
 

@@ -177,8 +177,10 @@
 
   <select id="relationsCount" resultType="java.lang.Integer">
     select count(1) from u_fans_relations
-    where u_id = #{uId,jdbcType=VARCHAR}
-      and u_related_id = #{uRelatedId,jdbcType=VARCHAR}
+    where (u_id = #{uId,jdbcType=VARCHAR}
+      and u_related_id = #{uRelatedId,jdbcType=VARCHAR})
+      or (u_id = #{uRelatedId,jdbcType=VARCHAR}
+      and u_related_id = #{uId,jdbcType=VARCHAR})
       and relation_type = #{relationType,jdbcType=SMALLINT}
   </select>
 
@@ -189,7 +191,10 @@
     from u_fans_relations
     where is_deleted = 0
     <if test="uId != null and uId != '' ">
-      and u_id = #{uId,jdbcType=VARCHAR}
+      and (u_id = #{uId,jdbcType=VARCHAR} or u_related_id = #{uId,jdbcType=VARCHAR})
+    </if>
+    <if test="relationType != null and relationType != '' ">
+      and  relation_type = #{relationType,jdbcType=SMALLINT}
     </if>
   </select>
 

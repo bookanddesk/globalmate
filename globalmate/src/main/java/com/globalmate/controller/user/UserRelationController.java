@@ -63,8 +63,9 @@ public class UserRelationController extends BaseController {
         userId = userId == null ? getCurrentUser().getId() : userId;
         List<UFansRelations> friendRelations = relationService.getFriendRelations(userId);
         if (CollectionUtils.isNotEmpty(friendRelations)) {
+            String finalUserId = userId;
             List<User> collect = friendRelations.stream()
-                    .map(x -> userService.getUser(x.getuRelatedId()))
+                    .map(x -> userService.getUser(StringUtils.equals(finalUserId, x.getuId()) ? x.getuRelatedId() : x.getuId()))
                     .collect(Collectors.toList());
             return buildSuccess(collect);
         }
