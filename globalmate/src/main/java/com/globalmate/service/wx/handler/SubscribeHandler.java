@@ -6,6 +6,7 @@ import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.service.wx.builder.TextBuilder;
 import com.globalmate.service.wx.WeixinService;
+import com.globalmate.uitl.StringUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,8 +35,12 @@ public class SubscribeHandler extends AbstractHandler {
     // 获取微信用户基本信息
     WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
 
+    String welcomeText = GMConstant.SUBSCRIBE_MSG_TEMP_INFO;
     if (userWxInfo != null) {
       userService.handleWxUser(userWxInfo);
+      if (!StringUtils.equalsIgnoreCase(GMConstant.LANGUAGE_CN, userWxInfo.getLanguage())) {
+        welcomeText = GMConstant.SUBSCRIBE_MSG_TEMP_INFO_EN;
+      }
     }
 
 //    WxMpXmlOutMessage responseResult = null;
@@ -50,10 +55,7 @@ public class SubscribeHandler extends AbstractHandler {
 //    }
 
     try {
-
-
-
-      return new TextBuilder().build(GMConstant.SUBSCRIBE_MSG_TEMP_INFO, wxMessage, weixinService);
+      return new TextBuilder().build(welcomeText, wxMessage, weixinService);
     } catch (Exception e) {
       this.logger.error(e.getMessage(), e);
     }

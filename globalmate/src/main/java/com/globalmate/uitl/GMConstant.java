@@ -24,7 +24,9 @@ public class GMConstant {
     public static final String MATCH_MSG_TEMP_REMARK = "remark";
     public static final String MATCH_MSG_TEMP_ID = "VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY";
 
-    public static final String SUBSCRIBE_MSG_TEMP_INFO = "您好，欢迎来到GloHelp，我们致力于打造一个覆盖全球的互信互助平台，希望能通过这个平台帮到更多的人。";
+    public static final String LANGUAGE_CN = "zh_CN";
+    public static final String SUBSCRIBE_MSG_TEMP_INFO = "欢迎关注GloHelp! 我们致力于打造基于真实社会网络的互信互助平台，通过精准推送高效地帮您解决身边的问题，让每一个遇到困难的人都有人帮，让世界变得更美好!";
+    public static final String SUBSCRIBE_MSG_TEMP_INFO_EN = "Welcome to GloHelp! We are committed to building a mutual trust and mutual help platform based on real social networks. We can help you solve problems around you through accurate push, so that everyone who encounters difficulties will help others and make the world a better place!";
 
     public static final String SESSION = "session";
 
