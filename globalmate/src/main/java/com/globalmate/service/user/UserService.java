@@ -277,7 +277,7 @@ public class UserService implements IUserService, ITokenservice {
     }
 
     private User copyProperties(User user, WxMpUser wxMpUser) {
-        user.setNikename(wxMpUser.getNickname());
+        user.setNikename(com.globalmate.uitl.StringUtils.replaceEmoji(wxMpUser.getNickname()));
         user.setSubscribe(wxMpUser.getSubscribe());
         user.setOpenid(wxMpUser.getOpenId());
         user.setSex(wxMpUser.getSexDesc());

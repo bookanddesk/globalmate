@@ -2,6 +2,9 @@ package com.globalmate.uitl;
 
 import com.google.common.base.Joiner;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author XingJiajun
  * @Date 2018/7/12 14:52
@@ -74,5 +77,20 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return isMobileDev;
     }
+
+    public static String replaceEmoji(String string) {
+        if (string == null) {
+            return string;
+        }
+        Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
+                Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+        Matcher emojiMatcher = emoji.matcher(string);
+        if (emojiMatcher.find()) {
+            string = emojiMatcher.replaceAll("");
+            return string;
+        }
+        return string;
+    }
+
 
 }

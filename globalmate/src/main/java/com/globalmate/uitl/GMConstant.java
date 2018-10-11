@@ -26,7 +26,7 @@ public class GMConstant {
 
     public static final String LANGUAGE_CN = "zh_CN";
     public static final String SUBSCRIBE_MSG_TEMP_INFO = "欢迎关注GloHelp! 我们致力于打造基于真实社会网络的互信互助平台，通过精准推送高效地帮您解决身边的问题，让每一个遇到困难的人都有人帮，让世界变得更美好!";
-    public static final String SUBSCRIBE_MSG_TEMP_INFO_EN = "Welcome to GloHelp! We are committed to building a mutual trust and mutual help platform based on real social networks. We can help you solve problems around you through accurate push, so that everyone who encounters difficulties will help others and make the world a better place!";
+    public static final String SUBSCRIBE_MSG_TEMP_INFO_EN = "Welcome to GloHelp! We are dedicated to building a mutual trust and help platform based on real social networks. We can help to solve your problems through accurate pushes, so that everyone in trouble will get help and the world will become a better place!";
 
     public static final String SESSION = "session";
 
