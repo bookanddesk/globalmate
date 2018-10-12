@@ -284,7 +284,7 @@ public class UserService implements IUserService, ITokenservice {
         user.setOpenid(wxMpUser.getOpenId());
         user.setSex(wxMpUser.getSexDesc());
         user.setLanguage(wxMpUser.getLanguage());
-        user.setCity(wxMpUser.getCity() == null ? wxMpUser.getProvince() : wxMpUser.getCity());
+//        user.setCity(wxMpUser.getCity() == null ? wxMpUser.getProvince() : wxMpUser.getCity());
         user.setCountry(wxMpUser.getCountry());
         user.setPic(wxMpUser.getHeadImgUrl());
 //        user.setCreateTime(new Date(wxMpUser.getSubscribeTime()));
