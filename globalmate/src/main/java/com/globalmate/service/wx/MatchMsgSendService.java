@@ -14,6 +14,7 @@ import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.UserService;
 import com.globalmate.uitl.CollectionUtils;
 import com.globalmate.uitl.DateUtil;
+import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,7 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
     }
 
     private String getFirstData(NeedAggEntity entity) {
-        String firstData = String.format("来自 %s 的 %s 需求",
+        String firstData = String.format(GMConstant.MATCH_MSG_TEMP_FIRST_VALUE,
                 entity.getNeed().getUserName(), entity.getConceretNeed().getTag());
         return firstData;
     }
@@ -142,8 +143,8 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
     private String getRemark(NeedAggEntity entity) {
         AbstractNeed concertNeed = entity.getConceretNeed();
         String remark = StringUtils.isNotBlank(concertNeed.getDescription()) ?
-                concertNeed.getDescription() : "请点击查看需求详情。";
-        return remark;
+                concertNeed.getDescription() : GMConstant.MATCH_MSG_TEMP_REMARK_VALUE_DEFAULT;
+        return String.format(GMConstant.MATCH_MSG_TEMP_REMARK_VALUE, remark);
     }
 
 

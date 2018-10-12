@@ -18,11 +18,14 @@ public class GMConstant {
     public static final String MATCH_MSG_TEMP_FONT_COLOUR_BLACK = "#111";
     public static final String MATCH_MSG_TEMP_FONT_COLOUR_GOLDEN = "#fbaf5a";
     public static final String MATCH_MSG_TEMP_FIRST = "first";
+    public static final String MATCH_MSG_TEMP_FIRST_VALUE = "来自 %s 的 %s 需求\n";
     public static final String MATCH_MSG_TEMP_KEYWORD1 = "keyword1";
     public static final String MATCH_MSG_TEMP_KEYWORD2 = "keyword2";
     public static final String MATCH_MSG_TEMP_KEYWORD3 = "keyword3";
     public static final String MATCH_MSG_TEMP_KEYWORD4 = "keyword4";
     public static final String MATCH_MSG_TEMP_REMARK = "remark";
+    public static final String MATCH_MSG_TEMP_REMARK_VALUE = "\n%s";
+    public static final String MATCH_MSG_TEMP_REMARK_VALUE_DEFAULT = "请点击查看需求详情。";
 //    public static final String MATCH_MSG_TEMP_ID = "VgbeYJT2h1DalNZDs17zRjsgD2M6jKHXZ9U3BUlwCuY";
 
     public static final String CERTIFY_MSG_FIRST_VALUE = " 您好，您的身份认证信息已审核完毕：\n";
@@ -30,8 +33,8 @@ public class GMConstant {
     public static final String CERTIFY_MSG_PASS = "通过";
     public static final String CERTIFY_MSG_NOT_PASS = "未通过";
     public static final String CERTIFY_MSG_CERTIFY_INFO = "%s 身份信息认证";
-    public static final String CERTIFY_MSG_REMARK_PASS = "\n亲爱的用户，您的认证已经通过，感谢您的支持和信任。若您遇到困难，希望本平台能为您解决，同时也希望您能够帮助更多的人。 ";
-    public static final String CERTIFY_MSG_REMARK_NOT_PASS = "\n亲爱的用户，很遗憾，您上传的证件不正确，为了保障全体用户的权益，请您上传真实证件，我们承诺保障您的信息安全。 ";
+    public static final String CERTIFY_MSG_REMARK_PASS = "\n亲爱的用户，您的认证已经通过，感谢您的支持和信任。若您遇到困难，希望本平台能为您解决，同时也希望您能够帮助更多的人。";
+    public static final String CERTIFY_MSG_REMARK_NOT_PASS = "\n亲爱的用户，很遗憾，您上传的证件不正确，为了保障全体用户的权益，请您上传真实证件，我们承诺保障您的信息安全。";
 
     public static final String LANGUAGE_CN = "zh_CN";
     public static final String SUBSCRIBE_MSG_TEMP_INFO = "欢迎关注GloHelp! 我们致力于打造基于真实社会网络的互信互助平台，通过精准推送高效地帮您解决身边的问题，让每一个遇到困难的人都有人帮，让世界变得更美好!";
