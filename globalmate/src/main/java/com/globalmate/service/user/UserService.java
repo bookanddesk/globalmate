@@ -169,12 +169,14 @@ public class UserService implements IUserService, ITokenservice {
             return null;
         }
         String name = userCache.get(id);
-        if (name == null) {
+        if (StringUtils.isEmpty(name)) {
             User user = getUser(id);
             if (user != null) {
                 name = user.getName();
-                if (name != null) {
+                if (StringUtils.isNotEmpty(name)) {
                     userCache.put(id, name);
+                }else {
+                    name = user.getNikename();
                 }
             }
         }

@@ -64,6 +64,7 @@
                 <pom.wxMenuUrl.sysEvaluate>${pom.wxMenuUrl.homePage}feedback</pom.wxMenuUrl.sysEvaluate>
                 <!--wxTempMsgId-->
                 <pom.wxTempMsg.matchMsgId>PJtigDPWITdqGKHneuHDRXsx0rYj-ysfudbOapNMZKc</pom.wxTempMsg.matchMsgId>
+                <pom.wxTempMsg.certifyMsgId>TPG5AkaxB3qFY8_pEaVp-gGe5Kb7xy4BdSvaUzBzZ_8</pom.wxTempMsg.certifyMsgId>
             </properties>
         </profile>
 
@@ -99,6 +100,7 @@
                 <pom.wxMenuUrl.sysEvaluate>${pom.wxMenuUrl.homePage}feedback</pom.wxMenuUrl.sysEvaluate>
                 <!--wxTempMsgId-->
                 <pom.wxTempMsg.matchMsgId>r40inr6jznFDqSF1T5lLK7X2mND9VwqY8OOlvIiFVNo</pom.wxTempMsg.matchMsgId>
+                <pom.wxTempMsg.certifyMsgId>gBa4-PlOJPE9vF6cC9CqmvHTFpP2PIq7ly2QNf2V3nk</pom.wxTempMsg.certifyMsgId>
             </properties>
         </profile>
 

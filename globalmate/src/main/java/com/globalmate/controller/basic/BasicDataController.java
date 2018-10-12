@@ -13,6 +13,7 @@ import com.globalmate.service.need.NeedService;
 import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.service.user.SchoolService;
 import com.globalmate.service.user.UserService;
+import com.globalmate.service.wx.CertifyMsgSendService;
 import com.globalmate.uitl.DateUtil;
 import com.globalmate.uitl.GMConstant;
 
@@ -53,6 +54,8 @@ public class BasicDataController extends BaseController {
     private NeedService needService;
     @Autowired
     private IAssistService assistService;
+    @Autowired
+    private CertifyMsgSendService certifyMsgSendService;
 
 
     @GetMapping("userQuery")
@@ -93,6 +96,7 @@ public class BasicDataController extends BaseController {
         if (ucertifyInfo != null) {
             ucertifyInfo.setIsEffective(isEffective);
             ucertifyInfoService.updateUCertifyInfo(ucertifyInfo);
+            certifyMsgSendService.send(ucertifyInfo);
         }
         return JsonResult.success();
     }

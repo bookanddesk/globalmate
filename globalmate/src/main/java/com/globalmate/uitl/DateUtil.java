@@ -20,6 +20,8 @@ public class DateUtil extends DateUtils
 	public static final String FMT_TIMES = "HH:mm:ss.SSS";
 	/** 日期格式：yyyy-MM-dd HH:mm:ss */
 	public static final String FMT_DATETIME = "yyyy-MM-dd HH:mm:ss";
+	/** 日期格式：yyyy-MM-dd HH:mm */
+	public static final String FMT_DATETIME_MINUTE = "yyyy-MM-dd HH:mm";
 	/** 日期格式：yyyy-MM-dd HH:mm:ss.SSS */
 	public static final String FMT_DATETIMES = "yyyy-MM-dd HH:mm:ss.SSS";
 

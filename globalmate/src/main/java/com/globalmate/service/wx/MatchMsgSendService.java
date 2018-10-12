@@ -76,8 +76,8 @@ public class MatchMsgSendService extends WxTempMsgSendService implements IMsgSen
         }
         MatchMsg matchMsg = new MatchMsg();
         matchMsg.setToUserId(openId);
-        matchMsg.setMsgTempId(getMsgTemplateId(matchMsg));
-        matchMsg.setUrl(matchMsg.getUrl());
+//        matchMsg.setMsgTempId(getMsgTemplateId(matchMsg));
+//        matchMsg.setUrl(matchMsg.getUrl());
         matchMsg.setCreateTime(Date.from(Instant.now()));
 
         String needId = sysMatchNeed.getNeedId();
