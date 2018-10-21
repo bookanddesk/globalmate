@@ -44,6 +44,11 @@ public enum NeedTypeEnum {
 	 */
 	formality("formality", "办手续"),
 
+	/**
+	 * 二手市场
+	 */
+	second_hand("second_hand", "二手市场"),
+
 
 	other("other", "其他");
 

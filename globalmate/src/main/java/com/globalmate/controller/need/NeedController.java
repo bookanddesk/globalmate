@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.globalmate.data.entity.NeedCommon;
 import com.globalmate.data.entity.vo.NeedAggEntity;
+import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.uitl.CollectionUtils;
 import com.globalmate.uitl.GMConstant;
 import com.globalmate.uitl.StringUtils;
@@ -77,6 +78,15 @@ public class NeedController extends BaseController {
     @PostMapping("addCommon")
     public JsonResult addCommonNeed(@RequestBody @Validated NeedCommon needCommon, BindingResult result) {
         handleValidateError(result);
+        boolean typeIllegal = false;
+        try {
+            NeedTypeEnum.valueOf(needCommon.getType());
+        } catch (IllegalArgumentException e) {
+            typeIllegal = true;
+        }
+        if (typeIllegal) {
+            return buildFail("needType illegal!");
+        }
         return buildSuccess(needService.addCommonNeed(needCommon, getCurrentUser()));
     }
 

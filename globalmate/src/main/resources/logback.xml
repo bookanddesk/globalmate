@@ -33,10 +33,10 @@
     <!--spring log configure-->
     <logger name="org.springframework" level="ERROR"/>
     
-    <logger name="org.apache.ibatis" level="INFO"/>
+    <logger name="org.apache.ibatis" level="ERROR"/>
 
     <!-- 日志输出级别 TRACE < DEBUG < INFO < WARN < ERROR-->
-    <root level="DEBUG">
+    <root level="ERROR">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
