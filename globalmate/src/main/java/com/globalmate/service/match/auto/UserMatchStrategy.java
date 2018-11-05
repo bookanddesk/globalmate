@@ -54,7 +54,8 @@ public class UserMatchStrategy extends MatchStrategy {
             return null;
         }
 //        List<SysMatchNeed> sysMatchNeeds = matching(needs, users);
-        List<SysMatchNeed> sysMatchNeeds = commonMatching(needs, users);
+//        List<SysMatchNeed> sysMatchNeeds = commonMatching(needs, users);
+        List<SysMatchNeed> sysMatchNeeds = allMatching(needs, users);
         return sysMatchNeeds;
     }
 
@@ -148,6 +149,41 @@ public class UserMatchStrategy extends MatchStrategy {
 
                 //标签匹配
                 if (!matchTags(NeedTypeEnum.valueOf(need.getType()), user)) {
+                    continue;
+                }
+
+                //匹配已存在
+                if (isMatchExist(need.getId(), user.getId())) {
+                    continue;
+                }
+
+                SysMatchNeed matchNeed = new SysMatchNeedBuilder().build().need(need).user(user).get();
+                matchNeed.setMatchInfo(StringUtils.join_(need.getType(), user.getHelpAvailable()));
+                sysMatchNeeds.add(matchNeed);
+            }
+        }
+
+        return sysMatchNeeds;
+    }
+
+    private List<SysMatchNeed> allMatching(List<Need> needs, List<User> users) {
+        List<SysMatchNeed> sysMatchNeeds = Lists.newArrayList();
+
+        for (Need need : needs) {
+
+            if (need == null) {
+                continue;
+            }
+
+            if (timeOutCheck(need)) {
+                needService.closeNeed(need.getId());
+                continue;
+            }
+
+            for (User user : users) {
+                if (user == null ||
+                        StringUtils.isBlank(user.getOpenid()) ||
+                        StringUtils.equalsIgnoreCase(user.getId(), need.getUserId())) {
                     continue;
                 }
 
