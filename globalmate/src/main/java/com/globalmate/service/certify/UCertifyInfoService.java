@@ -91,16 +91,18 @@ public class UCertifyInfoService implements IUCertifyInfoService {
     }
 
     private void updateVTag(UCertifyInfo record) {
-        GMEnums.vTag vTag = null;
-        try {
-            GMEnums.UCertifyType uCertifyType = GMEnums.UCertifyType.valueOf(record.getCetifyType());
-            vTag = GMEnums.vTag.valueOf(uCertifyType.getVTag());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        if (vTag == null) {
-            return;
-        }
+        //认证的用户就是金牌 2018-11-05
+        GMEnums.vTag vTag = GMEnums.vTag.vGold;
+//        GMEnums.vTag vTag = null;
+//        try {
+//            GMEnums.UCertifyType uCertifyType = GMEnums.UCertifyType.valueOf(record.getCetifyType());
+//            vTag = GMEnums.vTag.valueOf(uCertifyType.getVTag());
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//        }
+//        if (vTag == null) {
+//            return;
+//        }
         String userTag = userService.getUserTag(record.getuId());
         try {
             if (StringUtils.isEmpty(userTag)

@@ -4,6 +4,7 @@ import com.globalmate.cache.CacheServiceImpl;
 import com.globalmate.cache.LocalCache;
 import com.globalmate.data.dao.mapper.UserMapper;
 import com.globalmate.data.entity.User;
+import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.exception.user.UseNotFoundException;
 import com.globalmate.exception.user.UserAddFailException;
 import com.globalmate.exception.user.UserCheckFailException;
@@ -133,6 +134,21 @@ public class UserService implements IUserService, ITokenservice {
             throw new UseNotFoundException("未找到该用户！[" + user.getId() + "]");
         }
         user.setModifyTime(Date.from(Instant.now()));
+
+        //编辑了个人资料就是银牌用户
+        String userTag = user.getUserTag();
+        boolean needUpTg = StringUtils.isEmpty(userTag);
+        if (!needUpTg) {
+            try {
+                needUpTg = GMEnums.vTag.vSilver.compareTo(GMEnums.vTag.valueOf(userTag)) < 0;
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+        if (needUpTg) {
+            user.setUserTag(GMEnums.vTag.vSilver.name());
+        }
+
         int i = userMapper.updateByPrimaryKeySelective(user);
         if (i == 1) {
             return userMapper.selectByPrimaryKey(user.getId());
@@ -214,6 +230,8 @@ public class UserService implements IUserService, ITokenservice {
             copyProperties(user, wxMpUser);
             user.setCreateTime(Date.from(Instant.now()));
             user.setuExt2(generateMemberId());
+            //关注就是铜牌会员 2018-11-05
+            user.setUserTag(GMEnums.vTag.vCopper.name());
             return userMapper.insert(user);
         }
 
