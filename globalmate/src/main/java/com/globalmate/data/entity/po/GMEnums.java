@@ -159,7 +159,8 @@ public class GMEnums {
     public enum WXMsgType {
         SUBSCRIBE,    //关注
         MATCH,     //匹配
-        CERTIFY    //认证
+        CERTIFY,    //认证
+        UNREAD_IM    //认证
     }
 
     public enum vTag{

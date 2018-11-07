@@ -35,9 +35,9 @@
             <properties>
                 <!--mysql-->
                 <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
-                <pom.jdbc.url>jdbc:mysql://rm-uf6ku3q0992inwq39so.mysql.rds.aliyuncs.com/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
-                <pom.jdbc.username>gm</pom.jdbc.username>
-                <pom.jdbc.password>Globalmate88</pom.jdbc.password>
+                <pom.jdbc.url>jdbc:mysql://rm-2zely9zmlbl3rmcr7zo.mysql.rds.aliyuncs.com/qqhz?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.username>u_qqhz</pom.jdbc.username>
+                <pom.jdbc.password>jh1gjkywwdQqr4gW</pom.jdbc.password>
                 <!--<pom.jdbc.url>jdbc:mysql://10.4.111.31:3306/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
                 <pom.jdbc.username>root</pom.jdbc.username>
                 <pom.jdbc.password>111111</pom.jdbc.password>-->
@@ -58,6 +58,7 @@
                 <!--wxMenuUrl-->
                 <pom.wxMenuUrl.homePage>http://glmate.cuibq.com/dist/static/login.html</pom.wxMenuUrl.homePage>
                 <pom.wxMenuUrl.needDetailPage>http://glmate.cuibq.com/dist/index.html#/detail?id=%s&amp;userId=%s&amp;openId=%s</pom.wxMenuUrl.needDetailPage>
+                <pom.wxMenuUrl.imDetailPage>http://glmate.cuibq.com/dist/index.html#/im?id=%s&amp;userId=%s&amp;openId=%s&amp;toChartId=%s&amp;fromDetail=%s</pom.wxMenuUrl.imDetailPage>
                 <pom.wxMenuUrl.helpPage>${pom.wxMenuUrl.homePage}?router=seekHelpList</pom.wxMenuUrl.helpPage>
                 <pom.wxMenuUrl.personalPage>${pom.wxMenuUrl.homePage}?router=mine</pom.wxMenuUrl.personalPage>
                 <pom.wxMenuUrl.myNeed>${pom.wxMenuUrl.homePage}?router=myAssist</pom.wxMenuUrl.myNeed>
@@ -65,6 +66,7 @@
                 <!--wxTempMsgId-->
                 <pom.wxTempMsg.matchMsgId>PJtigDPWITdqGKHneuHDRXsx0rYj-ysfudbOapNMZKc</pom.wxTempMsg.matchMsgId>
                 <pom.wxTempMsg.certifyMsgId>TPG5AkaxB3qFY8_pEaVp-gGe5Kb7xy4BdSvaUzBzZ_8</pom.wxTempMsg.certifyMsgId>
+                <pom.wxTempMsg.unReadMsgId>FUBW05hFumoI0XkVhyp05Jzk1WwBXWfAHgQup7rw_PE</pom.wxTempMsg.unReadMsgId>
             </properties>
         </profile>
 
@@ -94,6 +96,7 @@
                 <!--wxMenuUrl-->
                 <pom.wxMenuUrl.homePage>http://glmate.cuibq.com/dist/static/login.html</pom.wxMenuUrl.homePage>
                 <pom.wxMenuUrl.needDetailPage>http://glmate.cuibq.com/dist/index.html#/detail?id=%s&amp;userId=%s&amp;openId=%s</pom.wxMenuUrl.needDetailPage>
+                <pom.wxMenuUrl.imDetailPage>http://glmate.cuibq.com/dist/index.html#/im?id=%s&amp;userId=%s&amp;openId=%s&amp;toChartId=%s&amp;fromDetail=%s</pom.wxMenuUrl.imDetailPage>
                 <pom.wxMenuUrl.helpPage>${pom.wxMenuUrl.homePage}?router=seekHelpList</pom.wxMenuUrl.helpPage>
                 <pom.wxMenuUrl.personalPage>${pom.wxMenuUrl.homePage}?router=mine</pom.wxMenuUrl.personalPage>
                 <pom.wxMenuUrl.myNeed>${pom.wxMenuUrl.homePage}?router=myAssist</pom.wxMenuUrl.myNeed>
@@ -101,6 +104,7 @@
                 <!--wxTempMsgId-->
                 <pom.wxTempMsg.matchMsgId>r40inr6jznFDqSF1T5lLK7X2mND9VwqY8OOlvIiFVNo</pom.wxTempMsg.matchMsgId>
                 <pom.wxTempMsg.certifyMsgId>gBa4-PlOJPE9vF6cC9CqmvHTFpP2PIq7ly2QNf2V3nk</pom.wxTempMsg.certifyMsgId>
+                <pom.wxTempMsg.unReadMsgId>_EQI5iZvWnwaxAY2LJ5l-uRpPKLzDs_CZMv6gO7lLnA</pom.wxTempMsg.unReadMsgId>
             </properties>
         </profile>
 
