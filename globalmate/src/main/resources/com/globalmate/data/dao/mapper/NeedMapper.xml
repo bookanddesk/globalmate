@@ -35,6 +35,14 @@
     delete from need
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="associationDelete" parameterType="java.lang.String">
+        delete from need
+        where ID_ = #{needId,jdbcType=VARCHAR};
+        delete from need_common
+        where need_id = #{needId,jdbcType=VARCHAR};
+    </delete>
+
     <insert id="insert" parameterType="com.globalmate.data.entity.Need">
     insert into need (ID_, start_type_, TYPE_,
       USER_ID_, USER_NAME_, description_, CREATE_TIME_,

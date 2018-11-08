@@ -345,4 +345,9 @@ public class NeedService extends AssistHandler<Need, GMEnums.AssistAction, User>
 		this.updateNeed(need);
 		nextHandler.handle(need, action, user);
 	}
+
+	@Override
+	public int deleteNeed(String needId) {
+		return needMapper.associationDelete(needId);
+	}
 }

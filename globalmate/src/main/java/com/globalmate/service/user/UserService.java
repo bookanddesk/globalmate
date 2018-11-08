@@ -165,7 +165,7 @@ public class UserService implements IUserService, ITokenservice {
     public List<User> listAllUsers() {
         User user = new User();
         user.setEnable(GMConstant.ONE_STR_VALUE);
-        return listUsersLike(null);
+        return listUsersLike(user);
     }
 
     @Override

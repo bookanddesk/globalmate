@@ -1,11 +1,13 @@
 package com.globalmate.controller.need;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.globalmate.data.entity.NeedCommon;
+import com.globalmate.data.entity.po.GMEnums;
 import com.globalmate.data.entity.vo.NeedAggEntity;
 import com.globalmate.service.need.NeedTypeEnum;
 import com.globalmate.uitl.CollectionUtils;
@@ -26,11 +28,11 @@ import com.globalmate.service.need.NeedService;
 public class NeedController extends BaseController {
     @Autowired
     private NeedService needService;
-   
+
     @PostMapping("update")
     public JsonResult addNeed(@RequestBody Need need) {
         try {
-        	need=needService.updateNeed(need);
+            need = needService.updateNeed(need);
         } catch (Exception e) {
             return buildFail(e.getMessage());
         }
@@ -88,6 +90,30 @@ public class NeedController extends BaseController {
             return buildFail("needType illegal!");
         }
         return buildSuccess(needService.addCommonNeed(needCommon, getCurrentUser()));
+    }
+
+    @DeleteMapping("delete/{needId}")
+    public JsonResult deleteCommonNeed(@PathVariable String needId) {
+        Need need = needService.getNeed(needId);
+        if (need == null) {
+            return buildFail("can't find need with id[" + needId + "]");
+        }
+
+        if (!StringUtils.equals(getCurrentUser().getId(), need.getUserId())) {
+            return buildFail("Permission denied when delete need with id[" + needId + "]");
+        }
+
+        GMEnums.NeedStatus needStatus = Optional.ofNullable(need.getEnable())
+                .map(Integer::parseInt)
+                .map(GMEnums.NeedStatus::transformCode)
+                .orElse(GMEnums.NeedStatus.CLOSE);
+        if (needStatus != GMEnums.NeedStatus.OPEN &&
+                needStatus != GMEnums.NeedStatus.CLOSE &&
+                needStatus != GMEnums.NeedStatus.COMPLETED) {
+            return buildFail("can't delete need with status " + needStatus.getValue());
+        }
+
+        return buildSuccess(needService.deleteNeed(needId));
     }
 
 }

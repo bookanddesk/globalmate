@@ -35,7 +35,7 @@
             <properties>
                 <!--mysql-->
                 <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
-                <pom.jdbc.url>jdbc:mysql://rm-2zely9zmlbl3rmcr7zo.mysql.rds.aliyuncs.com/qqhz?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.url>jdbc:mysql://rm-2zely9zmlbl3rmcr7zo.mysql.rds.aliyuncs.com/qqhz?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;allowMultiQueries=true</pom.jdbc.url>
                 <pom.jdbc.username>u_qqhz</pom.jdbc.username>
                 <pom.jdbc.password>jh1gjkywwdQqr4gW</pom.jdbc.password>
                 <!--<pom.jdbc.url>jdbc:mysql://10.4.111.31:3306/globalmate?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
@@ -75,7 +75,7 @@
             <properties>
                 <!--mysql-->
                 <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
-                <pom.jdbc.url>jdbc:mysql://rm-2zely9zmlbl3rmcr7zo.mysql.rds.aliyuncs.com/qqhz?useUnicode=true&amp;amp;characterEncoding=UTF-8</pom.jdbc.url>
+                <pom.jdbc.url>jdbc:mysql://rm-2zely9zmlbl3rmcr7zo.mysql.rds.aliyuncs.com/qqhz?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;allowMultiQueries=true</pom.jdbc.url>
                 <pom.jdbc.username>u_qqhz</pom.jdbc.username>
                 <pom.jdbc.password>jh1gjkywwdQqr4gW</pom.jdbc.password>
                 <!--redis-->

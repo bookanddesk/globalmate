@@ -64,5 +64,7 @@ public interface INeedService {
 	int closeNeed(String needId);
 
 	Need addCommonNeed(NeedCommon needCommon, User user);
+
+	int deleteNeed(String needId);
     
 }

@@ -27,4 +27,6 @@ public interface NeedMapper {
     int updateNeedEnable(@Param("needId") String needId, @Param("enableStr") String enableStr);
 
     List<Need> associatedQuery(@Param("need") Need need, @Param("keyword") String keyword);
+
+    int associationDelete(@Param("needId") String needId);
 }
