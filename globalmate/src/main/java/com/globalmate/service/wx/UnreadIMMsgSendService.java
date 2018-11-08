@@ -61,12 +61,19 @@ public class UnreadIMMsgSendService extends WxTempMsgSendService
         unreadIMMsg.setToUserId(openId);
         unreadIMMsg.setMsgTempId(getMsgTemplateId(unreadIMMsg));
 //        unreadIMMsg.setUrl();
-        unreadIMMsg.setFirst(String.format(GMConstant.UNREAD_IM_MSG_FIRST_VALUE,
-                unReadIMEntity.getMsgCount() != null ? unReadIMEntity.getMsgCount() + "条" : ""));
+        String first = String.format(GMConstant.UNREAD_IM_MSG_FIRST_VALUE,
+                unReadIMEntity.getMsgCount() != null ? unReadIMEntity.getMsgCount() + "条" : "");
+        first += String.format(GMConstant.UNREAD_IM_MSG_FIRST_VALUE_EN,
+                unReadIMEntity.getMsgCount() != null ? " " + unReadIMEntity.getMsgCount() : "");
+        unreadIMMsg.setFirst(first);
         //消息类型
-        unreadIMMsg.setKeyword1(GMConstant.UNREAD_IM_MSG_KEYWORD1_VALUE);
+        String keyword1 = GMConstant.UNREAD_IM_MSG_KEYWORD1_VALUE;
+        keyword1 += GMConstant.UNREAD_IM_MSG_KEYWORD1_VALUE_EN;
+        unreadIMMsg.setKeyword1(keyword1);
         //发送状态
-        unreadIMMsg.setKeyword2(GMConstant.UNREAD_IM_MSG_KEYWORD2_VALUE);
+        String keyword2 = GMConstant.UNREAD_IM_MSG_KEYWORD2_VALUE;
+        keyword2 += GMConstant.UNREAD_IM_MSG_KEYWORD2_VALUE_EN;
+        unreadIMMsg.setKeyword2(keyword2);
         //发送时间
         unreadIMMsg.setKeyword3(DateUtil.format(unReadIMEntity.getMsgSendDate() == null ?
                 Date.from(Instant.now()) : unReadIMEntity.getMsgSendDate(), DateUtil.FMT_DATETIME_MINUTE));
@@ -76,7 +83,8 @@ public class UnreadIMMsgSendService extends WxTempMsgSendService
         unreadIMMsg.setUrl(String.format(imDetailPage,
                 unReadIMEntity.getId(), uId, openId, unReadIMEntity.getToChartId(), unReadIMEntity.isFromDetail()));
 
-        String remark = "邀请您继续在GloHelp的洽谈。";
+        String remark = GMConstant.UNREAD_IM_MSG_REMARK_VALUE_DEFAULT;
+        remark += GMConstant.UNREAD_IM_MSG_REMARK_VALUE_DEFAULT_EN;
         NeedAggEntity needAgg = needService.getNeedAgg(unReadIMEntity.getNeedId());
         if (needAgg != null && needAgg.getConceretNeed() != null) {
             AbstractNeed conceretNeed = needAgg.getConceretNeed();
@@ -84,6 +92,7 @@ public class UnreadIMMsgSendService extends WxTempMsgSendService
                 String title = ((NeedCommon) conceretNeed).getTitle();
                 if (StringUtils.isNotEmpty(title)) {
                     remark = String.format(GMConstant.UNREAD_IM_MSG_REMARK_VALUE, title);
+                    remark += GMConstant.UNREAD_IM_MSG_REMARK_VALUE_EN;
                 }
             }
         }

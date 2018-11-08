@@ -35,10 +35,16 @@ public class GMConstant {
     public static final String CERTIFY_MSG_CERTIFY_INFO = "%s 身份信息认证";
     public static final String CERTIFY_MSG_REMARK_PASS = "\n亲爱的用户，您的认证已经通过，感谢您的支持和信任。若您遇到困难，希望本平台能为您解决，同时也希望您能够帮助更多的人。";
     public static final String CERTIFY_MSG_REMARK_NOT_PASS = "\n亲爱的用户，很遗憾，您上传的证件不正确，为了保障全体用户的权益，请您上传真实证件，我们承诺保障您的信息安全。";
-    public static final String UNREAD_IM_MSG_FIRST_VALUE = " 您好，您的GloHelp有%s未读的IM消息：\n";
-    public static final String UNREAD_IM_MSG_KEYWORD1_VALUE = "IM即时消息";
+    public static final String UNREAD_IM_MSG_FIRST_VALUE = "您好，您的GloHelp有%s未读的IM消息：\n";
+    public static final String UNREAD_IM_MSG_FIRST_VALUE_EN = "Hi, You got%s new message in GloHelp：\n";
+    public static final String UNREAD_IM_MSG_KEYWORD1_VALUE = "GloHelp即时消息";
+    public static final String UNREAD_IM_MSG_KEYWORD1_VALUE_EN = ", GloHelp instant message";
     public static final String UNREAD_IM_MSG_KEYWORD2_VALUE = "收到未读";
+    public static final String UNREAD_IM_MSG_KEYWORD2_VALUE_EN = "Unread";
+    public static final String UNREAD_IM_MSG_REMARK_VALUE_DEFAULT = "邀请您继续在GloHelp的洽谈。\n";
+    public static final String UNREAD_IM_MSG_REMARK_VALUE_DEFAULT_EN = "Someone is waiting for your reply, Please login GloHelp and check the message.\n";
     public static final String UNREAD_IM_MSG_REMARK_VALUE = "邀请您继续关于 %s 需求信息的相关洽谈";
+    public static final String UNREAD_IM_MSG_REMARK_VALUE_EN = "Someone is waiting for your reply, Please login GloHelp and check the message.\n";
 
     public static final String LANGUAGE_CN = "zh_CN";
     public static final String SUBSCRIBE_MSG_TEMP_INFO = "欢迎关注GloHelp! 我们致力于打造基于真实社会网络的互信互助平台，通过精准推送高效地帮您解决身边的问题，让每一个遇到困难的人都有人帮，让世界变得更美好!";
