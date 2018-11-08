@@ -163,6 +163,8 @@ public class UserService implements IUserService, ITokenservice {
 
     @Override
     public List<User> listAllUsers() {
+        User user = new User();
+        user.setEnable(GMConstant.ONE_STR_VALUE);
         return listUsersLike(null);
     }
 
@@ -237,6 +239,7 @@ public class UserService implements IUserService, ITokenservice {
 
         User user = users.get(0);
         copyProperties(user, wxMpUser);
+        user.setEnable(GMConstant.ONE_STR_VALUE);
         user.setModifyTime(Date.from(Instant.now()));
         if (StringUtils.isEmpty(user.getuExt2())) {
             user.setuExt2(generateMemberId());

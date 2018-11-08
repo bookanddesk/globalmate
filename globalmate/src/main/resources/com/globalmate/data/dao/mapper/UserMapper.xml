@@ -431,6 +431,9 @@
   <update id="updateSubscribeStatus" parameterType="java.util.Map">
     update user
     set subscribe = #{subscribe,jdbcType=BIT}
+    <if test="!subscribe">
+      , enable_ = '0'
+    </if>
     where openid =  #{openId,jdbcType=VARCHAR}
   </update>
   <update id="updateExt1" parameterType="java.lang.String">
