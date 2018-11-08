@@ -196,7 +196,7 @@ public class WeixinService extends WxMpServiceImpl {
   public String menuCreate() throws WxErrorException {
     WxMenu menu = new WxMenu();
     WxMenuButton button1 = new WxMenuButton();
-    button1.setName("求助");
+    button1.setName("首页Home");
     button1.setType(MenuButtonType.VIEW);
     button1.setUrl(homePage);
 
@@ -209,12 +209,12 @@ public class WeixinService extends WxMpServiceImpl {
     button3.setName("我的");
 
     menu.getButtons().add(button1);
-    menu.getButtons().add(button2);
-    menu.getButtons().add(button3);
+//    menu.getButtons().add(button2);
+//    menu.getButtons().add(button3);
 
     WxMenuButton button31 = new WxMenuButton();
     button31.setType(MenuButtonType.VIEW);
-    button31.setName("个人中心");
+    button31.setName("个人中心Me");
     button31.setUrl(personalPage);
 
     WxMenuButton button32 = new WxMenuButton();
@@ -227,9 +227,10 @@ public class WeixinService extends WxMpServiceImpl {
 //    button33.setName("平台反馈");
 //    button33.setKey(sysEvaluate);
 
-    button3.getSubButtons().add(button31);
-    button3.getSubButtons().add(button32);
+//    button3.getSubButtons().add(button31);
+////    button3.getSubButtons().add(button32);
 //        button3.getSubButtons().add(button33);
+    menu.getButtons().add(button31);
 
         return this.getMenuService().menuCreate(menu);
   }

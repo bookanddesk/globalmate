@@ -108,8 +108,7 @@ public class NeedController extends BaseController {
                 .map(GMEnums.NeedStatus::transformCode)
                 .orElse(GMEnums.NeedStatus.CLOSE);
         if (needStatus != GMEnums.NeedStatus.OPEN &&
-                needStatus != GMEnums.NeedStatus.CLOSE &&
-                needStatus != GMEnums.NeedStatus.COMPLETED) {
+                needStatus != GMEnums.NeedStatus.CLOSE) {
             return buildFail("can't delete need with status " + needStatus.getValue());
         }
 
