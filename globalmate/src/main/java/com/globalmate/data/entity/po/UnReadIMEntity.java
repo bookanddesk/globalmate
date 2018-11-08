@@ -11,7 +11,6 @@ import java.util.Date;
  */
 public class UnReadIMEntity {
 
-    @NotBlank
     private String id;
     private String fromUserId;
     @NotBlank
@@ -20,7 +19,6 @@ public class UnReadIMEntity {
     private String msgInfo;
     private Integer msgCount;
     private Date msgSendDate;
-    @NotBlank
     private String toChartId;
     private boolean fromDetail = true;
 
