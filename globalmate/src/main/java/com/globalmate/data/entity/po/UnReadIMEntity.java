@@ -13,7 +13,6 @@ public class UnReadIMEntity {
 
     @NotBlank
     private String id;
-    @NotBlank
     private String fromUserId;
     @NotBlank
     private String toUserId;

@@ -4,6 +4,7 @@ import com.globalmate.controller.BaseController;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.data.entity.po.UnReadIMEntity;
 import com.globalmate.service.wx.UnreadIMMsgSendService;
+import com.globalmate.uitl.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,9 @@ public class MsgController extends BaseController {
     @PostMapping("unreadTempMsg")
     public JsonResult sendUnreadTempMsg(@RequestBody UnReadIMEntity entity, BindingResult result) {
         handleValidateError(result);
+        if(StringUtils.isEmpty(entity.getFromUserId())) {
+            entity.setFromUserId(getCurrentUser().getId());
+        }
         unreadIMMsgSendService.send(entity);
         return buildSuccess();
     }
