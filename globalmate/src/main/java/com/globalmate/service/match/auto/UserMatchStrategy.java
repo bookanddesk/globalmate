@@ -54,8 +54,8 @@ public class UserMatchStrategy extends MatchStrategy {
             return null;
         }
 //        List<SysMatchNeed> sysMatchNeeds = matching(needs, users);
-//        List<SysMatchNeed> sysMatchNeeds = commonMatching(needs, users);
-        List<SysMatchNeed> sysMatchNeeds = allMatching(needs, users);
+        List<SysMatchNeed> sysMatchNeeds = commonMatching(needs, users);
+//        List<SysMatchNeed> sysMatchNeeds = allMatching(needs, users);
         return sysMatchNeeds;
     }
 
