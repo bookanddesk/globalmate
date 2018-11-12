@@ -109,7 +109,7 @@ public class NeedController extends BaseController {
                 .orElse(GMEnums.NeedStatus.CLOSE);
         if (needStatus != GMEnums.NeedStatus.OPEN &&
                 needStatus != GMEnums.NeedStatus.CLOSE) {
-            return buildFail("can't delete need with status " + needStatus.getValue());
+            return buildFail(getMsg("cannotDeleteNeedWithStatus", new Object[]{needStatus.getValue()}));
         }
 
         return buildSuccess(needService.deleteNeed(needId));

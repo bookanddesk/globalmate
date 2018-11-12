@@ -31,7 +31,7 @@ public class MsgController extends BaseController {
             entity.setFromUserId(getCurrentUser().getId());
         }
         if (msgService.isSendFrequently(entity)) {
-            return buildFail("Reminder message is too frequent!");
+            return buildFail(getMsg("reminderMessageIsTooFrequent"));
         }
         msgService.sendUnreadIMTempMsg(entity);
         return buildSuccess();

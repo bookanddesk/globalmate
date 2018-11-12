@@ -1,0 +1,3 @@
+#C:\Users\xing>native2ascii d:\msgCN.properties d:\aa.properties
+reminderMessageIsTooFrequent=消息提醒过于频繁！
+cannotDeleteNeedWithStatus=不能删除状态为{0}的需求！
