@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.globalmate.data.dao.mapper.NeedChatRecordMapper">
+  <resultMap id="BaseResultMap" type="com.globalmate.data.entity.NeedChatRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="need_id" jdbcType="VARCHAR" property="needId" />
+    <result column="u_need_id" jdbcType="VARCHAR" property="uNeedId" />
+    <result column="u_need_name" jdbcType="VARCHAR" property="uNeedName" />
+    <result column="im_chat_id" jdbcType="VARCHAR" property="imChatId" />
+    <result column="u_chat_target_id" jdbcType="VARCHAR" property="uChatTargetId" />
+    <result column="u_chat_target_name" jdbcType="VARCHAR" property="uChatTargetName" />
+    <result column="im_chat_create_time" jdbcType="TIMESTAMP" property="imChatCreateTime" />
+    <result column="im_chat_modify_time" jdbcType="TIMESTAMP" property="imChatModifyTime" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <result column="ext3" jdbcType="VARCHAR" property="ext3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, need_id, u_need_id, u_need_name, im_chat_id, u_chat_target_id, u_chat_target_name, 
+    im_chat_create_time, im_chat_modify_time, ext1, ext2, ext3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from need_chat_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from need_chat_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.globalmate.data.entity.NeedChatRecord">
+    insert into need_chat_record (id, need_id, u_need_id, 
+      u_need_name, im_chat_id, u_chat_target_id, 
+      u_chat_target_name, im_chat_create_time, im_chat_modify_time, 
+      ext1, ext2, ext3)
+    values (#{id,jdbcType=VARCHAR}, #{needId,jdbcType=VARCHAR}, #{uNeedId,jdbcType=VARCHAR}, 
+      #{uNeedName,jdbcType=VARCHAR}, #{imChatId,jdbcType=VARCHAR}, #{uChatTargetId,jdbcType=VARCHAR}, 
+      #{uChatTargetName,jdbcType=VARCHAR}, #{imChatCreateTime,jdbcType=TIMESTAMP}, #{imChatModifyTime,jdbcType=TIMESTAMP}, 
+      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.globalmate.data.entity.NeedChatRecord">
+    insert into need_chat_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="needId != null">
+        need_id,
+      </if>
+      <if test="uNeedId != null">
+        u_need_id,
+      </if>
+      <if test="uNeedName != null">
+        u_need_name,
+      </if>
+      <if test="imChatId != null">
+        im_chat_id,
+      </if>
+      <if test="uChatTargetId != null">
+        u_chat_target_id,
+      </if>
+      <if test="uChatTargetName != null">
+        u_chat_target_name,
+      </if>
+      <if test="imChatCreateTime != null">
+        im_chat_create_time,
+      </if>
+      <if test="imChatModifyTime != null">
+        im_chat_modify_time,
+      </if>
+      <if test="ext1 != null">
+        ext1,
+      </if>
+      <if test="ext2 != null">
+        ext2,
+      </if>
+      <if test="ext3 != null">
+        ext3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="needId != null">
+        #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedId != null">
+        #{uNeedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedName != null">
+        #{uNeedName,jdbcType=VARCHAR},
+      </if>
+      <if test="imChatId != null">
+        #{imChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="uChatTargetId != null">
+        #{uChatTargetId,jdbcType=VARCHAR},
+      </if>
+      <if test="uChatTargetName != null">
+        #{uChatTargetName,jdbcType=VARCHAR},
+      </if>
+      <if test="imChatCreateTime != null">
+        #{imChatCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imChatModifyTime != null">
+        #{imChatModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null">
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.globalmate.data.entity.NeedChatRecord">
+    update need_chat_record
+    <set>
+      <if test="needId != null">
+        need_id = #{needId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedId != null">
+        u_need_id = #{uNeedId,jdbcType=VARCHAR},
+      </if>
+      <if test="uNeedName != null">
+        u_need_name = #{uNeedName,jdbcType=VARCHAR},
+      </if>
+      <if test="imChatId != null">
+        im_chat_id = #{imChatId,jdbcType=VARCHAR},
+      </if>
+      <if test="uChatTargetId != null">
+        u_chat_target_id = #{uChatTargetId,jdbcType=VARCHAR},
+      </if>
+      <if test="uChatTargetName != null">
+        u_chat_target_name = #{uChatTargetName,jdbcType=VARCHAR},
+      </if>
+      <if test="imChatCreateTime != null">
+        im_chat_create_time = #{imChatCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imChatModifyTime != null">
+        im_chat_modify_time = #{imChatModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null">
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null">
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null">
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.globalmate.data.entity.NeedChatRecord">
+    update need_chat_record
+    set need_id = #{needId,jdbcType=VARCHAR},
+      u_need_id = #{uNeedId,jdbcType=VARCHAR},
+      u_need_name = #{uNeedName,jdbcType=VARCHAR},
+      im_chat_id = #{imChatId,jdbcType=VARCHAR},
+      u_chat_target_id = #{uChatTargetId,jdbcType=VARCHAR},
+      u_chat_target_name = #{uChatTargetName,jdbcType=VARCHAR},
+      im_chat_create_time = #{imChatCreateTime,jdbcType=TIMESTAMP},
+      im_chat_modify_time = #{imChatModifyTime,jdbcType=TIMESTAMP},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectChatRecords" parameterType="com.globalmate.data.entity.NeedChatRecord"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from need_chat_record
+    <where>
+      <if test="id != null and id != '' ">
+        id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="needId != null and needId != '' ">
+        and need_id = #{needId,jdbcType=VARCHAR}
+      </if>
+      <if test="imChatId != null and imChatId != '' ">
+        and im_chat_id = #{imChatId,jdbcType=VARCHAR}
+      </if>
+      <if test="uChatTargetId != null and uChatTargetId != '' ">
+       and u_chat_target_id = #{uChatTargetId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
+</mapper>
