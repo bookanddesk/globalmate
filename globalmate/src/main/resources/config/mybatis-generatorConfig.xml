@@ -52,7 +52,7 @@
         </javaClientGenerator>
         
         
-        <table tableName="location_cn_en"  schema="" enableCountByExample="false"
+        <table tableName="need_chat_record"  schema="" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 

@@ -534,3 +534,24 @@ ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_unicode_ci
 ROW_FORMAT=DYNAMIC
 ;
+
+CREATE TABLE `need_chat_record` (
+`id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+`need_id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '需求id' ,
+`u_need_id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '需求人id' ,
+`u_need_name`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '需求人姓名' ,
+`im_chat_id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'im消息id' ,
+`u_chat_target_id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '聊天对象id' ,
+`u_chat_target_name`  varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '聊天对象姓名' ,
+`im_chat_create_time`  timestamp NULL DEFAULT NULL COMMENT '聊天创建时间' ,
+`im_chat_modify_time`  timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP ,
+`ext1`  varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL ,
+`ext2`  varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL ,
+`ext3`  varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_unicode_ci
+ROW_FORMAT=DYNAMIC
+;
+
