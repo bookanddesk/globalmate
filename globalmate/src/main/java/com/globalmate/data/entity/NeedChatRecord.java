@@ -19,10 +19,8 @@ public class NeedChatRecord implements Serializable {
 
     private String uNeedName;
 
-    @NotBlank
     private String imChatId;
 
-    @NotBlank
     private String uChatTargetId;
 
     private String uChatTargetName;

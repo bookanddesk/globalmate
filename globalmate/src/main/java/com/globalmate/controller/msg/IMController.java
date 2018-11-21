@@ -31,17 +31,7 @@ public class IMController extends BaseController {
     public JsonResult addChatRecord(@RequestBody NeedChatRecord record,
                                     BindingResult result) {
         handleValidateError(result);
-        User user = getCurrentUser();
-        if (StringUtils.isEmpty(record.getuNeedId())) {
-            record.setuNeedId(user.getId());
-        }
-        if (StringUtils.isEmpty(record.getuNeedName())) {
-            record.setuNeedName(Optional.ofNullable(user.getName()).orElse(user.getNikename()));
-        }
-        if (StringUtils.isEmpty(record.getuChatTargetName())) {
-            record.setuChatTargetName(userService.getName(record.getuChatTargetId()));
-        }
-        return buildSuccess(imService.addChatRecord(record));
+        return buildSuccess(imService.addChatRecord(record, getCurrentUser()));
     }
 
     @GetMapping("listChatRecordsByNeedId/{needId}")
