@@ -324,6 +324,7 @@ public class UserService implements IUserService, ITokenservice {
         checkNotNull(user);
         if (StringUtils.isBlank(token)) {
             token = generateToken();
+            updateLoginTime(user);
         }
         cacheService.setSerializer(token, user, GMConstant.TOKEN_EXP_TIME);
         return token;
