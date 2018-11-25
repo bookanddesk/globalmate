@@ -5,7 +5,10 @@ import com.globalmate.data.entity.SysMatchNeed;
 import com.globalmate.data.entity.po.JsonResult;
 import com.globalmate.service.match.MatchService;
 import com.globalmate.service.match.auto.MatchTask;
+import com.globalmate.service.match.auto.UserMatchStrategy;
+import com.globalmate.service.wx.MatchMsgSendService;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.StringUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +33,10 @@ public class MatchController extends BaseController {
     private MatchService matchService;
     @Autowired
     private MatchTask matchTask;
+    @Autowired
+    private UserMatchStrategy userMatchStrategy;
+    @Autowired
+    private MatchMsgSendService msgSendService;
 
 
     @GetMapping("{needId}")
@@ -43,10 +50,19 @@ public class MatchController extends BaseController {
     }
 
     @GetMapping("sysMatch")
-    public JsonResult sysMatch() throws WxErrorException {
+    public JsonResult sysMatch() {
         matchTask.doMatch();
         return buildSuccess();
     }
 
+    @GetMapping("push")
+    public JsonResult push(String needId) {
+        List<SysMatchNeed> sysMatchNeeds = userMatchStrategy.matchAll(needId);
+        if (CollectionUtils.isNotEmpty(sysMatchNeeds)) {
+            msgSendService.send(sysMatchNeeds);
+            return buildSuccess(sysMatchNeeds.size());
+        }
+        return buildSuccess(0);
+    }
 
 }

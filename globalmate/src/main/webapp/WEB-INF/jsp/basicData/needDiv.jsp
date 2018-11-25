@@ -19,7 +19,27 @@
                 createTime: $('#createTimeId').val(),
                 createTime2: $('#createTimeId2').val()
             }
-        }
+        };
+
+        function push(needId) {
+            var queryUrl = "${path}/rest/match/push";
+            var param =
+                {
+                    needId: needId
+                }
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: queryUrl,
+                data: param,
+                success: function (data) {
+                    $.tooltip('推送全员数量：' + data.data, 2000, true);
+                },
+                error: function (data) {
+                    $.tooltip('推送请求失败');
+                }
+            });
+        };
 
     </script>
 </head>
@@ -91,6 +111,8 @@
                         <td width="5%">需求人</td>
                         <td width="5%">地点</td>
                         <td width="5%">创建时间</td>
+                        <td width="5%">描述</td>
+                        <td width="5%">操作</td>
                     </tr>
 
                     <c:forEach items="${pageInfo.list}" var="needObj" varStatus="index">
@@ -102,6 +124,10 @@
                             <td>${needObj.where}</td>
                             <td><fmt:formatDate value="${needObj.createTime}" type="both"
                                                 pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                            <td>${needObj.description}</td>
+                            <td>
+                                <a href="#" onclick="push('${needObj.id}')">推送全员</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -115,4 +141,5 @@
     </div>
 </div>
 </body>
+<script src="https://www.js-css.cn/jscode/open/open15/js/jquery.hDialog.js"></script>
 </html>

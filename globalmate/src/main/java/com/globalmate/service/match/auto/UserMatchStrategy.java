@@ -296,4 +296,19 @@ public class UserMatchStrategy extends MatchStrategy {
         return false;
     }
 
+
+    public List<SysMatchNeed> matchAll(String needId) {
+        if (StringUtils.isEmpty(needId)) {
+            return null;
+        }
+
+        Need need = needService.getNeed(needId);
+        if (need == null) {
+            return null;
+        }
+
+        List<SysMatchNeed> sysMatchNeeds = allMatching(Lists.newArrayList(need), userService.listAllUsers());
+        return sysMatchNeeds;
+    }
+
 }
