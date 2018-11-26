@@ -33,11 +33,6 @@ public class MatchController extends BaseController {
     private MatchService matchService;
     @Autowired
     private MatchTask matchTask;
-    @Autowired
-    private UserMatchStrategy userMatchStrategy;
-    @Autowired
-    private MatchMsgSendService msgSendService;
-
 
     @GetMapping("{needId}")
     public JsonResult list(@PathVariable("needId") String needId) {
@@ -57,10 +52,8 @@ public class MatchController extends BaseController {
 
     @GetMapping("push")
     public JsonResult push(String needId) {
-        List<SysMatchNeed> sysMatchNeeds = userMatchStrategy.matchAll(needId);
-        if (CollectionUtils.isNotEmpty(sysMatchNeeds)) {
-            msgSendService.send(sysMatchNeeds);
-            return buildSuccess(sysMatchNeeds.size());
+        if (StringUtils.isNotEmpty(needId)) {
+            return buildSuccess(matchTask.doMatch(needId));
         }
         return buildSuccess(0);
     }

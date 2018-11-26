@@ -16,6 +16,7 @@ public abstract class MatchStrategy {
 
     public abstract void match();
     public abstract List<SysMatchNeed> match(List<Need> needs);
+    public abstract List<SysMatchNeed> matchAll(List<Need> needs);
 
     protected boolean matchSuccess(String str, String target) {
         if (StringUtils.isBlank(str) || StringUtils.isBlank(target)) {

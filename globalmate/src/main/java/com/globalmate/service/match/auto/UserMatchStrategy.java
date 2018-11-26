@@ -59,6 +59,12 @@ public class UserMatchStrategy extends MatchStrategy {
         return sysMatchNeeds;
     }
 
+    @Override
+    public List<SysMatchNeed> matchAll(List<Need> needs) {
+        List<SysMatchNeed> sysMatchNeeds = allMatching(needs, userService.listAllUsers());
+        return sysMatchNeeds;
+    }
+
 
     /**
      * 根据用户Tag匹配需求，先过滤位置，再匹配需求描述

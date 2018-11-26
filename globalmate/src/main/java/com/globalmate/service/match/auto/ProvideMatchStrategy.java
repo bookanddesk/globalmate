@@ -52,6 +52,11 @@ public class ProvideMatchStrategy extends MatchStrategy {
         return matchNeeds;
     }
 
+    @Override
+    public List<SysMatchNeed> matchAll(List<Need> needs) {
+        return null;
+    }
+
 
     /**
      * 根据帮助匹配需求，先过滤位置，再匹配需求描述

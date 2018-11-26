@@ -26,4 +26,8 @@ public class MatchContext {
         return matchStrategy.match(needs);
     }
 
+    public List<SysMatchNeed> matchAll(List<Need> needs) {
+        return matchStrategy.matchAll(needs);
+    }
+
 }

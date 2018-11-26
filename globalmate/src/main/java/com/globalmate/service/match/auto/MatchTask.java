@@ -7,7 +7,9 @@ import com.globalmate.service.match.MatchService;
 import com.globalmate.service.need.NeedService;
 import com.globalmate.service.wx.MatchMsgSendService;
 import com.globalmate.uitl.CollectionUtils;
+import com.globalmate.uitl.StringUtils;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -47,12 +49,36 @@ public class MatchTask {
             return ;
         }
 
+        handleSysMatchNeed(sysMatchNeeds);
+    }
+
+
+    public int doMatch(String needId) {
+        int result = 0;
+        if (StringUtils.isEmpty(needId)) {
+            return result;
+        }
+
+        Need need = needService.getNeed(needId);
+        if (need == null) {
+            return result;
+        }
+
+        List<SysMatchNeed> sysMatchNeeds = matchContext.matchAll(Lists.newArrayList(need));
+        if (CollectionUtils.isEmpty(sysMatchNeeds)) {
+            return result;
+        }
+
+        handleSysMatchNeed(sysMatchNeeds);
+
+        return sysMatchNeeds.size();
+    }
+
+    private void handleSysMatchNeed(List<SysMatchNeed> sysMatchNeeds) {
         matchService.addMatchNeeds(sysMatchNeeds);
 
         //发送消息
         msgSendService.send(sysMatchNeeds);
-
-
     }
 
 
