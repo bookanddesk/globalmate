@@ -41,6 +41,27 @@
             });
         };
 
+        function closeNeed(needId) {
+            var queryUrl = "${path}/rest/basicData/closeNeed";
+            var param =
+                {
+                    needId: needId
+                }
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: queryUrl,
+                data: param,
+                success: function (data) {
+                    $.tooltip('关闭成功', 2000, true);
+                    $('#submitBtn').trigger('click')
+                },
+                error: function (data) {
+                    $.tooltip('请求失败');
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -95,7 +116,7 @@
                                        placeholder="需求人昵称">&nbsp;&nbsp;
                             </p>
                             <p>
-                                <button type="submit">查询</button>
+                                <button id="submitBtn" type="submit">查询</button>
                             </p>
                         </li>
                     </ul>
@@ -127,6 +148,7 @@
                             <td>${needObj.description}</td>
                             <td>
                                 <a href="#" onclick="push('${needObj.id}')">推送全员</a>
+                                <a href="#" onclick="closeNeed('${needObj.id}')">关闭</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -222,4 +222,9 @@ public class BasicDataController extends BaseController {
         return modelAndView;
     }
 
+    @GetMapping("closeNeed")
+    public @ResponseBody JsonResult closeNeed(String needId) {
+        return buildSuccess(needService.closeNeed(needId));
+    }
+
 }
